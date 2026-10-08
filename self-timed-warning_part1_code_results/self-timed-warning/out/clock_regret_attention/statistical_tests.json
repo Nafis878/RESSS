@@ -1,0 +1,74 @@
+[
+  {
+    "split": "id",
+    "baseline": "premium",
+    "mean_attention_minus_baseline": -0.0006358775937187205,
+    "bootstrap_95_ci": [
+      -0.0010095104790382768,
+      -0.00030250239625341605
+    ],
+    "raw_p": 0.0001,
+    "win_tie_loss": [
+      26,
+      267,
+      7
+    ],
+    "unit": "independent held-out cohort; average over three model seeds",
+    "test": "Monte Carlo paired sign flips of mean difference, two-sided, 9999 draws",
+    "holm_p": 0.0004
+  },
+  {
+    "split": "id",
+    "baseline": "mlp",
+    "mean_attention_minus_baseline": -0.00043661732672309735,
+    "bootstrap_95_ci": [
+      -0.0008433015167732936,
+      -8.68108137619364e-05
+    ],
+    "raw_p": 0.0195,
+    "win_tie_loss": [
+      13,
+      276,
+      11
+    ],
+    "unit": "independent held-out cohort; average over three model seeds",
+    "test": "Monte Carlo paired sign flips of mean difference, two-sided, 9999 draws",
+    "holm_p": 0.0195
+  },
+  {
+    "split": "shift",
+    "baseline": "premium",
+    "mean_attention_minus_baseline": -0.0015725589830253037,
+    "bootstrap_95_ci": [
+      -0.0021795616224638817,
+      -0.0010114966994348607
+    ],
+    "raw_p": 0.0001,
+    "win_tie_loss": [
+      53,
+      221,
+      26
+    ],
+    "unit": "independent held-out cohort; average over three model seeds",
+    "test": "Monte Carlo paired sign flips of mean difference, two-sided, 9999 draws",
+    "holm_p": 0.0004
+  },
+  {
+    "split": "shift",
+    "baseline": "mlp",
+    "mean_attention_minus_baseline": -0.004237491213609068,
+    "bootstrap_95_ci": [
+      -0.005553726817132675,
+      -0.0030552982768534396
+    ],
+    "raw_p": 0.0001,
+    "win_tie_loss": [
+      81,
+      217,
+      2
+    ],
+    "unit": "independent held-out cohort; average over three model seeds",
+    "test": "Monte Carlo paired sign flips of mean difference, two-sided, 9999 draws",
+    "holm_p": 0.0004
+  }
+]

@@ -1,0 +1,5 @@
+Prediction, alarm timing and maintenance cost of end-of-life alarms are separated
+With matched data, observation time explains most of the fixed-time vs alarm gap
+An asymmetric window score rewards alarm timing and hides notice and cost
+Under the metric M, neither our alarms nor threshold policies won on every dataset
+Batteries: accuracy fell on a held-out batch; a simple capacity trend did better

@@ -1,0 +1,162 @@
+[
+  {
+    "split": "confirmation_id",
+    "method": "attention",
+    "cohorts": 300,
+    "mean_log_gap": 0.005417073400262948,
+    "mean_certificate_factor": 3.1856716294942067,
+    "optimum_coverage": 0.73
+  },
+  {
+    "split": "confirmation_id",
+    "method": "horizon",
+    "cohorts": 300,
+    "mean_log_gap": 0.312797720006781,
+    "mean_certificate_factor": 7.535518514042712,
+    "optimum_coverage": 0.06666666666666667
+  },
+  {
+    "split": "confirmation_id",
+    "method": "mlp",
+    "cohorts": 300,
+    "mean_log_gap": 0.005772126508216376,
+    "mean_certificate_factor": 3.19634370805046,
+    "optimum_coverage": 0.7233333333333334
+  },
+  {
+    "split": "confirmation_id",
+    "method": "no_broadcast_attention",
+    "cohorts": 300,
+    "mean_log_gap": 0.005444656224391394,
+    "mean_certificate_factor": 3.199057532537087,
+    "optimum_coverage": 0.7266666666666667
+  },
+  {
+    "split": "confirmation_id",
+    "method": "pooled",
+    "cohorts": 300,
+    "mean_log_gap": 0.0056436436238904986,
+    "mean_certificate_factor": 3.1949492410867557,
+    "optimum_coverage": 0.7233333333333334
+  },
+  {
+    "split": "confirmation_id",
+    "method": "premium",
+    "cohorts": 300,
+    "mean_log_gap": 0.006056100353439009,
+    "mean_certificate_factor": 3.1303622211071427,
+    "optimum_coverage": 0.6733333333333333
+  },
+  {
+    "split": "confirmation_id",
+    "method": "premium_per_use",
+    "cohorts": 300,
+    "mean_log_gap": 0.013037166347864972,
+    "mean_certificate_factor": 3.4779126287474,
+    "optimum_coverage": 0.6333333333333333
+  },
+  {
+    "split": "confirmation_id",
+    "method": "random",
+    "cohorts": 300,
+    "mean_log_gap": 0.3620629995811639,
+    "mean_certificate_factor": 7.6450048940405315,
+    "optimum_coverage": 0.04
+  },
+  {
+    "split": "confirmation_id",
+    "method": "sequential_greedy",
+    "cohorts": 300,
+    "mean_log_gap": 0.005355020281385415,
+    "mean_certificate_factor": 3.1532252826111735,
+    "optimum_coverage": 0.7333333333333333
+  },
+  {
+    "split": "confirmation_id",
+    "method": "singleton",
+    "cohorts": 300,
+    "mean_log_gap": 0.006056100353439009,
+    "mean_certificate_factor": 3.1303622211071427,
+    "optimum_coverage": 0.6733333333333333
+  },
+  {
+    "split": "confirmation_shift",
+    "method": "attention",
+    "cohorts": 300,
+    "mean_log_gap": 0.019198506446299498,
+    "mean_certificate_factor": 11.427031490098837,
+    "optimum_coverage": 0.31
+  },
+  {
+    "split": "confirmation_shift",
+    "method": "horizon",
+    "cohorts": 300,
+    "mean_log_gap": 0.590974757956649,
+    "mean_certificate_factor": 22.91214378883258,
+    "optimum_coverage": 0.0
+  },
+  {
+    "split": "confirmation_shift",
+    "method": "mlp",
+    "cohorts": 300,
+    "mean_log_gap": 0.02370514638624855,
+    "mean_certificate_factor": 11.698335101563107,
+    "optimum_coverage": 0.2833333333333333
+  },
+  {
+    "split": "confirmation_shift",
+    "method": "no_broadcast_attention",
+    "cohorts": 300,
+    "mean_log_gap": 0.019646016682410606,
+    "mean_certificate_factor": 11.459267589202714,
+    "optimum_coverage": 0.30666666666666664
+  },
+  {
+    "split": "confirmation_shift",
+    "method": "pooled",
+    "cohorts": 300,
+    "mean_log_gap": 0.024262254763698067,
+    "mean_certificate_factor": 11.73964463035187,
+    "optimum_coverage": 0.2733333333333333
+  },
+  {
+    "split": "confirmation_shift",
+    "method": "premium",
+    "cohorts": 300,
+    "mean_log_gap": 0.019800964333562588,
+    "mean_certificate_factor": 11.281020435067916,
+    "optimum_coverage": 0.2866666666666667
+  },
+  {
+    "split": "confirmation_shift",
+    "method": "premium_per_use",
+    "cohorts": 300,
+    "mean_log_gap": 0.04539922205064483,
+    "mean_certificate_factor": 12.737254583872895,
+    "optimum_coverage": 0.19666666666666666
+  },
+  {
+    "split": "confirmation_shift",
+    "method": "random",
+    "cohorts": 300,
+    "mean_log_gap": 0.2809152280320053,
+    "mean_certificate_factor": 18.407296322955368,
+    "optimum_coverage": 0.006666666666666667
+  },
+  {
+    "split": "confirmation_shift",
+    "method": "sequential_greedy",
+    "cohorts": 300,
+    "mean_log_gap": 0.018576136837484748,
+    "mean_certificate_factor": 11.337546278759975,
+    "optimum_coverage": 0.31333333333333335
+  },
+  {
+    "split": "confirmation_shift",
+    "method": "singleton",
+    "cohorts": 300,
+    "mean_log_gap": 0.01943737366694921,
+    "mean_certificate_factor": 11.282254047990866,
+    "optimum_coverage": 0.29
+  }
+]

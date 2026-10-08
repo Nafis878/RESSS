@@ -1,0 +1,25 @@
+{
+  "rows": 247680,
+  "sha256": "16f1f65b02da523a17f3a502a35a34ed19f707e952b08ccd43be7de3c5ab18d8",
+  "all_rows_read": true,
+  "reused_calibration_fractions": [
+    0.25,
+    0.5,
+    1.0
+  ],
+  "reused_seeds": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030,
+    2031,
+    2032,
+    2033,
+    2034,
+    2035
+  ],
+  "compatible": "sampling fractions and calibration-resampling seed framework",
+  "incompatible": "score perturbations do not supply all four candidate alarm/life/cost trajectories; not recast as RAMPE cost results",
+  "prior_results_unchanged": true
+}

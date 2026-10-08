@@ -1,0 +1,1 @@
+PASS  R0 bearing window-tuned first warnings at H = 20 identical to the original script on this platform (0/17 in window)

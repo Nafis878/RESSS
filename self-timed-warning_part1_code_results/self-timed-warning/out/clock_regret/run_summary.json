@@ -1,0 +1,15 @@
+{
+  "protected_files_unchanged": 809,
+  "synthetic_cases": 2400,
+  "real_cases": 304,
+  "oracle_audit_cases": 120,
+  "initial_protected_count": 809,
+  "algorithm": "ordered shared-lifetime failure-phase exact relative regret",
+  "scientific_priority_established": false,
+  "environment": {
+    "python": "3.12.4",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2"
+  },
+  "elapsed_seconds": 16.562000000005355
+}

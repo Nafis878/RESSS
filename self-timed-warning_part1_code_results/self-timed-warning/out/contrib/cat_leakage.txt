@@ -1,0 +1,5 @@
+PASS  E1 disjoint outer test, outer training, inner and CAT-SPLIT unit sets (5 FD001 folds)
+PASS  E2a causality of the regressor (cap 90): max |prefix - full| = 0.00e+00 over 90 checks
+PASS  E2b causality of the CAT alarm: identical alarm cycle with the future deleted, no alarm before it (20 alarms)
+PASS  E3 permuted-life labels: CAT-c cost rate / perfect 2.548 (2 failures, median notice 60) vs real labels 1.078 (0 failures, median notice 26)
+PASS  E4 rerun of fold 1 reproduces every stored CAT decision (10240 cost rows, 4340 M rows)

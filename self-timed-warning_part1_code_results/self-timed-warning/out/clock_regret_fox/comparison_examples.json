@@ -1,0 +1,84 @@
+{
+  "cohort": {
+    "known_lifetime": 10,
+    "ages": [
+      8,
+      20
+    ],
+    "rates": [
+      "1/8",
+      "1/5"
+    ],
+    "oracle_relative_scores": [
+      "1",
+      "8/5"
+    ],
+    "selected_age": 8
+  },
+  "fox_discounted_exponential_specialization": {
+    "alpha": "log(2)",
+    "lambda": "log(2)",
+    "nu": "1/2",
+    "planned_cost": 1,
+    "failure_cost": 2,
+    "failure_only_risk": "2",
+    "finite_ages": [
+      {
+        "age": 1,
+        "phi": "1",
+        "delta": "5/8",
+        "risk": "8/3"
+      },
+      {
+        "age": 2,
+        "phi": "1",
+        "delta": "17/32",
+        "risk": "32/15"
+      },
+      {
+        "age": 8,
+        "phi": "1",
+        "delta": "65537/131072",
+        "risk": "131072/65535"
+      },
+      {
+        "age": 20,
+        "phi": "1",
+        "delta": "1099511627777/2199023255552",
+        "risk": "2199023255552/1099511627775"
+      }
+    ]
+  },
+  "heterogeneous": {
+    "horizon": [
+      1,
+      1,
+      1
+    ],
+    "observed_failure": [
+      true,
+      false,
+      false
+    ],
+    "premiums": [
+      98,
+      1,
+      100
+    ],
+    "candidate_age": 3,
+    "comparator_age": 2,
+    "full_clock_enumeration_value": "505/306",
+    "prefix_value": "505/306",
+    "witness": [
+      1,
+      2,
+      3
+    ],
+    "shared_count": 1,
+    "denominators": [
+      "707",
+      "612",
+      "1010"
+    ]
+  }
+}

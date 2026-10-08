@@ -1,0 +1,18 @@
+test_accounting_consistency (__main__.Tests.test_accounting_consistency) ... ok
+test_adversarial_witness_same_logs (__main__.Tests.test_adversarial_witness_same_logs) ... ok
+test_all_observed_exact (__main__.Tests.test_all_observed_exact) ... ok
+test_cap_sensitivity_upper_invariant (__main__.Tests.test_cap_sensitivity_upper_invariant) ... ok
+test_complete_case_all_missing (__main__.Tests.test_complete_case_all_missing) ... ok
+test_constructive_extremes (__main__.Tests.test_constructive_extremes) ... ok
+test_false_safe_healthy_label (__main__.Tests.test_false_safe_healthy_label) ... ok
+test_hidden_truth_mutation (__main__.Tests.test_hidden_truth_mutation) ... ok
+test_invalid_cap (__main__.Tests.test_invalid_cap) ... ok
+test_none_observed (__main__.Tests.test_none_observed) ... ok
+test_ratio_manual (__main__.Tests.test_ratio_manual) ... ok
+test_refuses_leakage (__main__.Tests.test_refuses_leakage) ... ok
+test_reveal_nests_intervals (__main__.Tests.test_reveal_nests_intervals) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.072s
+
+OK

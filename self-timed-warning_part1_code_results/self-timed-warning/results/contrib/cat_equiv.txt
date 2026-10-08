@@ -1,0 +1,4 @@
+PASS  P1 CAT code path = unmodified eol_window2.py on this machine, FD001 H = 20, unit by unit (92/100 in window)
+PASS  P1 (information) frozen Linux run: 88/100 in window; units with a different outcome on this machine: 4
+PASS  P2 cost policies of cat_run.py = unmodified audit_cost.run, FD001 fold 1 (10 policies, 3200 decisions)
+PASS  P3 policies under M of cat_run.py = unmodified kam_fd001.run_split, FD001 fold 1 (15 policies, 2100 decisions)

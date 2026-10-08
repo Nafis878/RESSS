@@ -1,0 +1,464 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{charter}
+\usepackage{textcomp,amsmath,amssymb,graphicx,booktabs,array,longtable,enumitem,xurl}
+\usepackage[expansion=false]{microtype}
+\urlstyle{same}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage[labelfont=bf,labelsep=period,font=small,justification=raggedright,singlelinecheck=false]{caption}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\begin{document}
+\begin{center}{\Large\bfseries Supplementary material}\\[6pt]{\large Knowing when to warn: Self-timed end-of-life alarms under an asymmetric tolerance window, their maintenance cost, and three pre-specified confirmations}\\[6pt]{\small Anonymized for review. Reference numbers in brackets refer to the reference list of the main article.}\end{center}
+\section*{S1. Fixed-time reference models}
+
+\noindent For Section 6.1, the models were evaluated at fixed fractions of each test engine's life (30, 50, 70 and 90\%) in the same outer folds. They were trained on the fit engines, and any stacking or calibration used only calibration engines. The eleven models at half of life are: age only; an input--output hidden Markov model; the similarity model; gradient-boosted trees; a temporal convolutional network with and without augmentation by a conditional generative adversarial network; a hybrid Transformer with an engineered-feature branch; the convolutional and LSTM networks; a physics-informed Bayesian exponential-degradation model with a population prior in the style of Gebraeel et al. [22]; and a stacked hybrid of ten base models (eight of the listed models plus two tree models on the sensor baseline and on sensor trends) and the cycle count, whose quantile stacker and shift were learned on calibration engines pooled over life stages; variants adding the TCN models reached between 30.7\% and 33.9\%. The single models are scored on their raw estimates, without a window-centring shift.
+
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item \textbf{Age only}: the mean remaining life of the training engines that survived beyond the current cycle (plotted in Fig. 2); the feature-subset analysis of Section 6.1 uses gradient-boosted trees on the cycle count instead.
+\item \textbf{Gradient-boosted trees}: histogram gradient boosting with absolute-error loss (400 iterations, learning rate 0.05, 31 leaves, minimum 40 samples per leaf, no target cap) on features of the seven temperature and speed sensors (exponential mean with span 5, expanding level, slope and standard deviation, a pooled health index, early-life baseline and age); the feature-subset analysis uses the same settings on subsets of the causal features of Section 4.2.
+\item \textbf{Input--output hidden Markov model}: three health states and an absorbing failure state, four discrete symbols from a principal-component quantisation, one transition matrix per operating regime; remaining life = expected time to absorption.
+\item \textbf{LSTM and CNN}: as in Section 5.3 of the main text.
+\item \textbf{Similarity}: principal-component trajectories matched to all training trajectories over a 60-cycle window; the remaining lives of the 30 closest matches are kernel-weighted into a distribution.
+\item \textbf{Physics-informed Bayesian model}: a linear health index is fitted to separate early and late cycles; the path a + exp($\theta$ + $\beta$t) with a failure level D has a multivariate normal population prior fitted to the training engines; the posterior for a test engine is obtained by importance sampling (20,000 samples) with the constraint that the engine has not yet failed.
+\item \textbf{Hybrid Transformer}: two self-attention blocks over the last 40 cycles of the normalised sensors and regime indicators, concatenated with the causal features, with a monotone quantile output trained with the pinball loss.
+\item \textbf{TCN and TCN with GAN augmentation}: dilated causal convolutions (dilations 1, 2, 4, 8) with quantile outputs; a conditional generative adversarial network, trained on the fit engines, generates 40-cycle sensor windows for given remaining life and age that are added to the training data.
+\item \textbf{Stacked hybrid}: quantile gradient boosting on the predictions of ten base models and the cycle count, trained on calibration engines at 16 life stages; the stacker type (from three candidates) and the shift were chosen by engine-grouped cross-validation within the calibration engines, and the estimate is the value that maximises the predicted probability of lying in the window.
+\end{itemize}
+
+\section*{S2. Proof of Proposition 1}
+
+\noindent Under A1 the warning is correct if and only if \textit{a} $\le$ $\varepsilon$ + \textit{s} $\le$ \textit{b}, that is, $\varepsilon$ $\in$ [\textit{a} \textminus{} \textit{s}, \textit{b} \textminus{} \textit{s}], an interval of width \textit{w} = \textit{b} \textminus{} \textit{a}. Hence \textit{P}(\textit{s}) = \textit{F}(\textit{b} \textminus{} \textit{s}) \textminus{} \textit{F}(\textit{a} \textminus{} \textit{s}), and since the interval has width \textit{w}, \textit{P}(\textit{s}) $\le$ sup\textsubscript{x} [\textit{F}(\textit{x} + \textit{w}) \textminus{} \textit{F}(\textit{x})] = \textit{C}\textsubscript{w}(\textit{F}), which is part (i).
+
+\noindent For part (ii), let \textit{f} be the density, unimodal and symmetric about \textit{m}, and write \textit{g}(\textit{x}) = \textit{F}(\textit{x} + \textit{w}) \textminus{} \textit{F}(\textit{x}), the probability of [\textit{x}, \textit{x} + \textit{w}]. Then \textit{g}'(\textit{x}) = \textit{f}(\textit{x} + \textit{w}) \textminus{} \textit{f}(\textit{x}). For \textit{x} < \textit{m} \textminus{} \textit{w}/2 the point \textit{x} + \textit{w} is closer to \textit{m} than \textit{x} (|\textit{x} + \textit{w} \textminus{} \textit{m}| < |\textit{x} \textminus{} \textit{m}|), so by symmetry and unimodality \textit{f}(\textit{x} + \textit{w}) $\ge$ \textit{f}(\textit{x}) and \textit{g} is non-decreasing; for \textit{x} > \textit{m} \textminus{} \textit{w}/2 the reverse holds and \textit{g} is non-increasing. Therefore \textit{g} attains its maximum at \textit{x} = \textit{m} \textminus{} \textit{w}/2, the interval centred at \textit{m}, and \textit{g}(\textit{m} \textminus{} \textit{w}/2) = Pr(|$\varepsilon$ \textminus{} \textit{m}| $\le$ \textit{w}/2) = \textit{C}\textsubscript{w}(\textit{F}). The interval [\textit{a} \textminus{} \textit{s}, \textit{b} \textminus{} \textit{s}] is centred at \textit{m} when (\textit{a} + \textit{b})/2 \textminus{} \textit{s} = \textit{m}, that is, \textit{s}\textsuperscript{*} = (\textit{a} + \textit{b})/2 \textminus{} \textit{m}; for [\textit{a}, \textit{b}] = [\textminus{}13, +2] this is \textit{s}\textsuperscript{*} = \textminus{}5.5 \textminus{} \textit{m}. If \textit{f} is constant near the maximum, \textit{s}\textsuperscript{*} is one of several maximisers. \hfill$\blacksquare$
+
+\noindent Assumption A1 is an idealisation: in the model, a different shift moves the warning to a different cycle, and the error distribution changes slowly with the remaining life at which it is measured. Section 6.8 of the main text therefore checks the result empirically instead of relying on it.
+
+\section*{S3. Example engines}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=1.00\linewidth]{img/Fig3_example_engines.png}
+\caption{Three PHM08 test engines at \textit{H} = 20, each with the settings selected for its own outer fold. The calibrated prediction $\tilde{y}$ (blue) stays flat while the engine looks healthy and falls as wear appears; the dot marks the first warning. Left: correct warning. Centre: too early. Right: too late.}
+\end{figure}
+
+\section*{S4. Leakage checks}
+
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item (E1) outer and inner engine sets are disjoint in every fold;
+\item (E2) causality: for 15 test engines and six random cut-offs each, predictions computed from truncated histories equal those from full histories;
+\item (E3) a negative control at \textit{H} = 10 in outer fold 1 that trains on remaining-life labels built from lives permuted across engines;
+\item (E4) refitting fold 1 with its stored settings reproduces the stored outcome of each of its 44 test engines at \textit{H} = 10.
+\end{itemize}
+
+\noindent All four checks passed on PHM08. The outer and inner engine sets were disjoint in every fold (E1). Predictions from truncated histories equalled those from full histories, with a maximum absolute difference of 0 over 90 checks (E2). Training on labels from permuted lives reduced the fold-1 in-window rate at \textit{H} = 10 from 97.7\% to 15.9\% (E3). Refitting fold 1 with its stored settings reproduced the stored outcome of each of its test engines (E4).
+
+\section*{S5. Battery confirmation: data curation and secondary analyses}
+
+\noindent Structural checks of the data, made after they arrived and before any model was run, required three deviations, recorded with reasons in the protocol file below the hashed section. (D1) The official life is the first cycle below 80\% of nominal capacity; in the first and third batches that cycle is not in the summary, so a record is complete if it runs to the cycle before (second-batch records run past the end of life and are truncated at it, as specified). (D2) Five cells of the first batch were continued as five cells of the second batch; the protocol intended to exclude such split tests, but the continuation files restart their cycle count, so the ten records were identified from the data providers' loading code and excluded. (D3) Five cells with a finite official life never fall below 0.91 Ah in their cleaned data and were excluded as censored, as the data providers also do. This leaves 123 cells (36, 43 and 44 from the three batches). The providers' own curation keeps 124 cells: it merges the five split tests, which we exclude, and drops four channels flagged as noisy, which our primary analysis keeps; a secondary analysis without them (119 cells) gave 95.0\%. An erratum appended to the protocol file after the run corrects three details of the deviation notes (two numerical, one about the test conditions: the batches also differ in rest periods) and records that the inner-split seed of the leave-one-batch-out analysis (100 + batch) was not specified; none affects the analysis. At \textit{H} = 10 and 15 the model reached 98.4\% and 99.2\%.
+
+\noindent The leave-one-batch-out analysis is harder, because the three batches were started at different times (May 2017, June 2017 and April 2018), used different rest periods, and share almost no charging protocol: of the 41 protocols of the second batch, only 2 occur in another batch. Training on two batches and testing on the third gave 86/123 = 69.9\% (95\% CI 61.0--77.9\%; 27 late, 10 too early, no missed cell), still clearly above the MLP with Kalman filter (39.0\%; 55 against 17 discordant cells, \textit{p} < 0.001) and age-only (3.3\%). The drop concentrated in the second batch (24 of 43 correct, 19 late), whose cells had the shortest lives (median 481 cycles, against 772 and 1006); the late errors are consistent with a model trained on longer-lived cells expecting more life than these cells had.
+
+\section*{S6. N-CMAPSS confirmation: secondary results}
+
+\noindent At \textit{H} = 10 and 15 the model reached 74.7\% and 70.7\%. On the official split (39 test engines) it reached 22/39 = 56.4\% at \textit{H} = 20, compared with 43.6\% for the MLP with Kalman filter and 30.8\% for age-only. The median error at \textit{H} = 20 was \textminus{}2.7 cycles, and the selected shifts ranged from \textminus{}4.0 to \textminus{}1.0, compared with \textminus{}4.0 to \textminus{}7.0 on PHM08; the debounce selected in every fold was \textit{k} = 5. Two deviations are recorded: the official split has no fold number, and seed 106 was used for its inner split; the protocol calls the Kalman filter of the MLP competitor constant-velocity, whereas it is the scalar filter with a fixed decrease of one cycle per cycle. In an exploratory re-run after the confirmation with all 14 channels (adding the pressures and the fuel flow), the rate at \textit{H} = 20 was 65.7\% (71.7\% at \textit{H} = 10), and with the wider windows [\textminus{}20, +5] and [\textminus{}30, +10] it was 83.8\% and 97.0\% (six channels: 80.8\% and 93.9\%).
+
+\section*{S7. Bearing confirmation: details}
+
+\noindent The 17 bearings ran under condition 1 (1800 rpm, 4000 N; seven bearings), condition 2 (1650 rpm, 4200 N; seven) and condition 3 (1500 rpm, 5000 N; three). Lives ranged from 230 to 2803 snapshots (median 1428, i.e. about 4 h), giving $\kappa$ = 7 snapshots per block; the window is therefore about \textminus{}15 to +2.3 minutes and \textit{H} = 20 is about 23 minutes before failure. The run followed the protocol without deviation. At \textit{H} = 10 and 15 the self-timed model placed 0 and 0 of 17 warnings in the window; on the official challenge split (6 training, 11 test bearings) it placed 0 of 11 at \textit{H} = 20, with 10 bearings never warned. STW-T reached 0\%, 5.9\% and 0\% at \textit{H} = 10, 15 and 20. Table S1 lists the bearings with the diagnosis made after the run, using an ad hoc criterion: the number of blocks before failure from which the summed RMS of the two channels stayed above 1.5 times its mean over the first 20 blocks (0: never sustained; 1: only the final block, which the model never sees). For the shortest bearing the 20 baseline blocks are most of its life. The criterion explains some misses but not the misses and very early warnings on bearings with long degradation. T1 (STW-T not worse than the standard rule by more than 5 points) was met only trivially: both rules placed 0 of 17 warnings in the window (0 against 0 discordant bearings, exact McNemar \textit{p} = 1.000).
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1662\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1108\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0997\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1883\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1329\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1580\linewidth-2\tabcolsep\relax}@{}}
+\caption{Bearings (primary cross-validation, \textit{H} = 20). Onset: blocks before failure from which the vibration RMS stayed above 1.5 times its early-life level (post hoc, ad hoc criterion; 0 = never sustained).}\\
+\toprule
+Bearing & Condition & Life (snapshots) & Blocks & Onset (blocks before failure) & Outcome & True blocks left at warning \\
+\midrule\endfirsthead
+\toprule
+Bearing & Condition & Life (snapshots) & Blocks & Onset (blocks before failure) & Outcome & True blocks left at warning \\
+\midrule\endhead
+\bottomrule\endfoot
+Bearing1\_1 & 1 & 2803 & 400 & 68 & EARLY & 84.4 \\
+Bearing1\_2 & 1 & 871 & 124 & 6 & MISSED & -- \\
+Bearing1\_3 & 1 & 2375 & 339 & 106 & EARLY & 45.3 \\
+Bearing1\_4 & 1 & 1428 & 204 & 49 & MISSED & -- \\
+Bearing1\_5 & 1 & 2463 & 351 & 2 & MISSED & -- \\
+Bearing1\_6 & 1 & 2448 & 349 & 3 & EARLY & 210.7 \\
+Bearing1\_7 & 1 & 2259 & 322 & 6 & MISSED & -- \\
+Bearing2\_1 & 2 & 911 & 130 & 108 & MISSED & -- \\
+Bearing2\_2 & 2 & 797 & 113 & 81 & MISSED & -- \\
+Bearing2\_3 & 2 & 1955 & 279 & 1 & EARLY & 177.3 \\
+Bearing2\_4 & 2 & 751 & 107 & 1 & MISSED & -- \\
+Bearing2\_5 & 2 & 2311 & 330 & 1 & EARLY & 132.1 \\
+Bearing2\_6 & 2 & 701 & 100 & 2 & EARLY & 63.1 \\
+Bearing2\_7 & 2 & 230 & 32 & 0 & MISSED & -- \\
+Bearing3\_1 & 3 & 515 & 73 & 3 & MISSED & -- \\
+Bearing3\_2 & 3 & 1637 & 233 & 4 & EARLY & 138.9 \\
+Bearing3\_3 & 3 & 434 & 62 & 15 & MISSED & -- \\
+\end{longtable}}
+
+\section*{S8. Other tolerance windows}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.2881\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1773\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1773\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1773\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1801\linewidth-2\tabcolsep\relax}@{}}
+\caption{In-window rate (\%) of first warnings at \textit{H} = 20 for four tolerance windows (settings re-selected for each window; five-fold cross-validation).}\\
+\toprule
+Dataset & [\textminus{}10, +2] & [\textminus{}13, +2] & [\textminus{}20, +5] & [\textminus{}30, +10] \\
+\midrule\endfirsthead
+\toprule
+Dataset & [\textminus{}10, +2] & [\textminus{}13, +2] & [\textminus{}20, +5] & [\textminus{}30, +10] \\
+\midrule\endhead
+\bottomrule\endfoot
+PHM08 & 87.6 & 91.7 & 98.2 & 99.5 \\
+FD001 & 82.0 & 88.0 & 99.0 & 100.0 \\
+FD002 & 90.0 & 94.6 & 98.8 & 99.6 \\
+FD003 & 89.0 & 96.0 & 99.0 & 100.0 \\
+FD004 & 78.3 & 82.7 & 93.6 & 97.2 \\
+N-CMAPSS (6 channels) & 63.6 & 68.7 & 80.8 & 93.9 \\
+N-CMAPSS (14 channels, exploratory) & 58.6 & 65.7 & 83.8 & 97.0 \\
+\end{longtable}}
+{\scriptsize Rates at \textit{H} = 10--40 for all windows are in the result files of the reproduction package.\par}\medskip
+
+\noindent The rate grew with the width of the window on every dataset (Table S2). With the stricter window [\textminus{}10, +2], PHM08 still reached 87.6\%; with [\textminus{}20, +5], PHM08 and every C-MAPSS dataset exceeded 93\% and N-CMAPSS reached 80.8\%; FD004 and N-CMAPSS, the datasets with the least concentrated errors, had the lowest rates for every window. 
+
+\section*{S9. Maintenance cost: earlier analysis with the battery warning level fixed}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.2327\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1219\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1274\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1274\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1274\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1274\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1358\linewidth-2\tabcolsep\relax}@{}}
+\caption{Long-run cost rate relative to perfect foresight (1.00 = replacement one cycle before every failure). STW: self-timed warning; Age: optimal age replacement; RTF: run to failure. Five-fold cross-validation.}\\
+\toprule
+Dataset & Lead time & STW, $\rho$ = 10 & Age, $\rho$ = 10 & STW, $\rho$ = 50 & Age, $\rho$ = 50 & RTF, $\rho$ = 10 \\
+\midrule\endfirsthead
+\toprule
+Dataset & Lead time & STW, $\rho$ = 10 & Age, $\rho$ = 10 & STW, $\rho$ = 50 & Age, $\rho$ = 50 & RTF, $\rho$ = 10 \\
+\midrule\endhead
+\bottomrule\endfoot
+PHM08 & 0 cycles & 1.09 & 1.77 & 1.28 & 2.37 & 9.95 \\
+ & 5 cycles & 1.07 & 1.77 & 1.07 & 2.37 & 9.95 \\
+ & 10 cycles & 1.10 & 1.77 & 1.10 & 2.37 & 9.95 \\
+FD001 & 0 cycles & 1.06 & 1.74 & 1.06 & 2.38 & 9.95 \\
+ & 5 cycles & 1.08 & 1.74 & 1.08 & 2.38 & 9.95 \\
+ & 10 cycles & 1.10 & 1.74 & 1.10 & 2.38 & 9.95 \\
+FD002 & 0 cycles & 1.06 & 1.67 & 1.06 & 1.92 & 9.95 \\
+ & 5 cycles & 1.07 & 1.67 & 1.07 & 1.92 & 9.95 \\
+ & 10 cycles & 1.09 & 1.67 & 1.09 & 1.92 & 9.95 \\
+FD003 & 0 cycles & 1.08 & 1.86 & 1.08 & 2.54 & 9.96 \\
+ & 5 cycles & 1.06 & 1.86 & 1.06 & 2.54 & 9.96 \\
+ & 10 cycles & 1.06 & 1.86 & 1.06 & 2.54 & 9.96 \\
+FD004 & 0 cycles & 1.11 & 2.13 & 1.28 & 2.30 & 9.96 \\
+ & 5 cycles & 1.11 & 2.13 & 1.11 & 2.30 & 9.96 \\
+ & 10 cycles & 1.16 & 2.13 & 1.36 & 2.30 & 9.96 \\
+N-CMAPSS & 0 cycles & 1.79 & 1.72 & 1.63 & 2.35 & 9.87 \\
+ & 5 cycles & 1.67 & 1.72 & 2.45 & 2.35 & 9.87 \\
+ & 10 cycles & 1.70 & 1.72 & 2.50 & 2.35 & 9.87 \\
+Battery (\textit{H} = 20 fixed) & 0 cycles & 1.16 & 2.23 & 1.51 & 4.57 & 9.99 \\
+ & 15 cycles & 1.13 & 2.23 & 1.48 & 4.57 & 9.99 \\
+ & 30 cycles & 1.26 & 2.23 & 2.27 & 4.57 & 9.99 \\
+\end{longtable}}
+{\scriptsize $\rho$: cost of a failure relative to a planned replacement. Lead time: cycles between the warning and the replacement. Engines: the warning level is chosen per (lead time, $\rho$) on training engines. Battery: lead times of 0, 5 and 10 blocks; \textit{H} fixed at the pre-specified 20 blocks.\par}\medskip
+
+\noindent Table S3 gives the cost analysis. Without lead time, the self-timed warnings brought the long-run cost rate on PHM08 to 1.07--1.28 times that of perfect foresight for $\rho$ from 5 to 50, against 1.70--2.37 for optimal age replacement and 5.0--49.8 for run-to-failure. On PHM08 and FD001--FD004 the warnings were cheaper than age replacement for every cost ratio and for lead times up to 10 cycles, with savings of 35--57\% without lead time. On PHM08 the saving grew from 37\% at $\rho$ = 5 to 46\% at $\rho$ = 50, because age replacement must replace early to avoid expensive failures, whereas the warnings adapt to each unit. With a lead time the warning level selected on training engines rose, and the cost stayed close to the no-lead case (PHM08 with 10 cycles of lead time: 1.07--1.10). On N-CMAPSS, where the error was least concentrated, the warnings were cheaper than age replacement for 3 of 4 cost ratios without lead time (1.50--1.83 against 1.68--2.35 times perfect foresight), a much smaller advantage than on the other data. On the batteries, with the warning level fixed at 20 blocks, the rate was 1.11--1.51 times perfect foresight, against 2.16--4.57 for age replacement, and the warnings stayed cheaper up to a lead time of 30 cycles. With 45 cycles of lead time, however, 14 of 123 cells failed before the planned replacement, because a fixed warning about 57 cycles before failure leaves too little margin, and the warnings were cheaper than age replacement only for $\rho$ = 5 and 10; the warning level must grow with the lead time, as it did automatically on the engine data. On the engine datasets the warning level was chosen on the same out-of-fold predictions that had been used to tune the other settings, which may make the choice slightly optimistic, although the test units were never used. Section 6.6 of the main text extends this analysis with alarms tuned directly to the cost, a health-indicator alarm and paired bootstrap intervals, and there the battery warning level is chosen like on the engines.
+
+\section*{S10. Theory-guided shift rule (STW-T)}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1773\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0665\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1219\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1219\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1551\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.2134\linewidth-2\tabcolsep\relax}@{}}
+\caption{Standard count-selected shift (STW) against the theory-guided shift (STW-T) on the datasets seen before STW-T was written (descriptive; five-fold cross-validation).}\\
+\toprule
+Dataset & \textit{H} & STW (\%) & STW-T (\%) & Mean shift STW & Mean shift STW-T & Only STW-T / only STW correct; \textit{p} \\
+\midrule\endfirsthead
+\toprule
+Dataset & \textit{H} & STW (\%) & STW-T (\%) & Mean shift STW & Mean shift STW-T & Only STW-T / only STW correct; \textit{p} \\
+\midrule\endhead
+\bottomrule\endfoot
+PHM08 & 10 & 96.3 & 95.0 & \textminus{}4.9 & \textminus{}5.8 & 3 / 6; 0.508 \\
+ & 15 & 94.0 & 93.6 & \textminus{}4.0 & \textminus{}5.3 & 4 / 5; 1.000 \\
+ & 20 & 91.7 & 90.8 & \textminus{}5.0 & \textminus{}6.5 & 7 / 9; 0.804 \\
+FD001 & 10 & 98.0 & 97.0 & \textminus{}4.7 & \textminus{}5.3 & 0 / 1; 1.000 \\
+ & 15 & 95.0 & 97.0 & \textminus{}3.5 & \textminus{}5.5 & 2 / 0; 0.500 \\
+ & 20 & 88.0 & 86.0 & \textminus{}4.0 & \textminus{}5.7 & 1 / 3; 0.625 \\
+FD002 & 10 & 96.2 & 97.7 & \textminus{}4.8 & \textminus{}6.1 & 5 / 1; 0.219 \\
+ & 15 & 96.9 & 95.4 & \textminus{}4.5 & \textminus{}5.6 & 2 / 6; 0.289 \\
+ & 20 & 94.6 & 94.2 & \textminus{}5.0 & \textminus{}5.7 & 3 / 4; 1.000 \\
+FD003 & 10 & 94.0 & 95.0 & \textminus{}4.0 & \textminus{}5.2 & 2 / 1; 1.000 \\
+ & 15 & 94.0 & 94.0 & \textminus{}5.1 & \textminus{}5.7 & 1 / 1; 1.000 \\
+ & 20 & 96.0 & 94.0 & \textminus{}3.9 & \textminus{}4.8 & 0 / 2; 0.500 \\
+FD004 & 10 & 90.4 & 90.0 & \textminus{}5.9 & \textminus{}6.0 & 0 / 1; 1.000 \\
+ & 15 & 85.9 & 85.9 & \textminus{}4.9 & \textminus{}6.0 & 7 / 7; 1.000 \\
+ & 20 & 82.7 & 83.5 & \textminus{}4.8 & \textminus{}5.4 & 6 / 4; 0.754 \\
+N-CMAPSS & 10 & 74.7 & 72.7 & \textminus{}3.5 & \textminus{}5.2 & 3 / 5; 0.727 \\
+ & 15 & 70.7 & 71.7 & \textminus{}4.4 & \textminus{}5.5 & 4 / 3; 1.000 \\
+ & 20 & 68.7 & 68.7 & \textminus{}2.5 & \textminus{}5.3 & 9 / 9; 1.000 \\
+Battery & 10 & 98.4 & 98.4 & \textminus{}2.7 & \textminus{}5.5 & 1 / 1; 1.000 \\
+ & 15 & 99.2 & 99.2 & \textminus{}3.4 & \textminus{}5.8 & 0 / 0; 1.000 \\
+ & 20 & 97.6 & 96.7 & \textminus{}3.4 & \textminus{}5.7 & 2 / 3; 1.000 \\
+\end{longtable}}
+{\scriptsize Exact McNemar test between the two rules. The standard results reproduce Table 2 and the confirmation results exactly. On the bearings (fresh data, pre-specified) both rules gave 0\% at \textit{H} = 20.\par}\medskip
+
+\noindent If the datasets differ in concentration rather than in how well the shift is set, a better shift rule should not help. STW-T is consistent with this: choosing the shift so that the median out-of-fold error equals the window centre changed the rate at \textit{H} = 20 by between \textminus{}2.0 and 0.8 percentage points on the seven datasets seen before (N-CMAPSS: 68.7\% $\rightarrow$ 68.7\%; Table S4). On N-CMAPSS, STW-T moved the mean shift from \textminus{}2.5 to \textminus{}5.3, close to the \textminus{}5.6 implied by the test errors, yet the rate did not change (9 against 9 discordant engines). The count-selected shifts were thus often less negative than Proposition 1 suggests (Fig. 8b of the main text), but this cost little, because the rate is flat near its optimum and limited by the concentration of the error; the remaining gap to the best fixed shift on the test errors reflects that a different shift also moves the warning to a different cycle (assumption A1).
+
+\section*{S11. Thirty random 50-engine test sets}
+
+\noindent With 50 random test engines and 168 training engines, drawn thirty times on PHM08, the number of correct first warnings per 50 engines at \textit{H} = 20 averaged 45.9 (accuracy 91.8\%, standard deviation 3.3 percentage points, range 42--49 of 50; Fig. S2a). On average 2.1 warnings per 50 engines were late and 2.0 too early, and no engine was missed. At least 46 of 50 were correct in 19 of the 30 iterations and at least 48 of 50, the target set by the group that defined the window, in 4. The mean true remaining life at the warning was 19.3 cycles, between 17.7 and 22.0 in every iteration (Fig. S2b). The iterations share engines (all 218 engines appeared in at least one test set), so they are not independent samples; they show the variability a single 50-engine test would have, and they agree with the cross-validated estimate. Per-iteration results are in Table S5.
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=1.00\linewidth]{img/Fig_rep30.png}
+\caption{Thirty random 50-engine test sets on PHM08 (168 training engines each, settings re-selected inside the training engines, \textit{H} = 20). (a) Share of the 50 first warnings in the window in each iteration; dashed: mean; dotted: 48 of 50. (b) True cycles left at the warning in each iteration: mean (line) and interquartile range over the 50 engines (band); dotted: 13 cycles.}
+\end{figure}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1329\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1662\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1108\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1219\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1108\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.2134\linewidth-2\tabcolsep\relax}@{}}
+\caption{Per-iteration results of the thirty random 50-engine tests on PHM08 (\textit{H} = 20).}\\
+\toprule
+Iteration & In window (of 50) & Accuracy (\%) & Late & Too early & Missed & Mean true cycles left at warning \\
+\midrule\endfirsthead
+\toprule
+Iteration & In window (of 50) & Accuracy (\%) & Late & Too early & Missed & Mean true cycles left at warning \\
+\midrule\endhead
+\bottomrule\endfoot
+1 & 47 & 94.0 & 1 & 2 & 0 & 19.1 \\
+2 & 46 & 92.0 & 1 & 3 & 0 & 20.1 \\
+3 & 46 & 92.0 & 2 & 2 & 0 & 19.4 \\
+4 & 47 & 94.0 & 1 & 2 & 0 & 19.1 \\
+5 & 47 & 94.0 & 2 & 1 & 0 & 19.4 \\
+6 & 48 & 96.0 & 2 & 0 & 0 & 18.9 \\
+7 & 45 & 90.0 & 3 & 2 & 0 & 21.0 \\
+8 & 42 & 84.0 & 3 & 5 & 0 & 22.0 \\
+9 & 46 & 92.0 & 1 & 3 & 0 & 20.2 \\
+10 & 47 & 94.0 & 1 & 2 & 0 & 19.1 \\
+11 & 47 & 94.0 & 3 & 0 & 0 & 19.4 \\
+12 & 46 & 92.0 & 3 & 1 & 0 & 18.3 \\
+13 & 46 & 92.0 & 2 & 2 & 0 & 19.8 \\
+14 & 46 & 92.0 & 1 & 3 & 0 & 20.4 \\
+15 & 47 & 94.0 & 3 & 0 & 0 & 19.3 \\
+16 & 48 & 96.0 & 1 & 1 & 0 & 17.7 \\
+17 & 45 & 90.0 & 3 & 2 & 0 & 18.8 \\
+18 & 45 & 90.0 & 3 & 2 & 0 & 19.3 \\
+19 & 48 & 96.0 & 1 & 1 & 0 & 18.7 \\
+20 & 44 & 88.0 & 3 & 3 & 0 & 19.0 \\
+21 & 47 & 94.0 & 3 & 0 & 0 & 19.4 \\
+22 & 45 & 90.0 & 2 & 3 & 0 & 18.8 \\
+23 & 46 & 92.0 & 1 & 3 & 0 & 19.7 \\
+24 & 42 & 84.0 & 3 & 5 & 0 & 19.5 \\
+25 & 49 & 98.0 & 1 & 0 & 0 & 18.6 \\
+26 & 44 & 88.0 & 3 & 3 & 0 & 19.2 \\
+27 & 47 & 94.0 & 2 & 1 & 0 & 18.7 \\
+28 & 44 & 88.0 & 2 & 4 & 0 & 18.2 \\
+29 & 45 & 90.0 & 4 & 1 & 0 & 18.5 \\
+30 & 45 & 90.0 & 2 & 3 & 0 & 18.9 \\
+\end{longtable}}
+{\scriptsize Mean over the 30 iterations: 45.9 of 50 (91.8\%), mean true cycles left 19.3. Iterations 1--20 are identical to an earlier 20-repetition run with the same seeds.\par}\medskip
+
+\section*{S12. Timing controls and cost-tuned policies: full results}
+
+\noindent Table S6 gives the constant-estimate control and the health-indicator threshold alarm of Section 6.3 at every warning level, and Fig. S3 shows the rates at \textit{H} = 20. Table S7 gives, for all 16 combinations of lead time and cost ratio, the cost rate of the window-tuned model relative to perfect foresight and its ratio to the cost-tuned model, the health-indicator alarm and age replacement, with paired bootstrap 95\% intervals (2,000 resamples of test units; fitted policies fixed). A ratio below 1 favours the window-tuned model. The experiments are in rev\_experiments.py and rev\_analyze.py of the reproduction package; they reproduce the original results of our model engine by engine on all seven datasets.
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1883\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0665\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1551\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1662\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1358\linewidth-2\tabcolsep\relax}@{}}
+\caption{In-window rate (\%) at every warning level: our model, the same alarm times with a constant estimate, and the health-indicator threshold alarm (five-fold cross-validation).}\\
+\toprule
+Dataset & \textit{H} & Our model & Constant estimate & \textit{p} (McNemar) & Health-indicator alarm & \textit{p} (McNemar) \\
+\midrule\endfirsthead
+\toprule
+Dataset & \textit{H} & Our model & Constant estimate & \textit{p} (McNemar) & Health-indicator alarm & \textit{p} (McNemar) \\
+\midrule\endhead
+\bottomrule\endfoot
+PHM08 & 10 & 96.3 & 97.2 & 0.625 & 58.7 & < 0.001 \\
+ & 15 & 94.0 & 92.2 & 0.481 & 60.6 & < 0.001 \\
+ & 20 & 91.7 & 91.7 & 1.000 & 56.0 & < 0.001 \\
+ & 30 & 83.5 & 84.9 & 0.690 & 50.5 & < 0.001 \\
+ & 40 & 79.4 & 78.9 & 1.000 & 39.0 & < 0.001 \\
+FD001 & 10 & 98.0 & 96.0 & 0.500 & 62.0 & < 0.001 \\
+ & 15 & 95.0 & 94.0 & 1.000 & 62.0 & < 0.001 \\
+ & 20 & 88.0 & 90.0 & 0.688 & 51.0 & < 0.001 \\
+ & 30 & 82.0 & 83.0 & 1.000 & 51.0 & < 0.001 \\
+ & 40 & 70.0 & 79.0 & 0.064 & 49.0 & 0.002 \\
+FD002 & 10 & 96.2 & 98.1 & 0.180 & 57.7 & < 0.001 \\
+ & 15 & 96.9 & 96.5 & 1.000 & 56.5 & < 0.001 \\
+ & 20 & 94.6 & 93.5 & 0.607 & 54.6 & < 0.001 \\
+ & 30 & 84.6 & 85.4 & 0.845 & 48.8 & < 0.001 \\
+ & 40 & 75.8 & 71.2 & 0.126 & 46.5 & < 0.001 \\
+FD003 & 10 & 94.0 & 95.0 & 1.000 & 64.0 & < 0.001 \\
+ & 15 & 94.0 & 93.0 & 1.000 & 64.0 & < 0.001 \\
+ & 20 & 96.0 & 94.0 & 0.688 & 57.0 & < 0.001 \\
+ & 30 & 84.0 & 81.0 & 0.648 & 49.0 & < 0.001 \\
+ & 40 & 70.0 & 70.0 & 1.000 & 32.0 & < 0.001 \\
+FD004 & 10 & 90.4 & 90.0 & 1.000 & 55.0 & < 0.001 \\
+ & 15 & 85.9 & 87.1 & 0.701 & 53.8 & < 0.001 \\
+ & 20 & 82.7 & 86.3 & 0.064 & 49.4 & < 0.001 \\
+ & 30 & 82.7 & 81.1 & 0.557 & 41.0 & < 0.001 \\
+ & 40 & 68.3 & 73.1 & 0.111 & 40.6 & < 0.001 \\
+N-CMAPSS & 10 & 74.7 & 70.7 & 0.219 & 77.8 & 0.607 \\
+ & 15 & 70.7 & 74.7 & 0.388 & 69.7 & 1.000 \\
+ & 20 & 68.7 & 70.7 & 0.804 & 53.5 & 0.020 \\
+ & 30 & 50.5 & 51.5 & 1.000 & 44.4 & 0.461 \\
+ & 40 & 41.4 & 55.6 & 0.013 & 30.3 & 0.169 \\
+Battery & 10 & 98.4 & 98.4 & 1.000 & 84.6 & < 0.001 \\
+ & 15 & 99.2 & 99.2 & 1.000 & 66.7 & < 0.001 \\
+ & 20 & 97.6 & 95.1 & 0.375 & 52.0 & < 0.001 \\
+ & 30 & 83.7 & 82.9 & 1.000 & 39.8 & < 0.001 \\
+ & 40 & 73.2 & 74.0 & 1.000 & 35.8 & < 0.001 \\
+\end{longtable}}
+{\scriptsize Battery in blocks of three cycles; N-CMAPSS with the six pre-specified channels.\par}\medskip
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=1.00\linewidth]{img/FigR1_timing_vs_estimate.png}
+\caption{First warnings in the window at \textit{H} = 20 with 95\% Clopper--Pearson intervals: our model, the same alarm times with a constant reported estimate, and a health-indicator threshold alarm without a remaining-life regressor.}
+\end{figure}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0554\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0554\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1662\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1883\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1883\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.2023\linewidth-2\tabcolsep\relax}@{}}
+\caption{Cost of the window-tuned model for all lead times $\ell$ and cost ratios $\rho$: rate relative to perfect foresight, and ratios of its cost rate to the other policies with paired bootstrap 95\% intervals.}\\
+\toprule
+Dataset & $\ell$ & $\rho$ & Window-tuned / perfect foresight & / cost-tuned STW & / health-indicator alarm & / age replacement \\
+\midrule\endfirsthead
+\toprule
+Dataset & $\ell$ & $\rho$ & Window-tuned / perfect foresight & / cost-tuned STW & / health-indicator alarm & / age replacement \\
+\midrule\endhead
+\bottomrule\endfoot
+PHM08 & 0 & 5 & 1.07 & 0.99 (0.96--1.01) & 0.96 (0.91--1.01) & 0.63 (0.57--0.68) \\
+ &  & 10 & 1.09 & 0.97 (0.90--1.01) & 0.96 (0.86--1.08) & 0.62 (0.54--0.69) \\
+ &  & 20 & 1.14 & 0.94 (0.80--1.01) & 0.96 (0.76--1.21) & 0.59 (0.46--0.76) \\
+ &  & 50 & 1.28 & 0.85 (0.60--1.01) & 0.96 (0.57--1.60) & 0.54 (0.31--0.93) \\
+ & 5 & 5 & 1.07 & 0.98 (0.91--1.03) & 0.95 (0.91--0.97) & 0.63 (0.58--0.67) \\
+ &  & 10 & 1.07 & 0.92 (0.80--1.03) & 0.93 (0.86--0.97) & 0.60 (0.54--0.66) \\
+ &  & 20 & 1.07 & 0.82 (0.64--1.03) & 0.89 (0.76--0.97) & 0.56 (0.45--0.66) \\
+ &  & 50 & 1.07 & 0.61 (0.40--1.03) & 0.79 (0.58--0.97) & 0.45 (0.30--0.66) \\
+ & 10 & 5 & 1.07 & 0.97 (0.92--1.01) & 0.96 (0.93--0.99) & 0.63 (0.57--0.68) \\
+ &  & 10 & 1.10 & 0.94 (0.82--1.06) & 0.98 (0.98--0.99) & 0.62 (0.56--0.68) \\
+ &  & 20 & 1.10 & 0.84 (0.66--1.06) & 0.98 (0.98--0.99) & 0.57 (0.47--0.68) \\
+ &  & 50 & 1.10 & 0.63 (0.41--1.06) & 0.98 (0.98--0.99) & 0.47 (0.32--0.68) \\
+ & 15 & 5 & 1.09 & 0.99 (0.94--1.02) & 0.96 (0.91--1.01) & 0.64 (0.59--0.70) \\
+ &  & 10 & 1.12 & 0.95 (0.85--1.02) & 0.96 (0.86--1.08) & 0.63 (0.55--0.72) \\
+ &  & 20 & 1.10 & 0.83 (0.68--1.04) & 0.90 (0.78--0.99) & 0.57 (0.47--0.68) \\
+ &  & 50 & 1.10 & 0.62 (0.41--1.04) & 0.80 (0.58--0.99) & 0.46 (0.31--0.68) \\
+FD001 & 0 & 5 & 1.06 & 0.98 (0.91--1.02) & 0.91 (0.81--0.98) & 0.63 (0.56--0.70) \\
+ &  & 10 & 1.06 & 0.93 (0.80--1.02) & 0.83 (0.67--0.98) & 0.61 (0.51--0.69) \\
+ &  & 20 & 1.06 & 0.85 (0.65--1.02) & 0.71 (0.50--0.98) & 0.56 (0.41--0.69) \\
+ &  & 50 & 1.06 & 0.68 (0.41--1.02) & 0.49 (0.28--0.98) & 0.45 (0.26--0.69) \\
+ & 5 & 5 & 1.08 & 1.03 (1.02--1.03) & 0.95 (0.88--1.00) & 0.64 (0.57--0.71) \\
+ &  & 10 & 1.08 & 1.03 (1.02--1.04) & 0.91 (0.78--1.00) & 0.62 (0.52--0.69) \\
+ &  & 20 & 1.08 & 1.03 (1.02--1.04) & 0.83 (0.63--1.00) & 0.57 (0.42--0.69) \\
+ &  & 50 & 1.08 & 1.03 (1.02--1.04) & 0.67 (0.40--1.00) & 0.45 (0.27--0.70) \\
+ & 10 & 5 & 1.09 & 0.99 (0.92--1.04) & 0.94 (0.87--0.99) & 0.65 (0.57--0.72) \\
+ &  & 10 & 1.10 & 0.96 (0.82--1.05) & 0.91 (0.78--1.00) & 0.63 (0.54--0.71) \\
+ &  & 20 & 1.10 & 0.88 (0.67--1.05) & 0.83 (0.63--1.00) & 0.58 (0.43--0.71) \\
+ &  & 50 & 1.10 & 0.70 (0.42--1.05) & 0.67 (0.40--1.00) & 0.46 (0.27--0.71) \\
+ & 15 & 5 & 1.09 & 0.99 (0.92--1.03) & 0.91 (0.81--0.98) & 0.65 (0.57--0.72) \\
+ &  & 10 & 1.10 & 0.95 (0.82--1.04) & 0.84 (0.68--0.99) & 0.63 (0.54--0.71) \\
+ &  & 20 & 1.10 & 0.87 (0.60--1.04) & 0.72 (0.51--0.99) & 0.58 (0.43--0.71) \\
+ &  & 50 & 1.10 & 0.70 (0.42--1.04) & 0.50 (0.29--0.99) & 0.46 (0.28--0.71) \\
+FD002 & 0 & 5 & 1.05 & 0.99 (0.96--1.01) & 0.93 (0.90--0.95) & 0.65 (0.61--0.70) \\
+ &  & 10 & 1.06 & 0.99 (0.92--1.02) & 0.92 (0.86--0.96) & 0.63 (0.59--0.67) \\
+ &  & 20 & 1.06 & 0.95 (0.84--1.02) & 0.89 (0.78--0.96) & 0.61 (0.53--0.67) \\
+ &  & 50 & 1.06 & 0.86 (0.65--1.02) & 0.80 (0.61--0.96) & 0.55 (0.41--0.67) \\
+ & 5 & 5 & 1.07 & 0.99 (0.93--1.05) & 0.97 (0.95--1.00) & 0.67 (0.62--0.72) \\
+ &  & 10 & 1.07 & 0.93 (0.83--1.03) & 0.96 (0.95--0.97) & 0.64 (0.59--0.67) \\
+ &  & 20 & 1.07 & 0.84 (0.68--1.03) & 0.96 (0.95--0.97) & 0.61 (0.53--0.67) \\
+ &  & 50 & 1.07 & 0.66 (0.44--1.03) & 0.96 (0.95--0.97) & 0.56 (0.42--0.68) \\
+ & 10 & 5 & 1.09 & 0.99 (0.95--1.03) & 0.92 (0.87--0.97) & 0.68 (0.63--0.73) \\
+ &  & 10 & 1.09 & 0.95 (0.84--1.05) & 0.92 (0.86--0.96) & 0.65 (0.61--0.69) \\
+ &  & 20 & 1.09 & 0.86 (0.69--1.05) & 0.89 (0.78--0.96) & 0.63 (0.55--0.69) \\
+ &  & 50 & 1.09 & 0.67 (0.45--1.05) & 0.80 (0.60--0.96) & 0.57 (0.43--0.69) \\
+ & 15 & 5 & 1.10 & 1.03 (0.99--1.08) & 0.94 (0.89--0.99) & 0.69 (0.64--0.74) \\
+ &  & 10 & 1.13 & 1.04 (0.94--1.15) & 0.99 (0.95--1.06) & 0.68 (0.62--0.74) \\
+ &  & 20 & 1.20 & 1.06 (0.88--1.29) & 1.05 (0.97--1.21) & 0.69 (0.57--0.84) \\
+ &  & 50 & 1.33 & 1.06 (0.68--1.66) & 1.16 (0.97--1.53) & 0.69 (0.45--1.07) \\
+FD003 & 0 & 5 & 1.08 & 0.99 (0.92--1.04) & 0.95 (0.88--0.99) & 0.61 (0.55--0.67) \\
+ &  & 10 & 1.08 & 0.95 (0.81--1.04) & 0.91 (0.77--0.99) & 0.58 (0.49--0.67) \\
+ &  & 20 & 1.08 & 0.87 (0.66--1.04) & 0.83 (0.63--0.99) & 0.53 (0.39--0.67) \\
+ &  & 50 & 1.08 & 0.69 (0.42--1.04) & 0.66 (0.40--0.99) & 0.43 (0.25--0.67) \\
+ & 5 & 5 & 1.06 & 1.02 (1.02--1.03) & 0.93 (0.85--0.97) & 0.60 (0.54--0.66) \\
+ &  & 10 & 1.06 & 1.02 (1.02--1.03) & 0.88 (0.76--0.97) & 0.57 (0.48--0.66) \\
+ &  & 20 & 1.06 & 1.02 (1.02--1.03) & 0.81 (0.61--0.97) & 0.53 (0.39--0.65) \\
+ &  & 50 & 1.06 & 1.02 (1.02--1.03) & 0.65 (0.39--0.97) & 0.42 (0.25--0.66) \\
+ & 10 & 5 & 1.06 & 1.02 (1.02--1.03) & 0.92 (0.85--0.96) & 0.60 (0.54--0.65) \\
+ &  & 10 & 1.06 & 1.02 (1.02--1.03) & 0.88 (0.71--0.96) & 0.57 (0.48--0.66) \\
+ &  & 20 & 1.06 & 1.02 (1.02--1.03) & 0.80 (0.61--0.96) & 0.52 (0.38--0.65) \\
+ &  & 50 & 1.06 & 1.02 (1.02--1.03) & 0.64 (0.38--0.96) & 0.42 (0.24--0.65) \\
+ & 15 & 5 & 1.06 & 0.94 (0.85--1.02) & 0.91 (0.83--0.95) & 0.60 (0.54--0.65) \\
+ &  & 10 & 1.06 & 0.86 (0.70--1.02) & 0.86 (0.74--0.95) & 0.57 (0.47--0.65) \\
+ &  & 20 & 1.06 & 0.74 (0.52--1.02) & 0.79 (0.60--0.95) & 0.52 (0.38--0.65) \\
+ &  & 50 & 1.06 & 0.51 (0.29--1.02) & 0.63 (0.38--0.95) & 0.42 (0.25--0.65) \\
+FD004 & 0 & 5 & 1.09 & 1.00 (0.97--1.02) & 0.99 (0.97--1.03) & 0.56 (0.52--0.61) \\
+ &  & 10 & 1.11 & 0.98 (0.91--1.01) & 1.01 (0.97--1.08) & 0.52 (0.45--0.60) \\
+ &  & 20 & 1.15 & 0.95 (0.82--1.01) & 1.05 (0.97--1.20) & 0.56 (0.46--0.68) \\
+ &  & 50 & 1.28 & 0.87 (0.64--1.01) & 1.17 (0.97--1.55) & 0.56 (0.36--0.85) \\
+ & 5 & 5 & 1.08 & 1.00 (0.97--1.02) & 0.96 (0.93--0.98) & 0.56 (0.52--0.60) \\
+ &  & 10 & 1.11 & 1.01 (0.94--1.05) & 0.97 (0.90--1.01) & 0.52 (0.46--0.58) \\
+ &  & 20 & 1.11 & 0.97 (0.85--1.05) & 0.93 (0.81--1.01) & 0.54 (0.46--0.59) \\
+ &  & 50 & 1.11 & 0.87 (0.66--1.05) & 0.84 (0.63--1.01) & 0.48 (0.35--0.59) \\
+ & 10 & 5 & 1.11 & 0.98 (0.92--1.02) & 0.96 (0.93--0.98) & 0.58 (0.53--0.63) \\
+ &  & 10 & 1.16 & 0.95 (0.85--1.05) & 0.97 (0.90--1.01) & 0.55 (0.48--0.63) \\
+ &  & 20 & 1.22 & 0.87 (0.72--1.06) & 0.94 (0.82--1.01) & 0.59 (0.49--0.72) \\
+ &  & 50 & 1.36 & 0.71 (0.49--1.06) & 0.87 (0.64--1.01) & 0.59 (0.38--0.94) \\
+ & 15 & 5 & 1.12 & 0.98 (0.95--1.00) & 0.97 (0.94--1.01) & 0.58 (0.53--0.64) \\
+ &  & 10 & 1.19 & 0.99 (0.92--1.03) & 1.00 (0.96--1.08) & 0.56 (0.48--0.65) \\
+ &  & 20 & 1.28 & 0.96 (0.83--1.03) & 1.04 (0.96--1.19) & 0.62 (0.48--0.78) \\
+ &  & 50 & 1.54 & 0.90 (0.69--1.03) & 1.13 (0.96--1.54) & 0.67 (0.41--1.07) \\
+N-CMAPSS & 0 & 5 & 1.50 & 0.98 (0.91--1.03) & 0.87 (0.74--1.02) & 0.89 (0.76--1.05) \\
+ &  & 10 & 1.79 & 1.19 (1.01--1.45) & 0.77 (0.57--1.08) & 1.04 (0.80--1.39) \\
+ &  & 20 & 1.83 & 1.11 (1.09--1.13) & 0.44 (0.28--0.71) & 0.98 (0.63--1.47) \\
+ &  & 50 & 1.63 & 0.79 (0.47--1.20) & 0.45 (0.39--0.51) & 0.69 (0.41--1.07) \\
+ & 5 & 5 & 1.60 & 1.05 (0.95--1.15) & 0.90 (0.78--1.04) & 0.95 (0.81--1.13) \\
+ &  & 10 & 1.67 & 1.18 (1.07--1.39) & 0.68 (0.52--0.94) & 0.97 (0.78--1.22) \\
+ &  & 20 & 1.95 & 1.38 (1.14--1.86) & 0.47 (0.31--0.79) & 1.04 (0.68--1.63) \\
+ &  & 50 & 2.45 & 1.74 (1.14--2.90) & 0.84 (0.52--1.43) & 1.04 (0.43--2.15) \\
+ & 10 & 5 & 1.66 & 1.10 (0.97--1.27) & 0.93 (0.77--1.14) & 0.99 (0.84--1.17) \\
+ &  & 10 & 1.70 & 1.12 (0.89--1.41) & 0.56 (0.43--0.77) & 0.99 (0.79--1.24) \\
+ &  & 20 & 1.86 & 1.12 (0.73--1.75) & 0.68 (0.45--1.02) & 0.99 (0.64--1.51) \\
+ &  & 50 & 2.50 & 1.20 (0.50--2.94) & 1.02 (0.64--1.76) & 1.06 (0.43--2.58) \\
+ & 15 & 5 & 1.66 & 1.19 (1.02--1.39) & 0.83 (0.68--1.03) & 0.99 (0.83--1.18) \\
+ &  & 10 & 1.64 & 1.16 (1.05--1.38) & 0.69 (0.54--0.91) & 0.96 (0.76--1.20) \\
+ &  & 20 & 1.79 & 1.27 (1.04--1.69) & 0.83 (0.66--1.14) & 0.96 (0.62--1.49) \\
+ &  & 50 & 2.25 & 1.59 (1.04--2.66) & 1.05 (0.66--1.78) & 0.96 (0.39--2.32) \\
+Battery & 0 & 5 & 1.07 & 0.99 (0.93--1.02) & 1.01 (0.97--1.07) & 0.50 (0.44--0.56) \\
+ &  & 10 & 1.13 & 1.00 (0.99--1.00) & 1.06 (0.98--1.21) & 0.51 (0.42--0.59) \\
+ &  & 20 & 1.28 & 1.05 (1.04--1.06) & 1.20 (1.03--1.54) & 0.48 (0.35--0.62) \\
+ &  & 50 & 1.55 & 1.05 (1.04--1.06) & 1.46 (1.03--2.31) & 0.34 (0.20--0.46) \\
+ & 5 & 5 & 1.07 & 1.01 (1.01--1.01) & 1.00 (0.97--1.07) & 0.50 (0.44--0.56) \\
+ &  & 10 & 1.11 & 0.98 (0.97--0.98) & 1.04 (0.97--1.19) & 0.50 (0.42--0.58) \\
+ &  & 20 & 1.28 & 1.04 (1.03--1.05) & 1.20 (1.03--1.53) & 0.48 (0.35--0.63) \\
+ &  & 50 & 1.55 & 1.04 (1.03--1.05) & 1.45 (1.03--2.30) & 0.34 (0.20--0.46) \\
+ & 10 & 5 & 1.14 & 1.07 (1.00--1.16) & 1.01 (0.94--1.10) & 0.53 (0.45--0.62) \\
+ &  & 10 & 1.13 & 1.00 (0.99--1.01) & 0.96 (0.95--0.98) & 0.51 (0.42--0.59) \\
+ &  & 20 & 1.27 & 1.04 (1.03--1.05) & 1.00 (0.99--1.02) & 0.47 (0.34--0.62) \\
+ &  & 50 & 1.54 & 1.04 (1.03--1.05) & 1.00 (0.99--1.02) & 0.34 (0.20--0.46) \\
+ & 15 & 5 & 1.10 & 1.02 (1.02--1.02) & 0.92 (0.86--0.96) & 0.51 (0.45--0.58) \\
+ &  & 10 & 1.15 & 1.03 (1.03--1.04) & 0.94 (0.93--0.96) & 0.52 (0.43--0.60) \\
+ &  & 20 & 1.24 & 1.03 (1.03--1.04) & 0.94 (0.93--0.95) & 0.46 (0.34--0.61) \\
+ &  & 50 & 1.50 & 1.03 (1.03--1.03) & 0.94 (0.93--0.95) & 0.33 (0.20--0.45) \\
+\end{longtable}}
+{\scriptsize $\ell$ in cycles for the engines and in blocks of three cycles for the battery.\par}\medskip
+
+\section*{S13. Settings of the model and of the evaluation}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.2659\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.7341\linewidth-2\tabcolsep\relax}@{}}
+\caption{Settings of the self-timed warning model and of the evaluation (identical for all datasets unless stated otherwise).}\\
+\toprule
+Component & Setting \\
+\midrule\endfirsthead
+\toprule
+Component & Setting \\
+\midrule\endhead
+\bottomrule\endfoot
+Outer split & Five folds by engine (seed 2026); repeated 50/168 splits on PHM08 with seeds 1001--1030; N-CMAPSS official split (60/39 engines) \\
+Inner split & Five folds of the training engines (seed 100 + outer fold; 2000 + iteration for the thirty random 50-engine tests; 106 for the N-CMAPSS official split); out-of-fold predictions for all training engines \\
+Normalisation & z-score per operating regime (PHM08, FD002, FD004: 6 regimes; FD001, FD003: 1; N-CMAPSS: flight class 1--3), statistics from the training engines of the split; a sensor constant within any regime is removed (15 sensors remain on PHM08, FD001, FD002; 16 on FD003, FD004; 6 pre-selected on N-CMAPSS) \\
+Features & Early-life baseline (first $\le$ 20 cycles); EWM spans 10 and 30 of baseline-removed signals; slopes over 15 and 40 cycles, smoothed with span 5; age \\
+Regressor & Histogram gradient boosting (scikit-learn), absolute-error loss, 500 iterations, learning rate 0.05, 31 leaves, minimum 40 samples per leaf, seed 0; target min(RUL, \textit{c}) \\
+Decision grid & \textit{c} $\in$ \{40, 60, 90\} (only \textit{c} $\ge$ \textit{H} + 20); smoothing span \textit{m} $\in$ \{1, 3, 6\}; debounce \textit{k} $\in$ \{1, 2, 3, 5\}; shift \textit{s} $\in$ \{\textminus{}12, \textminus{}11.5, \ldots{}, +8\} \\
+Selection criterion & Number of training engines with a correct first warning (out-of-fold); ties broken towards smaller |\textit{s}| \\
+Window and levels & Correct if \textminus{}13 $\le$ \textit{e} $\le$ +2; \textit{H} $\in$ \{10, 15, 20\} (all datasets), 30 and 40 (PHM08, and all engine datasets in the secondary analyses); primary \textit{H} = 20 \\
+Battery data & Blocks of $\kappa$ = 3 cycles ($\kappa$ = max(1, round(median life / 209.5))); seven per-cycle quantities, cleaned to physical ranges and z-scored as one regime; model, grids, window and levels in blocks, unchanged; inner seed 100 + outer fold (100 + batch for leave-one-batch-out) \\
+Bearing data & Blocks of $\kappa$ = 7 snapshots (same rule); eight features per snapshot (RMS, peak, kurtosis, crest factor of two channels); z-score per load/speed condition (pooled statistics if a condition has no training bearing); model, grids, window and levels in blocks, unchanged; official split inner seed 106 \\
+STW-T & Cap, span and debounce selected by the count criterion; shift chosen so that the median out-of-fold first-warning error equals \textminus{}5.5 (missed units ignored; ties: larger count, smaller |\textit{s}|) \\
+Other windows and cost & Windows [\textminus{}10, +2], [\textminus{}13, +2], [\textminus{}20, +5], [\textminus{}30, +10] with settings re-selected per window; \textit{H} $\in$ \{10, 15, 20, 30, 40\} on all engine datasets; lead time $\ell$ $\in$ \{0, 5, 10, 15\} cycles; failure cost $\rho$ $\in$ \{5, 10, 20, 50\}; \textit{H} chosen per ($\ell$, $\rho$) on training out-of-fold warnings \\
+Statistics & Clopper--Pearson 95\% intervals; exact McNemar tests; Holm correction over the seven competitors per level (Table 4) and over the nine variants (Table 5) \\
+\end{longtable}}
+
+\section*{S14. Reproducibility}
+
+\noindent The numbers in this article are produced by scripts in the accompanying repository and collected into a single results file (make\_paper2\_numbers.py) from which the manuscript is built; the build checks the key statements (for example the hypothesis outcomes, the significance pattern and the pooled rates) against that file and fails if they disagree. Main results: eol\_window2.py; N-CMAPSS confirmation: ncm\_warning.py with the hashed protocol WARNING\_PROTOCOL.md (the SHA-256 is computed on the text before the line ``\#\# Deviations'', ending with a single newline); identical-protocol comparison: h2h.py; ablation and oracle-timed control: warn\_ablation.py and oracle\_check.py;  leakage checks: eol\_leakage.py; fixed-time reference models: safe\_run.py and safe\_methods.py (age only, gradient-boosted trees, hidden Markov model, CNN, LSTM), collect\_base.py, bayes\_phys.py, hybrid\_tf.py, ablate\_hybrid.py, tcn\_gan.py and tcn\_eval.py; battery confirmation: battery\_warning.py with the hashed protocol BATTERY\_PROTOCOL.md (same hash convention) and battery\_cost.py; networks with equal inputs: dl\_warning.py; other windows, cost analysis and the 14-channel N-CMAPSS run: multi\_eval.py; check of Proposition 1: theory\_check.py; bearing confirmation: bearing\_extract.py and bearing\_warning.py with the hashed protocol BEARING\_PROTOCOL.md (hash of the whole file); theory-guided shift: stwt.py and stwt\_all.py; thirty random 50-engine tests: rep30.py (iterations 1--20 reproduce an earlier 20-repetition run); timing controls, health-indicator alarm and cost-tuned policies: rev\_experiments.py, rev\_analyze.py and make\_rev\_numbers.py; figures: fig\_stw\_architecture.py, paper2\_figures.py, paper2\_figures\_rev.py and fig\_rep30.py. The supplementary material is built by the same script.
+
+\end{document}

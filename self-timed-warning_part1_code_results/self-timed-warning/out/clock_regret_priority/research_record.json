@@ -1,0 +1,51 @@
+{
+  "recorded_at_utc": "2026-10-08T10:04:21.616095+00:00",
+  "author": {
+    "name": "Nafis Wadud Ansari",
+    "affiliation": "Daffodil International University",
+    "email": "ansari2305341800@diu.edu.bd",
+    "source": "Details supplied by user in this conversation"
+  },
+  "verdict": "B: potentially novel but insufficiently established",
+  "mathematical_result": "Exact heterogeneous later-pair prefix theorem; continuous limit; sharp pairwise resolution factor",
+  "historical_originality_established": false,
+  "public_priority_established": false,
+  "public_destination": null,
+  "public_deposit": null,
+  "externally_peer_reviewed": false,
+  "release_rights": "Unspecified; internal review draft",
+  "protected_artifacts_unchanged": 908,
+  "previous_negative_results_preserved": true,
+  "claims_of_new_real_performance": false,
+  "statistical_test_used_to_prove_novelty": false,
+  "test_summary": {
+    "exhaustive_full_clock_cases": 1000,
+    "integer_state_cases": 500,
+    "continuous_state_cases": 500,
+    "common_cost_integer_cases": 200,
+    "common_cost_continuous_cases": 200,
+    "compatible_epsilon_completions": 600,
+    "heterogeneous_resolution_comparisons": 1000,
+    "sharpness_equalities": 18,
+    "all_checks_passed": true,
+    "protected_artifacts_unchanged": 908,
+    "historical_priority_established": false,
+    "elapsed_seconds": 3.625
+  },
+  "verification_check_count": 27,
+  "environment": {
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "reportlab": "5.0.1",
+    "pypdf": "6.19.0",
+    "pymupdf": "1.28.2"
+  },
+  "source_sha256": {
+    "clock_regret_priority/fetch.py": "60596cd7cdb3de6512e6138bd97062ab41f00fd5f9e86e9ec868b3fe62591088",
+    "clock_regret_priority/heterogeneous.py": "57f0bc42b8727b518f1aaa8ac0f1ad52659dc62c5c2e3f126e232f9ce62a9286",
+    "clock_regret_priority/report.py": "d5f09089e71038b1f17b35d723823bef27bd4a1cad61cd731f96c311c5fc56ba",
+    "clock_regret_priority/run.py": "e873a771f4dbfd7095235d8237fd6aac1aeabe047a59b14175002ebad133631a",
+    "clock_regret_priority/test_heterogeneous.py": "fb7f61da6cf91f0014923b8f50c4d94ab6f7718279f3ff5cd61b04fe1c6b6e2a",
+    "clock_regret_priority/verify.py": "8a2b53809b48898038967aeefeddd288d1125c478e87e12e334adf0b99c5c0d0"
+  }
+}

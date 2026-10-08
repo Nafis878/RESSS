@@ -1,0 +1,16 @@
+PASS  perfect policy gives M = 0 (dT = 10)
+PASS  perfect policy gives M = 0 (dT = 1)
+PASS  M >= 0 for 2000 random grid policies (footnote-1 draws excluded: 0)
+PASS  perfect grid points (20, 30, 30)
+PASS  costs and life-cycles (1,5,1), (20,31,20)
+PASS  R_perfect = 3/80
+PASS  R_hat = 7/71
+PASS  M_hat = 347/213
+PASS  Var[R_hat] = 42849/25411681
+PASS  Var[M_hat] = 30470400/25411681
+PASS  grid mapping: 1 -> 10, 10 -> 10, 10.5 -> 20, NaN -> inf
+PASS  alarm at 24 -> replaced at 30 = T_F counts as failure; alarm at 25.5 -> 30, failure
+PASS  off-grid policy: M = -0.1398 < 0 is recorded in VIOLATIONS and returned unclipped
+PASS  footnote 1: with c_c/c_p = 1.01 failing is optimal for 3 of 3 units; a policy that lets the first fail has M = -0.0209 < 0 (recorded)
+PASS  paired bootstrap: identical policies give difference 0 (0, 0)
+15/15 tests passed

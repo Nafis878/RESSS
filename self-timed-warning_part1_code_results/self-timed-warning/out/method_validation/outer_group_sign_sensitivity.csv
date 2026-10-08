@@ -1,0 +1,25 @@
+dataset,analysis,contrast,primary_regime,outer_groups,positive,negative,ties,p_raw,interpretation,p_holm
+Battery,cv123,1SE_minus_CAT,False,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,0.1875
+Battery,cv123,1SE_minus_CATc,False,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,0.1875
+Battery,cv123,1SE_minus_plain,False,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,0.1875
+Battery,lobo,1SE_minus_CAT,True,3,0,3,0,0.25,exploratory; assumes independent fair signs of outer-group means,1.0
+Battery,lobo,1SE_minus_CATc,True,3,0,3,0,0.25,exploratory; assumes independent fair signs of outer-group means,1.0
+Battery,lobo,1SE_minus_plain,True,3,0,3,0,0.25,exploratory; assumes independent fair signs of outer-group means,1.0
+FD001,engine,1SE_minus_CAT,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+FD001,engine,1SE_minus_CATc,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+FD001,engine,1SE_minus_plain,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+FD002,engine,1SE_minus_CAT,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+FD002,engine,1SE_minus_CATc,True,5,1,4,0,0.375,exploratory; assumes independent fair signs of outer-group means,1.0
+FD002,engine,1SE_minus_plain,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+FD003,engine,1SE_minus_CAT,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+FD003,engine,1SE_minus_CATc,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+FD003,engine,1SE_minus_plain,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+FD004,engine,1SE_minus_CAT,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+FD004,engine,1SE_minus_CATc,True,5,1,4,0,0.375,exploratory; assumes independent fair signs of outer-group means,1.0
+FD004,engine,1SE_minus_plain,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+NCMAPSS6,engine,1SE_minus_CAT,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+NCMAPSS6,engine,1SE_minus_CATc,True,5,4,1,0,0.375,exploratory; assumes independent fair signs of outer-group means,1.0
+NCMAPSS6,engine,1SE_minus_plain,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+PHM08,engine,1SE_minus_CAT,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0
+PHM08,engine,1SE_minus_CATc,True,5,2,3,0,1.0,exploratory; assumes independent fair signs of outer-group means,1.0
+PHM08,engine,1SE_minus_plain,True,5,0,5,0,0.0625,exploratory; assumes independent fair signs of outer-group means,1.0

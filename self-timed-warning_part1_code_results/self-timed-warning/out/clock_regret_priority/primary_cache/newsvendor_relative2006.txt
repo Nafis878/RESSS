@@ -1,0 +1,2987 @@
+=== PDF PAGE 1 ===
+Newsvendor Optimization with
+Limited Distribution Information∗
+Zhisu Zhu†, Jiawei Zhang‡, and Yinyu Ye§
+November 18, 2006
+Abstract
+We report preliminary results on stochastic optimization with lim-
+ited distributional information.
+Lack of complete distribution calls
+for stochastically robust models that, after exploiting available lim-
+ited or partial information, oﬀer risk-shielded solutions, i.e., solutions
+that are insensitive to all possible distributions of random variables.
+We focus on the well-known newsvendor problem in this study, where
+the distribution of the random demand is only speciﬁed by its mean
+and one of the following: its standard deviation or its support. We
+propose a stochastically robust model for the newsvendor problem.
+More speciﬁcally, our model tries to minimize the regret that is de-
+ﬁned as the ratio of the expected cost based on limited information to
+that based on complete information, called Relative Expected Value
+of Distribution (REVD). We show how to derive an optimal solution
+to the REVD model. Numerical examples are provided to compare
+our model with other similar approaches. The goal is to establish a
+conﬁdence ratio that the decision from our model is not worse, rela-
+tively, too much than the decision based on the true distribution which
+would be never known exactly in real world applications.
+1
+Introduction
+We consider the newsvendor problem that can be described as follows. A
+newsvendor sells certain product whose demand is unknown but follows cer-
+∗This research is partially supported by the Boeing company.
+†Institute for Computational and Mathematical Engineering, Stanford University, Stan-
+ford, California 94305-4042. E–mail: zhuzhisu@stanford.edu
+‡IOMS–OM, Stern School of Business, New York University, New York, NY 10012.
+E–mail: jzhang@stern.nyu.edu
+§Department of Management Science and Engineering, Stanford University, Stanford,
+California 94305-4042. E–mail: yinyu-ye@stanford.edu
+1
+
+
+=== PDF PAGE 2 ===
+tain probability distribution. The newsvendor needs to place an order of q
+units before observing the demand. There are three types of costs: the unit
+ordering cost c, the unit inventory holding cost p, and the unit stock-out
+cost t. The objective is to decide the optimal order quantity q so that the
+expected total cost is minimized. The problem can be formulated as
+min
+q
+Gf(q) ≡cq + tEF(z −q)+ + pEF(q −z)+,
+(1)
+where z is a random demand with a probability distribution f (pdf) and a
+cumulative distribution F(cdf). We assume w.o.l.g. that c ≤t, otherwise
+there is a trivial optimal ordering q∗= 0 for arbitrary distribution, since
+G
+′
+f(q) ≥0 for every q > 0. We also assume that c > 0.
+When f is known, the optimal ordering quantity, denoted by q∗
+f, can be
+easily obtained as it satisﬁes
+Z ∞
+q∗
+f
+dF(x) = p + c
+p + t.
+However, in many practical situation, the distribution f is not necessarily
+known. On the other hand, it is much easier to estimate points of the mean,
+the standard deviation, and the support of z based on historical data. Scarf
+[4] (see also Vairaktarakis [7] for more general settings) proposed a min-max
+approach to the newsvendor problem when only the mean µ and standard de-
+viation σ of the demand are known. More speciﬁcally, he solves the following
+min-max problem
+min
+q≥0
+max
+f∈H(µ,σ) Gf(q),
+where H(µ, σ) is the set of distributions with mean of µ and standard devi-
+ation of σ. The distribution-free solution Scarf introduced is
+q∗
+u ≡µ + σ
+2 (
+r t −c
+p + c −
+r
+p + c
+t −c ),
+where the solution q∗
+u is often referred to as the “Scarf’s rule”. Scarf’s results
+have been extended to more general setting, see, for example, Gallego and
+Moon [2].
+In a Boeing Stochastic&Robust Optimization project report [1], for a
+class of stochastic optimization problems the authors established a relative
+regret bound on a solution optimal to a deterministic counterpart, that is,
+simply adapting the mean values of random variables in decision making. The
+tightness of the bound depends on the closeness in cost function gradients
+and may be eﬃciently checked when the deterministic solution is found. The
+goal of the study can be also used to measure the beneﬁts of distribution
+information.
+2
+
+
+=== PDF PAGE 3 ===
+Scarf’s approach is simple and oﬀers a robust solution to the newsvendor
+model. However, as the model tries to minimizes the worst case cost, the
+solution obtained is quite pessimistic. Therefore, recently new robust models
+are proposed to the newsvendor problem by Yue, Chen, and Wang [5] and
+by Perakis and Roels [3]. Rather than minimizing the worst case cost (over
+all possible distribution), the approach proposed by [5, 3] minimizes a regret
+of the newsvendor, which is deﬁned as follows. Assume that q is the order
+quantity where the decision is made without knowing the true distribution.
+Assume the distribution is f, then the cost associated with the decision q
+is Gf(q), while the optimal cost is Gf(q∗
+f) by solving (1). The regret, also
+called the Absolute Expected Value of Distribution (AEVD), is then deﬁned
+by the diﬀerence of Gf(q) and Gf(q∗
+f), i.e.,
+AEV Df(q) ≡Gf(q) −Gf(q∗
+f).
+Therefore, one would like to choose an optimal q such that
+max
+f∈H(I) AEV Df(q)
+is minimized, where H(I) is the set of all possible distributions.
+In [5], H(I) is chosen as H(µ, σ)—all distributions with the given mean
+and standard deviation; and in [3], H(I) is chosen as H(µ, [A, B])—all dis-
+tributions with the given mean and support [A, B] of the random demand.
+Closed form solutions for these two cases are provided in both [5] and [3] while
+other kinds of partial distribution information (i.e. symmetry, unimodality)
+are also investigated in [3]. (The closed form solution for H(µ, [A, B]) derived
+in [3] was incomplete, so that we shall give complete results and proofs in
+Appendix (6.5).)
+It can be expected that the min-max regret approach is less conservative
+than Scarf’s approach.
+However, the optimal objective value obtained in
+the AEVD model must be interpreted in context.
+For instance, for two
+distributions, one with a regret of $100 and another one of $200, which
+might be meaningless if $100 is 50% of the corresponding minimal cost and
+$200 is only 10% of the corresponding minimal cost.
+Therefore, we propose a new robust model where the regret is deﬁned as
+the ratio of Gf(q) and Gf(q∗
+f), called Relative Expected Value of Distribution
+(REVD), i.e.,
+REV Df(q) ≡Gf(q)
+Gf(q∗
+f).
+We show how to compute
+max
+f∈H(I) REV Df(q)
+(2)
+3
+
+
+=== PDF PAGE 4 ===
+when H(I) is H(µ, σ) or H(µ, [A, B]). The analysis is slightly more compli-
+cated than that in the AEVD model because a fractional objective function
+is involved here.
+Now, it is straightforward to interpret the objective value of our REVD
+model. For example, if the optimal REV D is 1.1, it means that the chosen
+decision is at most 10% above the expected minimal cost when one knows the
+complete distribution of the demand. Furthermore, we develop techniques
+to ﬁnd the optimal q such that
+max
+f∈H(I) REV Df(q)
+is minimized.
+The above three approaches were suggested under general settings of ro-
+bust optimization in [6] by Kouvelis and Yu, corresponding to three diﬀerent
+robustness criteria: Absolute Robustness, Robust Deviation and Relative
+Robustness.
+In a speciﬁc decision, some or all of the robustness criteria
+might be applied. The Scarf’s rule (absolute robust criterion) tends to lead
+to decisions that are very conservative in nature and the main concern is how
+to hedge against the worst possible happening. The AEVD (robust devia-
+tion) and REVD (relative robustness) tend to be less conservative in their
+decision selection, and more in tune with a logic that attempts to exploit op-
+portunities for improvement, in other words, minimize the regret. And, the
+AEVD model is to minimize the absolute regret, while the REVD model is
+to minimize the relative regret. For most of the cases, the AEVD and REVD
+model will tend to favor similar decisions, but the REVD should be used in
+the situations that either the performance of the optimal AEVD ordering
+is highly variable (i.e. can be very small or large); or the demand distribu-
+tion ﬂuctuates in a wide range (i.e. the standard deviation of the demand is
+very large). These situations will be illustrated by numerical simulations in
+Section 4.
+We are also investigating the multiple-item and capacitated inventory
+problem based on the same models, where similar results are obtained and
+will be reported in a new report.
+2
+Min-Max REVD with mean and support
+In this section, we compute (2) with H(I) = H(µ, [A, B]) by using the duality
+of linear fractional programming. In particular, consider a primal problem
+(P)
+max
+ξT x
+dT x
+s.t.
+Ax = b,
+x ≥0.
+4
+
+
+=== PDF PAGE 5 ===
+The primal problem can be reformulated as a linear program by applying the
+following variable transformation: t =
+1
+dT x, z = tx:
+(P
+′)
+max
+ξTz
+s.t.
+Az −bt = 0,
+dTz = 1,
+z ≥0, t ≥0.
+Therefore, the dual problem is
+(D)
+min
+λ
+s.t.
+ATy + dλ ≥ξ,
+−bTy ≥0,
+y, λ free.
+Now, apply the above result to the min-max REVD:
+minq maxf∈H(µ,[A,B]) REV Df(q)
+=
+minq maxf∈H(µ,[A,B])
+Gf(q)
+Gf(q∗
+f)
+=
+minq maxf∈H(µ,[A,B])
+Gf(q)
+minˆq Gf(ˆq)
+=
+minq maxf∈H(µ,[A,B]) maxˆq
+Gf(q)
+Gf(ˆq)
+=
+minq maxˆq maxf∈H(µ,[A,B])
+Gf(q)
+Gf(ˆq)
+=
+minA≤q≤B maxA≤ˆq≤B maxf∈H(µ,[A,B])
+Gf(q)
+Gf(ˆq).
+Let’s consider the inner optimization problem
+h(q, ˆq) :=
+max
+f∈H(µ,[A,B])
+Gf(q)
+Gf(ˆq), A ≤q ≤B and A ≤ˆq ≤B,
+which can be formulated as
+max
+Gf(q)
+Gf(ˆq)
+s.t.
+R B
+A dF(x) = 1,
+R B
+A xdF(x) = µ,
+where F(x) is the cumulative distribution function of f.
+Rewrite Gf(q) and Gf(ˆq) as
+Gf(q)
+=
+R B
+A cq dF(x) +
+R q
+A p(q −x)dF(x) +
+R B
+q t(x −q)dF(x)
+=
+R q
+A[p(q −x) + cq]dF(x) +
+R B
+q [t(x −q) + cq]dF(x),
+and
+Gf(ˆq)
+=
+R ˆq
+A[p(ˆq −x) + cˆq]dF(x) +
+R B
+ˆq [t(x −ˆq) + cˆq]dF(x).
+5
+
+
+=== PDF PAGE 6 ===
+Then, we can view it as an inﬁnite fractional LP with
+ξT = (p(q −x) + cq|x≤q, t(x −q) + cq|x≥q),
+dT = (p(ˆq −x) + cˆq|x≤ˆq, t(x −ˆq) + cˆq|x≥ˆq),
+and the variable vector f(x)|A≤x≤B, where f(x) is the density of the distri-
+bution F(x).
+Hence, the dual of this inﬁnite fractional LP problem is
+min
+λ
+s.t.
+y0 + xy1 + λ[p(ˆq −x) + cˆq]
+≥
+[p(q −x) + cq] · 1x≤q
++[t(x −q) + cq] · 1x≥q,
+for A ≤x ≤ˆq
+y0 + xy1 + λ[t(x −ˆq) + cˆq]
+≥
+[p(q −x) + cq] · 1x≤q
++[t(x −q) + cq] · 1x≥q,
+for ˆq ≤x ≤B
+y0 + µy1 ≤0.
+It is equivalent to
+min
+λ
+s.t.
+−µy1 + xy1 + λ[p(ˆq −x) + cˆq]
+≥
+[p(q −x) + cq] · 1x≤q
++[t(x −q) + cq] · 1x≥q,
+A ≤x ≤ˆq
+−µy1 + xy1 + λ[t(x −ˆq) + cˆq]
+≥
+[p(q −x) + cq] · 1x≤q
++[t(x −q) + cq] · 1x≥q,
+ˆq ≤x ≤B.
+Now, from the dual problem we get the following results: (Note: Mini-
+mizing λ is equivalent to minimizing the function value of the left-hand-side
+at x = µ. )
+Lemma 1. For (q, ˆq) ∈[A, B]2, we have
+h(q, ˆq) =
+
+
+
+
+
+
+
+
+
+1 + (q−ˆq)(p+c)
+cˆq+pˆq−pµ ,
+if ˆq ≥µ and q ≥ˆq,
+1 + ˆq−q
+ˆq−A
+(t−c)(µ−A)−(p+c)(ˆq−µ)
+cˆq+pˆq−pµ
+,
+if ˆq ≥µ and q ≤ˆq,
+1 + q−ˆq
+B−ˆq
+(p+c)(B−µ)−(t−c)(µ−ˆq)
+cˆq+tµ−tˆq
+,
+if ˆq ≤µ and q ≥ˆq,
+1 + (ˆq−q)(t−c)
+cˆq+tµ−tˆq ,
+if ˆq ≤µ and q ≤ˆq.
+Notice that the result are symmetric under the following exchange: p ↔
+−t, t ↔−p and A ↔B.
+Deﬁne REVDmax(q) ≡maxf∈H(µ,[A,B]) REV Df(q) as the largest REVD,
+and let qe be the decision that minimizes it, that is
+qe = arg min REVDmax(q).
+Then we have the following lemma:
+6
+
+
+=== PDF PAGE 7 ===
+Lemma 2.
+REV Dmax(q) =
+½ h+(q),
+if q ≤qe,
+h−(q),
+if q ≥qe,
+where
+h+(q) =
+max
+min{B,µ+ t−c
+p+c(µ−A)}≥ˆq≥µ
+ˆq −q
+ˆq −A
+(t −c)(µ −A) −(p + c)(ˆq −µ)
+cˆq + pˆq −pµ
++ 1,
+h−(q) =
+max
+max{A,µ−p+c
+t−c (B−µ)}≤ˆq≤µ
+q −ˆq
+B −ˆq
+(p + c)(B −µ) −(t −c)(µ −ˆq)
+cˆq + tµ −tˆq
++ 1.
+We can further simplify it by introducing the following variable transfor-
+mations:
+θ = q −µ
+µ
+, α = t −c
+p
+, β = p + c
+p
+, a = µ −A
+µ
+, b = B −µ
+µ
+, x = ˆq −µ
+µ
+, y = µ −ˆq
+µ
+.
+Then, the above formula becomes
+REV Dmax(q) =
+(
+max0≤x≤min ( α
+β a,b) g+(θ, x),
+if q ≤qe,
+max0≤y≤min (a, β
+α b) g−(θ, y),
+if q ≥qe,
+where
+g+(θ, x) = 1 + x −θ
+x + a ·
+αa −βx
+β −1 + βx,
+g−(θ, y) = 1 + y + θ
+y + b ·
+βb −αy
+β −1 + αy.
+Notice that h+(q) is a decreasing function while h−(q) is a increasing
+function, and h+(B) ≤1 ≤h−(B), h−(A) ≤1 ≤h+(A). It follows that
+h+(qe) = h−(qe), which is equivalent to
+max
+0≤x≤min( α
+β a,b) g+(θ, x) =
+max
+0≤y≤min(a, β
+αb)
+g−(θ, y).
+Therefore, we can calculate qe by solving the following optimization prob-
+lem:
+max
+0≤x≤min( α
+β a,b),0≤y≤min(a, β
+αb)
+g+(θ, x) s.t. g+(θ, x) = g−(θ, y).
+Eliminating θ from the constraint and then plug it into the objective function,
+we get the following optimization problem:
+max
+0≤x≤min( α
+β a,b),0≤y≤min(a, β
+αb)
+ga,b,α,β(x, y),
+where
+ga,b,α,β(x, y) = 1+
+(x + y)(αa −βx)(βb −αy)
+(y + b)(αa −βx)(β −1 + αy) + (x + a)(βb −αy)(β −1 + βx).
+We now have
+7
+
+
+=== PDF PAGE 8 ===
+Theorem 1. Let (x∗, y∗) be the solution of the above optimization
+problem. Then, the min-max REVD and the associated decision qe are
+given by
+REV Dmax(qe) = g(x∗, y∗)
+and qe = (1 + θe)µ,
+where
+θe = x(y + b)(αa −βx)(β −1 + αy) −y(x + a)(βb −αy)(β −1 + βx)
+(y + b)(αa −βx)(β −1 + αy) + (x + a)(βb −αy)(β −1 + βx) .
+From Theorem 1, we can further show that the minimum of REV Dmax
+increases as a or b increases, which is also illustrated in the numerical ex-
+amples given in the next section. Actually, we can see this from the model
+directly. Note that a + b = B−A
+µ
+measures the size of the support, which is
+an indicator of the uncertainty. Hence, as a or b increases, the support gets
+larger, and the amount of uncertainty increases, therefore it’s reasonable to
+expect larger minimum REV Dmax.
+To analyze the above optimization problem, we ﬁrst look at a special case
+when α = β (i.e. t −c = p + c) and a = b (i.e. µ = A+B
+2 ). In this case
+the objective function is symmetric w.r.t x and y. Since it is concave, the
+optimal is achieved at x = y. Therefore, the above optimization problem is
+deduced to the following univariate optimization problem:
+max
+0≤x≤a φa,α(x) ≡
+x(a −x)
+(x + a)(1 −1
+α + x) + 1.
+Notice, φ
+′
+a,α(x) = −[(x + a)2(x + 1 −1
+α)2]−2[(2a + 1 −1
+α)x2 + 2a(1 −1
+α)x −
+a2(1−1
+α)]. Therefore the optimal x∗that maximize φa,α(x) is the root of the
+second order equation
+(2a + 1 −1
+α)x2 + 2a(1 −1
+α)x −a2(1 −1
+α) = 0
+in the interval [0, a]. Hence
+x∗= −a(α −1) +
+p
+2a2(α −1)(αa + α −1)
+2αa + α −1
+,
+and the minimum REV Dmax for this case is φa,α(x∗).
+To illustrate the variance of REVD, let’s look at a few plots of g(x, y) for
+several sets of a, b, α and β. The plot of g(x, y) for the case of a = b = 1,
+α = β = 2 is given as below:
+8
+
+
+=== PDF PAGE 9 ===
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.5
+1
+1
+1.05
+1.1
+1.15
+1.2
+1.25
+x
+The plot of g(x,y) when a=b=1, alpha=beta=2
+y
+g(x,y)
+For this case, the optimal x∗= 0.2899, y∗= 0.2899, with the min-max
+REVD 1.202.
+That is, our decision is at most 20% above the expected
+minimal cost when one knows the complete distribution of the demand. The
+plot of g(x, y) for the case of a = 1, b = 2, α = 3 and β = 4 is given as below:
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+1.05
+1.1
+1.15
+1.2
+1.25
+x
+The plot of g(x,y) when a=1, b=2, alpha=3, beta=4
+y
+g(x,y)
+For this case, we can ﬁnd the optimal x∗= 0.062, y∗= 0.910, with the
+min-max REVD 1.220. The plot of g(x, y) for the case of a = 1, b = 2, α = 3
+9
+
+
+=== PDF PAGE 10 ===
+and β = 8 is given as below:
+0
+0.1
+0.2
+0.3
+0.4
+0
+0.5
+1
+1
+1.05
+1.1
+1.15
+1.2
+1.25
+x
+The plot of g(x,y) when a=1, b=2, alpha=3, beta=8
+y
+g(x,y)
+For this case, we can ﬁnd the optimal x∗= 0, y∗= 1, with the Min-max
+REVD 1.215.
+3
+Min-Max REVD with mean and standard
+deviation
+We use the same notation as in last section to minimizes the maximum REVD
+for distributions with given mean µ and standard deviation σ. (Thus, we may
+have diﬀerent expression for g(x, y) in diﬀerent sections.)
+Let H(µ, σ) be the set of all distributions with given mean µ and standard
+deviation σ. Then all the two-point pdf’s in H(µ, σ) can be represented by
+{T(γ)| −t < γ < p}, where T(γ) is a two-point pdf that assigns weights
+ω1(γ) = t+γ
+p+t and ω2(γ) = p−γ
+p+t to points
+q1(γ) = µ −σ(p −γ
+t + γ )
+1
+2 and q2(γ) = µ + σ( t + γ
+p −γ )
+1
+2,
+respectively.
+If f = T(γ), the objective function Gf(q) after some algebraic manipula-
+tion, can be simpliﬁed as follows:
+GT(γ)(q) =
+
+
+
+cq −t(q −µ),
+if q ≤q1(γ),
+cq + σ[(p −γ)(t + γ)]
+1
+2 + γ(q −µ),
+if q1(γ) ≤q ≤q2(γ),
+cq + p(q −µ),
+if q ≥q2(γ).
+10
+
+
+=== PDF PAGE 11 ===
+We have
+Lemma 3. (Similar to Theorem 3 in [5]) For any q and f ∈H(µ, σ), there
+exists a two-point pdf T(γ) ∈H(µ, σ) with −t < γ < p such that
+REV Df(q) ≤REV DT(γ)(q).
+In view of Lemma 3, for any given decision q, we only have to search
+among two-point pdf’s T(γ) to ﬁnd its largest REVD, i.e., to ﬁnd a parameter
+−t ≤γ ≤p that maximizes REV DT(γ)(q):
+REVDmax(q) = max
+−t≤γ≤p{REVDT(γ)(q)}.
+From the geometric interpretation we can deﬁne
+V+(q, γ)
+=
+REVDT(γ)(q)|−c≤γ≤p,q1(γ)≤q≤q2(γ)
+=
+GT (γ)(q)
+GT (γ)(q1(γ))|q1(γ)≤q≤q2(γ)
+=
+cq+σ[(p−γ)(t+γ)]
+1
+2 +γ(q−µ)
+cq1(γ)+σ[(p−γ)(t+γ)]
+1
+2 −γ(σ( p−γ
+t+γ )
+1
+2 ),
+and
+V−(q, γ)
+=
+REVDT(γ)(q)|−t≤γ≤−c,q1(γ)≤q≤q2(γ)
+=
+GT (γ)(q)
+GT (γ)(q2(γ))|q1(γ)≤q≤q2(γ)
+=
+cq+σ[(p−γ)(t+γ)]
+1
+2 +γ(q−µ)
+cq2(γ)+σ[(p−γ)(t+γ)]
+1
+2 +γ(σ( t+γ
+p−γ )
+1
+2 ).
+Then, we derive
+Lemma 4.
+max
+−t≤γ≤p{REVDT(γ)(q)} = max{ max
+−c≤γ1≤p V+(q, γ1),
+max
+−t≤γ2≤−c V−(q, γ2)}
+Thus, combining with the result in Lemma 3, we have
+REVDmax(q) = max{ max
+−c≤γ1≤p V+(q, γ1),
+max
+−t≤γ2≤−c V−(q, γ2)}.
+Let qe be the decision that minimizes the largest REVD, that is
+qe = arg min REVDmax(q).
+Since V+(q, γ1) ≤1 for all q ≤q1(γ1), −c ≤γ1 ≤p and V−(q, γ2) ≤1
+for all q ≥q2(γ2),−t ≤γ2 ≤−c.
+Then max−c≤γ1≤p V+(q, γ1) ≤1 for
+all q ≤q1(−c) and max−t≤γ2≤−c V−(q, γ1) ≤1 for all q ≥q2(−c), because
+min−c≤γ1≤p q1(γ1) = q1(−c) and max−t≤γ2≤−c q2(γ2) = q2(−c).
+11
+
+
+=== PDF PAGE 12 ===
+Notice that V+(q, γ1) and max−c≤γ1≤p V+(q, γ1) are both increasing func-
+tions of q, while V−(q, γ2) and max−t≤γ2≤−c V−(q, γ2) are both decreasing
+functions of q. It follows that
+q1(−c) ≤qe ≤q2(−c)
+and
+max
+−c≤γ1≤p V+(qe, γ1) =
+max
+−t≤γ2≤−c V−(qe, γ2).
+Therefore, we can simplify the formula for REV Dmax(q) as follows:
+REV Dmax(q) =
+½ max−c≤γ1≤p V+(q, γ1),
+if q ≥qe,
+max−t≤γ2≤−c V−(q, γ2),
+if q ≤qe.
+We can further simplify it by introducing the following variable transfor-
+mations:
+θ = q −µ
+σ
+, α = t −c
+p
+, β = p + c
+p
+, λ = µ
+σ, x = γ1 + c
+p
+, y = −γ2 + c
+p
+.
+Then, the above formula becomes
+REV Dmax(q) =
+½ max0≤x≤β g+(θ, x),
+if q ≥qe,
+max0≤y≤α g−(θ, y),
+if q ≤qe,
+where
+g+(θ, x) = V+(q, γ1) = 1 +
+1 + θ
+q
+α+x
+β−x
+α + (β −1)λ
+q
+α+x
+β−x
+x,
+g−(θ, y) = V−(q, γ2) = 1 +
+1 −θ
+q
+β+y
+α−y
+β + (β −1)λ
+q
+β+y
+α−y
+y.
+The above formula also illustrates how to calculate the maximum REVD
+for any given decision q. Now, let us calculate qe by the following optimization
+procedure:
+max
+0≤x≤β,0≤y≤α g+(θ, x) s.t. g+(θ, x) = g−(θ, y).
+Eliminating θ from the constraint and then plug it into the objective function,
+we get the following optimization problem:
+max
+0≤x≤β,0≤y≤α gα,β,λ(x, y),
+where
+gα,β,λ(x, y) = 1+
+(
+q
+α+x
+β−x +
+q
+β+y
+α−y)xy
+q
+α+x
+β−x[β + (β −1)λ
+q
+β+y
+α−y]x +
+q
+β+y
+α−y[α + (β −1)λ
+q
+α+x
+β−x]y
+.
+We now have
+12
+
+
+=== PDF PAGE 13 ===
+Theorem 2. Let (x∗, y∗) be the solution of the above optimization
+problem. Then, the min-max REVD and the associated decision qe are
+given by
+REV Dmax(qe) = g(x∗, y∗)
+and qe = µ + θeσ,
+where
+θe =
+−[β + (β −1)λ
+q
+β+y∗
+α−y∗]x∗+ [α + (β −1)λ
+q
+α+x∗
+β−x∗]y∗
+q
+α+x∗
+β−x∗[β + (β −1)λ
+q
+β+y∗
+α−y∗]x∗+
+q
+β+y∗
+α−y∗[α + (β −1)λ
+q
+α+x∗
+β−x∗]y∗
+.
+From Theorem 2, we can further show that the minimum REV Dmax de-
+creases as λ = µ
+σ increases, which is also illustrated in the numerical examples
+given in the next section. Notice µ
+σ is a measure of the uncertainty, hence we
+can see that as µ
+σ increases, the amount of uncertainty decreases accordingly,
+therefore it’s reasonable to expect smaller minimum REV Dmax.
+To analyze the above optimization problem, we ﬁrst look at a special case
+when α = β, i.e. t −c = p + c. Notice, in this case the objective function
+is symmetric w.r.t x and y, since it is concave, then the optimal is assumed
+when x = y. Therefore, the above optimization problem is deduced to the
+following univariate optimization problem:
+max
+0≤x≤α φα,λ(x) ≡
+x
+α + (α −1)λ
+q
+α+x
+α−x
++ 1.
+One can ﬁnd some upper bounds for REV Dmax(qe), one trivial upper
+bound is 1 +
+1
+1+(1−1
+α )λ for α = β case; and 1 +
+max{α2,β2}
+αβ+(β−1)λ√αβ for the general
+case.
+Notice, φ
+′
+α,λ(x) = (α + (α −1)λ
+q
+α+x
+α−x)−2[α −(α −1)λ(x2 + αx −α2)(α +
+x)−1/2(α −x)−3/2]. Therefore the optimal x∗that maximize φα,λ(x) is the
+root of the following equation
+α −(α −1)λ(x2 + αx −α2)(α + x)−1/2(α −x)−3/2] = 0
+in the interval [0, α], and the minimum REV Dmax for this case is φα,λ(x∗).
+Again, to illustrate the variance of REVD, let’s look at a few plots of
+g(x, y) for several sets of a, b, α and β. The plot of g(x, y) for the case of
+α = β = 2 and λ = 5 is given as below:
+13
+
+
+=== PDF PAGE 14 ===
+0
+0.5
+1
+1.5
+2
+0
+0.5
+1
+1.5
+2
+1
+1.05
+1.1
+1.15
+x
+The plot of g(x,y) for alpha=beta=2, lambda=5
+y
+g(x,y)
+For this case, we can ﬁnd the optimal x∗= 1.324, y∗= 1.324, with
+the min-max REVD 1.101.
+That is, our decision is at most 10% above
+the expected minimal cost when one knows the complete distribution of the
+demand. The plot of g(x, y) for the case of α = 1, β = 2 and λ = 5 is given
+as below:
+0
+0.5
+1
+1.5
+2
+0
+0.2
+0.4
+0.6
+0.8
+1
+1
+1.02
+1.04
+1.06
+1.08
+1.1
+x
+The plot of g(x,y) for alpha=1, beta=2, lambda=5
+y
+g(x,y)
+For this case, we can ﬁnd the optimal x∗= 0.963, y∗= 0.828, with the
+14
+
+
+=== PDF PAGE 15 ===
+min-max REVD 1.077. The plot of g(x, y) for the case of α = 0.5, β = 2 and
+λ = 5 is given as below:
+0
+0.5
+1
+1.5
+2
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+1
+1.01
+1.02
+1.03
+1.04
+1.05
+1.06
+1.07
+1.08
+x
+The plot of g(x,y) for alpha=0.5, beta=2, lambda=5
+y
+g(x,y)
+For this case, we can ﬁnd the optimal x∗= 0.627, y∗= 0.433, with the
+min-max REVD 1.060.
+4
+Numerical examples
+Here we present some numerical examples to conﬁrm our model and theoret-
+ical ﬁndings.
+4.1
+Given mean µ and standard deviation σ
+Consider the following newsvendor example used in Gallego and Moon [2]:
+p = 10.10, t = 15.20, µ = 900, σ = 122.
+For diﬀerent value of the ﬁxed ordering cost c, we use the following ordering
+quantities: the simple mean µ, the Scarf’s rule q∗
+u, the min-max AEVD order-
+ing qd, the min-max REVD qr
+c, the optimal order quantities under the normal
+15
+
+
+=== PDF PAGE 16 ===
+distribution, Gamma distribution, Log-normal distribution and uniform dis-
+tribution respectively. Furthermore, for each order quantity, we calculate the
+maximum AEVD, the maximum REVD and the cost range. Notice, [5] did
+not take the ordering cost c into account, hence we enhance their result in
+Appendix (6.6) when the ordering cost exists, so that we can compare their
+result with that from our model. The cost range can be computed from the
+tight upper bound Gu(q) and lower bound Gl(q) of Gf(q) given in [5]:
+Gu(q) ≡cq + p −t
+2
+(q −µ) + t + p
+2
+[σ2 + (q −µ)2]1/2,
+and
+Gl(q) ≡cq + t(µ −q)+ + p(q −µ)+.
+For example, we run the MATLAB routine [output] = compare(p, t, µ, σ, c)
+for the case of c = 1 as follows: (We round the order quantities into integers.)
+>> [output]=compare(10.10, 15.20, 900, 122, 1)
+output =
+1.0e+002 *
+9.00000000000000
+5.59421544044897
+0.01363044836708
+9.15000000000000
+4.85642471804169
+0.01328808067625
+9.12000000000000
+4.62729638619057
+0.01308715890476
+9.10000000000000
+4.76069763139554
+0.01296496449780
+9.19000000000000
+5.16847035268217
+0.01356899231343
+9.13000000000000
+4.70319441055238
+0.01315321455813
+9.11000000000000
+4.68096004455819
+0.01302201391452
+9.26000000000000
+5.73156192371308
+0.01409742369965
+Table 1: Ordering cost c = 0.2
+c = 0.2
+Quantity
+Max AEVD
+Max REVD
+Cost Range
+µ
+900
+$612.25
+1.849
+[$180, $1723]
+q∗
+u
+923
+$495.31
+2.316
+[$417, $1696]
+qd
+918
+$459.80
+2.030
+[$365, $1698]
+qr
+c
+911
+$516.45
+1.645
+[$293, $1704]
+Normal
+929
+$541.31
+2.659
+[$479, $1698]
+Gamma
+923
+$495.31
+2.316
+[$417, $1696]
+Log −normal
+921
+$480.29
+2.202
+[$396, $1697]
+Uniform
+939
+$620.87
+3.232
+[$582, $1709]
+16
+
+
+=== PDF PAGE 17 ===
+Table 2: Ordering cost c = 1
+c = 1
+Quantity
+Max AEVD
+Max REVD
+Cost Range
+µ
+900
+$559.42
+1.363
+[$900, $2443]
+q∗
+u
+915
+$485.64
+1.329
+[$1067, $2432]
+qd
+912
+$462.73
+1.309
+[$1033, $2432]
+qr
+c
+910
+$476.07
+1.296
+[$1011, $2433]
+Normal
+919
+$516.85
+1.357
+[$1111, $2432]
+Gamma
+913
+$470.32
+1.315
+[$1044, $2432]
+Log −normal
+911
+$468.10
+1.302
+[$1022, $2433]
+Uniform
+926
+$573.16
+1.410
+[$1189, $2438]
+Table 3: ordering cost c = 5
+c = 5
+Quantity
+Max AEVD
+Max REVD
+Cost Range
+µ
+900
+$619.02
+1.120
+[$4500, $6043]
+q∗
+u
+876
+$496.27
+1.097
+[$4745, $6014]
+qd
+881
+$459.15
+1.090
+[$4694, $6015]
+qr
+c
+882
+$465.67
+1.088
+[$4684, $6016]
+Normal
+870
+$542.10
+1.107
+[$4806, $6016]
+Gamma
+865
+$581.29
+1.115
+[$4857, $6020]
+Log −normal
+863
+$597.20
+1.119
+[$4877, $6022]
+Uniform
+859
+$629.41
+1.126
+[$4918, $6028]
+Table 4: Ordering cost c = 10
+c = 10
+Quantity
+Max AEVD
+Max REVD
+Cost Range
+µ
+900
+$1006.86
+1.107
+[$9000, $10543]
+q∗
+u
+811
+$501.74
+1.054
+[$9463, $10247]
+qd
+831
+$407.46
+1.042
+[$9359, $10259]
+qr
+c
+831
+$407.46
+1.042
+[$9359, $10259]
+Normal
+800
+$555.50
+1.060
+[$9520, $10250]
+Gamma
+798
+$565.33
+1.061
+[$9530, $10252]
+Log −normal
+798
+$565.33
+1.061
+[$9530, $10252]
+Uniform
+776
+$674.46
+1.073
+[$9645, $10277]
+Table 5: ordering cost c = 15
+c = 15
+Quantity
+Max AEVD
+Max REVD
+Cost Range
+µ
+900
+$1519.09
+1.112
+[$13500, $15043]
+q∗
+u
+222
+$135.60
+1.010
+[$13636, $13773]
+qd
+378
+$104.34
+1.008
+[$13604, $13782]
+qr
+c
+780
+$613.93
+1.0018
+[$13524, $14171]
+Normal
+606
+$253.26
+1.0044
+[$13559, $13866]
+Gamma
+632
+$283.49
+1.0040
+[$13554, $13888]
+Log −normal
+644
+$299.10
+1.0038
+[$13551, $13900]
+Uniform
+692
+$375.30
+1.0031
+[$13541, $13961]
+17
+
+
+=== PDF PAGE 18 ===
+Notice, the maximum REVD only depends on α, β and λ. Hence, we
+can ﬁx two of them, and change the value of the other parameter to see the
+corresponding changes of maximum REVD.
+The results are as follows:
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+1
+1.5
+2
+2.5
+3
+3.5
+4
+Fix β=1.1, λ=4, the REVD plot for α=0.5:4
+α
+maximum REVD
+Scarfs rule
+minimax AEVD
+minimax REVD
+Normal
+Gamma
+Log−normal
+Uniform
+18
+
+
+=== PDF PAGE 19 ===
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+1.02
+1.04
+1.06
+1.08
+1.1
+1.12
+1.14
+1.16
+1.18
+Fix α=1, λ=5, the REVD plot for β=1.5:5
+β
+maximum REVD
+Scarfs rule
+minimax AEVD
+minimax REVD
+Normal
+Gamma
+Log−normal
+Uniform
+1
+2
+3
+4
+5
+6
+7
+8
+1
+1.1
+1.2
+1.3
+1.4
+1.5
+1.6
+1.7
+Fix α=1, β=2, the REVD plot for λ=1:8
+λ
+maximum REVD
+Scarfs rule
+minimax AEVD
+minimax REVD
+Normal
+Gamma
+Log−normal
+Uniform
+From the numerical results, we can observe the followings.
+1. For the example in Table 1, the order quantity from the AEVD model
+has a large maximum REVD 2.030, i.e. the worst case cost is 103%
+more than the minimal cost. In contrast, the order quantity from the
+REVD model has maximum REVD 1.645, whose worst case cost is only
+64.5% more than the minimal cost. And the regrets from not ordering
+19
+
+
+=== PDF PAGE 20 ===
+optimal for these two ordering quantities are 459.80 and 516.45, which
+is almost in the same scale. That’s why our REVD model is preferable
+to AEVD model in those situations.
+2. In the ﬁrst plot for the case of β = 1 + c
+p = 1.1 and λ = µ
+σ = 4, α = t−c
+p
+varying from 0.5 to 4, we can see that the maximum REVD quantities
+corresponding to the optimal orderings under AEVD model and REVD
+model are quite diﬀerent. Typically, the above two quantities are quite
+close, but diﬀer largely when λ is small (i.e. more uncertainty) and/or
+β = 1 + c
+p is small ( i.e. the inventory holding cost is dominant).
+3. We have considered four distributions: normal, Gamma, Log-normal,
+Uniform. Although none of them dominates the others, it is quite clear
+that uniform distribution may not be a good choice for the newsvendor
+in making decisions.
+4.2
+Given mean µ and support [A, B]
+Notice, the maximum REVD only depends on α, β, a and b. Hence, we
+can ﬁx three of them, and change the value of the other parameter to see
+the corresponding changes of the maximum REVD. In particular, if we ﬁx
+A = 0, B = 1 and p = 1, then a = 1. We can change α, β or b, and compute
+the maximum REVD corresponding to the optimal ordering under diﬀerent
+distributions, say, Beta(1, b), Beta(2, 2b), Beta(3, 3b), Triangular distribu-
+tion and Uniform distribution. Compare them with the results for maximum
+REVD of min-max REVD ordering and mean ordering, we get the following:
+20
+
+
+=== PDF PAGE 21 ===
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+1.3
+1.4
+1.5
+1.6
+1.7
+1.8
+1.9
+2
+Fix β=2, a=1, b=1.2, the REVD plot for α=0.5:4
+α
+maximum REVD
+Beta(1,b)
+Beta(2,2b)
+Beta(3,3b)
+Uniform
+Mean
+Triangular
+minimax REVD
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+5
+1.1
+1.15
+1.2
+1.25
+1.3
+1.35
+1.4
+1.45
+1.5
+Fix α=1, a=1, b=1.2, the REVD plot for β=1.5:5
+β
+maximum REVD
+Beta(1,b)
+Beta(2,2b)
+Beta(3,3b)
+Uniform
+Mean
+Triangular
+minimax REVD
+21
+
+
+=== PDF PAGE 22 ===
+0.4
+0.6
+0.8
+1
+1.2
+1.4
+1.6
+1.8
+2
+1.1
+1.15
+1.2
+1.25
+1.3
+1.35
+1.4
+1.45
+1.5
+Fix α=1, β=2, a=1, the REVD plot for b=0.6:1.8
+b
+maximum REVD
+Beta(1,b)
+Beta(2,2b)
+Beta(3,3b)
+Uniform
+Mean
+Triangular
+minimax REVD
+From the numerical results, we can observe the followings.
+1. The triangle and some beta distributions seem to shield risk quite well
+for the worse case, so that they might be good benchmark distributions
+for inventory decision making when the demand mean and support are
+known.
+2. Again, it is quite clear that uniform distribution may not be a good
+choice for the newsvendor in making decisions.
+Remarks Note that in these numerical examples we did not include the or-
+dering quantity that minimizes the maximum AEVD for the following two
+reasons: First, we did not derive the method to compute the ordering quan-
+tity that minimizes the maximum AEVD with mean µ and support [A, B].
+In fact, the method provided in [5] to compute the min-max AEVD ordering
+is only for the case of given mean µ and standard deviation σ. And, [3] and
+Appendix 6.5 in our report deal with the case of given µ and support [A, B],
+but what we computed is RVAI (Robust Value of Additional Information),
+which is the diﬀerence between the proﬁt and optimal proﬁt, instead of the
+diﬀerence between the costs in AEVD. Although these two are equivalent
+somehow, but we still need to take some time to convert them from one to
+another.
+Secondly, neither [5] nor [3] takes the ordering cost c into consideration,
+hence at the time when we derive Theorem 3 in Appendix 6.5, ordering cost
+was not taken into account either. But if we need to compare the AEVD
+22
+
+
+=== PDF PAGE 23 ===
+with our REVD model, ’c’ needs to be taken into account. We plan to do so
+soon.
+5
+Conclusions and Future Work
+Our ﬁndings have important implications to general stochastic optimization.
+For example, in the case of knowing the mean and support, the triangle dis-
+tribution could be used as a “robust” assumption in decision models and
+sampling methods. For knowing the mean and standard deviation, the nor-
+mal distribution seems save for a class of problems. We plan to investigate
+these distributions further.
+The problem discussed above has only one random variable. As we men-
+tioned earlier, we are now investigating the multiple-item, dependent random
+variable, and capacitated inventory problem under the same model.
+More importantly, we plan to apply the model and approach to general
+stochastic optimization problems, where we also like to derive theoretical
+bounds on REVD for certain classes of problems.
+References
+[1] Manar El-Chammas, Anthony So, Wei Wu, and Yinyu Ye: Boeing Report:
+Bounds for Stochastic Optimization, March, 2006.
+[2] Guillermo Gallego and Ilkyeong Moon: The Distribution Free Newsboy
+Problem: Review and Extensions, 1993
+[3] George Perakis and Guillaume Roels:
+Regret in the Newsvendor Model
+with Partial Information, 2006
+[4] Scarf, H. (1958): A min-max solution of an inventory problem, Studies in
+The Mathematical Theory of Inventory and Production, 201-209, Stanford
+University Press, California, 1958.
+[5] Jinfeng Yue, Bintong Chen and Min-Chiang Wang:
+Expected Value
+of Distribution Information for the Newsvendor Problem, Operations Re-
+search, to appear, 2006.
+[6] Panos Kouvelis and Gang Yu:
+Robust Discrete Optimization and Its
+Application, KLUWER ACADEMIC PUBLISHERS, 1997.
+[7] George L. Vairaktarakis: Robust multi-item newsboy models with a budget
+constraint, Int. J. Production Economics 66 (2000) 213-226.
+23
+
+
+=== PDF PAGE 24 ===
+6
+Appendix
+6.1
+Proof of Lemma 1.
+Proof: (i) ˆq ≥µ and q ≥ˆq
+⇒
+(y1 −λp)x + λ(cˆq + pˆq) −µy1 = p(q −x) + cq for A ≤x ≤ˆq,
+and
+(y1 + λt)x + λ(cˆq −tˆq) −µy1 ≥t(x −q) + cq for ˆq ≤x ≤B.
+(Note: coincide with the ﬁrst segment.)
+Therefore,
+λmin = 1 + (q −ˆq)(p + c)
+cˆq + pˆq −pµ
+y1 = (q −ˆq)(p + c)p
+cˆq + pˆq −pµ
+(ii) ˆq ≥µ and q ≤ˆq
+⇒
+(y1 −λp)x + λ(cˆq + pˆq) −µy1 ≥p(q −x) + cq for A ≤x ≤ˆq,
+and
+(y1 + λt)x + λ(cˆq −tˆq) −µy1 ≥t(x −q) + cq for ˆq ≤x ≤B.
+(y1 −λp)x + λ(cˆq + pˆq) −µy1 = p(q −x) + cq for x = A
+and
+(y1 −λp)x + λ(cˆq + pˆq) −µy1 = t(x −q) + cq for x = ˆq.
+(Note: intersect with two point at x = A and x = ˆq).
+Therefore,
+λmin = 1 + ˆq −q
+ˆq −A
+(t −c)(µ −A) −(p + c)(ˆq −µ)
+cˆq + pˆq −pµ
+y1 = ˆq −q
+ˆq −A
+(p + c)tˆq −(t −c)pA
+cˆq + pˆq −pµ
+(iii) ˆq ≤µ and q ≥ˆq
+⇒
+(y1 −λp)x + λ(cˆq + pˆq) −µy1 ≥p(q −x) + cq for A ≤x ≤ˆq,
+24
+
+
+=== PDF PAGE 25 ===
+and
+(y1 + λt)x + λ(cˆq −tˆq) −µy1 ≥t(x −q) + cq for ˆq ≤x ≤B.
+(y1 + λt)x + λ(cˆq −tˆq) −µy1 = p(q −x) + cq for x = ˆq
+and
+(y1 + λt)x + λ(cˆq −tˆq) −µy1 = t(x −q) + cq for x = B.
+(Note: intersect with two point at x = ˆq and x = B).
+Therefore,
+λmin = 1 + q −ˆq
+B −ˆq
+(p + c)(B −µ) −(t −c)(µ −ˆq)
+cˆq + tµ −tˆq
+y1 = q −ˆq
+B −ˆq
+(t −c)pˆq −(p + c)tB
+cˆq + tµ −tˆq
+(vi) ˆq ≤µ and q ≤ˆq
+⇒
+(y1 −λp)x + λ(cˆq + pˆq) −uy1 ≥p(q −x) + cq for A ≤x ≤ˆq,
+and
+(y1 + λt)x + λ(cˆq −tˆq) −uy1 = t(x −q) + cq for ˆq ≤x ≤B.
+(Note: coincide with the second segment.)
+Therefore,
+λmin = 1 + (ˆq −q)(t −c)
+cˆq + tµ −tˆq
+y1 = −(ˆq −q)(t −c)t
+cˆq + tµ −tˆq
+The above four cases together completes the proof.
+6.2
+Proof of Lemma 2.
+Notice
+REV Dmax(q)
+=
+maxf∈H(µ,[A,B]) REV Df(q)
+=
+maxA≤ˆq≤B h(q, ˆq)
+=
+max{maxµ≤ˆq≤B h(q, ˆq), maxA≤ˆq≤µ h(q, ˆq)}
+=
+max{maxmax(µ,q)≤ˆq≤B h(q, ˆq), maxA≤ˆq≤min(µ,q) h(q, ˆq)}
+25
+
+
+=== PDF PAGE 26 ===
+the last equality is because of the following facts:
+h(q, ˆq) = 1 + (q −ˆq)(p + c)
+cˆq + pˆq −pµ ≤h(q, µ), when µ ≤ˆq ≤q;
+h(q, ˆq) = 1 + (ˆq −q)(t −c)
+cˆq + tµ −tˆq ≤h(q, µ), when q ≤ˆq ≤µ.
+Then,
+h+(q)
+:=
+maxˆq≥max(µ,q) h(q, ˆq)
+=
+maxˆq≥max(µ,q)
+ˆq−q
+ˆq−A
+(t−c)(µ−A)−(p+c)(ˆq−µ)
+cˆq+pˆq−pµ
++ 1
+=
+maxmin{B,µ+ t−c
+p+c(µ−A)}≥ˆq≥max(µ,q)
+ˆq−q
+ˆq−A
+(t−c)(µ−A)−(p+c)(ˆq−µ)
+cˆq+pˆq−pµ
++ 1
+=
+maxmin{B,µ+ t−c
+p+c(µ−A)}≥ˆq≥µ
+ˆq−q
+ˆq−A
+(t−c)(µ−A)−(p+c)(ˆq−µ)
+cˆq+pˆq−pµ
++ 1
+the last equality is because
+h(q, ˆq) = ˆq −q
+ˆq −A
+(t −c)(µ −A) −(p + c)(ˆq −µ)
+cˆq + pˆq −pµ
++ 1 ≤1,
+when
+µ ≤ˆq ≤min{B, µ + t −c
+p + c(µ −A), q}.
+By the same way, we have
+h−(q)
+:=
+maxˆq≤min(µ,q) h(q, ˆq)
+=
+maxmax{A,µ−p+c
+t−c (B−µ)}≤ˆq≤µ
+q−ˆq
+B−ˆq
+(p+c)(B−µ)−(t−c)(µ−ˆq)
+cˆq+tµ−tˆq
++ 1
+Notice that h+(q) is decreasing function while h−(q) is increasing function,
+and h+(B) ≤1 ≤h−(B), h−(A) ≤1 ≤h+(A). It follows that
+h+(qe) = h−(qe).
+Therefore, we can get the formula for REV Dmax(q) as follows:
+REV Dmax(q) =
+½ h+(q),
+if q ≤qe,
+h−(q),
+if q ≥qe.
+6.3
+Proof of Lemma 3.
+We have two ways to prove it.
+Method 1. Apply the result of Theorem 3 and remark (7) in paper [5].
+Let T(γ) be the two-point pdf chosen in Theorem 3 such that q1(γ) = q∗
+f.
+Then AEV Df(q) ≤AEV DT(γ)(q) and GT(γ)(q∗
+f) ≤Gf(q∗
+f) (by (7) in [5]).
+(Note: The proof for AEV Df(q) ≤AEV DT(γ)(q) is slightly diﬀerent from
+the proof in [5], because the deﬁnition of Gf(q) is diﬀerent.)
+26
+
+
+=== PDF PAGE 27 ===
+Then
+AEV Df(q)
+Gf(q∗
+f)
+≤AEV DT(γ)(q)
+GT(γ)(q∗
+f)
+,
+⇒
+Gf(q)
+Gf(q∗
+f) = AEV Df(q)
+Gf(q∗
+f)
++ 1 ≤AEV DT(γ)(q)
+GT(γ)(q∗
+f)
++ 1 = GT(γ)(q)
+GT(γ)(q∗
+f),
+⇒
+REV Df(q) = Gf(q)
+Gf(q∗
+f) ≤GT(γ)(q)
+GT(γ)(q∗
+f) ≤
+GT(γ)(q)
+GT(γ)(q∗
+T(γ)) = REV DT(γ)(q),
+the last inequality is because GT(γ)(q∗
+T(γ)) ≤GT(γ)(q∗
+f).
+Method 2: Use the LP duality to prove just like what we did in section
+2. (see the proof of Lemma 1 or [3] Theorem 7)
+Method 2: Use the LP duality to prove. (see [3] Theorem 7)
+Let r = REV Dmax(q), then consider the following LP problem:
+max
+Gf(q) −rGf(ˆq)
+s.t.
+R
+ΩxidF(x) = qi,
+for i = 0, 1, 2,
+where q0 = 1, q1 = µ and q2 = µ2 + σ2.
+Its dual is
+min
+y0 + y1µ + y2(σ2 + µ2)
+s.t.
+y0 + y1x + y2x2 ≥
+[p(q −x) + cq] · 1x≤q + [t(x −q) + cq] · 1x≥q
+−r{[p(ˆq −x) + cˆq] · 1x≤ˆq + [t(x −ˆq) + cˆq] · 1x≥ˆq},
+∀x.
+From the geometrical interpretation of this dual problem , we can see that
+there are at most two intersection points (i.e. two active constraints of the
+dual), which means the optimal distribution is at most a two-point distribu-
+tion.
+6.4
+Proof of Lemma 4.
+Consider the following two cases:
+(1) When −c ≤γ ≤p, then q∗
+T(γ) = q1(γ). We have
+REV DT(γ)(q) =
+GT(γ)(q)
+GT(γ)(q1(γ))
+(a) If q1(γ) ≤q ≤q2(γ), then
+REV DT(γ)(q) = V+(q, γ).
+27
+
+
+=== PDF PAGE 28 ===
+(b) If q ≥q2(γ), then
+REV DT(γ)(q) =
+cq + p(q −µ)
+cq1(γ) + σ[(p −γ)(t + γ)]
+1
+2 −γ(σ( p−γ
+t+γ )
+1
+2)
+≤cq + p(q −µ)
+cµ
+= V+(q, p).
+(c) If q ≤q1(γ), then
+REV DT(γ)(q) =
+cq −t(q −µ)
+cq2(γ) + σ[(p −γ)(t + γ)]
+1
+2 −γ(σ( p−γ
+t+γ )
+1
+2)
+≤cq −t(q −µ)
+cµ
+= V−(q, −t).
+On the other hand, from the geometric point of view, since GT(γ)(q) is a
+convex function, we have
+REV DT(γ)(q) ≥V+(q, γ).
+It follows that
+V+(q, γ) ≤REV DT(γ)(q) ≤max{V+(q, γ), V+(q, p), V−(q, −t)}.
+(2) When −t ≤γ ≤−c, by the same way we have
+V−(q, γ) ≤REV DT(γ)(q) ≤max{V−(q, γ), V+(q, p), V−(q, −t)}.
+Combining these two, we have
+max
+−t≤γ≤p{REVDT(γ)(q)} = max{ max
+−c≤γ1≤p V+(q, γ1),
+max
+−t≤γ2≤−c V−(q, γ2)}.
+6.5
+The ordering that minimizes the RVAI for distri-
+butions with given mean µ and support [A,B]
+In [3], the min-max regret problem is formulated as
+min
+Q≥0 max
+F∈D(q){[max
+ˆQ≥0 Π( ˆQ, F)] −Π(Q, F)},
+where Π(Q, F) = pEF[min{Q, D}] −cQ is the expected proﬁt. Notice, here
+we use the same notation as in [3]: Q is the order quantity before the selling
+season, ˆQ is the order quantity after observing the demand distribution, c is
+the unit order cost and p is the unit selling price. We use these notations
+throughout all this subsection.
+Deﬁnition 1 The Robust Value of Additional Information (RVAI)
+corresponds to the maximum proﬁt loss from knowing only partial
+information on the demand distribution. Mathematically, the RVAI is the
+optimal value of the above problem.
+28
+
+
+=== PDF PAGE 29 ===
+By inverting the order of maximization, it can be formulated as follows:
+minQ≥0 RV AI
+=
+minQ≥0 maxF∈D(q){[max ˆQ≥0 Π( ˆQ, F)] −Π(Q, F)}
+=
+minQ≥0 max ˆQ≥0{maxF∈D(q)[Π( ˆQ, F) −Π(Q, F)]}
+=
+minQ≥0 max ˆQ≥0 p{maxF∈D(q)
+R ∞
+0 (min{x, ˆQ} −min{x, Q})dF(x)} + c(Q −ˆQ)
+Theorem 3. (The original one, Theorem 2 given in [3], was imcomplete) If
+the demand distribution is nonnegative, with support [A, B] and mean µ,
+the min-max regret order quantity is the following:
+Q∗=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A + p−c
+p
+µ−A
+B−µ(B −A),
+if p
+c ≤min{1 + 1
+2
+B−µ
+µ−A, 1 + B−µ
+B−A},
+B −(2p−c)2
+4p(p−c)(B −µ),
+if 1 + 1
+2
+B−µ
+µ−A ≤p
+c ≤1 + 1
+2
+q
+B−µ
+µ−A,
+A + (
+q
+c
+p −
+q
+c
+p −µ−A
+B−A)2 (B−A)2
+µ−A ,
+if 1 + B−µ
+B−A ≤p
+c ≤1 + ( µ−A
+B−µ + 1
+2
+B−A
+B−µ
+q
+µ−A
+B−µ)−1,
+Q0,
+if max{1 + ( µ−A
+B−µ + 1
+2
+B−A
+B−µ
+q
+µ−A
+B−µ)−1, 1 + 1
+2
+B−µ
+µ−A}
+≤p
+c ≤min{1 + 2
+q
+B−µ
+µ−A, B−A
+µ−A + 1
+2
+B−A
+µ−A
+q
+B−µ
+µ−A},
+B −(
+q
+p−c
+p −
+q
+p−c
+p −B−µ
+B−A)2 (B−A)2
+B−µ ,
+if B−A
+µ−A + 1
+2
+B−A
+µ−A
+q
+B−µ
+µ−A ≤p
+c ≤1 + B−A
+µ−A ,
+A + (p+c)2
+4pc (µ −A),
+if 1 + 2
+q
+B−µ
+µ−A ≤p
+c ≤1 + 2B−µ
+µ−A,
+B −c
+p
+B−µ
+µ−A(B −A),
+if p
+c ≥max{1 + B−A
+µ−A , 1 + 2B−µ
+µ−A}.
+and the RVAI amounts to
+RVAI=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(1 −p−c
+p
+B−A
+B−µ )(p −c)(µ −A),
+if p
+c ≤min{1 + 1
+2
+B−µ
+µ−A, 1 + B−µ
+B−A},
+c2
+4p(B −µ),
+if 1 + 1
+2
+B−µ
+µ−A ≤p
+c ≤1 + 1
+2
+q
+B−µ
+µ−A,
+(1 −
+q
+1 −p
+c
+µ−A
+B−A)2( c
+p
+B−A
+µ−A −1)c(B −A),
+if 1 + B−µ
+B−A ≤p
+c ≤1 + ( µ−A
+B−µ + 1
+2
+B−A
+B−µ
+q
+µ−A
+B−µ)−1,
+(
+p
+p(B −µ) −
+p
+(p −c)(B −Q0))2,
+if max{1 + ( µ−A
+B−µ + 1
+2
+B−A
+B−µ
+q
+µ−A
+B−µ)−1, 1 + 1
+2
+B−µ
+µ−A}
+≤p
+c ≤min{1 + 2
+q
+B−µ
+µ−A, B−A
+µ−A + 1
+2
+B−A
+µ−A
+q
+B−µ
+µ−A},
+(1 −
+q
+1 −
+p
+p−c
+B−µ
+B−A)2(p−c
+p
+B−A
+B−µ −1)
+·(p −c)(B −A),
+if B−A
+µ−A + 1
+2
+B−A
+µ−A
+q
+B−µ
+µ−A ≤p
+c ≤1 + B−A
+µ−A ,
+(p−c)2
+4p
+(µ −A),
+if 1 + 2
+q
+B−µ
+µ−A ≤p
+c ≤1 + 2 B−µ
+µ−A,
+(1 −c
+p
+B−A
+µ−A )c(B −µ),
+if p
+c ≥max{1 + B−A
+µ−A , 1 + 2B−µ
+µ−A}.
+where Q0 = Γ2 ∩˜Γ2 is the intersection point of Γ2 and ˜Γ2 in the monotonic
+interval, i.e. the unique solution of
+p
+p(µ −A) −
+p
+c(Q −A) =
+p
+p(B −µ) −
+p
+(p −c)(B −Q), such that Q is
+in the monotonic interval of both Γ2 and ˜Γ2.
+29
+
+
+=== PDF PAGE 30 ===
+Proof: Let
+f(Q, ˆQ) = p{ max
+F∈D(q)
+Z ∞
+0
+(min{x, ˆQ} −min{x, Q})dF(x)} + c(Q −ˆQ),
+then
+RV AI
+=
+minQ≥0 max ˆQ≥0 f(Q, ˆQ)
+=
+minQ≥0 max{max ˆQ≥Q f(Q, ˆQ), max ˆQ≤Q f(Q, ˆQ)}
+=
+minQ≥0 max{f+(Q), f−(Q)}
+where f+(Q) = max ˆQ≥Q f(Q, ˆQ), f−(Q) = max ˆQ≤Q f(Q, ˆQ).
+The inner maximization problem of f(Q, ˆQ) over all distributions in D(q),
+can be formulated as a semi-inﬁnite linear optimization problem. By strong
+duality, the primal problem is equivalent to the following dual problem:
+miny0,y1
+y0 + y1µ
+s.t.
+y0 + y1x ≥min{x, ˆQ} −min{x, Q},
+∀A ≤x ≤B.
+(a) For the case of ˆQ ≥Q. Using geometric interpretation, we can get
+the same result as in [3]:
+f+(Q) =
+
+
+
+
+
+(p −c)(µ −Q),
+if Q ≤A + c
+p(µ −A),
+(
+p
+p(µ −A) −
+p
+c(Q −A))2,
+if A + c
+p(µ −A) ≤Q ≤A + c
+p
+(B−A)2
+µ−A ,
+(p µ−A
+B−A −c)(B −Q),
+if Q ≥A + c
+p
+(B−A)2
+µ−A .
+(b) For ˆQ ≤Q, we can get the following results by the same way:
+f−(Q) =
+
+
+
+
+
+c(Q −µ),
+if Q ≥B −p−c
+p (B −µ),
+(
+p
+p(B −µ) −
+p
+(p −c)(B −Q))2,
+if B −p−c
+p
+(B−A)2
+B−µ
+≤Q ≤B −p−c
+p (B −µ),
+(p B−µ
+B−A −(p −c))(Q −A),
+if Q ≤B −p−c
+p
+(B−A)2
+B−µ .
+Let Γ1, Γ2, Γ3 denote the three segments of f+(Q), ˜Γ1, ˜Γ2, ˜Γ3 denote the
+three segments of f−(Q) respectively. ( the order is the same as the order
+listed in (a) (b) above.)
+Notice the optimal order Q∗satisﬁes f+(Q∗) = f−(Q∗), hence to minimize
+max{f+(Q), f−(Q)}, we need to ﬁnd the intersection point of f+(Q) and
+f−(Q). ( take into account the monotonity of f+(Q) and f−(Q).) (Notice
+Γ1 ∩˜Γ1 = ∅)
+We consider the following two cases:
+30
+
+
+=== PDF PAGE 31 ===
+Case 1:
+p
+c ≥B−A
+µ−A , then we need to ﬁnd the intersection point between
+Γ1, Γ2, Γ3 and ˜Γ1, ˜Γ2. (Actually part of ˜Γ2). We get
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Γ3 ∩˜Γ1,
+if p
+c ≥max{1 + B−A
+µ−A , 1 + 2 B−µ
+µ−A},
+Γ3 ∩˜Γ2,
+if B−A
+µ−A + 1
+2
+B−A
+µ−A
+q
+B−µ
+µ−A ≤p
+c ≤1 + B−A
+µ−A ,
+Γ2 ∩˜Γ2,
+if 1 + 1
+2
+q
+B−µ
+µ−A ≤p
+c ≤min{1 + 2
+q
+B−µ
+µ−A, B−A
+µ−A + 1
+2
+B−A
+µ−A
+q
+B−µ
+µ−A},
+Γ2 ∩˜Γ1,
+if 1 + 2
+q
+B−µ
+µ−A ≤p
+c ≤1 + 2B−µ
+µ−A},
+Γ1 ∩˜Γ2,
+if p
+c ≤1 + 1
+2
+q
+B−µ
+µ−A.
+Case 2:
+p
+c ≤B−A
+µ−A ⇔
+p
+p−c ≥B−A
+B−µ , then we need to ﬁnd the intersection
+point between Γ1, Γ2 and ˜Γ1, ˜Γ2, ˜Γ3. (Actually part of Γ2). (It’s symmetric
+to case 1 under the following exchange: p ↔p, c ↔(p −c), A ↔B and
+Γi ↔˜Γi.) Then, we get
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+˜Γ3 ∩Γ1,
+if
+p
+p−c ≥max{1 + B−A
+B−µ , 1 + 2 µ−A
+B−µ},
+˜Γ3 ∩Γ2,
+if B−A
+B−µ + 1
+2
+B−A
+B−µ
+q
+µ−A
+B−µ ≤
+p
+p−c ≤1 + B−A
+B−µ ,
+˜Γ2 ∩Γ2,
+if 1 + 1
+2
+q
+µ−A
+B−µ ≤
+p
+p−c ≤min{1 + 2
+q
+µ−A
+B−µ, B−A
+B−µ + 1
+2
+B−A
+B−µ
+q
+µ−A
+B−µ},
+˜Γ2 ∩Γ1,
+if 1 + 2
+q
+µ−A
+B−µ ≤
+p
+p−c ≤1 + 2 µ−A
+B−µ},
+˜Γ1 ∩Γ2,
+if
+p
+p−c ≤1 + 1
+2
+q
+µ−A
+B−µ.
+Combing the above two cases, we get the results as follows:
+(1) B−µ
+µ−A ≤1
+Q∗=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A + p−c
+p
+µ−A
+B−µ(B −A),
+if p
+c ≤1 + 1
+2
+B−µ
+µ−A,
+B −(2p−c)2
+4p(p−c)(B −µ),
+if 1 + 1
+2
+B−µ
+µ−A ≤p
+c ≤1 + 1
+2
+q
+B−µ
+µ−A,
+Q0,
+if 1 + 1
+2
+q
+B−µ
+µ−A ≤p
+c ≤B−A
+µ−A + 1
+2
+B−A
+µ−A
+q
+B−µ
+µ−A,
+B −(
+q
+p−c
+p −
+q
+p−c
+p −B−µ
+B−A)2 (B−A)2
+B−µ ,
+if B−A
+µ−A + 1
+2
+B−A
+µ−A
+q
+B−µ
+µ−A ≤p
+c ≤1 + B−A
+µ−A ,
+B −c
+p
+B−µ
+µ−A(B −A),
+if p
+c ≥1 + B−A
+µ−A .
+(2) B−µ
+µ−A ≥1
+31
+
+
+=== PDF PAGE 32 ===
+Q∗=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A + p−c
+p
+µ−A
+B−µ(B −A),
+if p
+c ≤1 + B−µ
+B−A,
+A + (
+q
+c
+p −
+q
+c
+p −µ−A
+B−A)2 (B−A)2
+µ−A ,
+if 1 + B−µ
+B−A ≤p
+c ≤1 + ( µ−A
+B−µ + 1
+2
+B−A
+B−µ
+q
+µ−A
+B−µ)−1,
+Q0,
+if 1 + ( µ−A
+B−µ + 1
+2
+B−A
+B−µ
+q
+µ−A
+B−µ)−1 ≤p
+c ≤1 + 2
+q
+B−µ
+µ−A,
+A + (p+c)2
+4pc (µ −A),
+if 1 + 2
+q
+B−µ
+µ−A ≤p
+c ≤1 + 2B−µ
+µ−A,
+B −c
+p
+B−µ
+µ−A(B −A),
+if p
+c ≥1 + 2B−µ
+µ−A.
+Therefore, we can write them together as follows:
+Q∗=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A + p−c
+p
+µ−A
+B−µ(B −A),
+if p
+c ≤min{1 + 1
+2
+B−µ
+µ−A, 1 + B−µ
+B−A},
+B −(2p−c)2
+4p(p−c)(B −µ),
+if 1 + 1
+2
+B−µ
+µ−A ≤p
+c ≤1 + 1
+2
+q
+B−µ
+µ−A,
+A + (
+q
+c
+p −
+q
+c
+p −µ−A
+B−A)2 (B−A)2
+µ−A ,
+if 1 + B−µ
+B−A ≤p
+c ≤1 + ( µ−A
+B−µ + 1
+2
+B−A
+B−µ
+q
+µ−A
+B−µ)−1,
+Q0,
+if max{1 + ( µ−A
+B−µ + 1
+2
+B−A
+B−µ
+q
+µ−A
+B−µ)−1, 1 + 1
+2
+B−µ
+µ−A}
+≤p
+c ≤min{1 + 2
+q
+B−µ
+µ−A, B−A
+µ−A + 1
+2
+B−A
+µ−A
+q
+B−µ
+µ−A},
+B −(
+q
+p−c
+p −
+q
+p−c
+p −B−µ
+B−A)2 (B−A)2
+B−µ ,
+if B−A
+µ−A + 1
+2
+B−A
+µ−A
+q
+B−µ
+µ−A ≤p
+c ≤1 + B−A
+µ−A ,
+A + (p+c)2
+4pc (µ −A),
+if 1 + 2
+q
+B−µ
+µ−A ≤p
+c ≤1 + 2B−µ
+µ−A,
+B −c
+p
+B−µ
+µ−A(B −A),
+if p
+c ≥max{1 + B−A
+µ−A , 1 + 2B−µ
+µ−A}.
+and the RVAI amounts to
+RVAI=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(1 −p−c
+p
+B−A
+B−µ )(p −c)(µ −A),
+if p
+c ≤min{1 + 1
+2
+B−µ
+µ−A, 1 + B−µ
+B−A},
+c2
+4p(B −µ),
+if 1 + 1
+2
+B−µ
+µ−A ≤p
+c ≤1 + 1
+2
+q
+B−µ
+µ−A,
+(1 −
+q
+1 −p
+c
+µ−A
+B−A)2( c
+p
+B−A
+µ−A −1)c(B −A),
+if 1 + B−µ
+B−A ≤p
+c ≤1 + ( µ−A
+B−µ + 1
+2
+B−A
+B−µ
+q
+µ−A
+B−µ)−1,
+(
+p
+p(B −µ) −
+p
+(p −c)(B −Q0))2,
+if max{1 + ( µ−A
+B−µ + 1
+2
+B−A
+B−µ
+q
+µ−A
+B−µ)−1, 1 + 1
+2
+B−µ
+µ−A}
+≤p
+c ≤min{1 + 2
+q
+B−µ
+µ−A, B−A
+µ−A + 1
+2
+B−A
+µ−A
+q
+B−µ
+µ−A},
+(1 −
+q
+1 −
+p
+p−c
+B−µ
+B−A)2(p−c
+p
+B−A
+B−µ −1)
+·(p −c)(B −A),
+if B−A
+µ−A + 1
+2
+B−A
+µ−A
+q
+B−µ
+µ−A ≤p
+c ≤1 + B−A
+µ−A ,
+(p−c)2
+4p
+(µ −A),
+if 1 + 2
+q
+B−µ
+µ−A ≤p
+c ≤1 + 2 B−µ
+µ−A,
+(1 −c
+p
+B−A
+µ−A )c(B −µ),
+if p
+c ≥max{1 + B−A
+µ−A , 1 + 2B−µ
+µ−A}.
+32
+
+
+=== PDF PAGE 33 ===
+6.6
+The ordering that minimizes the maximum AEVD
+for distributions with given mean µ and standard
+deviation σ
+Let ϝ be the set of all pdf’s with a given mean µ and a given standard
+deviation σ. Then all the two-point pdf’s in ϝ can be represented by {T(γ)|−
+t < γ < p}, where T(γ) is a two-point pdf that assigns weights ω1(γ) = t+γ
+p+t
+and ω2(γ) = p−γ
+p+t to points
+q1(γ) = µ −σ(p −γ
+t + γ )
+1
+2 and q2(γ) = µ + σ( t + γ
+p −γ )
+1
+2,
+respectively.
+If f = T(γ), the objective function Gf(q) after some algebraic calcula-
+tions, can be simpliﬁed as follows:
+GT(γ)(q) =
+
+
+
+cq −t(q −µ),
+if q ≤q1(γ),
+cq + σ[(p −γ)(t + γ)]
+1
+2 + γ(q −µ),
+if q1(γ) ≤q ≤q2(γ),
+cq + p(q −µ),
+if q ≥q2(γ).
+Lemma 5. (Similar to Theorem 3 in [5]) For any q and f ∈ϝ, there exists
+a two-point pdf T(γ) ∈ϝ with −t < γ < p such that
+AEV Df(q) ≤AEV DT(γ)(q).
+Proof: We have two ways to prove it.
+Method 1. Similar to the proof of Theorem 3 in paper [5]. (Note: The
+proof for AEV Df(q) ≤AEV DT(γ)(q) is slightly diﬀerent from the proof in
+[5], because the deﬁnition of Gf(q) is diﬀerent.)
+Method 2: Use duality to prove it, which is pretty much the same as the
+proof for Lemma 3.
+In view of Lemma 5, for any given decision q, we only have to search
+among two-point pdf’s T(γ) to ﬁnd its largest AEVD, i.e., to ﬁnd a parameter
+−t ≤γ ≤p that maximizes REV DT(γ)(q):
+AEVDmax(q) = max
+−t≤γ≤p{AEVDT(γ)(q)}.
+From the geometric interpretation we can deﬁne
+V+(q, γ)
+=
+AEVDT(γ)(q)|−c≤γ1≤p,q1(γ)≤q≤q2(γ)
+=
+[GT(γ)(q) −GT(γ)(q1(γ))]|q1(γ)≤q≤q2(γ)
+=
+(q −µ + σ
+q
+p−γ
+t+γ )(γ + c)
+33
+
+
+=== PDF PAGE 34 ===
+V−(q, γ)
+=
+AEVDT(γ)(q)|−t≤γ≤−c,q1(γ)≤q≤q2(γ)
+=
+[GT(γ)(q) −GT(γ)(q2(γ))]|q1(γ)≤q≤q2(γ)
+=
+(q −µ −σ
+q
+t+γ
+p−γ)(γ + c)
+Lemma 6.
+max
+−t≤γ≤p{AEVDT(γ)(q)} = max{ max
+−c≤γ1≤p V+(q, γ1),
+max
+−t≤γ2≤−c V−(q, γ2)}
+Proof: We omitted the proof because it is only slightly diﬀerent from the
+proof in [5]. The only diﬀerence is that we take into account the ordering
+cost ’c’.
+Then, combining with the result in Lemma 5, we have
+AEVDmax(q) = max{ max
+−c≤γ1≤p V+(q, γ1),
+max
+−t≤γ2≤−c V−(q, γ2)}.
+Let qe be the decision that minimizes the largest AEVD, that is
+qe = arg min AEVDmax(q).
+Since V+(q, γ1) ≤0 for all q ≤q1(γ1), −c ≤γ1 ≤p and V−(q, γ2) ≤
+0 for all q ≥q2(γ2),−t ≤γ2 ≤−c.
+Then max−c≤γ1≤p V+(q, γ1) ≤0 for
+all q ≤q1(−c) and max−t≤γ2≤−c V−(q, γ1) ≤0 for all q ≥q2(−c), because
+min−c≤γ1≤p q1(γ1) = q1(−c) and max−t≤γ2≤−c q2(γ2) = q2(−c).
+Notice that V+(q, γ1) and max−c≤γ1≤p V+(q, γ1) are both increasing func-
+tions of q, while V−(q, γ2) and max−t≤γ2≤−c V−(q, γ2) are both decreasing
+functions of q. It follows that
+q1(−c) ≤qe ≤q2(−c)
+and
+max
+−c≤γ1≤p V+(qe, γ1) =
+max
+−t≤γ2≤−c V−(qe, γ2).
+Therefore, we can simplify the formula for AEV Dmax(q) as follows:
+AEV Dmax(q) =
+½ max−c≤γ1≤p V+(q, γ1),
+if q ≥qe,
+max−t≤γ2≤−c V−(q, γ2),
+if q ≤qe.
+We can further simplify it by introducing the following variable transfor-
+mations:
+θ = q −µ
+σ
+, α = t −c
+p
+, β = p + c
+p
+, x = γ1 + c
+p
+, y = −γ2 + c
+p
+.
+34
+
+
+=== PDF PAGE 35 ===
+Then, the above formula becomes
+AEV Dmax(q) = (pσ)
+½ max0≤x≤β g+(θ, x),
+if q ≥qe,
+max0≤y≤α g−(θ, y),
+if q ≤qe,
+where
+g+(θ, x) = V+(q, γ1) = [θ +
+r
+β −x
+α + x]x,
+g−(θ, y) = V−(q, γ2) = [−θ +
+rα −y
+β + y ]y.
+The above formula illustrated how to calculate the maximum AEVD for
+any given decision q. Now, let us calculate qe by the following optimization
+procedure:
+max
+0≤x≤β,0≤y≤α g+(θ, x) s.t. g+(θ, x) = g−(θ, x).
+Eliminating θ from the constraint and then plug it into the objective
+function, we get the following non-constrained optimization problem:
+max
+0≤x≤β,0≤y≤α gα,β(x, y),
+where
+gα,β(x, y) =
+xy
+x + y(
+r
+β −x
+α + x +
+rα −y
+β + y ).
+Theorem 4. Let (x∗, y∗) be the solution of the above optimization
+problem. Then, the min-max AEVD and the associated decision qe are
+given by
+AEV Dmax(qe) = (pσ)g(x∗, y∗)
+and qe = µ + θeσ,
+where
+θe =
+1
+x∗+ y∗(−
+r
+β −x∗
+α + x∗x∗+
+rα −y∗
+β + y∗y∗).
+35

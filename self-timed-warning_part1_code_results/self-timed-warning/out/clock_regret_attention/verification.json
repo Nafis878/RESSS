@@ -1,0 +1,11 @@
+{
+  "old_artifacts_unchanged": 1025,
+  "regenerated_exactly_labeled_datasets": 2400,
+  "public_only_features_and_disjoint_input_sets": true,
+  "exact_focus_results_and_feasible_witnesses": 6600,
+  "checkpoint_focus_predictions_reproduced": 3600,
+  "fixed_epoch_validation_checkpoint_selection": 6,
+  "paired_tests_holm_and_bootstrap_reproduced": 4,
+  "stored_arbitrary_focus_cases": 500,
+  "exploratory_greedy_cases_reproduced": 600
+}

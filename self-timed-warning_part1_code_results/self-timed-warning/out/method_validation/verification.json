@@ -1,0 +1,148 @@
+{
+  "passed": 35,
+  "failed": 0,
+  "protected_files_unchanged": 776,
+  "checks": [
+    {
+      "name": "776_frozen_files_unchanged",
+      "passed": true
+    },
+    {
+      "name": "prior_observability_manifest_28_hashes_unchanged",
+      "passed": true
+    },
+    {
+      "name": "initial_plan_hash_preserved",
+      "passed": true
+    },
+    {
+      "name": "amended_plan_transparent",
+      "passed": true
+    },
+    {
+      "name": "24_unique_dataset_contrasts",
+      "passed": true
+    },
+    {
+      "name": "primary_family21_sensitivity3",
+      "passed": true
+    },
+    {
+      "name": "1149_primary_unique_assets",
+      "passed": true
+    },
+    {
+      "name": "primary_assets_appear_in_exactly_three_contrasts",
+      "passed": true
+    },
+    {
+      "name": "asset_split_uniqueness",
+      "passed": true
+    },
+    {
+      "name": "24_sign_tests_recomputed_from_assets",
+      "passed": true
+    },
+    {
+      "name": "holm_primary_correct",
+      "passed": true
+    },
+    {
+      "name": "holm_sensitivity_correct",
+      "passed": true
+    },
+    {
+      "name": "21_primary_significant_and20_negative",
+      "passed": true
+    },
+    {
+      "name": "2000_draws_each_of8_regimes",
+      "passed": true
+    },
+    {
+      "name": "bootstrap_draw_keys_unique",
+      "passed": true
+    },
+    {
+      "name": "bootstrap_hidden_risk_nonnegative",
+      "passed": true
+    },
+    {
+      "name": "bootstrap_certificate_never_exceeds_true_gain",
+      "passed": true
+    },
+    {
+      "name": "only_linear_metrics_labeled_CI",
+      "passed": true
+    },
+    {
+      "name": "threshold_ranges_not_claimed_as_confidence_intervals",
+      "passed": true
+    },
+    {
+      "name": "nonregular_diagnostics_retained",
+      "passed": true
+    },
+    {
+      "name": "composite_nonregular_ranges_labeled_sensitivity",
+      "passed": true
+    },
+    {
+      "name": "exploratory_group_tests_none_adjusted_significant",
+      "passed": true
+    },
+    {
+      "name": "primary_outer_group_counts3_or5",
+      "passed": true
+    },
+    {
+      "name": "48_point_summaries_match_frozen_results",
+      "passed": true
+    },
+    {
+      "name": "29184_lp_comparisons_unique_complete",
+      "passed": true
+    },
+    {
+      "name": "generic_lp_endpoints_match_all_frozen_endpoints",
+      "passed": true
+    },
+    {
+      "name": "both_generic_certifications_match_all_frozen_decisions",
+      "passed": true
+    },
+    {
+      "name": "15168_missing_outcome_LP_pairs",
+      "passed": true
+    },
+    {
+      "name": "8_independent_unit_tests_passed",
+      "passed": true
+    },
+    {
+      "name": "report_has_explicit_negative_method_verdict",
+      "passed": true
+    },
+    {
+      "name": "report_discloses_posthoc_and_dependency_limits",
+      "passed": true
+    },
+    {
+      "name": "report_has_no_superiority_claim_from_LP_equality",
+      "passed": true
+    },
+    {
+      "name": "machine_verdict_NO_and_resource_priority_unestablished",
+      "passed": true
+    },
+    {
+      "name": "scientific_figure_artifacts_present",
+      "passed": true
+    },
+    {
+      "name": "original_CI_label_files_archived_only",
+      "passed": true
+    }
+  ],
+  "figure_review": "PNG visually inspected; legend moved clear of data and final image inspected"
+}

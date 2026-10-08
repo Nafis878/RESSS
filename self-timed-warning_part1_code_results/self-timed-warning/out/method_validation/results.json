@@ -1,0 +1,28 @@
+{
+  "bootstrap_draws": 2000,
+  "seed": 20261008,
+  "primary_sign_tests": 21,
+  "sensitivity_sign_tests": 3,
+  "significant_primary_holm": 21,
+  "primary_assets": 1149,
+  "primary_domains": 7,
+  "domain_sizes": {
+    "Battery/cv123": 123,
+    "Battery/lobo": 123,
+    "FD001/engine": 100,
+    "FD002/engine": 260,
+    "FD003/engine": 100,
+    "FD004/engine": 249,
+    "NCMAPSS6/engine": 99,
+    "PHM08/engine": 218
+  },
+  "lp_comparisons": 29184,
+  "lp_solved_pairs": 15168,
+  "endpoint_max_absolute_error": 2.220446049250313e-16,
+  "certification_mismatches": 0,
+  "protected_files_unchanged": 776,
+  "prior_art_method_reproduced": true,
+  "methodological_novelty_established": false,
+  "inference": "post hoc, fixed-policy, asset-within-outer-split conditional inference",
+  "elapsed_seconds": 39.78199999999924
+}

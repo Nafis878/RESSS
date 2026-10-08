@@ -1,0 +1,9 @@
+Dataset,Comparator,CAT-c M %,Comparator M %,Difference points,Paired 95% interval,Plan verdict
+FD001,P1_res_opt_mid,5.8575,5.5789,0.2786,"[-0.3903, 0.9448]",unclear
+FD001,STW_window,5.8575,8.4911,-2.6336,"[-3.3373, -1.948]",CAT
+FD002,P1_res_opt_mid,7.922,5.6554,2.2666,"[-1.5709, 9.6873]",unclear
+FD002,STW_window,7.922,4.8507,3.0713,"[-0.6822, 10.3943]",unclear
+FD003,P1_res_opt_mid,13.6111,7.9323,5.6788,"[-4.1832, 24.6006]",unclear
+FD003,STW_window,13.6111,4.7578,8.8533,"[-0.6643, 27.5676]",unclear
+FD004,P1_res_opt_mid,7.102,11.2518,-4.1498,"[-12.0954, -0.0388]",CAT
+FD004,STW_window,7.102,8.4405,-1.3385,"[-1.85, -0.8637]",CAT

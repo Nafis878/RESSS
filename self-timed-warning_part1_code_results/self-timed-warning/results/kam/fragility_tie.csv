@@ -1,0 +1,11 @@
+ds,protocol,model,decisions,differ,max_abs_M_diff
+fd001,cv,cls,700,0,0.0
+fd001,cv,res,700,0,0.0
+fd001,rs,cls,4200,0,0.0
+fd001,rs,res,4200,0,0.0
+fd002,cv,cls,1820,0,0.0
+fd002,cv,res,1820,0,0.0
+fd003,cv,cls,700,1,0.22248359016254815
+fd003,cv,res,700,0,0.0
+fd004,cv,cls,1743,0,0.0
+fd004,cv,res,1743,0,0.0

@@ -1,0 +1,1 @@
+PASS  frozen results reproduce the complete numerical summary and verdicts exactly

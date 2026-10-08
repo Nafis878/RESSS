@@ -1,0 +1,3 @@
+PASS  R1 battery STW_window: every test decision identical to the original nested script rerun on this platform (3936 rows)
+PASS  R1 battery STW_cost: every test decision identical to the original nested script rerun on this platform (3936 rows)
+PASS  R1 battery STW_cost_1se: every test decision identical to the original nested script rerun on this platform (3936 rows)

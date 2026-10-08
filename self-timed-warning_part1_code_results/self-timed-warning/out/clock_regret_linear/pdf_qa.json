@@ -1,0 +1,8 @@
+{
+  "pdf_sha256": "c8c8edf799e4c8c1bc231693532ec7e17e5c6ae3b7effc8f959ed5f550b03d5d",
+  "pages": 5,
+  "renderer": "PyMuPDF, scale 1.3; Poppler executable unavailable",
+  "visual_review": "All five latest page PNGs inspected by the authoring assistant before final packaging.",
+  "visual_defects_detected": 0,
+  "table_split": false
+}

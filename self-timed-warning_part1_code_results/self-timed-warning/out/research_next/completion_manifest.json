@@ -1,0 +1,278 @@
+{
+  "investigation_complete": true,
+  "new_method_implemented": false,
+  "new_method_validated": false,
+  "novel_method_established": false,
+  "novelty_gate": "not_passed; user-authorized negative-novelty fallback completed",
+  "historical_completion": {
+    "checks": 262,
+    "preserved_files": 591,
+    "input_files": 21,
+    "frozen_artifacts": 80
+  },
+  "diagnostic_counts": {
+    "battery_replay_decisions": 31488,
+    "stress_rows": 247680,
+    "stress_groups": 172,
+    "target_reference_rows": 1920,
+    "cost_matrix_cells": 640,
+    "paired_risk_tests": 96,
+    "new_unit_test_groups": 11
+  },
+  "scope_limits": [
+    "no new optimizer",
+    "no new-method removal ablations",
+    "fixed-signal score stress only",
+    "no independent retraining seed study",
+    "no training-class prevalence intervention",
+    "no verified chronological stream",
+    "no operational delayed/censored-feedback experiment",
+    "no exact frozen deployment guarantee"
+  ],
+  "checks": [
+    {
+      "check": "all 591 protected original files unchanged",
+      "pass": true
+    },
+    {
+      "check": "historical 262-check completion record retained",
+      "pass": true
+    },
+    {
+      "check": "all 21 original inputs unchanged",
+      "pass": true
+    },
+    {
+      "check": "all 80 frozen completion artifacts unchanged",
+      "pass": true
+    },
+    {
+      "check": "168-file source inventory consistent",
+      "pass": true
+    },
+    {
+      "check": "90 Python AST inventories retained",
+      "pass": true
+    },
+    {
+      "check": "284-artifact frozen inventory consistent",
+      "pass": true
+    },
+    {
+      "check": "all 11 reference unit-test groups pass",
+      "pass": true
+    },
+    {
+      "check": "cv1: frozen replay decisions and scores verified (3200)",
+      "pass": true
+    },
+    {
+      "check": "cv2: frozen replay decisions and scores verified (3200)",
+      "pass": true
+    },
+    {
+      "check": "cv3: frozen replay decisions and scores verified (3200)",
+      "pass": true
+    },
+    {
+      "check": "cv4: frozen replay decisions and scores verified (3072)",
+      "pass": true
+    },
+    {
+      "check": "cv5: frozen replay decisions and scores verified (3072)",
+      "pass": true
+    },
+    {
+      "check": "lobo1: frozen replay decisions and scores verified (4608)",
+      "pass": true
+    },
+    {
+      "check": "lobo2: frozen replay decisions and scores verified (5504)",
+      "pass": true
+    },
+    {
+      "check": "lobo3: frozen replay decisions and scores verified (5632)",
+      "pass": true
+    },
+    {
+      "check": "all 31488 battery decisions reproduced",
+      "pass": true
+    },
+    {
+      "check": "complete 247680-row / 172-group stress grid",
+      "pass": true
+    },
+    {
+      "check": "stress includes all seven cost domains and eight battery splits",
+      "pass": true
+    },
+    {
+      "check": "stress seeds, calibration fractions and alpha grid complete",
+      "pass": true
+    },
+    {
+      "check": "stress risk equals saved unit failures",
+      "pass": true
+    },
+    {
+      "check": "larger synthetic critical-score shift never reduces failure",
+      "pass": true
+    },
+    {
+      "check": "no-stress baselines match frozen CAT costs/settings (608 cells)",
+      "pass": true
+    },
+    {
+      "check": "no-stress dT=10 baselines match frozen M failure decisions (80 cells)",
+      "pass": true
+    },
+    {
+      "check": "complete labelled-target reference grid",
+      "pass": true
+    },
+    {
+      "check": "target reference uses disjoint calibration/remaining-unit partitions",
+      "pass": true
+    },
+    {
+      "check": "small-label budgets explicitly marked nonfinite",
+      "pass": true
+    },
+    {
+      "check": "target cost/risk numerical results valid",
+      "pass": true
+    },
+    {
+      "check": "complete 640-cell fixed-policy cost grid",
+      "pass": true
+    },
+    {
+      "check": "all 96 paired risk tests use full-family Holm",
+      "pass": true
+    },
+    {
+      "check": "paired conditional cost intervals contain estimates",
+      "pass": true
+    },
+    {
+      "check": "all engine and both battery regimes reported",
+      "pass": true
+    },
+    {
+      "check": "contribution statement exactly 150 whitespace-delimited words",
+      "pass": true
+    },
+    {
+      "check": "all 16 pitch items present",
+      "pass": true
+    },
+    {
+      "check": "all ten phase statuses and negative novelty gate documented",
+      "pass": true
+    },
+    {
+      "check": "report local evidence links resolve",
+      "pass": true
+    },
+    {
+      "check": "figure artifacts present",
+      "pass": true
+    },
+    {
+      "check": "all investigation deliverables exist",
+      "pass": true
+    },
+    {
+      "check": "protected originals still unchanged after validation",
+      "pass": true
+    }
+  ],
+  "changed_protected_files": [],
+  "environment": {
+    "python": "3.12.4",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scipy": "1.17.1",
+    "scikit_learn": "1.8.0",
+    "threads": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    }
+  },
+  "checked_at_utc": "2026-10-07T18:51:28.430219+00:00",
+  "client_report_date": "2026-10-08 Asia/Dhaka",
+  "investigation_plan_sha256": "3ed772828d838a17406f6e0ab4b6c661515f0318bf46705b28569641502a7ced",
+  "original_completion_sha256": "5aa3fcacb02df6673f210d1d7310b261133d00e7e96967528cdf3e927b763a03",
+  "sha256": {
+    "research_next/audit.py": "75413d7bb6f6f533a75bf71b16e441a1e424c7acc4059f9ff65eab1d21867134",
+    "research_next/build_report.py": "a1f13eacfec44fb3cce942b9d61b7e5ebb97a5e02a80a045f895fff864331c1a",
+    "research_next/calibration_tools.py": "69f476232ecea6eaa33c6c44e99d18931b18291b69c9df309910d6b45fb33f9b",
+    "research_next/FINAL_SCIENTIFIC_REPORT.md": "d45df961260d0f8e7f3954d4401d97eb1ccc431ec360357577452aa9dd26c33f",
+    "research_next/LITERATURE_AUDIT.md": "5320b8fe35c8579e20faa01fc7365d416782c597bb621b0805080f84b3fe964f",
+    "research_next/MATHEMATICAL_STATUS.md": "5bc3beffadedccfab66d2ecc3505519f87c7790f9d955e931a9ad53739974cde",
+    "research_next/PLAN.md": "3ed772828d838a17406f6e0ab4b6c661515f0318bf46705b28569641502a7ced",
+    "research_next/README.md": "f519ed4c9342865ddc2bb40ba3d7d7fba8e584d8546af32faff3db9832c12d0b",
+    "research_next/reconstruct_battery.py": "a8565fe9c279a2f54846e14c67ea7c1aebb8a07d696e156741a970c8a3489719",
+    "research_next/statistics_audit.py": "1e1cffe30465a7ed1a776e9f17abc2dfdd50a76d018abd5d0de88809421b3094",
+    "research_next/stress.py": "4387fca9f01e7769c0fd95329f1b11792251a1a46bbcc176a3389e07a579ec2b",
+    "research_next/test_calibration_tools.py": "13ddb41c6b8bbd6edca9139219eb1e05aa4152d886fd8bb0d4713317eed00353",
+    "research_next/verify.py": "22a81cb7d62b85f74a0d8504f9976825d3f20d2d71e4405ed602284c6c0d7bf6",
+    "out/research_next/all_dataset_effects.csv": "cbbc3d1f7e0b400c103689a69ab3a17534668b09776ec16c4e19f71e1d0c986e",
+    "out/research_next/battery/cv1_check.txt": "2c773298c5fb84fb3746184f6a093ed881c5453cef5027fd730768ace7f49be4",
+    "out/research_next/battery/cv1_scores.csv": "16a9060475b23c4054634cc59d87da9ff1828f64ffafe98f123615d48add68dc",
+    "out/research_next/battery/cv1_tables.npz": "3d3e9db0efd61abdcb72c33e4d0688247fc30ebaa1c46fc70a2b17d17232efef",
+    "out/research_next/battery/cv2_check.txt": "0c28c1ff6bfaca2ef9258c49471334fa3752379f421b6e03333d80b2113ca157",
+    "out/research_next/battery/cv2_scores.csv": "4f0f9b2119dee3bf2f7024d2c0860cc583574efc9c200d095dc3aab065f20cd3",
+    "out/research_next/battery/cv2_tables.npz": "7d01912d412dbc1b1648f52f582f400f318090603b2d1b24e1c4970f85375333",
+    "out/research_next/battery/cv3_check.txt": "b6a0bb909234d273bf948c43a5d7f28e77f39531607a4ae48217a056ada49a73",
+    "out/research_next/battery/cv3_scores.csv": "4bd414043ef88d137eec5517add05d8378e09f76b909006f71a454142bfd6938",
+    "out/research_next/battery/cv3_tables.npz": "28b4eabca38e170e09bf33e82e8195510914ad10f12d42763f506ee1e97f0879",
+    "out/research_next/battery/cv4_check.txt": "f0ffbed0db994230543d131e4d33707cd24761a9991d6a044d990c41bda79243",
+    "out/research_next/battery/cv4_scores.csv": "8cf2cae370578936da3923139fb194490049d4039d2bee43e8539a0b1871209c",
+    "out/research_next/battery/cv4_tables.npz": "9e2c35f5b6b13d0b71945dd214024045057476841293edeb88cf5034b58d6a50",
+    "out/research_next/battery/cv5_check.txt": "f8ff953f532e559e65ded60d4cdd6bd59eac3756a16a048e701e44df45eb50d4",
+    "out/research_next/battery/cv5_scores.csv": "3e80027fec513a857b5c4e5643a32bd783938149a4f3a2fa529069b15ed4e2a7",
+    "out/research_next/battery/cv5_tables.npz": "511543fe027cf4d891d49f88275c28eaa1b6afbb0c00254bd73da9eff7877ddb",
+    "out/research_next/battery/lobo1_check.txt": "497fe2142e33bc055273805cdc843df36ecb2a79da0125201ebf83279c039007",
+    "out/research_next/battery/lobo1_scores.csv": "4e991b517b41d69f6b00d26375ca2d07fb94d9be68bf6d6ef356c1d18a2179ae",
+    "out/research_next/battery/lobo1_tables.npz": "46e1f328fa068cd470d757796cb63238174476a6bc6e737cd434eb387502b553",
+    "out/research_next/battery/lobo2_check.txt": "5899cd307f84773492ae163670b548cca01332d38207cb55984497685b1cb5a9",
+    "out/research_next/battery/lobo2_scores.csv": "08d46646eecaa64de19dc7a98bdbad1e1e9666aeaf7f81688811aac12d9f67c0",
+    "out/research_next/battery/lobo2_tables.npz": "5d797434d496c99795622cf6eee03937d4dfd34c3aad59d0768f03a8cb53bec2",
+    "out/research_next/battery/lobo3_check.txt": "75e198651a7536757d649c0c2aeb2813e01398f03dfb38d4c45315413b7c89c2",
+    "out/research_next/battery/lobo3_scores.csv": "affcf2d87df34e370fcdc7ed39ef085d062a07ff129d297e0935e25ca3dd560f",
+    "out/research_next/battery/lobo3_tables.npz": "d8b1f2017aca16a5aa49c1eda43c92723b9e77a7338662a5d822e94200c15fe3",
+    "out/research_next/battery_by_batch.csv": "4b7e0dee0ecbeca5b8202c1c8423cbbfff823a977ae9510b951309814de15190",
+    "out/research_next/battery_diagnostics.png": "7ac433531890a26afea5093d991ceba7ca334d4e16dc41fd47eba277d9266010",
+    "out/research_next/battery_diagnostics.svg": "9f2dd01deb5bf9beac56654589e66077cdec6e6fefe26837ca1361c594e49de5",
+    "out/research_next/battery_score_shift.csv": "281f72cb12423fcceb69fdb7328c6a4c3e68c30384a51ed92cab3160dc125f5c",
+    "out/research_next/calibration_stress.csv.gz": "16f1f65b02da523a17f3a502a35a34ed19f707e952b08ccd43be7de3c5ab18d8",
+    "out/research_next/calibration_stress_summary.csv": "e525748184ae733cdab593fa48c9f1720885fb07cbc3348a1131d744ba6ec82e",
+    "out/research_next/catc_changes.csv": "8cd6ecbd9941a4174bcfc35bce95ed235baf9e62bb2220fd7fd81dda7da49cc3",
+    "out/research_next/cost_matrix_stress.csv": "40f14f60c608ef427fd29116851002145737336792ac1d3072cc997a87a7ebf7",
+    "out/research_next/effects_table.md": "b1ec7de995abd31e77fd063ee965fe322a9d53c8bb23b9b0464b277eb771615a",
+    "out/research_next/fold_effects.csv": "8fbf6110df2304881549faf43caa773055be3e10662834b05194e0ce08845692",
+    "out/research_next/fold_effects_summary.csv": "0b5d28add6ca924c45e3d52a67010216d31d2d15fb5b9dac5456528cdce6003f",
+    "out/research_next/fragility_table.md": "443a543da22ab034e537bfcc83791c1475b3e2ac1a94900b984746ce5d6670c1",
+    "out/research_next/frozen_output_inventory.csv": "6300c11d5981a07299272ed836a0ff0f85debc3d56178a9c716a45b0591bd8f4",
+    "out/research_next/lobo_paired_validation.csv": "5da1b008080df7a54191252084b8f79761371a3709d7e5f0821acf7ad9df7d9b",
+    "out/research_next/noise_stress_summary.csv": "3a68d84fa9ad3d0956f844dbc0b1c2df1b6bd06bf366d8952f8cc74df9dcca7f",
+    "out/research_next/paired_effects.csv": "26877c31d14bebc39e721762b423013396cba3f7c4667337252b8070fe8d58aa",
+    "out/research_next/policy_cells.csv": "bfc349e1b3a3d7477bf9a70e50c0c4c2fae359f9dcab713250267fb6c1af4c60",
+    "out/research_next/protected_before.json": "335fad866aae67120ae608e0339470cca65866837056351d7a4adb2af228d5ee",
+    "out/research_next/reconstruct_0.log": "29805a4912e6cefd3cc5db82ba379685aadbbf0d8c8834782a8cc2a309446d6f",
+    "out/research_next/reconstruct_1.log": "082938150e01a622fb3d7ce509d4aa9927f47f7890b72e089c083b1cbe362cdf",
+    "out/research_next/score_shift.csv": "f3c2d560d9c85805132c7758cb7ec16f58c125a9c71317153d69e62031d83e1b",
+    "out/research_next/score_stress_table.md": "3ad378531b69d9e65ae9372f549e1a39ae3709a00790429df3cd838df9f85e16",
+    "out/research_next/setting_confound.csv": "3319b0b55f176658d76fa0e89abdcd342e3db51e16620fd5e129f6a0f8a5972d",
+    "out/research_next/source_inventory.csv": "dcfea3595e2a34cbe1d20dd09a1156e38ee99c53ae84625f2ddaf8cdcdf0c8cc",
+    "out/research_next/source_symbols.json": "b024c76d5d64c0a7019d68432c0d98a1a12558dd60544216c51995115c5616e3",
+    "out/research_next/stress.log": "c454460fb93e0976046353e7e96d987a0fdc1a777e770e0dc5a212eeebdc00d7",
+    "out/research_next/target_label_reference.csv": "fc097475d5af7987d6c237eb00f33463faf5eded953ed348a4142e112392fd1e",
+    "out/research_next/target_label_reference_summary.csv": "e603b374bd0e9318be11a999b2a993da95454c2663ac512b2788b526a5f0d41b",
+    "out/research_next/unit_tests.log": "a6a4506e8d09fa9e609934faaab3c9964e4da7860d50af95349a9ae0505d18dd",
+    "out/research_next/win_tie_loss.csv": "15e5a47a0f4281400692779d1e35875514682eacaf4514cd4a50cd1eb2807161"
+  }
+}

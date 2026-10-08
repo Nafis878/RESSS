@@ -1,0 +1,28 @@
+{
+  "checks": {
+    "ten_test_groups_pass": true,
+    "1000_stored_full_clock_cases": true,
+    "independent_full_clock_values_recomputed": true,
+    "all_integer_witness_values_feasible": true,
+    "all_pair_intervals_valid": true,
+    "200_independent_families_recomputed": true,
+    "stored_family_selection_factors_valid": true,
+    "200_continuous_phase_oracles_recomputed": true,
+    "continuous_intervals_and_limits_labeled": true,
+    "all_304_engineering_scenarios_present": true,
+    "208_nontrivial_and_96_single_age_cohorts": true,
+    "all_engineering_exact_decision_certificates_valid": true,
+    "engineering_negative_results_retained": true,
+    "engineering_scenarios_labeled_not_measured": true,
+    "90_tolerance_cases_with_valid_bounds": true,
+    "nonzero_approximation_losses_exercised": true,
+    "initial_algorithm_and_evidence_preserved": true,
+    "seven_page_attributed_manuscript": true,
+    "complete_theorem_and_negative_results_in_pdf": true,
+    "pdf_no_text_outside_page": true,
+    "all_final_pages_visually_reviewed": true,
+    "974_prior_artifacts_unchanged": true
+  },
+  "passed": 22,
+  "novelty_verdict": "B"
+}

@@ -1,0 +1,6 @@
+ds,protocol,P1_cls_opt_mid_vs_P1_cls_q,P1_res_opt_mid_vs_P1_res_q,STW_cost_vs_STW_cost_1se,verdict
+fd001,cv,4 vs 3,0 vs 0,4 vs 0,weakened
+fd001,rs,12 vs 20,4 vs 4,44 vs 12,weakened (descriptive)
+fd002,cv,4 vs 4,0 vs 0,12 vs 0,weakened
+fd003,cv,0 vs 3,0 vs 4,4 vs 0,weakened
+fd004,cv,4 vs 9,4 vs 7,4 vs 4,weakened

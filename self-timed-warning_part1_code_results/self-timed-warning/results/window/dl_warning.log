@@ -1,0 +1,12 @@
+fold 1 done in 7237s
+fold 2 done in 2469s
+fold 3 done in 1763s
+fold 4 done in 1933s
+fold 5 done in 2140s
+H   method
+10  cnn15     179/218 = 82.1%
+    lstm15    201/218 = 92.2%
+    tf15      206/218 = 94.5%
+20  cnn15     172/218 = 78.9%
+    lstm15    176/218 = 80.7%
+    tf15      201/218 = 92.2%

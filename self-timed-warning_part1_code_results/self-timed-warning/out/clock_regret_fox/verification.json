@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-08",
+  "checks": {
+    "958_prior_artifacts_unchanged": true,
+    "supplied_source_unchanged": true,
+    "all_five_journal_pages_rendered": true,
+    "known_cohort_exact_scores": true,
+    "known_cohort_selects_preventive_age_8": true,
+    "fox_exponential_discount_identity": true,
+    "heterogeneous_interior_full_enumeration": true,
+    "heterogeneous_endpoints_are_strictly_insufficient": true,
+    "updated_manuscript_closes_only_fox_gap": true,
+    "prior_artifacts_unchanged_after_addendum": true
+  },
+  "passed": 10,
+  "source_visual_inspection": "All relevant journal pages 533-537 inspected; article is scanned.",
+  "fox_full_text_gap_closed": true,
+  "remaining_identified_full_manuscript_gaps": 1,
+  "novelty_verdict": "B",
+  "historical_priority_established": false,
+  "public_disclosure_created": false
+}

@@ -1,0 +1,7 @@
+Dataset,Versus window,Versus plain,Versus 1-SE,Versus age
+PHM08,"mixed (0 wins, 1 losses)","mixed (0 wins, 0 losses)","loses (0 wins, 8 losses)","beats (14 wins, 0 losses)"
+FD001,"mixed (10 wins, 1 losses)","mixed (0 wins, 4 losses)","mixed (5 wins, 0 losses)","beats (14 wins, 0 losses)"
+FD002,"mixed (6 wins, 0 losses)","mixed (0 wins, 0 losses)","mixed (4 wins, 3 losses)","beats (13 wins, 0 losses)"
+FD003,"beats (8 wins, 0 losses)","loses (0 wins, 16 losses)","mixed (4 wins, 0 losses)","beats (12 wins, 0 losses)"
+FD004,"beats (8 wins, 0 losses)","mixed (0 wins, 0 losses)","mixed (2 wins, 3 losses)","beats (15 wins, 0 losses)"
+NCMAPSS6,"beats (9 wins, 0 losses)","mixed (0 wins, 6 losses)","mixed (2 wins, 3 losses)","beats (10 wins, 0 losses)"

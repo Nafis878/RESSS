@@ -1,0 +1,19 @@
+{
+  "protected_artifacts_unchanged": 858,
+  "initial_protected_count": 858,
+  "replay_cohorts": 2704,
+  "pairwise_optima_reproduced": 39448,
+  "independent_timing_inputs": 84,
+  "repeated_timings_per_input": 3,
+  "timing_family": 7,
+  "diagnostic_generic_state_comparisons": 120,
+  "scientific_priority_established": false,
+  "population_performance_changed": false,
+  "elapsed_seconds": 32.4690000000046,
+  "environment": {
+    "python": "3.12.4",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2"
+  }
+}

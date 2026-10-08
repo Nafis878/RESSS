@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-08",
+  "protected_artifacts_unchanged": 958,
+  "fox_gap_closed": true,
+  "novelty_verdict": "B",
+  "checks_passed": 10,
+  "sha256": {
+    "clock_regret_fox/LITERATURE.md": "8ff7c9999fd4d0ef41b9b1f39e434aad7fc108e0e3683c0c20a250a8f69d6537",
+    "clock_regret_fox/MANUSCRIPT.md": "1db586c500f2a74bbdcffa621240cf6143a6a5b1eb918f4cb931a57d09408a01",
+    "clock_regret_fox/run.py": "2525dd8c19c3532915d48075e96895bb66c4e90de692941c26cff5a5831124d3",
+    "out/clock_regret_fox/comparison_examples.json": "613d2a5676ce0e3f63e08a4a1c727a0d2c37652ced43e218238febebd7a1932e",
+    "out/clock_regret_fox/protected_before.json": "468ccd0732fae3d09ccc2c50de886aa9b117078417caa5f6b7d28673b560a65c",
+    "out/clock_regret_fox/source.txt": "278a372a09c37702071d260742187b293404a5718973ec9710b4dff1a37bcd96",
+    "out/clock_regret_fox/source_qa/page-1.png": "17ec1f3e628f556d32e798c60e587307e6a13e76f9a0ec49afb806f3ac309333",
+    "out/clock_regret_fox/source_qa/page-2.png": "fa86a1668ef325da65b306c841d9e33aa645b5486cd8697f7fe38cdced1c49db",
+    "out/clock_regret_fox/source_qa/page-3.png": "ab35799e72daefaa3ba0a90aa2f6b57e619f5f9c1a47a1e4889bc181589f43cf",
+    "out/clock_regret_fox/source_qa/page-4.png": "c06155710f49078f1c85c5e18808161fdbce46404b0cf2762d06cc88fed3d830",
+    "out/clock_regret_fox/source_qa/page-5.png": "99a8a516c0691171c87f24ecb1f3a12903e348dd3013696e45ad3398a6e51342",
+    "out/clock_regret_fox/source_qa/page-6.png": "8bc24ec3e36b926d789d4eb88d423351a23982517ab19b226976db1fa3d44af5",
+    "out/clock_regret_fox/source_qa/page-7.png": "36c1e9f5fb8485f9b77640bd3a0569acf451fff597e2eea93543aca1ed9ad94e",
+    "out/clock_regret_fox/source_record.json": "6152369567aed7cc0c058d06840398c26cff9ff38b0f9dcd9de0de1da400acf4",
+    "out/clock_regret_fox/verification.json": "8f141983168a196a43b8f0181dc3ef5fc4277f8e6c704cee62684d825fac4c06"
+  }
+}

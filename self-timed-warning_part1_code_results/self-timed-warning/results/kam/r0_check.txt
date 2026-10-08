@@ -1,0 +1,7 @@
+PASS  fd001_cv_table.csv: 126 rows; largest absolute difference 0.00e+00
+PASS  fd001_cv_pairs.csv: 210 rows; largest absolute difference 0.00e+00
+PASS  fd001_rs_policies.csv: 126 rows; largest absolute difference 0.00e+00
+PASS  fd001_rs_pairs.csv: 168 rows; largest absolute difference 0.00e+00
+PASS  fd001_rs_policies_by_split.csv: 3780 rows; largest absolute difference 0.00e+00
+PASS  fd001_thresholds.csv: 28 rows; largest absolute difference 0.00e+00
+PASS  fd001_bins_summary.csv: 12 rows; largest absolute difference 0.00e+00

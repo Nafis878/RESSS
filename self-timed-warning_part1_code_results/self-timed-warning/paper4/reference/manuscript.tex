@@ -1,0 +1,575 @@
+\documentclass[a4paper,fleqn,doubleblind]{cas-dc}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{charter}
+\renewcommand{\sfdefault}{bch}
+\usepackage{textcomp}
+\usepackage{amsmath,amssymb}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{graphicx,booktabs,array,enumitem}
+\usepackage{xurl}
+\urlstyle{same}
+\usepackage[switch]{lineno}
+\usepackage[expansion=false]{microtype}
+\def\tsc#1{\csdef{#1}{\textsc{\lowercase{#1}}\xspace}}
+\renewcommand{\linenumberfont}{\normalfont\tiny\color{gray}}
+\setlength{\bibsep}{1pt}
+\renewcommand{\figurename}{Fig.}
+\begin{document}
+\let\WriteBookmarks\relax
+\let\printorcid\relax
+\def\floatpagepagefraction{1}
+\def\textpagefraction{.001}
+\shorttitle{Evaluating end-of-life alarms}
+\shortauthors{Anonymized manuscript}
+\title [mode = title]{Evaluating end-of-life alarms: observation time, alarm timing, maintenance cost and transfer}
+\begin{abstract}
+Remaining-useful-life models are usually scored at evaluator-chosen times, whereas replacement is triggered once, by an alarm. On eight run-to-failure datasets we separate long-range prediction, near-failure estimation, alarm timing and maintenance cost for single end-of-life alarms scored by an asymmetric acceptance window. On PHM08, with matched training data and cross-fitted calibration, one fixed-time model placed 24.8\% of estimates in the window at half of life and 85.3\% at 90\% of life; a self-timed recipe reached 91.7\%, no more than its regressor at 90\% of life. A constant estimate at the recipe's alarm times scored within 3.6 points of the model's estimate, so the window mainly rewards timing; it also conceals the notice given. In a renewal--reward model, window-tuned alarms were cheaper than age replacement on five of six engine datasets, but direct cost tuning was better on some datasets and worse on others. In post hoc analyses of battery cells with fully nested preprocessing, the recipe was correct for 95.1\% of cells within batches and 79.7\% with a batch held out, where a capacity-trend baseline reached 98.4\%; in a separate cost analysis the trend was significantly cheaper. The recipe reached 68.7\% on N-CMAPSS and failed on bearings (0 of 17).
+\end{abstract}
+\begin{keywords}
+Remaining useful life \sep
+Predictive maintenance \sep
+Alarm timing \sep
+Renewal--reward model \sep
+Model evaluation \sep
+Distribution shift \sep
+Lithium-ion battery
+\end{keywords}
+\maketitle
+\linenumbers
+\section{Introduction}\label{sec:1}
+
+Data-driven prognostics estimates the remaining useful life (RUL) of a component from its condition-monitoring history \cite{lei2018,si2011}. On the standard turbofan benchmarks, estimates are usually scored at evaluator-chosen times: the last cycle of truncated test trajectories, every cycle, or fixed fractions of life \cite{ramasso2014}. A replacement decision, however, is taken once, at a time the decision rule itself chooses. Four quantities that are easily conflated then need to be kept apart. \textbf{Long-range prediction} is the accuracy of an estimate made far from failure. \textbf{Near-failure estimation} is its accuracy when little life is left. \textbf{Alarm timing} is the distribution of the remaining life at the moment the policy acts. \textbf{Maintenance-policy performance} is the long-run cost of the replacements and failures that the alarms produce. A good result on one does not imply a good result on another, and a single score can mix several of them.
+
+This paper studies one operational score that mixes them: an asymmetric acceptance window for a single end-of-life alarm. An alarm is accepted if the true remaining life at the alarm lies between 2 cycles below and 13 cycles above the reported estimate, so that late alarms are tolerated far less than early ones. A policy observes each unit cycle by cycle, stays silent while the unit looks healthy, raises one alarm with a remaining-life estimate, and is scored at that alarm; a unit that fails without an alarm counts as late. Alarm-based maintenance is established. de Pater et al. \cite{depater2022} trigger maintenance scheduling from alarms on probabilistic RUL prognostics, and Kamariotis et al. \cite{kamariotis2024} evaluate prognostic algorithms, and tune the policies built on them, by the increase in long-run maintenance cost that they induce relative to perfect prognostics. What is less understood is what a window score of this kind actually rewards, and whether optimising it yields good maintenance decisions.
+
+We use a deliberately simple recipe built from standard parts: a gradient-boosted regressor with a capped target and a smoothed, shifted and debounced threshold trigger, all selected by nested cross-validation. The recipe is a vehicle for the evaluation, not its contribution. The experiments answer four questions:
+
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item[(Q1)] How do long-range prediction, near-failure estimation, alarm timing and maintenance-policy performance differ, and how much of an apparent advantage of a self-timed alarm over fixed-time prediction is due to each, when training data and calibration information are matched?
+\item[(Q2)] What does the asymmetric alarm window reward, and what can its score conceal?
+\item[(Q3)] When does optimising window accuracy produce useful maintenance policies, and when does direct cost optimisation perform better?
+\item[(Q4)] What happens when evaluation moves from validation within familiar conditions to a held-out test batch or to a different asset type?
+\end{itemize}
+
+The contributions are the answers to these questions on eight run-to-failure datasets, together with the evaluation protocol that produces them:
+
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item[(i)] A decomposition of the fixed-time versus self-timed contrast on PHM08 under matched training data and cross-fitted calibration. It separates the observation time, the calibration, the target and feature design and the trigger, and shows that most of the contrast is due to the observation time, with a smaller contribution from target and feature design, and not to self-timing.
+\item[(ii)] Evidence that the window score is chiefly a measure of alarm timing. A constant estimate at the same alarm times scored within a few percentage points of the model's own estimate on each of the seven datasets on which it was run; a health-indicator threshold alarm scored far lower; and the score conceals the notice actually given.
+\item[(iii)] A per-dataset cost comparison under identical information. Alarms tuned to the window, with only the warning level chosen by cost, are compared with alarms tuned directly to cost (plain, regularised and quantile-based), with health-indicator and capacity baselines and with optimal age replacement.
+\item[(iv)] A generalisation analysis with a common physical task and fully nested preprocessing. It covers lithium-ion cells under cross-validation and with a whole test batch held out, alongside N-CMAPSS engines and rolling bearings, whose protocols were fixed in advance, and it reports where the recipe fails and where a simple physically motivated baseline is better.
+\end{itemize}
+
+We claim no new alarm rule, no new metric and no deployment readiness. The recipe is retrained on each dataset, and no frozen model is transferred between asset types. All data come from simulations or laboratory tests. Section 2 reviews related work and positions the study; Section 3 defines the task, the four quantities and the cost model; Section 4 describes the recipe and the policies compared; Section 5 gives the experimental design and the status of each analysis; Section 6 reports results by question; Section 7 discusses them; Section 8 outlines future work; and Section 9 concludes.
+
+\section{Related work}\label{sec:2}
+
+\subsection{Remaining-life prediction and its evaluation}
+
+The C-MAPSS simulations and the PHM08 challenge data \cite{saxena2008} are the standard engine benchmarks. The three winning PHM08 approaches were a similarity-based method \cite{wang2008}, a recurrent network \cite{heimes2008} and an ensemble of neural networks filtered by a Kalman filter \cite{peel2008}. Later work moved to long short-term memory \cite{zheng2017} and convolutional networks \cite{li2018}, usually with a remaining-life target capped near 125 cycles. N-CMAPSS adds realistic flight profiles \cite{ariaschao2021}. On tabular inputs, tree ensembles remain strong \cite{grinsztajn2022,friedman2001}. Severson et al. \cite{severson2019} cycled commercial lithium-ion cells to failure, and the PRONOSTIA platform produced run-to-failure vibration records of rolling bearings \cite{nectoux2012}. Ramasso and Saxena \cite{ramasso2014} showed how strongly reported scores depend on the choice of cut-off points and metrics. Saxena et al. \cite{saxena2010} introduced metrics that follow a prediction over time, such as the prognostic horizon and $\alpha$--$\lambda$ accuracy, and asymmetric losses that penalise late predictions are common \cite{rengasamy2020}.
+
+\subsection{From prognostics to maintenance decisions}
+
+Age replacement, which uses no condition information, is the classical benchmark for any condition-based policy \cite{barlow1960,dejonge2020}. Degradation models with Bayesian updating yield residual-life distributions \cite{gebraeel2005}, and dynamic predictive-maintenance frameworks act on predicted failure probabilities \cite{nguyen2019,mitici2023} or learn policies from probabilistic prognostics by reinforcement learning \cite{lee2023}. de Pater et al. \cite{depater2022} propose a fleet-level scheduling framework for aircraft in which periodically updated RUL prognostics of a convolutional network trigger alarms, maintenance is scheduled only after an alarm, a safety factor guards against prognostic error, and an integer linear program assigns aircraft to maintenance slots. Kamariotis et al. \cite{kamariotis2024} propose a metric that assesses data-driven prognostic algorithms by their effect on downstream predictive-maintenance decisions: the relative increase in long-run expected maintenance cost per unit time, under a given decision setting and policy, compared with perfect prognostics, estimated from run-to-failure data. They use it to compare algorithms, to optimise the parameters of heuristic maintenance policies and to tune algorithm hyperparameters. Xie et al. \cite{xie2025}, in a preprint, train the prognostic model itself against downstream maintenance cost on simulated turbofan (C-MAPSS) data.
+
+\subsection{Position of this study}
+
+The present study differs from these in what is evaluated. de Pater et al. \cite{depater2022} design an alarm-triggered scheduling system and evaluate its fleet cost; we take the alarm rule as given and ask what a common acceptance criterion for single alarms measures. Kamariotis et al. \cite{kamariotis2024} recommend scoring prognostics by decision cost; we use their kind of cost evaluation to test whether tuning to an operational window is an adequate substitute for tuning to cost, and we find that it is not in general. Neither of those studies is designed to separate observation time, calibration, target design and alarm timing under matched training data, or to examine what happens to window accuracy and cost when a whole test batch is held out. Because such comparisons are easily biased by model selection on evaluation data \cite{varma2006} and by leakage \cite{kapoor2023}, every setting here is selected on training units only. Three datasets were analysed under protocols fixed in advance \cite{nosek2018}, with the limitations stated in Section 5.3.
+
+\section{Problem formulation}\label{sec:3}
+
+\subsection{First-warning task}
+
+A unit \textit{i} is observed at cycles \textit{t} = 1, \ldots{}, \textit{L}\textsubscript{i}, where \textit{L}\textsubscript{i} is its life, unknown in service. The true remaining life at cycle \textit{t} is \textit{r}\textsubscript{t} = \textit{L}\textsubscript{i} \textminus{} \textit{t}. A warning policy maps the history up to \textit{t} to either \textit{silent} or \textit{warn}, together with an estimate $\hat{y}$\textsubscript{t}. The first-warning time is
+
+\begin{equation}
+t^{*} = \min\{\, t < L_i : \text{the policy warns at } t \,\},
+\end{equation}
+
+and the error of the warning is \textit{e} = $\hat{y}$\textsubscript{t*} \textminus{} \textit{r}\textsubscript{t*}. A warning is \textbf{correct} if \textminus{}13 $\le$ \textit{e} $\le$ +2, that is, exactly when
+
+\begin{equation}
+\hat{y}_{t^*} - 2 \le r_{t^*} \le \hat{y}_{t^*} + 13.
+\end{equation}
+
+It is \textbf{too early} if \textit{e} < \textminus{}13 and \textbf{too late} if \textit{e} > +2; a unit that fails without a warning is \textbf{missed} and counted with the late outcomes. The primary score is the share of units whose first warning is correct (the in-window rate). We also report the late-or-missed and too-early rates, the true remaining life at the alarm (the notice actually given), and the share of alarms raised with \textit{r}\textsubscript{t*} $\ge$ 13. Only those alarms can be too early, unless the estimate is negative, so a policy that warned only in the last few cycles would meet the window trivially. The window was fixed by an operator's requirement before this study; its early limit coincides with the early constant of the PHM08 score \cite{saxena2008}, and its late limit is much stricter than that score's late constant of 10.
+
+The warning level \textit{H} expresses how much notice is wanted: the policy warns when it believes that about \textit{H} cycles are left. \textit{H} = 20 is the primary level, designated on PHM08 as the smallest of \{10, 15, 20, 30, 40\} at which more than 90\% of alarms were raised with at least 13 cycles left (Section 5.3).
+
+\subsection{Four quantities, and when evaluation leaks}
+
+We separate (1) \textbf{long-range prediction}, the accuracy of $\hat{y}$\textsubscript{t} at times chosen independently of the policy, for example a fixed fraction of life; (2) \textbf{near-failure estimation}, the accuracy of $\hat{y}$\textsubscript{t} when \textit{r}\textsubscript{t} is small, for example at the cycle where \textit{r}\textsubscript{t} = \textit{H}; (3) \textbf{alarm timing}, the distribution of \textit{r}\textsubscript{t*} produced by the policy; and (4) \textbf{maintenance-policy performance}, the cost rate of Section 3.3. A fixed fraction of life is not known in service, but evaluating a model retrospectively at such a time is not leakage. It would be leakage if the fraction, the life or a rule derived from them were given to the model as an input or used to train or select it; the fixed-time models of Section 6.1 received none of these. Conversely, the first-warning task is not easier merely because the policy chooses its time: the choice must be made from the history alone, and a late or missed alarm is a failure.
+
+\subsection{Maintenance cost}
+
+Alarms are priced in a renewal--reward model \cite{barlow1960}. An alarm at cycle \textit{t}\textsuperscript{*} schedules a planned replacement $\ell$ cycles later. If \textit{r}\textsubscript{t*} > $\ell$ the replacement happens at \textit{t}\textsuperscript{*} + $\ell$ and costs 1; otherwise, or if no alarm is raised, the unit fails at \textit{L} and the failure costs $\rho$. An alarm with exactly $\ell$ cycles left counts as a failure. Units are replaced by new ones, so the long-run cost per cycle is estimated by the total cost divided by the total cycles of use over the test units. We use lead times $\ell$ $\in$ \{0, 5, 10, 15\} cycles for the engines and \{0, 15, 30, 45\} charge--discharge cycles for the batteries, and cost ratios $\rho$ $\in$ \{5, 10, 20, 50\}. The ratios are illustrative, not measured. Optimal age replacement replaces every unit at the age \textit{T} that minimises the cost rate on the training lives; it needs no lead time because the replacement age is known in advance. Perfect foresight (replacement at \textit{L} \textminus{} 1, cost 1) and run-to-failure bound the range, and every cost rate is reported relative to perfect foresight.
+
+\subsection{Physical units}
+
+For the battery and bearing data, whose lives are several times longer in their native units than engine lives, the models work in blocks of $\kappa$ consecutive charge--discharge cycles or vibration snapshots (Section 5.2). The task itself is defined in physical units: a warning level, an acceptance window and lead times in cycles (or snapshots). For the batteries the task is \textit{H} = 60 cycles and the window [\textminus{}39, +6] cycles, the engine task scaled by three; for the bearings it is \textit{H} = 140 snapshots and [\textminus{}91, +14] snapshots. A model with block length $\kappa$ uses the warning level, window, lead times, caps and shifts divided by $\kappa$, so that every acceptance decision, alarm cost and setting has the same meaning in physical units whatever $\kappa$ is; only the smoothing span and the debounce are counted in blocks. Alarms can only be raised at block ends, and the remaining life of a block is that at its last cycle; the remaining life at the alarm and the cycles of use are reported in cycles. Three battery analyses keep the task in blocks of $\kappa$ cycles, with $\kappa$ from the outer training cells (window [\textminus{}13, +2] blocks, warning levels in blocks): the timing controls and the shift study (Section 6.2) and the window-tuned policies of the cost analysis (Sections 6.3 and 6.4). Their lead times, costs and cycles of use are nevertheless in cycles, and the cost-tuned policies do not use the window. We write ``unit'' for an engine, cell or bearing.
+
+\section{The recipe and the policies compared}\label{sec:4}
+
+Fig. 1 shows the self-timed warning (STW) recipe. Its online part runs at every cycle of a unit in service; its offline part fixes four settings $\theta$ = (\textit{c}, \textit{m}, \textit{k}, \textit{s}) on training units only.
+
+\begin{figure*}[!tbp]\centering
+\includegraphics[width=\textwidth]{img/Fig1_STW_architecture.png}
+\caption{The self-timed warning (STW) recipe. Online (top): regime-normalised sensors are encoded causally and mapped to an estimate $\hat{y}$\textsubscript{t}, which is smoothed and shifted to $\tilde{y}$\textsubscript{t}; an alarm is raised the first time $\tilde{y}$ stays at or below \textit{H} for \textit{k} cycles. Offline (bottom): $\theta$ = (\textit{c}, \textit{m}, \textit{k}, \textit{s}) is chosen on inner out-of-fold predictions of the training units and frozen; test units are scored once. Inset: the scoring window for \textit{e} = $\tilde{y}$\textsubscript{t*} \textminus{} \textit{r}\textsubscript{t*}.}
+\end{figure*}
+
+\textbf{Normalisation and features.} Each sensor is z-scored within its operating regime with statistics of the training units, and sensors that are constant within any regime are dropped (15 sensors remain on PHM08, FD001 and FD002, 16 on FD003 and FD004; N-CMAPSS uses the six temperature and shaft-speed channels fixed in its protocol). At cycle \textit{t} the encoder uses cycles 1, \ldots{}, \textit{t} only: an early-life baseline (the mean of the first min(20, \textit{t}) cycles), exponentially weighted means with spans 10 and 30 of the baseline-removed signals, least-squares slopes over the last 15 and 40 cycles, and the age \textit{t} (Supplementary Section S4 checks causality).
+
+\textbf{Regressor.} A histogram gradient-boosted regressor \cite{pedregosa2011} with absolute-error loss (500 iterations, learning rate 0.05, 31 leaves, at least 40 samples per leaf, seed 0) is trained on all cycles of the training units with the target
+
+\begin{equation}
+y_t = \min( r_t, c ), \qquad c \in \{40, 60, 90\}.
+\end{equation}
+
+Capping the target is standard \cite{heimes2008}; a low cap concentrates the loss on the last \textit{c} cycles, where the alarm is raised.
+
+\textbf{Trigger.} The estimate is smoothed causally and shifted, $\tilde{y}$\textsubscript{t} = EWM\textsubscript{m}($\hat{y}$)\textsubscript{t} + \textit{s}, with span \textit{m} $\in$ \{1, 3, 6\} (\textit{m} = 1: no smoothing) and \textit{s} $\in$ \{\textminus{}12, \textminus{}11.5, \ldots{}, +8\}, and the alarm is raised at
+
+\begin{equation}
+t^{*} = \min\{\, t : \tilde{y}_{\tau} \le H \ \text{for all}\ \tau = t-k+1, \ldots, t \,\},
+\end{equation}
+
+with debounce \textit{k} $\in$ \{1, 2, 3, 5\}; the reported estimate is $\tilde{y}$\textsubscript{t*}.
+
+\textbf{Nested selection.} The training units of each outer fold are split into five inner folds. Regressors fitted on four inner folds, which also supply the normalisation statistics, predict every cycle of the fifth, giving out-of-fold predictions for all training units. For each \textit{H}, the grid (caps with \textit{c} $\ge$ \textit{H} + 20, three spans, four debounce values and 41 shifts) is searched for the setting with the most correct out-of-fold first warnings; ties go to the smaller |\textit{s}|. The regressor is then refitted on all training units, $\theta$ is frozen, and each test unit is processed once. Supplementary Section S13 lists every setting.
+
+\subsection{The role of the shift}
+
+Let $\varepsilon$ = EWM\textsubscript{m}($\hat{y}$)\textsubscript{t*} \textminus{} \textit{r}\textsubscript{t*} be the unshifted error at the alarm, so that \textit{e} = $\varepsilon$ + \textit{s}, and write the window as [\textit{a}, \textit{b}] = [\textminus{}13, +2], of width \textit{w} = 15. The following elementary result explains why a negative shift helps. It is stated for a \textbf{fixed} error distribution.
+
+\textbf{Proposition 1.} Let $\varepsilon$ have a continuous distribution \textit{F} that does not depend on \textit{s} (assumption A1). Then the probability that \textit{e} = $\varepsilon$ + \textit{s} lies in [\textit{a}, \textit{b}] is
+
+\begin{equation}
+P(s) = F(b - s) - F(a - s).
+\end{equation}
+
+(i) \textit{P}(\textit{s}) $\le$ \textit{C}\textsubscript{w}(\textit{F}) = sup\textsubscript{x} [\textit{F}(\textit{x} + \textit{w}) \textminus{} \textit{F}(\textit{x})] for every \textit{s}. (ii) If \textit{F} has a density that is unimodal and symmetric about its median \textit{m}, \textit{P}(\textit{s}) is maximised at
+
+\begin{equation}
+s^{*} = (a + b)/2 - m = -5.5 - m,
+\end{equation}
+
+with maximum Pr(|$\varepsilon$ \textminus{} \textit{m}| $\le$ 7.5). The proof is in Supplementary Section S2.
+
+The result implies that an unbiased estimator should be shifted by about \textminus{}5.5 cycles, because the window is centred at \textminus{}5.5. It is \textbf{not} a guarantee for the sequential policy: changing \textit{s} changes the stopping time \textit{t}\textsuperscript{*} and therefore the distribution of $\varepsilon$, so in practice \textit{F} depends on \textit{s}. Section 6.2 measures how far the alarm moves when the shift changes and how far the realised rate departs from \textit{P}(\textit{s}).
+
+\subsection{Policies and information sets}
+
+Table 3 lists every policy compared, the information it uses and how its settings are selected. All selection uses training units only: out-of-fold predictions where a regressor is involved, the training series themselves where nothing is fitted. Outer test units are scored once.
+
+\section{Experimental design}\label{sec:5}
+
+\subsection{Data}
+
+\begin{table*}[!tbp]
+\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Datasets. Life: cycles (battery: charge--discharge cycles; bearings: vibration snapshots) to failure of the run-to-failure units. Time unit: the unit in which the models work; $\kappa$ is computed from training units only (Section 5.2).}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1717\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0997\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1053\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1662\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1053\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1717\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1801\linewidth-2\tabcolsep\relax}@{}}
+\toprule
+Dataset & Units & Rows & Life, min--max (median) & Regimes & Time unit of the model & Status (Table 2) \\
+\midrule
+PHM08 & 218 & 45,918 & 128--357 (209.5) & 6 & cycle & development \\
+FD001 & 100 & 20,631 & 128--362 (199) & 1 & cycle & additional evaluation \\
+FD002 & 260 & 53,759 & 128--378 (199) & 6 & cycle & additional evaluation \\
+FD003 & 100 & 24,720 & 145--525 (220.5) & 1 & cycle & additional evaluation \\
+FD004 & 249 & 61,249 & 128--543 (234) & 6 & cycle & additional evaluation \\
+N-CMAPSS & 99 & 7,473 & 48--100 (75) & 3 (flight class) & flight cycle & pre-specified \\
+Battery \cite{severson2019} & 123 cells & 95,276 & 148--1935 (731) & 1 & block of $\kappa$ cycles ($\kappa$ = 2--6) & pre-specified; time scale corrected \\
+Bearings \cite{nectoux2012} & 17 bearings & 24,889 & 230--2803 (1428) & 3 (load/speed) & block of $\kappa$ snapshots ($\kappa$ $\in$ \{4, 6, 7, 9\}) & pre-specified; time scale corrected \\
+\bottomrule
+\end{tabular}\par\vspace{3pt}{\raggedright\scriptsize C-MAPSS and PHM08: training sets only (complete trajectories); the truncated official test sets are not used. N-CMAPSS: one row per engine and flight (mean of the 1 Hz signals), 99 engines of nine subsets. Battery: 123 of 140 cell records after exclusions fixed before any model was run (split tests, censored cells and two records without an official life; Supplementary Section S5); life = first cycle below 80\% of the nominal 1.1 Ah. Bearings: one row per 0.1-s snapshot recorded every 10 s; eight features per snapshot. PHM08, FD001--FD004 and N-CMAPSS come from one simulator family (C-MAPSS).\par}
+\end{table*}
+
+We use the 218 run-to-failure engines of PHM08, the training sets of C-MAPSS FD001--FD004 \cite{saxena2008}, and N-CMAPSS reduced to one row per engine and flight \cite{ariaschao2021}. The battery data are commercial LFP/graphite cells (A123 APR18650M1A, 1.1 Ah) cycled to failure under 66 fast-charging protocols in three batches that also differ in their rest periods \cite{severson2019}. The model sees seven per-cycle quantities (discharge and charge capacity, internal resistance, average, minimum and maximum temperature, charge time), z-scored as one regime as fixed in the protocol. The bearing data are the 17 complete records of the PRONOSTIA platform under three load and speed conditions \cite{nectoux2012}, reduced to root mean square, peak, kurtosis and crest factor of the horizontal and vertical acceleration of each snapshot.
+
+\subsection{Time scale of the battery and bearing data}
+
+The protocols aggregated consecutive cycles or snapshots into blocks of $\kappa$ = max(1, round(median life / 209.5)), 209.5 cycles being the median PHM08 life, so that the grids designed for engine lives could be reused unchanged. As executed under the protocols, the median was taken over all units of a dataset, including those later used as test units, so held-out lives could influence the time scale; for the batteries the all-cell median (731 cycles) lies just below the boundary between $\kappa$ = 3 and $\kappa$ = 4 (733.25 cycles). We report those protocol results for provenance and base every interpretation on training-only time scales. The history of the correction, including an intermediate analysis in which inner folds inherited the outer training set's $\kappa$, is in the correction note (Supplementary Section S16).
+
+\textbf{Fully nested preprocessing (batteries).} The battery task is defined in physical units (Section 3.4). Within each outer training set, every inner training subset builds its own blocks, its own z-score statistics and its own regressor, with $\kappa$ computed from that subset only. Its inner validation cells are scored in their own blocks against the same physical window, so the out-of-fold counts of the five inner folds can be summed per setting even when their $\kappa$ differ. After selection, blocks, statistics and regressor are rebuilt from the complete outer training set, with $\kappa$ from that set, and the outer test cells are scored once. This is done under cross-validation by cell (five folds, seed 2026) and with each of the three batches held out in turn. Three ways of choosing $\kappa$ are reported:
+
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item \textbf{rule, nested}: $\kappa$ by the protocol rule computed from each training subset (inner subsets for selection, the outer training set for the final model);
+\item \textbf{selected by inner cross-validation}: $\kappa$ $\in$ \{2, \ldots{}, 6\} with the largest summed out-of-fold count (ties to the outer rule value, then to the smaller $\kappa$);
+\item \textbf{fixed}: each $\kappa$ $\in$ \{2, \ldots{}, 6\} in turn, as a sensitivity analysis.
+\end{itemize}
+
+No failure life outside a training subset enters its time scale or its selection, so neither the outer test estimates nor the inner selections use held-out lives. \textbf{Bearings.} The bearing analyses use $\kappa$ from the outer training set (inner folds inherit it), and a sensitivity analysis holds the physical task fixed for $\kappa$ $\in$ \{3, 5, 7, 10, 14\}. Inheriting $\kappa$ can influence which settings are selected, but not the outer test estimate. We did not repeat the bearing analysis with full nesting, because every variant run gave at most one correct alarm in 17. The battery cost analysis (Tables 7 and 9) also uses $\kappa$ from the outer training set, inherited by the inner folds; its window-tuned policies select their settings with the task in blocks (Section 3.4).
+
+\textbf{How an operator would choose $\kappa$.} In service, lives are unknown, but three sources of information are not: the lives of units previously run to failure (the training fleet, as here), design or warranty lives, and the notice that a replacement needs. We therefore regard the task as fixed in physical units and $\kappa$ as a temporal resolution, chosen from historical lives or by cross-validation on them.
+
+\subsection{Development, pre-specified, corrected and exploratory analyses}
+
+\begin{table*}[!tbp]
+\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Status of every analysis. Pre-specified: protocol written and hashed (SHA-256) before the model or a competitor was run on the data; the hashes are held by the authors and were not deposited with a registry.}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.2216\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.4542\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.3242\linewidth-2\tabcolsep\relax}@{}}
+\toprule
+Status & Analyses & What the status means \\
+\midrule
+Development & PHM08 (model, grids, warning levels and primary level \textit{H} = 20) & Choices made while looking at PHM08 results; estimates may be optimistic \\
+Additional evaluation, not pre-specified & C-MAPSS FD001--FD004 (run once with unchanged code) & Code fixed before the run, but \textit{H} = 20 was designated after these results were known \\
+Pre-specified & N-CMAPSS (protocol 2026-09-30), battery (2026-09-30), bearings (2026-10-01): data, time scale rule, model, grids, competitors, splits, levels and hypotheses & Protocol hashed before the analysis; N-CMAPSS had been used earlier for fixed-time prediction \\
+Corrected (post hoc) & Battery and bearing analyses with training-only time scales; fully nested battery analysis with a physical task; $\kappa$ sensitivity & Deviation from the hashed protocols, made after their results were known \\
+Exploratory (post hoc) & Matched fixed-time decomposition; timing controls; health-indicator alarm; battery capacity baselines; identical-protocol competitors and networks with matched inputs; ablation; oracle-timed control; shift study; all cost analyses; other windows; 14-channel N-CMAPSS; theory-guided shift on seen data; thirty random 50-engine test sets; bearing onset diagnosis & Describe the method; not confirmations \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+The model and grids were developed on PHM08 after fixed-time results of several models were known, and the C-MAPSS datasets were then run once with unchanged code. \textit{H} = 20 was designated afterwards by the criterion of Section 3.1 computed on PHM08 (95.4\% of alarms raised with at least 13 cycles left at \textit{H} = 20, against 65.6\% at \textit{H} = 15). Three protocols were then written in sequence, each after the previous result was known. Each fixed the data, the time-scale rule (for aggregated data), the unchanged recipe, two competitors under the same tuning (an age-only regressor and a multilayer perceptron with a Kalman filter, Section 5.4), five-fold cross-validation by unit (seed 2026), and four hypotheses at \textit{H} = 20: in-window rate $\ge$ 85\%; late-or-missed rate $\le$ 10\%; higher in-window rate than age-only and than the MLP with Kalman filter (exact McNemar test, two-sided \textit{p} < 0.05). The bearing protocol added a fifth: that a theory-guided shift rule (STW-T, which sets the median out-of-fold error to the window centre) would be no more than 5 points worse than the standard rule. A hash shows that a protocol has not changed since it was hashed, not when it was hashed; the dates rest on the authors' records and file time stamps. N-CMAPSS had been used earlier in the project for fixed-time prediction with other models, although no warning rule had been fitted to it.
+
+\subsection{Comparisons}
+
+\textbf{Fixed-time versus self-timed (PHM08).} Eleven fixed-time models (Supplementary Section S1) are evaluated under a fit-75\%/calibrate-25\% protocol: trained on 75\% of the training engines of each outer fold, calibrated where applicable on the other 25\%, and scored at 30, 50, 70 and 90\% of each test engine's life. Because the recipe is fitted on all outer training engines, that comparison confounds the training allocation with everything else. The matched comparison therefore uses one cross-fitting procedure for every variant. Inner five-fold out-of-fold predictions of the outer training engines (seed 100 + fold, normalisation from each inner training subset) are used for every calibration or selection step, and the final model is refitted on all outer training engines. Outer test engines never enter fitting, calibration or selection. The variants change one element at a time. The \textbf{observation time} is 50\% or 90\% of life, the cycle with exactly 20 true cycles left (an oracle time that cannot be deployed), or the policy's own alarm. The \textbf{regressor} is either the fixed-time gradient-boosted model (no target cap, features of seven temperature and speed sensors) or the recipe's capped regressor. \textbf{Calibration} is a shift chosen on the out-of-fold errors at the same observation time; the trigger variants choose span, debounce and shift on out-of-fold alarms. A matched 75\%/25\% comparison, in which both the fixed-time model and the recipe are fitted on the same 75\% and calibrated or tuned on the same 25\%, is reported as well.
+
+\textbf{Identical-protocol competitors (PHM08).} In the spirit of the three winning PHM08 approaches we re-implemented a similarity method \cite{wang2008}, an LSTM \cite{heimes2008,zheng2017} and a multilayer perceptron followed by a scalar Kalman filter \cite{peel2008}, and added a convolutional network \cite{li2018}. All were run through the same trigger, each with its warning settings chosen on calibration engines (25\% of each outer training part; seed 7) and the shift grid \textminus{}15 to +10. An LSTM, a CNN and a hybrid Transformer were also given exactly the recipe's inputs and cap set. The re-implementations are not the original code, and only the networks' caps and warning settings were tuned.
+
+\textbf{Timing controls.} A \textit{constant-estimate control} keeps the recipe's alarm times and replaces the reported estimate by one constant per fold, chosen on training out-of-fold alarms; it can show only whether the estimate adds information beyond the alarm time. A \textit{health-indicator threshold alarm} has no remaining-life regressor: a linear health indicator, in the spirit of Wang et al. \cite{wang2008}, is fitted to separate the first 30 from the last five cycles of each training unit, and the alarm is raised when its smoothed value stays above a threshold for \textit{k} cycles, reporting a constant in [\textit{H} \textminus{} 6, \textit{H}].
+
+\textbf{Battery baselines.} Two baselines use the measured discharge capacity directly: a threshold alarm on smoothed block-mean capacity that reports a constant, and a capacity trend that extrapolates a least-squares line through the capacity of the last 30, 60 or 120 cycles to the end-of-life capacity of 0.88 Ah and feeds the extrapolated remaining life to the same trigger. Neither fits a model, so their settings are chosen on the training cells themselves. They are evaluated on the window, on the notice they give and on cost. \textbf{Ablation (PHM08).} Each variant changes one component of the recipe and re-tunes the rest.
+
+\subsection{Policies and their information sets}
+
+\begin{table*}[!tbp]
+\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Policies compared, the signal they act on, the settings they select and the data and criterion used for selection. OOF: out-of-fold predictions of the training units from inner five-fold cross-validation; nothing is selected on test units.}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1883\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1883\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.2105\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.2799\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1329\linewidth-2\tabcolsep\relax}@{}}
+\toprule
+Policy & Signal & Settings selected & Selection data and criterion & Used in \\
+\midrule
+STW, window-tuned & Capped GBM estimate, smoothed and shifted & Cap \textit{c}, span \textit{m}, debounce \textit{k}, shift \textit{s} (per \textit{H}); in the cost analysis also \textit{H} & OOF; most correct first warnings (up to 1,476 settings per \textit{H}); \textit{H} by lowest training cost rate & All \\
+Constant-estimate control & Alarm times of the window-tuned STW & One constant estimate & OOF alarms; most correct & Q2 \\
+Health-indicator alarm & Linear health indicator, smoothed & Span, debounce, threshold (120 quantiles); constant estimate (window)  & OOF; most correct, or lowest training cost rate & Q2, Q3 \\
+STW, cost-tuned (plain, 1-SE, 80th percentile) & Capped GBM estimate, smoothed & \textit{c}, \textit{m}, \textit{k}, threshold $\tau$ $\in$ \{1, \ldots{}, 60\} (2,160 settings) & OOF; lowest training cost rate; 1-SE: largest mean remaining life at the alarm within one bootstrap SE of the minimum; or lowest 80th bootstrap percentile & Q3 \\
+Quantile alarm (plain, 1-SE) & 10\% quantile GBM, smoothed & \textit{m}, \textit{k}, $\tau$ & OOF; as above & Q3 \\
+Capacity threshold (battery) & Block-mean discharge capacity, smoothed & Span, debounce, threshold; constant estimate (window) & Training cells; most correct, or lowest training cost rate (plain, 1-SE) & Q3, Q4 \\
+Capacity trend (battery) & Remaining life from capacity extrapolated to 0.88 Ah & Trend length, span, debounce, shift (window) or threshold $\tau$ (cost) & Training cells; most correct (window), lowest training cost rate (plain, 1-SE), \textit{H} by cost for the window-tuned version & Q3, Q4 \\
+Optimal age replacement & Age & Replacement age \textit{T} & Training lives; lowest cost rate & Q3 \\
+Fixed-time GBM & Uncapped GBM estimate at a fixed observation time & Shift; with the trigger: span, debounce, shift & OOF (cross-fitted) or calibration engines (75/25) & Q1 \\
+Age-only regressor; MLP + Kalman filter & Age; MLP estimate filtered over time & As STW, window-tuned & OOF; most correct first warnings & Q4 (protocols) \\
+\bottomrule
+\end{tabular}\par\vspace{3pt}{\raggedright\scriptsize Lead times and cycles of use of the battery policies are converted with the $\kappa$ of each outer training set. The engine cost results of the window-tuned, cost-tuned, health-indicator and age policies were reproduced unit by unit by a separate rerun that shares the alarm and cost functions.\par}
+\end{table*}
+
+The window-tuned policy uses cost only to choose its warning level among five values; every other setting is chosen by the window count. The cost-tuned policies choose all their settings by the training cost rate. The two grids are of similar size (about 1,500 settings per warning level against 2,160), so the comparison concerns the selection criterion rather than the size of the search.
+
+\subsection{Statistics and what the uncertainty covers}
+
+Proportions carry Clopper--Pearson 95\% intervals \cite{clopper1934}. Paired comparisons of in-window rates use the exact McNemar test \cite{mcnemar1947}. Holm's correction \cite{holm1979} is applied over the seven competitors at each level of the identical-protocol comparison, over the nine ablation variants, and, for the health-indicator alarm, over the seven datasets of the timing-control table. The constant-estimate comparisons are reported unadjusted, since none was significant even before adjustment. The pre-specified hypothesis tests are reported unadjusted, as fixed in the protocols. A non-significant difference is not read as equivalence, because no equivalence margin was specified. Ratios of cost rates carry paired 95\% intervals from 2,000 bootstrap resamples of test units with the fitted policies held fixed. The 16 lead-time and cost-ratio cells of a dataset share the same units and alarms, so they are not independent replications; we report the range of ratios over cells and, descriptively, the number of cells whose interval excludes 1.
+
+These intervals cover the sampling of test units given the fitted policies. They omit the variability from refitting the regressor, from the assignment of units to folds and from the selection of settings. Three results indicate its size. On PHM08, thirty repeated random 50-engine test sets with settings re-selected each time gave a standard deviation of 3.3 percentage points (Supplementary Section S9). On the batteries, changing the time scale ($\kappa$ = 2 to 6) moved the cross-validation rate by up to 3.3 points and the held-out-batch rate by up to 21.1 points. A change of the filling of one missing cycle moved per-split counts by up to three cells (Supplementary Section S5). Four leakage checks were run on PHM08: disjoint outer and inner units, causality of the features, a negative control with permuted lives, and exact reproduction of a refitted fold (Supplementary Section S4).
+
+\section{Results}\label{sec:6}
+
+\subsection{Q1: Long-range prediction, near-failure estimation and alarm timing}
+
+\begin{table*}[!tbp]
+\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Fixed-time and self-timed evaluation on PHM08 under matched training data (218 engines, five-fold cross-validation). Except in the last two rows, every variant is fitted on all outer training engines, and calibration and selection use inner out-of-fold predictions of the training engines only; the last two rows fit on 75\% and calibrate or tune on the other 25\%. Correct: $\hat{y}$ \textminus{} 2 $\le$ \textit{r} $\le$ $\hat{y}$ + 13.}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.2327\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1883\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1662\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1773\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1219\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1137\linewidth-2\tabcolsep\relax}@{}}
+\toprule
+Variant & Observation time & Regressor & Calibration or selection & Correct (\%) & 95\% CI \\
+\midrule
+Fixed-time, half of life & 50\% of life (median 105 cycles left) & Fixed-time GBM & Shift & 54 (24.8) & 19.2--31.1\% \\
+Fixed-time, near failure & 90\% of life (median 21 left) & Fixed-time GBM & Shift & 186 (85.3) & 79.9--89.7\% \\
+Fixed-time, oracle time & 20 true cycles left & Fixed-time GBM & Shift & 184 (84.4) & 78.9--89.0\% \\
+Fixed-time model, self-timed & Own alarm, \textit{H} = 20 & Fixed-time GBM & Span, debounce, shift & 184 (84.4) & 78.9--89.0\% \\
+Recipe regressor, near failure & 90\% of life & Capped GBM (recipe) & Cap, shift & 200 (91.7) & 87.3--95.0\% \\
+Recipe regressor, oracle time & 20 true cycles left & Capped GBM (recipe) & Cap, shift & 196 (89.9) & 85.1--93.6\% \\
+Recipe, self-timed & Own alarm, \textit{H} = 20 & Capped GBM (recipe) & Cap, span, debounce, shift & 200 (91.7) & 87.3--95.0\% \\
+Fit 75\% / calibrate 25\%: fixed-time & 90\% of life & Fixed-time GBM & Shift on 25\% & 177 (81.2) & 75.4--86.2\% \\
+Fit 75\% / tune 25\%: recipe & Own alarm, \textit{H} = 20 & Capped GBM (recipe) & All settings on 25\% & 195 (89.4) & 84.6--93.2\% \\
+\bottomrule
+\end{tabular}\par\vspace{3pt}{\raggedright\scriptsize Fixed-time GBM: no target cap, features of seven temperature and speed sensors. Oracle time: uses the true life and cannot be deployed. Paired exact McNemar tests (only first / only second correct): self-timed vs 90\% of life, recipe 8/8 (\textit{p} = 1.000), fixed-time model 16/18 (\textit{p} = 0.864); recipe vs fixed-time regressor at 90\% of life 27/13 (\textit{p} = 0.038), at 20 cycles left 27/15 (\textit{p} = 0.088); cross-fitted vs 75/25, fixed-time 18/9 (\textit{p} = 0.122), recipe 9/4 (\textit{p} = 0.267).\par}
+\end{table*}
+
+Table 4 and Fig. 2 separate the contributions on PHM08. \textbf{Observation time} dominates. Scored at half of life, where the change of a pooled health signal from its early-life level (median 0.23) is comparable to its cycle-to-cycle noise (0.21), the calibrated fixed-time model placed 24.8\% of estimates in the window. Under the fit-75\%/calibrate-25\% protocol, the best of eleven fixed-time models at half of life, a stacked hybrid whose quantile stacker and shift were learned on the calibration engines, placed 33.5\% (Fig. 2a shows three of them; Supplementary Section S1 lists all eleven). At 90\% of life (median 21 cycles left; at 20 cycles left the health signal has risen to about 1.08) the same model placed 85.3\%. \textbf{Training allocation} mattered less: fitting on 75\% of the training engines and calibrating on the other 25\% gave 81.2\% for the fixed-time model and 89.4\% for the recipe, against 85.3\% and 91.7\% with cross-fitting on all of them, and neither difference was significant.
+
+\textbf{Target and features} made a difference at a fixed observation time. At 90\% of life the recipe's capped regressor placed 91.7\% in the window against 85.3\% for the fixed-time model (27 against 13 discordant engines, \textit{p} = 0.038). At exactly 20 cycles left the figures were 89.9\% against 84.4\% (27 against 15 discordant engines, \textit{p} = 0.088). \textbf{Self-timing} did not add measurable accuracy for either regressor. With the trigger, the fixed-time model reached 84.4\%, its rate at 20 cycles left (17 against 17 discordant engines). The recipe's self-timed first warning reached 91.7\%, the same rate as its regressor scored at 90\% of life (8 against 8 discordant engines, \textit{p} = 1.000). Against the calibrated fixed-time model at 90\% of life the self-timed recipe was higher (26 against 12 discordant engines, \textit{p} = 0.034), but that difference is accounted for by the regressor, not by the timing.
+
+The answer to Q1 on these data is therefore that the contrast between long-range fixed-time prediction (24.8\% at half of life under cross-fitting; 33.5\% for the best of eleven models under the fit-75\%/calibrate-25\% protocol, against 89.4\% for the recipe under that protocol) and the self-timed alarm (91.7\%) is mostly a contrast of observation time, with a further, smaller contribution from target and feature design. What self-timing contributes is not accuracy but usability in service. A fraction of life cannot be observed in service, whereas the alarm reaches near-failure accuracy from the history alone, with no missed engine and a median of 19 cycles of notice. These are paired comparisons on 218 engines of one simulator, and differences of a few points could go undetected.
+
+\begin{figure*}[!tbp]\centering
+\includegraphics[width=\textwidth]{img/Fig2_matched.png}
+\caption{Fixed-time and self-timed evaluation on PHM08 (218 engines, five-fold cross-validation), window [\textminus{}13, +2]. (a) Fixed-time models fitted on 75\% of the outer training engines and scored at fractions of each engine's life, on their raw estimates (dashed) and with a shift chosen on the other 25\% (solid); the median true remaining life at each fraction is in brackets. (b) Matched comparison (Table 4): all variants fitted on all outer training engines with cross-fitted calibration; hatched: oracle observation time (//) or self-timed alarm (dots). Error bars: 95\% Clopper--Pearson intervals.}
+\end{figure*}
+
+\subsection{Q2: What the window score rewards, and what it conceals}
+
+\begin{table*}[!tbp]
+\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{First-warning results of the recipe on the development and additional evaluation datasets (five-fold cross-validation by engine, nested selection of the settings). Correct: $\hat{y}$ \textminus{} 2 $\le$ \textit{r} $\le$ $\hat{y}$ + 13 at the alarm.}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1274\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0554\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1053\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0776\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1274\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0997\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0886\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1746\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}@{}}
+\toprule
+Dataset & \textit{H} & Correct & \% & 95\% CI & Late or missed & Too early & True cycles left at alarm, median (5--95\%) & Alarms with $\ge$ 13 cycles left (\%) \\
+\midrule
+PHM08 & 10 & 210/218 & 96.3 & 92.9--98.4 & 4 & 4 & 10 (5--17) & 21.7 \\
+ & 15 & 205/218 & 94.0 & 90.0--96.8 & 6 & 7 & 15 (8--22) & 65.6 \\
+ & 20 & 200/218 & 91.7 & 87.3--95.0 & 8 & 10 & 19 (13--28) & 95.4 \\
+ & 30 & 182/218 & 83.5 & 77.9--88.2 & 13 & 23 & 30 (20--43) & 100.0 \\
+ & 40 & 173/218 & 79.4 & 73.4--84.5 & 22 & 23 & 38.5 (28--51) & 100.0 \\
+FD001 & 10 & 98/100 & 98.0 & 93.0--99.8 & 2 & 0 & 11 (7--17) & 32.0 \\
+ & 15 & 95/100 & 95.0 & 88.7--98.4 & 4 & 1 & 14 (8--21) & 59.0 \\
+ & 20 & 88/100 & 88.0 & 80.0--93.6 & 4 & 8 & 19 (13--29) & 96.0 \\
+FD002 & 10 & 250/260 & 96.2 & 93.0--98.1 & 5 & 5 & 11 (5--17) & 32.7 \\
+ & 15 & 252/260 & 96.9 & 94.0--98.7 & 4 & 4 & 15 (9--22) & 73.1 \\
+ & 20 & 246/260 & 94.6 & 91.1--97.0 & 7 & 7 & 19 (12--26) & 93.8 \\
+FD003 & 10 & 94/100 & 94.0 & 87.4--97.8 & 5 & 1 & 11 (5--17) & 32.7 \\
+ & 15 & 94/100 & 94.0 & 87.4--97.8 & 4 & 2 & 16 (8--24) & 77.8 \\
+ & 20 & 96/100 & 96.0 & 90.1--98.9 & 1 & 3 & 21 (16--29) & 98.0 \\
+FD004 & 10 & 225/249 & 90.4 & 86.0--93.7 & 7 & 17 & 10 (4--20) & 33.3 \\
+ & 15 & 214/249 & 85.9 & 81.0--90.0 & 18 & 17 & 14 (6--26) & 61.8 \\
+ & 20 & 206/249 & 82.7 & 77.5--87.2 & 17 & 26 & 20 (12--34) & 94.4 \\
+\bottomrule
+\end{tabular}\par\vspace{3pt}{\raggedright\scriptsize Pooled over PHM08 and FD001--FD004: 877/927 (94.6\%) at \textit{H} = 10, 860/927 (92.8\%) at \textit{H} = 15, 836/927 (90.2\%) at \textit{H} = 20. The five datasets come from one simulator, so the pooled rate is not an estimate for unrelated systems.\par}
+\end{table*}
+
+Table 5 gives the first-warning results on the engines. At \textit{H} = 20, 200 of 218 PHM08 engines (91.7\%, 95\% CI 87.3--95.0\%) received a correct first warning; 8 were late, 10 too early and none was missed. The alarm came a median of 19 cycles before failure (5--95\%: 13--28; Fig. 4), and 95.4\% of alarms were raised with at least 13 cycles left, so the early limit was active. On C-MAPSS the rate was 88.0\% on FD001, 94.6\% on FD002, 96.0\% on FD003 and 82.7\% on FD004, which has two fault modes and six regimes; 6 of its 26 too-early alarms came more than 30 cycles early. Pooled over the 927 engines it was 90.2\%. On PHM08, lower warning levels gave higher rates but less notice (96.3\% at \textit{H} = 10), and \textit{H} = 30 and 40 gave 83.5\% and 79.4\%; on FD002 and FD003 the rate did not fall monotonically with \textit{H} (Fig. 3). Over thirty random splits of PHM08 into 168 training and 50 test engines, the rate at \textit{H} = 20 averaged 91.8\% (standard deviation 3.3 points; Supplementary Section S9).
+
+\begin{figure}[!tbp]\centering
+\includegraphics[width=\linewidth]{img/Fig4_level_tradeoff.png}
+\caption{Share of first warnings in the window as a function of the warning level \textit{H} (five-fold cross-validation). Error bars: 95\% Clopper--Pearson intervals for the pre-specified N-CMAPSS analysis.}
+\end{figure}
+
+\begin{table*}[!tbp]
+\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Timing controls at \textit{H} = 20 (five-fold cross-validation): the recipe, the same alarm times with one constant estimate per fold, and a health-indicator threshold alarm without a remaining-life regressor.}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1883\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1496\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1496\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1773\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1662\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1691\linewidth-2\tabcolsep\relax}@{}}
+\toprule
+Dataset & Recipe: correct (\%) & Constant estimate: correct (\%) & Discordant (recipe only / control only); \textit{p} & Health-indicator alarm: correct (\%) & Discordant; \textit{p} (Holm) \\
+\midrule
+PHM08 & 200/218 (91.7) & 200 (91.7) & 7 / 7; 1.000 & 122 (56.0) & 83 / 5; < 0.001 \\
+FD001 & 88/100 (88.0) & 90 (90.0) & 2 / 4; 0.688 & 51 (51.0) & 41 / 4; < 0.001 \\
+FD002 & 246/260 (94.6) & 243 (93.5) & 9 / 6; 0.607 & 142 (54.6) & 105 / 1; < 0.001 \\
+FD003 & 96/100 (96.0) & 94 (94.0) & 4 / 2; 0.688 & 57 (57.0) & 40 / 1; < 0.001 \\
+FD004 & 206/249 (82.7) & 215 (86.3) & 5 / 14; 0.064 & 123 (49.4) & 94 / 11; < 0.001 \\
+N-CMAPSS & 68/99 (68.7) & 70 (70.7) & 7 / 9; 0.804 & 53 (53.5) & 26 / 11; 0.020 \\
+Battery & 118/123 (95.9) & 115 (93.5) & 7 / 4; 0.549 & 67 (54.5) & 54 / 3; < 0.001 \\
+Engines pooled (PHM08, FD001--FD004) & 836/927 (90.2) & 842 (90.8) & 27 / 33; 0.519 & 495 (53.4) & -- \\
+\bottomrule
+\end{tabular}\par\vspace{3pt}{\raggedright\scriptsize Exact McNemar tests. Constant-estimate column: unadjusted \textit{p}; health-indicator column: Holm-adjusted over the seven datasets. Battery: task in blocks with $\kappa$ from the outer training cells (Supplementary Section S10 gives every level).\par}
+\end{table*}
+
+\textbf{Timing, not the reported number.} Because the alarm is raised when the smoothed, shifted estimate first stays below \textit{H}, the reported estimate varies little between units: on PHM08 at \textit{H} = 20 its standard deviation at the alarm was 2.1 cycles (5--95\%: 11.2--18.2), against 4.8 cycles for the true remaining life. Correctness, $\hat{y}$ \textminus{} 2 $\le$ \textit{r} $\le$ $\hat{y}$ + 13, therefore depends mainly on where the alarm falls. For $\hat{y}$ between 11.2 and 18.2 the accepted range of \textit{r} runs from at least 9.2 to at most 31.2 cycles; a fixed band is only an approximation of this condition. In Table 6, the recipe's alarm times with one constant estimate per fold placed 90.8\% of first warnings in the window over the five engine datasets, against 90.2\% with the model's estimate (27 against 33 discordant engines, \textit{p} = 0.519). Per dataset the constant scored between \textminus{}2.4 and +3.6 percentage points relative to the model's estimate: lower on FD002, FD003, Battery, higher on FD001, FD004, N-CMAPSS, equal on PHM08. No difference was significant, but no equivalence margin was tested. Because this control keeps the recipe's alarm times, it shows only that the reported estimate added no detectable information beyond the alarm time; it says nothing about how good those times are.
+
+\textbf{How good the times are} is shown by the health-indicator threshold alarm, which times its alarm on a classical linear health indicator. It placed 49.4--57.0\% of first warnings in the window, significantly fewer than the recipe on each of the seven datasets after Holm's correction (largest adjusted \textit{p} = 0.020, N-CMAPSS), with many alarms too early (64 of 218 on PHM08). What the regressor contributes is a health indicator calibrated in cycles to failure, so that one threshold fires at a similar remaining life on units that degrade at different rates.
+
+\textbf{What the score conceals.} A correct alarm with \textit{H} = 20 means a remaining life of roughly 9 to 31 cycles; the score does not distinguish 10 from 30 cycles of notice, nor say whether the notice suffices for a given lead time. It treats every error inside [\textminus{}13, +2] alike and every error outside it alike, whatever its size, and it is silent about cost. Section 6.4 shows, on the battery cells, a case where the policy with the higher window score gave much less notice, and Section 6.3 shows that window tuning and cost tuning ranked differently by cost on different datasets.
+
+\begin{figure*}[!tbp]\centering
+\includegraphics[width=\textwidth]{img/Fig5_error_leadtime.png}
+\caption{Distribution of (a) the warning error and (b) the true remaining life at the alarm at \textit{H} = 20 for PHM08 (five-fold cross-validation) and N-CMAPSS (pre-specified analysis). Shaded: the window; dotted: 13 cycles, below which the early limit practically cannot bind.}
+\end{figure*}
+
+\textbf{Other regressors and components.} Under an identical fit-75\%/tune-25\% protocol (Supplementary Section S15, Fig. 5a), the recipe placed 89.4\% of PHM08 first warnings in the window at \textit{H} = 20. Re-implemented LSTM, similarity and CNN approaches with their original inputs placed 64.2\%, 63.3\% and 55.5\% (Holm-adjusted \textit{p} < 0.001 at \textit{H} = 10 and 20). The MLP with Kalman filter, which shares the recipe's feature encoder, placed 82.6\%; the difference was not significant after correction (Holm-adjusted \textit{p} = 0.071 at \textit{H} = 20, 0.240 at \textit{H} = 10). Given the recipe's inputs and cap set, an LSTM and a CNN rose to 80.7\% and 78.9\%, still significantly below the recipe at \textit{H} = 20. A hybrid Transformer reached 92.2\%, numerically higher (13 against 19 discordant engines, \textit{p} = 0.377), at about 36 minutes of training per fold against about 34 seconds. Inputs and targets therefore explain much of the gap to the re-implementations. Since only the networks' caps and warning settings were tuned, these comparisons do not rank architectures.
+
+In the ablation (Fig. 5b), removing the shift caused the largest loss among the trigger and target components (77.1\%, with 49 late alarms; Holm-adjusted \textit{p} < 0.001). Training without a cap gave 81.7\% (\textit{p} = 0.002), consistent with the target-design effect in Table 4, and an untuned rule gave 78.4\%. Seven sensors gave 83.9\%, sensor features without age 85.8\%, and age alone 14.2\%. The conventional cap of 125 (89.9\%), no smoothing (90.4\%) and no debounce (89.4\%) were not significantly different from the full recipe; with 218 engines such tests can miss differences of a few percentage points.
+
+\begin{figure*}[!tbp]\centering
+\includegraphics[width=\textwidth]{img/Fig6_comparison_ablation.png}
+\caption{(a) In-window rate under the identical fit-75\%/tune-25\% protocol of Supplementary Section S15, with 95\% intervals. (b) Component ablation on PHM08 at \textit{H} = 20 (nested protocol); each bar changes one component and re-tunes the remaining settings.}
+\end{figure*}
+
+\textbf{The shift moves the alarm.} Proposition 1 assumes that the error distribution does not change with the shift. We varied the shift on the test units of each fold by up to $\pm$4 around the value selected on training data at \textit{H} = 20, keeping the other settings, and recorded the alarm cycle, the true remaining life at the alarm and the unshifted error $\varepsilon$ (Fig. 6). On each of the seven datasets the shift acted mainly by moving the alarm. Each unit of shift changed the median true remaining life at the alarm by \textminus{}1.0 to \textminus{}0.9 cycles (blocks for the battery), against \textminus{}0.1 to 0.1 for the median of $\varepsilon$. Assumption A1 is therefore violated by construction, yet the error at the alarm changed slowly. Within $\pm$2 of the selected shift, the largest difference between the realised rate and the rate predicted by Proposition 1 from the errors at the selected shift was 1.6 to 8.0 percentage points, depending on the dataset (largest on FD001); within $\pm$4 it was 4.2 to 8.0 points. The proposition thus describes the direction and rough size of the response to the shift, with errors of several points. It is not a bound for the sequential policy and says nothing about what other features or models could achieve. A low rate is therefore not evidence that no shift could do better, nor is the concentration of the out-of-fold error a deployment check.
+
+\begin{figure*}[!tbp]\centering
+\includegraphics[width=\textwidth]{img/Fig8_shift_A1.png}
+\caption{Assumption A1 of Proposition 1, test units at \textit{H} = 20 with the other settings fixed. (a) Realised in-window rate (solid) and the rate predicted by Proposition 1 from the errors at the selected shift (dashed) as the shift moves away from the value selected on training data. (b) Change of the median true remaining life at the alarm relative to the selected shift; dotted: one cycle less per unit of shift. Battery in blocks of $\kappa$ from the outer training cells.}
+\end{figure*}
+
+\subsection{Q3: Window tuning and direct cost optimisation}
+
+\begin{table*}[!tbp]
+\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Cost of the window-tuned alarms relative to each alternative policy, by dataset. Each entry: median (minimum--maximum) over the 16 lead-time and cost-ratio cells of the ratio of cost rates (window-tuned / alternative; below 1 favours the window-tuned policy); then the number of cells in which the paired 95\% bootstrap interval lies entirely below 1 / entirely above 1.}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1199\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1253\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1253\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1253\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1253\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1253\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1253\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1282\linewidth-2\tabcolsep\relax}@{}}
+\toprule
+Dataset & Age replacement & Health-indicator alarm & STW, cost-tuned & STW, cost-tuned, 1-SE & STW, cost-tuned, 80th pct. & Quantile alarm, cost-tuned & Quantile alarm, 1-SE \\
+\midrule
+PHM08 & 0.60 (0.45--0.64); 16/0 & 0.96 (0.79--0.99); 10/0 & 0.93 (0.61--0.99); 0/0 & 1.01 (0.84--1.22); 1/4 & 0.93 (0.61--0.99); 0/0 & 1.00 (0.63--1.05); 0/3 & 1.00 (0.82--1.21); 0/2 \\
+FD001 & 0.59 (0.45--0.65); 16/0 & 0.83 (0.49--0.95); 9/0 & 0.96 (0.68--1.03); 0/4 & 1.00 (0.99--1.02); 4/7 & 0.96 (0.68--1.03); 0/4 & 1.04 (1.03--1.06); 0/16 & 1.02 (1.01--1.04); 0/16 \\
+FD002 & 0.65 (0.55--0.69); 15/0 & 0.94 (0.80--1.16); 12/0 & 0.97 (0.66--1.06); 0/0 & 1.01 (0.85--1.05); 1/11 & 1.00 (0.66--1.06); 0/4 & 1.01 (0.74--1.06); 0/4 & 1.02 (0.99--1.24); 1/14 \\
+FD003 & 0.55 (0.42--0.61); 16/0 & 0.85 (0.63--0.95); 16/0 & 1.01 (0.51--1.03); 0/8 & 0.98 (0.98--0.99); 16/0 & 1.01 (0.51--1.03); 0/8 & 0.90 (0.51--1.02); 0/4 & 0.98 (0.97--1.00); 12/3 \\
+FD004 & 0.56 (0.48--0.67); 15/0 & 0.97 (0.84--1.17); 2/0 & 0.97 (0.71--1.01); 0/0 & 1.00 (0.86--1.19); 0/3 & 0.97 (0.71--1.01); 0/0 & 1.02 (0.76--1.20); 0/3 & 1.04 (1.01--1.41); 0/11 \\
+N-CMAPSS & 0.98 (0.69--1.06); 0/0 & 0.80 (0.44--1.05); 6/0 & 1.17 (0.79--1.73); 0/9 & 1.14 (0.78--1.73); 0/9 & 1.16 (0.79--1.73); 0/9 & 1.12 (0.78--1.76); 0/6 & 1.11 (0.77--1.73); 0/4 \\
+Battery & 0.49 (0.33--0.52); 16/0 & 0.98 (0.91--1.06); 11/4 & 1.03 (0.98--1.06); 1/13 & 0.98 (0.94--1.02); 12/2 & 1.02 (0.98--1.06); 1/12 & 1.00 (0.97--1.05); 2/6 & 0.96 (0.91--1.00); 15/0 \\
+\bottomrule
+\end{tabular}\par\vspace{3pt}{\raggedright\scriptsize Five-fold cross-validation; lead times $\ell$ $\in$ \{0, 5, 10, 15\} cycles (battery 0, 15, 30, 45 cycles) and failure-cost ratios $\rho$ $\in$ \{5, 10, 20, 50\}. The 16 cells of a dataset share units and alarms and are not independent; the counts are descriptive. Battery: cross-validation by cell, $\kappa$ from the outer training cells; the battery policies under a held-out batch, including the capacity trend, are in Table 9. The cost rates relative to perfect foresight for every cell are in Supplementary Section S11.\par}
+\end{table*}
+
+Table 7 and Fig. 7 compare the policies under identical splits, information, lead times and cost ratios. Against optimal age replacement, the window-tuned alarms were cheaper with a paired interval excluding equality in 16, 16, 15, 16, 15, 16 of 16 cells on PHM08, FD001, FD002, FD003, FD004, Battery, respectively. Their cost rate was 1.07--1.28 times that of perfect foresight on PHM08, against 1.70--2.37 for age replacement. N-CMAPSS was the exception: in no cell did the interval exclude equality, and the point estimate favoured age replacement in 4 of 16 cells.
+
+Against policies tuned directly to cost the results depend on the dataset (Table 7). Plain cost tuning of the same regressor was significantly cheaper than window tuning in 4, 8, 9 and 13 of the 16 cells on FD001, FD003, N-CMAPSS and the batteries (none on PHM08, FD002 and FD004), and significantly more expensive in 1 of the 16 cells on the batteries (none elsewhere). Its occasional large losses remain. On PHM08 with $\ell$ = 10 and $\rho$ = 50 it cost 1.75 times perfect foresight, against 1.10 for window tuning, with 3 test failures against 0. The one-standard-error rule reduced that loss to 1.30, still above window tuning there. Across cells it was significantly cheaper than window tuning in 4, 7, 11, 3, 9 and 2 of the 16 cells on PHM08, FD001, FD002, FD004, N-CMAPSS and the batteries (none on FD003), and significantly more expensive in 1, 4, 1, 16 and 12 of the 16 cells on PHM08, FD001, FD002, FD003 and the batteries (none on FD004 and N-CMAPSS). The cost-tuned 10\% quantile alarm was significantly cheaper than window tuning in 3, 16, 4, 4, 3, 6 and 6 of the 16 cells on PHM08, FD001, FD002, FD003, FD004, N-CMAPSS and the batteries, and more expensive in 2 of the 16 cells on the batteries (none elsewhere). The health-indicator alarm was usually the more expensive: window tuning was significantly cheaper in 10, 9, 12, 16, 2, 6 and 11 of the 16 cells on PHM08, FD001, FD002, FD003, FD004, N-CMAPSS and the batteries, and more expensive in 4 of the 16 cells on the batteries (none elsewhere). On the batteries, the cost-tuned capacity-threshold policy was significantly cheaper than window tuning in 4 cells and never significantly more expensive.
+
+Relative to the cheapest condition-based policy in each cell, the mean excess cost over the 112 cells was 7.9\% for window tuning, 13.6\% for plain cost tuning, 5.6\% with the one-standard-error rule, 10.2\% for the quantile alarm (5.9\% with the one-standard-error rule), 26.3\% for the health-indicator alarm and 85.6\% for age replacement. These means are descriptive, because the cells are correlated. The policy with the lowest mean excess cost differed between datasets: window-tuned STW on PHM08, cost-tuned quantile alarm on FD001, quantile alarm with the 1-SE rule on FD002, window-tuned STW on FD003, quantile alarm with the 1-SE rule on FD004, cost-tuned STW (80th percentile) on N-CMAPSS, capacity threshold with the 1-SE rule on Battery. The largest single excess cost was 94.8\% for plain cost tuning (FD003), 75.7\% for window tuning (N-CMAPSS, $\ell$ = 5, $\rho$ = 50), 53.0\% with the one-standard-error rule (Battery) and 102.1\% for the quantile alarm (N-CMAPSS). Window tuning thus avoided the largest losses of plain cost tuning on several datasets, plausibly through the margin that the narrow late side of the window builds in, but that mechanism was not tested and it did not hold on N-CMAPSS. No tuning rule was cheapest on every dataset, and window tuning is not a reliable surrogate for cost optimisation.
+
+\begin{figure*}[!tbp]\centering
+\includegraphics[width=\textwidth]{img/FigR3_cost_audit.png}
+\caption{Long-run cost rate relative to perfect foresight (1.00 = replacement one cycle before every failure) for policies tuned on training units: (a) without lead time and $\rho$ = 10; (b) with a lead time of 10 cycles (30 cycles for the battery) and $\rho$ = 50. Five-fold cross-validation; battery task in blocks, with $\kappa$ from the outer training cells. Off-scale values are labelled.}
+\end{figure*}
+
+\subsection{Q4: From familiar conditions to held-out batches and other asset types}
+
+\begin{table*}[!tbp]
+\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Battery cells under a common physical task (\textit{H} = 60 cycles, window [\textminus{}39, +6] cycles), fully nested preprocessing and selection. Correct first warnings, and correct first warnings that also left at least 45 cycles of notice.}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1934\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1476\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1374\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1170\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1425\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1323\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1299\linewidth-2\tabcolsep\relax}@{}}
+\toprule
+Evaluation & Recipe, $\kappa$ by rule (nested) & Recipe, $\kappa$ by inner CV & Recipe, $\kappa$ fixed 2--6 (range, \%) & Capacity trend ($\kappa$ by rule) & Recipe: correct and $\ge$ 45 cycles left (\%) & Trend: correct and $\ge$ 45 cycles left (\%) \\
+\midrule
+Cross-validation by cell & 117/123 (95.1) & 121/123 (98.4) & 95.1--98.4 & 123/123 (100.0) & 80.5 & 32.5 \\
+One batch held out (all) & 98/123 (79.7) & 92/123 (74.8) & 63.4--84.6 & 121/123 (98.4) & 44.7 & 43.1 \\
+  Batch 1 held out & 25/36 (69.4) & 30/36 (83.3) & -- & 36/36 (100.0) & 69.4 & 77.8 \\
+  Batch 2 held out & 38/43 (88.4) & 27/43 (62.8) & -- & 41/43 (95.3) & 11.6 & 0.0 \\
+  Batch 3 held out & 35/44 (79.5) & 35/44 (79.5) & -- & 44/44 (100.0) & 56.8 & 56.8 \\
+\bottomrule
+\end{tabular}\par\vspace{3pt}{\raggedright\scriptsize 123 cells. $\kappa$ by rule: max(1, round(median training life / 209.5)) from each training subset; $\kappa$ by inner CV: chosen among 2--6 by the summed inner out-of-fold count. Paired exact McNemar, recipe ($\kappa$ by rule) against the capacity trend: cross-validation 0/6 (\textit{p} = 0.031), held-out batch 2/25 (\textit{p} < 0.001). Task in blocks (cross-validation and held-out batch): $\kappa$ = 3 from all cells, as in the protocol, 97.6\% and 69.9\%; $\kappa$ from the outer training cells 95.9\% and 65.0\%, capacity trend 100.0\% and 99.2\% (Supplementary Sections S5 and S16).\par}
+\end{table*}
+
+\textbf{Battery cells, within and across batches.} Under the common physical task with fully nested preprocessing (Table 8, Fig. 8), the recipe placed 117/123 (95.1\%) of first warnings in the window under cross-validation by cell, in which every batch is represented among the training cells (below, ``within batches''), 98.4\% with $\kappa$ chosen by inner cross-validation, and 95.1--98.4\% for any fixed $\kappa$ from 2 to 6. With a whole batch held out, the rate fell to 98 of 123 (79.7\%; batch 1: 69.4\%, batch 2: 88.4\%, batch 3: 79.5\%). It was 74.8\% with $\kappa$ chosen by inner cross-validation and 63.4--84.6\% across fixed $\kappa$. Under two conventions that express the task in blocks, the held-out-batch rate was 69.9\% ($\kappa$ = 3 from all cells, as in the protocol) and 65.0\% ($\kappa$ from the outer training cells). The held-out-batch estimate therefore depends on the time-scale convention: the fixed-$\kappa$ values alone span 21.1 percentage points. Every version lies below every within-batch version and below the protocol criterion of 85\%. Paired by cell, the fall from cross-validation to a held-out batch was significant under every convention of the fully nested analysis (exact McNemar; rule: 22 against 3 discordant cells, \textit{p} < 0.001; largest \textit{p} over the $\kappa$ conventions < 0.001). The batches differ in charging protocols, rest periods and start dates, and in typical life (median 772.5, 481.0 and 1005.5 cycles). Validation within familiar conditions therefore overstated what the recipe achieves on a new test campaign. The within-batch result is an upper reference, and the held-out-batch range is the relevant estimate for a new campaign.
+
+\textbf{A strong simple baseline.} Battery end of life is defined by discharge capacity falling to 0.88 Ah, and capacity is one of the measured inputs. Extrapolating the recent capacity trend to that level, with the same trigger and with settings chosen on the training cells, placed 123/123 (100.0\%) of first warnings in the window within batches and 121/123 (98.4\%) with a batch held out. That is significantly more than the recipe in both cases (Table 8) and stable across $\kappa$ (Fig. 8b). Its correct alarms, however, gave less notice. Within batches its median remaining life at the alarm was 40 cycles against 55 for the recipe, and 32.5\% of cells received a correct alarm with at least 45 cycles left, against 80.5\%. With a batch held out the two were similar at 45 cycles (43.1\% against 44.7\%). The trend was ahead at 30 cycles (75.6\% against 61.8\%) and behind at 60 (4.9\% against 29.3\%; Fig. 8c). On batch 2, the shortest-lived batch, 88.4\% of the recipe's first warnings were correct, but only 11.6\% of its cells received a correct alarm with at least 45 cycles left (trend: 95.3\% and 0.0\%). A higher window score therefore did not mean more usable notice, which is what the cost analysis prices.
+
+\begin{table*}[!tbp]
+\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Battery maintenance cost under cross-validation by cell and with one batch held out: long-run cost rate relative to perfect foresight, and in brackets the number of the 123 cells that failed before replacement.}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.2548\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1496\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1496\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1496\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1496\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1469\linewidth-2\tabcolsep\relax}@{}}
+\toprule
+Policy & CV, $\ell$ = 0, $\rho$ = 10 & CV, $\ell$ = 30, $\rho$ = 50 & Batch held out, $\ell$ = 0, $\rho$ = 10 & Batch held out, $\ell$ = 30, $\rho$ = 50 & Batch held out, $\ell$ = 45, $\rho$ = 50 \\
+\midrule
+Recipe, window-tuned & 1.16 (1) & 1.51 (1) & 1.80 (10) & 6.12 (12) & 3.20 (5) \\
+Recipe, cost-tuned (1-SE) & 1.19 (1) & 1.54 (1) & 1.55 (6) & 3.66 (6) & 2.36 (3) \\
+Capacity threshold (1-SE) & 1.05 (0) & 2.00 (2) & 1.05 (0) & 4.16 (7) & 3.42 (5) \\
+Capacity trend, window-tuned & 1.01 (0) & 1.06 (0) & 1.01 (0) & 1.87 (2) & 1.46 (1) \\
+Capacity trend, cost-tuned (1-SE) & 1.05 (0) & 1.06 (0) & 1.04 (0) & 1.47 (1) & 1.06 (0) \\
+Age replacement & 2.23 (3) & 4.59 (2) & 6.88 (40) & 36.63 (40) & 36.63 (40) \\
+\bottomrule
+\end{tabular}\par\vspace{3pt}{\raggedright\scriptsize $\ell$: lead time in charge--discharge cycles; $\rho$: failure-to-replacement cost ratio. $\kappa$ from the outer training cells and inherited by the inner folds (not fully nested); window-tuned policies select their settings with the task in blocks (Section 3.4); lead times, costs and use in cycles; same splits, inner folds and bootstrap rule as Table 7. Cells of the 16-cell grid in which the cost-tuned capacity trend (1-SE) was significantly cheaper / dearer than the window-tuned recipe: cross-validation 9/0, held-out batch 16/0; window-tuned trend against window-tuned recipe 14/0 and 16/0. Every cell is in Supplementary Section S11.\par}
+\end{table*}
+
+\textbf{Under the cost model} (Table 9, Fig. 9), the trend's advantage persisted and, with a batch held out, grew. Under cross-validation the window-tuned capacity trend was significantly cheaper than the window-tuned recipe in 14 of the 16 lead-time and cost-ratio cells, and the cost-tuned trend with the one-standard-error rule in 9. Plain cost tuning of the trend had a lower point estimate than plain cost tuning of the recipe in all 16 cells, but in none was the interval clear of equality. No trend policy was significantly dearer than its recipe counterpart in any cell. With a batch held out, the trend was significantly cheaper in all 16 cells in each of the four paired comparisons made (cost-tuned trend with the one-standard-error rule against the window-tuned recipe and against the recipe with the same rule; plain cost tuning of both; window tuning of both). The window-tuned recipe let 10 of 123 cells fail without lead time at $\rho$ = 10, and 12 with a lead time of 30 cycles at $\rho$ = 50. The cost-tuned trend with the one-standard-error rule let 0 and 1 fail, at 1.04 and 1.47 times the perfect-foresight cost rate. Age replacement, with its replacement age chosen on the other batches, let 40 cells fail with a batch held out. On these cells, then, a physically motivated baseline aimed at the failure definition did better than the learned recipe on window accuracy across batches and on cost, whereas the recipe gave more notice within batches. Because the trend was cheaper under window tuning, plain cost tuning and the one-standard-error rule alike, its advantage did not depend on the tuning criterion.
+
+\begin{table*}[!tbp]
+\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{N-CMAPSS and rolling bearings (\textit{H} = 20; five-fold cross-validation by unit unless stated), with the two competitors fixed in the protocols.}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.3435\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1219\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1274\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1192\linewidth-2\tabcolsep\relax}@{}}
+\toprule
+Dataset and analysis & Recipe: correct (\%) & 95\% CI & Late / early / missed & MLP + Kalman filter (\%) & Age-only (\%) \\
+\midrule
+N-CMAPSS, 99 engines (pre-specified) & 68/99 (68.7) & 58.6--77.6 & 18 / 8 / 5 & 58.6 & 24.2 \\
+N-CMAPSS, official split (39 test engines) & 22/39 (56.4) & 39.6--72.2 & 10 / 6 / 1 & 43.6 & 30.8 \\
+Bearings, 17, protocol ($\kappa$ = 7 from all bearings) & 0/17 (0.0) & 0.0--19.5 & 0 / 7 / 10 & 0.0 & 5.9 \\
+Bearings, 17, $\kappa$ from training bearings & 0/17 (0.0) & 0.0--19.5 & 0 / 7 / 10 & 0.0 & 5.9 \\
+Bearings, official split (11 test), $\kappa$ from training bearings & 1/11 (9.1) & 0.2--41.3 & 0 / 2 / 8 & 9.1 & 0.0 \\
+\bottomrule
+\end{tabular}\par\vspace{3pt}{\raggedright\scriptsize Protocol hypotheses at \textit{H} = 20 (in-window $\ge$ 85\%; late or missed $\le$ 10\%; better than age-only; better than the MLP with Kalman filter; exact McNemar, two-sided \textit{p} < 0.05): N-CMAPSS, only the third met; bearings, none met. For the battery cells with the task in blocks, all four were met under cross-validation (Supplementary Section S5).\par}
+\end{table*}
+
+\textbf{N-CMAPSS.} The recipe placed 68 of 99 first warnings in the window (68.7\%, 95\% CI 58.6--77.6\%); 18 were late and 5 engines were missed (Table 10). It was clearly better than age-only (24.2\%; criterion 3 met), but neither threshold was met, and its advantage over the MLP with Kalman filter (58.6\%) was not significant (25 against 15 discordant engines, \textit{p} = 0.154). Lives are short, so a 20-cycle alarm comes at roughly three quarters of life, and the true remaining life at the alarm was spread more widely than on PHM08 (Fig. 4b). An exploratory re-run with all 14 channels did not help (Supplementary Section S6). N-CMAPSS comes from the same simulator family as the development data, so it tests a change of operating profile rather than of asset type.
+
+\textbf{Bearings.} The recipe failed. None of the 17 first warnings fell in the window, either in the protocol analysis or with $\kappa$ from the training bearings (7 too early and 10 missed). The competitors were also almost always wrong (age-only 1, MLP with Kalman filter 0 of 17). With the physical task fixed (\textit{H} = 140 snapshots), block lengths of 3, 5, 7, 10, 14 snapshots gave at most 1 of 17. The pre-specified fifth hypothesis, that STW-T would be no more than 5 points worse, was met only trivially (0\% against 0\%), which cannot establish non-inferiority. A post hoc diagnosis with an ad hoc criterion (Supplementary Section S7) found that in 11 of 17 bearings the vibration level rose to and stayed above 1.5 times its early-life level only within the last six blocks before failure (about seven minutes), or never. 6 of these were never warned, which is consistent with failure becoming visible too late for a 20-block alarm. The other 5 received alarms 63--211 blocks before failure, long before any sustained rise, which late visibility cannot explain. Of the 6 bearings with longer degradation, 4 were missed and 2 warned too early. Late onset is therefore at most a partial explanation; small training sets (13--14 bearings per fold), three operating conditions and the feature set are competing explanations that were not tested. The result shows that this recipe, with these features, did not work on these bearings, not that advance warning of bearing failure is impossible.
+
+\begin{figure*}[!tbp]\centering
+\includegraphics[width=\textwidth]{img/Fig8_battery_physical.png}
+\caption{Battery cells under a common physical task (\textit{H} = 60 cycles, window [\textminus{}39, +6] cycles) with fully nested preprocessing. (a) In-window rate under cross-validation by cell and with each batch held out: the recipe with $\kappa$ by the nested rule or by inner cross-validation, and the capacity trend. (b) Sensitivity to a fixed block length $\kappa$. (c) Share of cells whose first warning was correct and left at least \textit{N} cycles before failure.}
+\end{figure*}
+
+\begin{figure*}[!tbp]\centering
+\includegraphics[width=\textwidth]{img/Fig9_battery_cost.png}
+\caption{Battery maintenance cost relative to perfect foresight (log scale) as a function of the lead time at $\rho$ = 50, (a) under cross-validation by cell and (b) with one batch held out. Policies tuned on training cells; $\kappa$ from the outer training cells.}
+\end{figure*}
+
+\section{Discussion}\label{sec:7}
+
+\subsection{Answers to the four questions}
+
+\textbf{Q1.} On PHM08 the four quantities behaved differently, and under matched training data and cross-fitted calibration the contrast between fixed-time and self-timed evaluation came mostly from the observation time. The same calibrated fixed-time model placed 24.8\% of its estimates in the window at half of life and 85.3\% at 90\% of life. The recipe's capped regressor added about 6.4 points at 90\% of life (\textit{p} = 0.038), and self-timing added nothing measurable for either regressor. Long-range accuracy therefore says little about near-failure accuracy. Near-failure accuracy, in turn, says little about the timing of a self-timed alarm or about maintenance cost, which Q2 and Q3 address. The practical value of self-timing is that it reaches near-failure accuracy without knowing the life, which a fraction of life or an oracle time cannot do in service; it makes the alarm usable in service, not more accurate.
+
+\textbf{Q2.} The asymmetric window rewards alarm timing. Because the alarm fires when the smoothed estimate first crosses a fixed level, the reported estimate is nearly constant at the alarm; a constant estimate at the same alarm times scored within 3.6 points of the model's estimate on each of the seven datasets on which it was run (no equivalence margin was tested), whereas a health-indicator threshold alarm scored significantly lower on all seven. The score conceals how much notice the alarm gives and what the alarms cost. On the battery cells, the capacity trend had the higher window score within batches but gave a correct alarm with at least 45 cycles left on 32.5\% of cells, against 80.5\% for the recipe. A window score should therefore be reported together with the distribution of the remaining life at the alarm, or the share of correct alarms with the notice that the maintenance task needs.
+
+\textbf{Q3.} Window tuning gave useful policies where the alarms were accurate and the test units resembled the training units. Window-tuned alarms were significantly cheaper than optimal age replacement in most cost settings on the five C-MAPSS datasets and on the battery cells within batches, but not on N-CMAPSS. Direct cost optimisation was better on some datasets and worse on others (Table 7). Plain cost tuning occasionally produced large losses when failures were expensive; a one-standard-error rule reduced them; and no tuning rule was cheapest on every dataset. On the battery cells, a capacity trend had a lower cost rate than the recipe under both criteria in every cost setting, significantly so in every setting with a batch held out. Window tuning is therefore not a reliable surrogate for cost optimisation. It may be a reasonable operational choice where cost ratios are uncertain, provided that its cost is checked.
+
+\textbf{Q4.} The recipe's results from familiar conditions did not carry over to new ones. On the battery cells, under a common physical task with fully nested preprocessing, the in-window rate fell from 95.1\% under cross-validation by cell to 79.7\% with a whole batch held out. Across the $\kappa$ conventions examined, the held-out-batch rate lay between 63.4\% and 84.6\%, below every within-batch estimate and below the protocol criterion. The capacity trend, in contrast, went from 100.0\% to 98.4\%. On N-CMAPSS, the same simulator family under different operating profiles, the recipe reached 68.7\%, and on the bearings, a different asset type, none of 17 alarms was correct. Within-batch cross-validation is therefore an upper reference, not an estimate for a new campaign. Each new population needs its own validation, with whole batches or campaigns held out and with a simple physically motivated baseline where one exists.
+
+\subsection{Window tuning and cost tuning}
+
+Kamariotis et al. \cite{kamariotis2024} argue that prognostic algorithms and the policies built on them should be judged and tuned by the long-run cost of the decisions they induce. Our results support evaluating alarms by cost, with a qualification about how the cost is minimised. Minimising the empirical cost rate over about two thousand settings sometimes selected alarms with too little margin and produced large losses when failures were expensive. A one-standard-error rule reduced the largest losses, a lower quantile was often cheaper but did not avoid them, and no tuning rule was cheapest on every dataset. Window tuning was cheaper than the one-standard-error rule on FD003 and the batteries and more expensive on several other datasets. Its settings other than the warning level do not depend on cost ratios, which are often uncertain in practice. The window is best regarded as an operational specification, not a proxy for cost. Where cost ratios and lead times can be estimated, tuning to the cost with a safeguard against selection noise should be compared with it on the fleet's own history.
+
+The battery results add a further qualification: on these cells the choice of signal mattered more than the choice of tuning criterion. Window-tuned and cost-tuned versions of the capacity trend had a lower cost rate than the recipe policy with which they were paired in every cost setting, significantly so in every setting with a batch held out (Table 9). Comparing tuning criteria for one regressor is therefore no substitute for comparing the regressor with a simple baseline aimed at the failure definition.
+
+\subsection{Practical implications and relation to earlier work}
+
+The following implications hold under the assumptions evaluated here: simulated or laboratory run-to-failure data, a fixed lead time, independent units and replacement as good as new. (i) Long-range prediction, near-failure estimation, alarm timing and maintenance cost should be evaluated separately, because good performance on one did not imply good performance on another. (ii) An alarm window used as an acceptance criterion constrains when alarms are raised. It should be accompanied by the notice actually given and, where possible, by the cost of the alarms. (iii) For the recipe, validation within familiar test conditions overstated performance on a held-out batch by 14 to 32 percentage points, depending on the time-scale convention. Held-out campaigns, batches or operating conditions are the more relevant check. (iv) Where failure is defined by a threshold on a measured quantity, a simple extrapolation of that quantity is a necessary baseline.
+
+These findings complement the two closest studies. de Pater et al. \cite{depater2022} trigger maintenance scheduling from alarms on probabilistic prognostics and evaluate the resulting fleet cost. Kamariotis et al. \cite{kamariotis2024} score prognostic algorithms by the increase in long-run maintenance cost they induce relative to perfect prognostics, and tune heuristic policies and algorithm hyperparameters to that metric. Our results support their emphasis on decision cost: an operational window score did not reliably rank policies by cost, and a policy with a higher window score could give less notice. Our results add three points: a decomposition of fixed-time versus self-timed evaluation under matched training and calibration; evidence that a window score mainly measures alarm timing; and the observation that both window and cost assessments made within batches overstated performance on a held-out batch. We do not compare our policies with their frameworks, which address scheduling and probabilistic prognostics that are outside the present scope.
+
+\subsection{Limitations}
+
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item \textbf{No field data.} Six of the eight datasets are simulations from one simulator family (C-MAPSS), and the battery and bearing data are laboratory measurements. On the batteries, end of life is a threshold on a measured quantity. First-warning rates of the recipe ranged from 0\% to 98\% across datasets and analyses and fell under a change of test campaign, so they must be re-estimated for each application.
+\item \textbf{Development, pre-specification and corrections.} The recipe and grids were developed on PHM08, and the primary warning level was designated after the C-MAPSS results were known. Only three datasets had protocols fixed in advance; the hashes were not deposited with a registry, so their timing rests on the authors' records. The training-only $\kappa$ and the battery analysis with a common physical task and fully nested preprocessing are corrections made after the protocol analyses. The matched fixed-time comparison, the timing controls, the capacity baselines, the cost analyses and the shift study are exploratory analyses added after the main results were known. The bearing analysis and the battery cost analysis are not fully nested (Section 5.2).
+\item \textbf{Scope of the decomposition.} The matched comparison of Q1 uses one dataset (PHM08), one fixed-time model and one recipe. Differences of a few points could go undetected with 218 engines.
+\item \textbf{Competitors and baselines.} The challenge approaches are re-implementations, not the original code, and only the networks' caps and warning settings were tuned. The health-indicator, capacity-threshold and capacity-trend baselines are single representatives of their classes, and the capacity trend exists only for the batteries.
+\item \textbf{Statistics.} Intervals are conditional on the fitted policies; refitting and fold-assignment variability is reflected only in the repeated PHM08 splits and the $\kappa$ sensitivity. Non-significant differences are not evidence of equivalence. Multiplicity is adjusted within tables, not across the paper, and the cost cells within a dataset are correlated, so they are not replications.
+\item \textbf{Cost model.} The renewal--reward model assumes a fixed lead time, independent units and replacement as good as new. The cost ratios are illustrative, and the model ignores spare parts, downtime and the grouping of maintenance across units \cite{depater2022,mitici2023}. The window-tuned and cost-tuned policies select on the same out-of-fold predictions that tune their other settings.
+\item \textbf{Theory.} Proposition 1 holds for a fixed error distribution. For the sequential policy it is only an approximate description on these data, with errors of up to 8.0 points within $\pm$4 of the selected shift, not a guarantee.
+\end{itemize}
+
+\section{Future work}\label{sec:8}
+
+Four directions follow from the limitations. \textbf{Field data and changing conditions.} Alarms tuned on one battery batch lost accuracy on another. Recalibrating the shift on the first failures of a new population, or attaching distribution-free uncertainty to the alarm time, should be tested on fleet data with censoring. \textbf{Maintenance policies.} The warning level could be chosen jointly with the order lead time, and the alarms of several units grouped into shared visits \cite{depater2022,mitici2023}, with the trend and window comparisons repeated under those policies. \textbf{Test and inspection policies.} For units that are proof-tested or inspected at intervals \cite{dejonge2020}, an alarm could trigger an additional test rather than a replacement; this requires an encoder for sparse observations and a cost model with test costs. \textbf{Fault detection.} For failures that become visible only shortly before they happen, the first-warning rule should be compared with sequential detectors such as cumulative-sum and exponentially weighted moving-average charts \cite{page1954,roberts1959} under the same leakage-safe protocol. A two-stage design, in which a detector declares the onset of a defect and a remaining-life model then times the replacement, remains an untested hypothesis for the bearings.
+
+\section{Conclusion}\label{sec:9}
+
+Scoring remaining-life models only at evaluator-chosen times hides how their alarms behave. On PHM08, under matched training data and cross-fitted calibration, most of the contrast between fixed-time and self-timed evaluation was due to the observation time (24.8\% of estimates in the window at half of life against 85.3\% at 90\% of life for the same calibrated model). Target and feature design added a few points, and self-timing added no measurable accuracy, although only a self-timed alarm can be used in service without knowing the life. The asymmetric window mainly rewarded alarm timing: a constant estimate at the same alarm times scored within 3.6 percentage points of the model's estimate, and the score did not reveal the notice given or the cost incurred. Window-tuned alarms were cheaper than age replacement on five of six engine datasets, but direct cost tuning was better on some datasets and worse on others, so the window is not a reliable surrogate for cost. In post hoc analyses of battery cells, a self-timed recipe that placed 95.1\% of first warnings in the window within batches placed 79.7\% with a batch held out, and a capacity-trend baseline was more accurate and, with a batch held out, significantly cheaper in every cost setting. On N-CMAPSS the recipe reached 68.7\%, and on bearings it failed (0 of 17). These are results from simulations and laboratory tests; they support evaluating alarms by timing, notice and cost, on held-out batches or campaigns and against simple domain baselines, not the deployment of the recipe.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+
+\noindent During the preparation of this work the authors used Claude (Anthropic) in order to assist with code development, data analysis and drafting of the manuscript. After using this tool, the authors reviewed and edited the content as needed and take full responsibility for the content of the published article.
+
+\section*{Data availability}
+
+\noindent The PHM08, C-MAPSS and N-CMAPSS datasets are available from the NASA Prognostics Center of Excellence data repository, the battery data of Severson et al. \cite{severson2019} from \url{https://data.matr.io}, and the bearing data of the IEEE PHM 2012 challenge \cite{nectoux2012} from the FEMTO-ST institute. Code, hashed protocols, derived data summaries and the result files needed to reproduce every number are in a repository whose link is withheld for anonymised review.
+
+\begin{thebibliography}{34}
+\bibitem{lei2018} Lei Y, Li N, Guo L, Li N, Yan T, Lin J. Machinery health prognostics: A systematic review from data acquisition to RUL prediction. Mechanical Systems and Signal Processing 2018;104:799--834. \url{https://doi.org/10.1016/j.ymssp.2017.11.016}
+\bibitem{si2011} Si X-S, Wang W, Hu C-H, Zhou D-H. Remaining useful life estimation -- A review on the statistical data driven approaches. European Journal of Operational Research 2011;213(1):1--14. \url{https://doi.org/10.1016/j.ejor.2010.11.018}
+\bibitem{ramasso2014} Ramasso E, Saxena A. Performance benchmarking and analysis of prognostic methods for CMAPSS datasets. International Journal of Prognostics and Health Management 2014;5(2). \url{https://doi.org/10.36001/ijphm.2014.v5i2.2236}
+\bibitem{depater2022} de Pater I, Reijns A, Mitici M. Alarm-based predictive maintenance scheduling for aircraft engines with imperfect remaining useful life prognostics. Reliability Engineering \& System Safety 2022;221:108341. \url{https://doi.org/10.1016/j.ress.2022.108341}
+\bibitem{kamariotis2024} Kamariotis A, Tatsis K, Chatzi E, Goebel K, Straub D. A metric for assessing and optimizing data-driven prognostic algorithms for predictive maintenance. Reliability Engineering \& System Safety 2024;242:109723. \url{https://doi.org/10.1016/j.ress.2023.109723}
+\bibitem{saxena2008} Saxena A, Goebel K, Simon D, Eklund N. Damage propagation modeling for aircraft engine run-to-failure simulation. In: 2008 International Conference on Prognostics and Health Management. IEEE; 2008, p. 1--9. \url{https://doi.org/10.1109/PHM.2008.4711414}
+\bibitem{wang2008} Wang T, Yu J, Siegel D, Lee J. A similarity-based prognostics approach for remaining useful life estimation of engineered systems. In: 2008 International Conference on Prognostics and Health Management. IEEE; 2008, p. 1--6. \url{https://doi.org/10.1109/PHM.2008.4711421}
+\bibitem{heimes2008} Heimes FO. Recurrent neural networks for remaining useful life estimation. In: 2008 International Conference on Prognostics and Health Management. IEEE; 2008, p. 1--6. \url{https://doi.org/10.1109/PHM.2008.4711422}
+\bibitem{peel2008} Peel L. Data driven prognostics using a Kalman filter ensemble of neural network models. In: 2008 International Conference on Prognostics and Health Management. IEEE; 2008, p. 1--6. \url{https://doi.org/10.1109/PHM.2008.4711423}
+\bibitem{zheng2017} Zheng S, Ristovski K, Farahat A, Gupta C. Long short-term memory network for remaining useful life estimation. In: 2017 IEEE International Conference on Prognostics and Health Management (ICPHM). IEEE; 2017, p. 88--95. \url{https://doi.org/10.1109/ICPHM.2017.7998311}
+\bibitem{li2018} Li X, Ding Q, Sun J-Q. Remaining useful life estimation in prognostics using deep convolution neural networks. Reliability Engineering \& System Safety 2018;172:1--11. \url{https://doi.org/10.1016/j.ress.2017.11.021}
+\bibitem{ariaschao2021} Arias Chao M, Kulkarni C, Goebel K, Fink O. Aircraft engine run-to-failure dataset under real flight conditions for prognostics and diagnostics. Data 2021;6(1):5. \url{https://doi.org/10.3390/data6010005}
+\bibitem{grinsztajn2022} Grinsztajn L, Oyallon E, Varoquaux G. Why do tree-based models still outperform deep learning on typical tabular data? Advances in Neural Information Processing Systems 2022;35:507--520. \url{https://doi.org/10.52202/068431-0037}
+\bibitem{friedman2001} Friedman JH. Greedy function approximation: A gradient boosting machine. The Annals of Statistics 2001;29(5):1189--1232. \url{https://doi.org/10.1214/aos/1013203451}
+\bibitem{nectoux2012} Nectoux P, Gouriveau R, Medjaher K, Ramasso E, Chebel-Morello B, Zerhouni N, Varnier C. PRONOSTIA: An experimental platform for bearings accelerated degradation tests. In: IEEE International Conference on Prognostics and Health Management (PHM'12), Denver, CO, United States; 2012. \url{https://hal.science/hal-00719503}
+\bibitem{rengasamy2020} Rengasamy D, Rothwell B, Figueredo GP. Asymmetric loss functions for deep learning early predictions of remaining useful life in aerospace gas turbine engines. In: 2020 International Joint Conference on Neural Networks (IJCNN). IEEE; 2020, p. 1--7. \url{https://doi.org/10.1109/IJCNN48605.2020.9207051}
+\bibitem{severson2019} Severson KA, Attia PM, Jin N, Perkins N, Jiang B, Yang Z, Chen MH, Aykol M, Herring PK, Fraggedakis D, Bazant MZ, Harris SJ, Chueh WC, Braatz RD. Data-driven prediction of battery cycle life before capacity degradation. Nature Energy 2019;4(5):383--391. \url{https://doi.org/10.1038/s41560-019-0356-8}
+\bibitem{saxena2010} Saxena A, Celaya J, Saha B, Saha S, Goebel K. Metrics for offline evaluation of prognostic performance. International Journal of Prognostics and Health Management 2010;1(1). \url{https://doi.org/10.36001/ijphm.2010.v1i1.1336}
+\bibitem{barlow1960} Barlow R, Hunter L. Optimum preventive maintenance policies. Operations Research 1960;8(1):90--100. \url{https://doi.org/10.1287/opre.8.1.90}
+\bibitem{dejonge2020} de Jonge B, Scarf PA. A review on maintenance optimization. European Journal of Operational Research 2020;285(3):805--824. \url{https://doi.org/10.1016/j.ejor.2019.09.047}
+\bibitem{gebraeel2005} Gebraeel NZ, Lawley MA, Li R, Ryan JK. Residual-life distributions from component degradation signals: A Bayesian approach. IIE Transactions 2005;37(6):543--557. \url{https://doi.org/10.1080/07408170590929018}
+\bibitem{nguyen2019} Nguyen KTP, Medjaher K. A new dynamic predictive maintenance framework using deep learning for failure prognostics. Reliability Engineering \& System Safety 2019;188:251--262. \url{https://doi.org/10.1016/j.ress.2019.03.018}
+\bibitem{mitici2023} Mitici M, de Pater I, Barros A, Zeng Z. Dynamic predictive maintenance for multiple components using data-driven probabilistic RUL prognostics: The case of turbofan engines. Reliability Engineering \& System Safety 2023;234:109199. \url{https://doi.org/10.1016/j.ress.2023.109199}
+\bibitem{lee2023} Lee J, Mitici M. Deep reinforcement learning for predictive aircraft maintenance using probabilistic remaining-useful-life prognostics. Reliability Engineering \& System Safety 2023;230:108908. \url{https://doi.org/10.1016/j.ress.2022.108908}
+\bibitem{xie2025} Xie Z, Abdin A, Fang Y. Toward decision-oriented prognostics: An integrated estimate-optimize framework for predictive maintenance. arXiv preprint 2025;arXiv:2506.19698. \url{https://doi.org/10.48550/arXiv.2506.19698}
+\bibitem{varma2006} Varma S, Simon R. Bias in error estimation when using cross-validation for model selection. BMC Bioinformatics 2006;7:91. \url{https://doi.org/10.1186/1471-2105-7-91}
+\bibitem{kapoor2023} Kapoor S, Narayanan A. Leakage and the reproducibility crisis in machine-learning-based science. Patterns 2023;4(9):100804. \url{https://doi.org/10.1016/j.patter.2023.100804}
+\bibitem{nosek2018} Nosek BA, Ebersole CR, DeHaven AC, Mellor DT. The preregistration revolution. Proceedings of the National Academy of Sciences 2018;115(11):2600--2606. \url{https://doi.org/10.1073/pnas.1708274114}
+\bibitem{pedregosa2011} Pedregosa F, Varoquaux G, Gramfort A, Michel V, Thirion B, Grisel O, Blondel M, Prettenhofer P, Weiss R, Dubourg V, VanderPlas J, Passos A, Cournapeau D, Brucher M, Perrot M, Duchesnay E. Scikit-learn: Machine learning in Python. Journal of Machine Learning Research 2011;12:2825--2830.
+\bibitem{clopper1934} Clopper CJ, Pearson ES. The use of confidence or fiducial limits illustrated in the case of the binomial. Biometrika 1934;26(4):404--413. \url{https://doi.org/10.1093/biomet/26.4.404}
+\bibitem{mcnemar1947} McNemar Q. Note on the sampling error of the difference between correlated proportions or percentages. Psychometrika 1947;12(2):153--157. \url{https://doi.org/10.1007/BF02295996}
+\bibitem{holm1979} Holm S. A simple sequentially rejective multiple test procedure. Scandinavian Journal of Statistics 1979;6(2):65--70. \url{https://www.jstor.org/stable/4615733}
+\bibitem{page1954} Page ES. Continuous inspection schemes. Biometrika 1954;41(1--2):100--115. \url{https://doi.org/10.1093/biomet/41.1-2.100}
+\bibitem{roberts1959} Roberts SW. Control chart tests based on geometric moving averages. Technometrics 1959;1(3):239--250. \url{https://doi.org/10.1080/00401706.1959.10489860}
+\end{thebibliography}
+\end{document}

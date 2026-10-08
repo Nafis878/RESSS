@@ -1,0 +1,12 @@
+{
+  "record_type": "internal research provenance; not public priority",
+  "created_utc": "2026-10-08T06:15:20.430675+00:00",
+  "claim": "ordered failure-phase/count exact finite-cohort relative-regret age replacement",
+  "scientific_priority_established": false,
+  "public_disclosure_performed": false,
+  "plan_sha256": "d67544b83ff245c0b500bcaab1556a5bc3b7f4291a6201d93358fbd392afdb96",
+  "theory_sha256": "516d1768fd91862f6ba3e3e26a651d35c2faab48cde80560217a0fa14c94f26e",
+  "implementation_sha256": "ac7bc7e1e6a134167fa3c36ba03410faacf96a12528fa45a219a44cebfc54d50",
+  "literature_audit_sha256": "574ebe78ea16171a33714e22980f421a355b77ee7f53c122e3b502f5969daf0e",
+  "report_sha256": "0ced48e4db102e8dde03310d29ed2c87692c61a70e3d4538f6649f98ff5fd93e"
+}

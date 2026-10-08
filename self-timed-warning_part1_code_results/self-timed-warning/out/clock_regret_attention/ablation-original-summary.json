@@ -1,0 +1,162 @@
+[
+  {
+    "split": "original_id",
+    "method": "attention",
+    "cohorts": 300,
+    "mean_log_gap": 0.004688218037959797,
+    "mean_certificate_factor": 2.992912772610751,
+    "optimum_coverage": 0.7533333333333333
+  },
+  {
+    "split": "original_id",
+    "method": "horizon",
+    "cohorts": 300,
+    "mean_log_gap": 0.2993394200772694,
+    "mean_certificate_factor": 7.003635030436405,
+    "optimum_coverage": 0.08333333333333333
+  },
+  {
+    "split": "original_id",
+    "method": "mlp",
+    "cohorts": 300,
+    "mean_log_gap": 0.005170976298691658,
+    "mean_certificate_factor": 2.9837451552840655,
+    "optimum_coverage": 0.74
+  },
+  {
+    "split": "original_id",
+    "method": "no_broadcast_attention",
+    "cohorts": 300,
+    "mean_log_gap": 0.004706919318905561,
+    "mean_certificate_factor": 3.0068604758939483,
+    "optimum_coverage": 0.7533333333333333
+  },
+  {
+    "split": "original_id",
+    "method": "pooled",
+    "cohorts": 300,
+    "mean_log_gap": 0.00486718590767745,
+    "mean_certificate_factor": 2.9780178771137154,
+    "optimum_coverage": 0.75
+  },
+  {
+    "split": "original_id",
+    "method": "premium",
+    "cohorts": 300,
+    "mean_log_gap": 0.005341983258876257,
+    "mean_certificate_factor": 2.930020498066644,
+    "optimum_coverage": 0.7266666666666667
+  },
+  {
+    "split": "original_id",
+    "method": "premium_per_use",
+    "cohorts": 300,
+    "mean_log_gap": 0.011473657066907495,
+    "mean_certificate_factor": 3.274979668443665,
+    "optimum_coverage": 0.6466666666666666
+  },
+  {
+    "split": "original_id",
+    "method": "random",
+    "cohorts": 300,
+    "mean_log_gap": 0.3616108034897702,
+    "mean_certificate_factor": 7.300930572527495,
+    "optimum_coverage": 0.04666666666666667
+  },
+  {
+    "split": "original_id",
+    "method": "sequential_greedy",
+    "cohorts": 300,
+    "mean_log_gap": 0.004608151624280427,
+    "mean_certificate_factor": 2.9540013929939595,
+    "optimum_coverage": 0.7633333333333333
+  },
+  {
+    "split": "original_id",
+    "method": "singleton",
+    "cohorts": 300,
+    "mean_log_gap": 0.005341983258876257,
+    "mean_certificate_factor": 2.930020498066644,
+    "optimum_coverage": 0.7266666666666667
+  },
+  {
+    "split": "original_shift",
+    "method": "attention",
+    "cohorts": 300,
+    "mean_log_gap": 0.015679071918884614,
+    "mean_certificate_factor": 11.145589275657288,
+    "optimum_coverage": 0.37
+  },
+  {
+    "split": "original_shift",
+    "method": "horizon",
+    "cohorts": 300,
+    "mean_log_gap": 0.632216403826181,
+    "mean_certificate_factor": 23.438644581385162,
+    "optimum_coverage": 0.0
+  },
+  {
+    "split": "original_shift",
+    "method": "mlp",
+    "cohorts": 300,
+    "mean_log_gap": 0.0198431902320423,
+    "mean_certificate_factor": 11.449858045161694,
+    "optimum_coverage": 0.30666666666666664
+  },
+  {
+    "split": "original_shift",
+    "method": "no_broadcast_attention",
+    "cohorts": 300,
+    "mean_log_gap": 0.015750561242724195,
+    "mean_certificate_factor": 11.166657249060902,
+    "optimum_coverage": 0.36333333333333334
+  },
+  {
+    "split": "original_shift",
+    "method": "pooled",
+    "cohorts": 300,
+    "mean_log_gap": 0.019959365189753442,
+    "mean_certificate_factor": 11.482689980900458,
+    "optimum_coverage": 0.31
+  },
+  {
+    "split": "original_shift",
+    "method": "premium",
+    "cohorts": 300,
+    "mean_log_gap": 0.01725728129381214,
+    "mean_certificate_factor": 11.004580000461486,
+    "optimum_coverage": 0.31
+  },
+  {
+    "split": "original_shift",
+    "method": "premium_per_use",
+    "cohorts": 300,
+    "mean_log_gap": 0.04086400200382622,
+    "mean_certificate_factor": 12.507989567722825,
+    "optimum_coverage": 0.20666666666666667
+  },
+  {
+    "split": "original_shift",
+    "method": "random",
+    "cohorts": 300,
+    "mean_log_gap": 0.29419041633733006,
+    "mean_certificate_factor": 18.638417778325817,
+    "optimum_coverage": 0.013333333333333334
+  },
+  {
+    "split": "original_shift",
+    "method": "sequential_greedy",
+    "cohorts": 300,
+    "mean_log_gap": 0.01527231489354886,
+    "mean_certificate_factor": 11.074191432201838,
+    "optimum_coverage": 0.38333333333333336
+  },
+  {
+    "split": "original_shift",
+    "method": "singleton",
+    "cohorts": 300,
+    "mean_log_gap": 0.017086944580569224,
+    "mean_certificate_factor": 11.005390440292949,
+    "optimum_coverage": 0.31333333333333335
+  }
+]

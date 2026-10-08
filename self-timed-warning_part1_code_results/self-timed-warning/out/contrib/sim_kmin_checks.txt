@@ -1,0 +1,1 @@
+PASS  fixed-rule KMIN upper bound in 156/156 certifiable cells, 20000 replicates each; no single-rule lower bound claimed

@@ -1,0 +1,2605 @@
+=== PDF PAGE 1 ===
+Off-policy Evaluation Beyond Overlap:
+Sharp Partial Identiﬁcation Under Smoothness
+Samir Khan 1 Martin Saveski 2 Johan Ugander 3
+Abstract
+Off-policy evaluation, and the complementary
+problem of policy learning, use historical data col-
+lected under a logging policy to estimate and/or
+optimize the value of a target policy. Methods
+for these tasks typically assume overlap between
+the target and logging policy, enabling solutions
+based on importance weighting and/or imputa-
+tion. Absent such an overlap assumption, existing
+work either relies on a well-speciﬁed model or
+optimizes needlessly conservative bounds. In this
+work, we develop methods for no-overlap policy
+evaluation without a well-speciﬁed model, rely-
+ing instead on non-parametric assumptions on
+the expected outcome, with a particular focus on
+Lipschitz smoothness. Under such assumptions
+we are able to provide sharp bounds on the off-
+policy value, along with asymptotically optimal
+estimators of those bounds. For Lipschitz smooth-
+ness, we construct a pair of linear programs that
+upper and lower bound the contribution of the no-
+overlap region to the off-policy value. We show
+that these programs have a concise closed form
+solution, and that their solutions converge under
+the Lipschitz assumption to the sharp partial iden-
+tiﬁcation bounds at a minimax optimal rate, up to
+log factors. We demonstrate the effectiveness our
+methods on two semi-synthetic examples, and ob-
+tain informative and valid bounds that are tighter
+than those possible without smoothness assump-
+tions.
+1Department of Statistics, Stanford University 2Information
+School, University of Washington 3Department of Management
+Science and Engineering, Stanford University. Correspondence to:
+Samir Khan <samirk@stanford.edu>.
+Proceedings of the 41 st International Conference on Machine
+Learning, Vienna, Austria. PMLR 235, 2024. Copyright 2024 by
+the author(s).
+1. Introduction
+Off-policy evaluation (OPE) is the task of estimating the
+value of an evaluation/target policy using data from a be-
+havior/logging policy, and arises naturally in many settings
+(Li et al., 2010; 2011; Bottou et al., 2013; Swaminathan
+et al., 2017; Liao et al., 2021; Chin et al., 2022). The two
+standard approaches to off-policy evaluation are reweight-
+ing and imputation. Reweighting methods, as the name
+suggests, reweight outcomes observed under the behavior
+policy to obtain unbiased estimates of the evaluation policy.
+Imputation methods, on the other hand, model the expected
+outcome of taking an action as a function of covariates, and
+then use this model to estimate the off-policy value. Finally,
+doubly-robust methods combine these two approaches to ob-
+tain better theoretical guarantees (Dud´ık et al., 2011). Once
+an estimator of the off-policy value is available, the esti-
+mated policy value can be optimized over a policy class to
+select an optimal policy, which is the task of policy learning.
+All of these methods for policy evaluation and learning
+generally rely on an overlap assumption, which ensures that
+any action with positive probability under the evaluation
+policy also has positive probability under the behavior policy.
+If the overlap assumption is not satisﬁed, the weights used
+by reweighting methods will be inﬁnite, and the models used
+by imputation methods will only be valid under strong well-
+speciﬁcation assumptions. In both cases, overlap violations
+lead to biased estimates of the off-policy value and sub-
+optimal choices of learned policy (Sachdeva et al., 2020).
+This state of affairs raises the question: if we do not have
+overlap and are unwilling to assume a well-speciﬁed model,
+can we say anything about the off-policy value? In such
+a case, the off-policy value is not point-identiﬁed, so we
+cannot provide a point estimate, but can still provide partial
+identiﬁcation bounds on the off-policy value.
+In this work, we propose new estimators and resolve open
+questions in the policy evaluation and learning literatures
+by identifying tight bounds on the off-policy value in the
+presence of overlap violations under modest non-parametric
+assumptions on the expected outcome function, and give
+rate-optimal estimators of these bounds (up to log-factors).
+We focus on smoothness assumptions that constrain the
+1
+
+
+=== PDF PAGE 2 ===
+Off-policy Evaluation Beyond Overlap
+No-overlap,
+πb = 0
+Overlap,
+πb > 0
+ˆµ(x)
+Lip. lower bound
+Lip. upper bound
+Covariate, x
+Outcome
+Figure 1. Visualization of our approach on a problem with four
+data points.
+conditional outcome to be L-Lipschitz, and brieﬂy discuss
+other assumptions such as monotonicity. These smoothness
+assumptions are generalizations of the classical bounded
+response assumption for partial identiﬁcation proposed
+by Manski (1990).
+The spirit of our approach is visualized in Figure 1, which
+shows a toy policy problem with a single real-valued covari-
+ate. For small values of the covariate, we have overlap and
+so the behavior policy has a positive probability of assigning
+units to treatment. For those treated units, we observe their
+outcomes (shown as black dots). On the other hand, for large
+values of the covariate, we do not have overlap (indicated
+by red), and so units in this region are never treated and
+we never observe any responses. We can ﬁt a model ˆµ(x)
+(shown as a dashed black line) to the observed responses,
+but because this model has not been trained on observations
+in the no-overlap region, there is no way to guarantee that
+its predictions there are remotely accurate.
+Rather than directly using a model ˆµ, in this work we make
+the weaker assumption that the true conditional mean func-
+tion µ is L-Lipschitz. Under this assumption, if the model
+ˆµ is consistent in the overlap region, we can give bounds
+(shown in blue) on the conditional mean in the no-overlap
+region. We emphasize that we assume smoothness with
+respect to a particular covariate space and metric; as such,
+the covariate space and metric should be chosen based on
+domain knowledge about which covariates and metric the
+outcome is plausibly smooth in.
+2. Related Work
+The overlap assumption is standard in off-policy evaluation
+literature (Bottou et al., 2013; Swaminathan and Joachims,
+2015; Thomas and Brunskill, 2016; Wang et al., 2017) and
+we focus our discussion on the emerging literature on policy
+evaluation and learning in the no-overlap setting.
+Well-speciﬁed outcome models.
+One strand of this liter-
+ature relies on access to a well-speciﬁed outcome model.
+For example, Mou et al. (2023) assume that the reward func-
+tion lies within a reproducing kernel Hilbert space and use
+this assumption to extrapolate into the no-overlap region,
+thus effectively assuming a well-speciﬁed outcome model.
+Additionally, their method requires the action probabilities
+to be positive, albeit potentially arbitrarily small, while our
+results allow for action probabilities that are exactly zero.
+On the policy learning side, Sachdeva et al. (2020) ﬁrst
+show that a policy learned using inverse-propensity scoring
+is sub-optimal, and then consider several remedies based
+on restricting the set of policies that are optimized over or
+using a well-speciﬁed model. In contrast to these works, we
+require no such extrapolation and allow for evaluation of
+arbitrary policies.
+Learning by optimizing lower bounds.
+Another strand
+of the no-overlap literature develops methods for policy
+learning by optimizing lower bounds on the off-policy value
+over some class of outcome functions. This is the approach
+taken by Higbee (2022) and Ben-Michael et al. (2021), al-
+though in both cases the bounds they optimize are poten-
+tially quite loose and are thus inappropriate for providing in-
+formation about the value of a particular policy; we demon-
+strate this looseness in simulations in Section 6. Of these
+two works, Higbee (2022) is slightly further from ours, in
+that they make assumptions on the expected outcome as a
+function of action rather than as a function of covariates,
+and Ben-Michael et al. (2021) is slightly closer to ours, in
+that they make a similar Lipschitz assumption on the ex-
+pected outcome as a function of covariates. In both cases,
+our estimators are different and the theoretical optimality
+results we obtain for our estimators go beyond the results
+found in these works and more completely develop the par-
+tial identiﬁcation framework for off-policy evaluation under
+smoothness; see Appendix E for further details.
+Reinforcement learning.
+In the reinforcement learning
+literature, Jiang and Huang (2020) propose a “minimax
+value interval” that is valid even under no-overlap. How-
+ever, their method relies on a well-speciﬁed outcome model,
+requires solving a challenging min-max optimization prob-
+lem, and is more relevant when both the outcome model and
+behavior policies are unknown. In our setting, the behavior
+policy is known, and so our methods, which also come with
+optimality guarantees, are preferable.
+There are also proposals in the reinforcement learning liter-
+ature to learn a policy by optimizing a lower bound, such
+as that of Xie et al. (2021). This work requires knowledge
+of a model class F that is known to contain good approxi-
+mations of the true value function, and which can be taken
+to be the class of Lipschitz functions in our setting. There
+2
+
+
+=== PDF PAGE 3 ===
+Off-policy Evaluation Beyond Overlap
+are two differences between this work and ours. First, Xie
+et al. (2021) require access to an empirical risk minimization
+oracle over the class F, which is computationally expensive
+when F is a non-parametric class like the class of Lipschitz
+functions. Thus the methods of Xie et al. (2021) are better
+suited to parametric F.
+Second, the lower bound that Xie et al. (2021) optimize
+is the worst-case off-policy value over value functions in
+F that have small sample error. Rather than working over
+this subset of F, we impose an additional “consistency”
+assumption on F (see Section 4 for details) that ensures that
+the functions in F have zero population error, and then ﬁnd
+worst-case bounds on the off-policy value over the entirety
+of F. When the true value function is contained in F and
+the number of samples is large, the bounds obtained by our
+approach and their approach will be nearly equal.
+Peer-review applications.
+Finally, Saveski et al. (2023)
+deploy methods based on partial identiﬁcation under smooth-
+ness assumptions in an off-policy evaluation problem arising
+in the context of matching reviewers to papers at academic
+conferences. However, they combine the steps of ﬁtting
+a model ˆµ and estimating bounds on the off-policy value
+into a single linear program, leading to sub-optimal bounds.
+Their work highlights the importance of the no-overlap set-
+ting, and thus of the potential for our methods and results to
+provide stronger conclusions on existing data sets.
+3. Model and Notation
+We consider the problem of off-policy evaluation of stochas-
+tic policies that select an action from an action space based
+on covariates Xi. The covariates Xi take values in a metric
+space X with metric d(·, ·). The actions are random vari-
+ables Ai that takes values in a set A. Each action a ∈A has
+a corresponding potential outcome Yi(a), and we assume
+that tuples (Xi, {Yi(a)}a∈A) are i.i.d. from a distribution
+P0 on X ×R|A| for some covariate space X. The actions Ai
+are such that P(Ai = a | Xi = x) = πb(x, a) for a behav-
+ior policy πb : X × A →[0, 1] that satisﬁes the constraint
+P
+a∈A πb(x, a) = 1, for all x ∈X.
+In this set-up, we observe {(Xi, Ai, Yi(Ai))}n
+i=1 under the
+behavior policy πb and would like to estimate the value of a
+different policy πe. That is, we would like to estimate the
+functional ψ(P0) = E(Xi,Yi)∼P0, Ai|Xi∼πe[Yi(Ai)], where
+Ai|Xi is drawn according to πe. It is convenient to de-
+compose this functional across the actions and write it as
+ψ(P0) = P
+a∈A E(Xi,Yi)∼P0[Yi(a)πe(Xi, a)].
+Critically, in this work we allow there to exist x ∈X and
+a ∈A such that πb(x, a) = 0. We refer to {x : πb(x, a) =
+0} as the no-overlap region and to {x : πb(x, a) > 0} as
+the overlap region.
+The model described thus far corresponds to a general multi-
+action off-policy evaluation problem. However, by virtue
+of the decomposition across actions given above, we can
+naturally reduce any multi-action OPE problem to a bi-
+nary action OPE problem. For any action a ∈A, we can
+deﬁne the binary action ˜Ai = 1{Ai = a} and binary eval-
+uation policy ˜πe(Xi) = πe(Xi, a). Then, if we can esti-
+mate the functional ˜ψ(P0) = EP0[Yi(a)˜πe(Xi)], from data
+(X1, ˜A1, Y1(a) ˜A1), · · · , (Xn, ˜An, Yn(a) ˜An), we can com-
+bine these estimates across all a ∈A to estimate ψ(P0).
+With this in mind, when developing our methods and the-
+oretical results, we consider binary off-policy evaluation
+problems with action space A = {0, 1} and Yi(0) = 0.
+Since there is only one action with non-zero reward, we
+suppress the dependence on the action in our notation,
+writing Yi for Yi(1), πb(Xi) for πb(Xi, 1), and πe(Xi)
+for πe(Xi, 1). Further, in the binary problem, we write
+µP (x) = EP [Yi(1) | Xi = x] for the conditional mean
+function under a distribution P and ˆµP for an estimate of
+µP learned from the observed data through empirical risk
+minimization.
+4. Nonparametric Partial Identiﬁcation
+In this section, we describe our framework for OPE without
+overlap and then provide several speciﬁc instantiations. We
+work in the setting where Ai is binary; by the reduction of
+Section 3, our results extend naturally to the multi-action
+setting. For an OPE problem with binary actions we show
+how to partially identify the off-policy value ψ(P0) using
+the assumption that P0 ∈P for a family of distributions P.
+This family P encodes the nature of our assumptions on P0
+and may take several forms, but one crucial feature that P
+has to satisfy is that it must only contain distributions that
+are consistent with the true distribution P0. This means that
+each P ∈P must have the same marginal distribution of
+Xi as P0, and the same joint distribution of (Xi, Yi) in the
+overlap region as P0.
+We describe our approach for a generic family P. The ﬁrst
+step is to write ψ = ψ1 + ψ2 where
+ψ1(P) = EP [Yiπe(Xi)1{πb(Xi) > 0}],
+ψ2(P) = EP [Yiπe(Xi)1{πb(Xi) = 0}],
+(1)
+so that ψ1 is the contribution of the overlap region and ψ2 is
+the contribution of the no-overlap region. The ﬁrst term, ψ1,
+is identiﬁable, so we can estimate it, e.g., using an inverse-
+probability weighted (IPW) estimator ˆψ1 (a self-normalized
+or doubly-robust estimator can also be used to estimate ψ1
+without any modiﬁcations to our results (Dud´ık et al., 2011;
+Swaminathan and Joachims, 2015)).
+The second term, ψ2, however is not identiﬁed. Our ap-
+proach is to bound its contribution to (1) using the as-
+3
+
+
+=== PDF PAGE 4 ===
+Off-policy Evaluation Beyond Overlap
+sumption that P0 ∈P for some family P. Under this
+assumption, the tightest possible bounds we could obtain
+are infP ∈P ψ2(P) and supP ∈P ψ2(P), which we denote by
+ψ−
+2 and ψ+
+2 respectively. So to bound ψ2, we must construct
+estimators ˆψ−
+2 and ˆψ+
+2 of ψ−
+2 and ψ+
+2 , respectively.
+Once we have such estimators, we can set ˆψ−= ˆψ1 +
+ˆψ−
+2 , ˆψ+ = ˆψ1 + ˆψ+
+2 , and use [ ˆψ−, ˆψ+] as an interval esti-
+mate of ψ(P0). The following result, whose proof appears
+in Appendix A, guarantees the validity of this interval under
+conditions on ˆψ1, ˆψ+
+2 , and ˆψ−
+2 .
+Theorem 4.1. Suppose that ˆψ1 is a consistent estimator
+of ψ1(P0), and that ˆψ−
+2 and ˆψ+
+2 are consistent estima-
+tors of ψ−
+2 and ψ+
+2 respectively. Then, for any ϵ > 0,
+limn→∞P( ˆψ−−ϵ ≤ψ(P0) ≤ˆψ+ + ϵ) = 1.
+Thus, if we construct bounds ˆψ−
+2 , ˆψ+
+2 satisfying the con-
+ditions of Theorem 4.1, the interval [ ˆψ−, ˆψ+] will be con-
+sistent for ψ(P0). Next, we consider speciﬁc choices of P
+that arise from different assumptions on P0, and construct
+such an estimator ˆψ−
+2 . We focus throughout on the inﬁmum,
+but all of our discussion holds mutatis mutandis for the
+supremum.
+Boundedness assumptions.
+As a ﬁrst example, we con-
+sider the following simple choice of P, corresponding to
+the assumption that the response Yi must lie in the interval
+[ℓ, u]:
+Pbdd
+ℓ,u = {P consistent w. P0 : ℓ≤Yi ≤u a.s.} .
+(2)
+The assumption that ℓ≤Yi ≤u implies that ℓ≤µP (x) ≤
+u for all x as well, and a natural choice of ψ−
+2 is ˆψ−
+2 =
+ℓ
+n
+Pn
+i=1 πe(Xi)1{πb(Xi) = 0}. Then, by the law of large
+numbers, ˆψ−
+2
+P−→ℓE[πe(Xi)1{πb(Xi) = 0}], and we can
+verify that this is also the value of ψ−
+2 . Thus the consistency
+conditions of Theorem 4.1 hold and the interval [ ˆψ−, ˆψ+]
+is consistent for ψ(P0).
+The interval [ ˆψ−, ˆψ+] is an analogue of the so-called Man-
+ski bounds (Manski, 1990), and so our framework gener-
+alizes this well-established practice. As such, we can also
+obtain conﬁdence intervals for the partial identiﬁcation re-
+gion of ψ(P0) using the methods of Imbens and Manski
+(2004) and Stoye (2009).
+Smoothness assumptions.
+Next, we move on to our main
+focus: Lipschitz assumptions on µP (x). Formally, this
+corresponds to the family
+PLip
+L
+= {P consistent w. P0 : µP is L-Lipschitz} ,
+where by L-Lipschitz we mean that |µP (x1) −µP (x2)| ≤
+Ld(x1, x2) for some metric d on X. By restricting µP to be
+L-Lipschitz, we can draw conclusions about the behavior
+≥ˆµ(X1) −Ld(X1, X2)
+≥ˆµ(X1) −Ld(X1, X3)
+≥ˆµ(X1) −Ld(X1, X2)
+−Ld(X2, X3)
+•
+ˆµ(X1)
+•
+t2
+•t3
+Figure 2. An illustration of the no-interaction property for Lips-
+chitz constraints. At the optimal solution of (3), constraints (blue)
+between pairs of points in the no-overlap region (red) are not active
+(light blue).
+of µP in the no-overlap region based on our observations in
+the overlap region and thus estimate infP ∈PLip
+L
+ψ2(P).
+We propose to construct the estimator ˆψ−
+2 in this setting by
+solving the following linear program:
+min
+t1, · · · , tn
+1
+n
+n
+X
+i=1
+tiπe(Xi)1{πb(Xi) = 0}
+(3)
+s.t.
+|ti −tj| ≤Ld(Xi, Xj),
+1 ≤i < j ≤n,
+ti −ˆµ(Xi) = 0,
+∀i s.t. πb(Xi) > 0.
+The problem (3) is an approximation of the population prob-
+lem infP ∈PLip
+L
+ψ2(P) in three ways: (i) it averages over
+sample points in the objective rather than over P0; (ii) it only
+enforces the Lipschitz constraint between pairs of observed
+data points Xi, Xj rather than between all pairs x1, x2; and
+(iii) it sets points in the overlap region to have value ˆµ rather
+than µ. We will see shortly that all of these approximations
+are asymptotically negligible.
+We now characterize the solution to (3) and its properties
+under assumptions. The key to our results is the surprising
+fact that (3) can be solved in closed-form whenever d is a
+metric, even though this is not generally the case for linear
+programs. We are able to obtain a closed-form solution
+to (3) because its constraints satisfy what we refer to as a
+no-interaction property, by which we mean that points in
+the no-overlap region do not place sharp bounds on each
+other.
+To see why, consider an example with n = 3, where the
+i = 1 point is in the overlap region and the other two
+points are in the no-overlap region (Figure 2). We must
+have t1 = ˆµ(X1). We must also have t2 ≥ˆµ(X1) −
+Ld(X1, X2), and since the objective is non-decreasing in
+the ti, we set t2 = ˆµ(X1)−Ld(X2, X1). Then, consider t3.
+The lower bound on t3 coming directly from t1 is ˆµ(X1) −
+Ld(X3, X1), while the lower bound coming indirectly from
+t2 is ˆµ(X1) −Ld(X2, X1) −Ld(X3, X2).
+The key point is that d(X2, X1) + d(X3, X2) > d(X3, X1)
+by the triangle inequality, and so the bound from the overlap
+region is always sharper than the bound from the no-overlap
+4
+
+
+=== PDF PAGE 5 ===
+Off-policy Evaluation Beyond Overlap
+region. We emphasize that this no-interaction property is
+non-trivial and does not hold in general, e.g., it does not
+hold for an α-H¨older continuity assumption.
+Based on this intuition, we expect that constraints between
+points in the no-overlap region in (3) are redundant, and
+the optimal solution to (3) will simply set each ti in the
+no-overlap region to the tightest lower bound obtained from
+a point in the overlap region. We state this precisely in our
+next theorem, which requires the following assumptions.
+Assumption 4.2. The estimated ˆµ satisﬁes |ˆµ(Xi) −
+ˆµ(Xj)|
+≤
+Ld(Xi, Xj) for all Xi, Xj
+such that
+πb(Xi), πb(Xj) > 0.
+Assumption 4.3. The estimated ˆµ is consistent, so that
+supx:πb(x)>0 |ˆµ(x) −µP0(x)|
+P−→0.
+Assumption 4.2 is necessary for (3) to be feasible. To satisfy
+this assumption for moderate values of L, we recommend
+estimating ˆµ with smooth approximations such as paramet-
+ric models, splines, or kernel methods (Hastie et al., 2009).
+Assumption 4.3 requires consistency in the overlap region;
+note that we make no assumptions on the behavior of ˆµ in
+the no-overlap region.
+Our next assumption is on the marginal distribution P0,X
+of Xi. This assumption ensures that the marginal distribu-
+tion of Xi does not have any “holes” that prevent us from
+observing parts of the overlap region.
+Assumption 4.4. For every x such that πb(x) > 0, either
+(a) the distribution P0,X has an atom at {x} or (b) for every
+ϵ > 0, there exists δ > 0 such that P(d(Xi, x) ≤ϵ) > δ.
+Under these assumptions, we have the following result,
+whose proof appears in Appendix A. In this result, we write
+1i as shorthand for 1{πb(Xi) = 0}.
+Theorem 4.5. Suppose that P0 ∈PLip
+L . Then, for ˆψ−
+2 and
+ψ−
+2 , we have that:
+(a) under Assumption 4.2, the problem (3) is feasible and
+has value ˆψ−
+2 , which is
+1
+n
+n
+X
+i=1
+πe(Xi)
+
+max
+j:πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj)
+
+1i,
+(b) the population bound is ψ−
+2 , which is
+EP0
+"
+πe(Xi)
+ 
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+!
+1i
+#
+,
+(c) under Assumptions 4.3 and 4.4, we have ˆψ−
+2
+P−→ψ−
+2 .
+Theorem 4.5(a) establishes a closed-form solution to (3),
+i.e., we do not need to solve it numerically. This is im-
+portant even for moderate values of n, since (3) has O(n2)
+constraints. The fastest known algorithms for solving a
+general linear program with d constraints have complexity
+O(d2.5) (Lee and Sidford, 2015), and so solving (3) has
+worst-case complexity O(n5). In contrast, computing the
+closed-form given in (12) requires only O(n2) operations,
+which is of the same order as computing all pairwise dis-
+tances d(Xi, Xj). In cases where even O(n2) operations
+are too expensive, we can construct conservative approxi-
+mations of ˆψ−
+2 by building on recent advances in efﬁcient
+exact and approximate nearest neighbor search; we discuss
+such tools further in Appendix B.
+The results in Theorem 4.5(b,c) are of a different ﬂavor,
+and characterize the statistical properties of solutions to
+(3). Speciﬁcally, they show that three approximations we
+made in constructing ˆψ−
+2 are asymptotically negligible, and
+we recover infP ∈PLip
+L
+ψ2(P) in large samples. Thus the
+consistency conditions of Theorem 4.1 are satisﬁed and our
+bounds are the best possible under the given assumptions.
+Further assumptions.
+The framework we present cap-
+tures many other potentially interesting assumptions. For
+example, we can combine the two assumptions presented
+here, and assume that P ∈PLip
+L
+∩Pbdd
+ℓ,u , to obtain tighter
+bounds than either assumption alone would give. In fact, the
+no-interaction property discussed after (3) continues to hold
+in this case, and our results then extend naturally; we present
+these more general results in Theorem A.1 of Appendix A.
+A variety of other assumptions are also possible, includ-
+ing monotonicity of µ with respect to a partial order on
+the covariates Xi, convexity of µ, smoothness of higher
+derivatives of µ, α-H¨older continuity of µ, and composi-
+tions of these assumptions. Interestingly, these assump-
+tions and their compositions do not necessarily satisfy the
+no-interaction property: for example, if we assume both
+Lipschitz smoothness and monotonicity, the no-interaction
+property no longer holds, as we show in Appendix D. As
+such, our results on smoothness, boundedness, and their
+composition, are both non-trivial and surprising.
+In summary, we derive bounds on the off-policy value un-
+der smoothness or smoothness and boundedness assump-
+tions without assuming overlap. Unlike previous work, our
+bounds are provably sharp—that is, they allow an analyst to
+make the strongest conclusions possible about a particular
+policy under the given assumptions—and can be computed
+efﬁciently even for large datasets owing to our careful analy-
+sis and closed-form solution of the linear programs involved.
+5. Rates of Convergence
+In this section, we precisely characterize the asymptotics of
+ˆψ−
+2 by identifying the rate at which it converges to ψ−
+2 and
+showing that this rate is optimal up to log factors. We ﬁrst
+5
+
+
+=== PDF PAGE 6 ===
+Off-policy Evaluation Beyond Overlap
+upper bound the mean-squared error (MSE) of ˆψ−
+2 , with
+a proof given in Appendix A. Recall that we write 1i for
+1{πb(Xi) = 0}.
+Theorem 5.1. Let ˆψ−
+2 , ψ−
+2 be as in Theorem 4.5. Then, if
+Xi has a density that is lower bounded by a constant b then
+the mean-squared error E[( ˆψ−
+2 −ψ−
+2 )2] is upper bounded
+by
+2E[∥(ˆµ(x)−µ(x))1i∥2
+∞]+4L2(cdbn)−2/d+σ2n−1, (4)
+where cd is the volume of a d-dimensional unit ball,
+σ2 = var
+ 
+πe(Xi)[
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)]1i]
+!
+.
+The bound (4) contains three terms: one corresponding to
+error from the estimation of µ; one corresponding to the
+error from approximating a supremum by a maximum; and
+one that is noise.
+Classical results on non-parametric regression show that the
+minimax rate for estimating an L-Lipschitz function in d
+dimensions in the sup-norm is of order (log n/n)−2/(d+2),
+and that this rate is obtained by a kernel estimator (Stone,
+1982). Thus, the dominant term of (4) is the ﬁrst one, and
+the MSE of ˆψ−
+2 is O((log n/n)−2/(d+2)) when using an
+appropriate kernel estimator. With this in mind, we caution
+against using our methods in extremely high-dimensional
+settings, since rates of convergence will be slow.
+Next we present a nearly matching lower bound, proven
+in Appendix A through a LeCam two-point argument that
+extends lower bound constructions for estimating Lipschitz
+functions at a point to the off-policy evaluation setting
+(Wainwright, 2019).
+Theorem 5.2. Let ψ−
+2 be as in Theorem 4.5, suppose that
+the covariates Xi takes values in [−1, 1]d, and that the sup-
+port of the policy πb is [−1/2, 1/2]d. Then, if n ≥21−dL2,
+the minimax risk inf ˆ
+ψ−
+2 supP ∈PLip
+L
+EP
+h
+( ˆψ−
+2 −ψ−
+2 )2i
+is at
+least
+1
+16E[πe(Xi)1{πb(Xi) = 0}]2(2n)−2/(d+2)(4L)−2d/(d+2).
+The assumption on the support of πb simpliﬁes the lower
+bound construction; we expect similar rates in other ge-
+ometries. The lower bound of Theorem 5.2 shows that
+any estimator must have an MSE that is at least of order
+n−2/(d+2), and so the rate achieved by ˆψ−
+2 is optimal up to
+log-factors. To see why we obtain this rate, note that ψ−
+2
+depends on a supremum of µ over the overlap region. Thus,
+we need to be able to estimate the value of µ at a particular
+point, namely the point at which the supremum is attained.
+The minimax lower bound for estimating an L-Lipschitz
+function in d dimensions at a point is n−2/(d+2), and so we
+inherit this rate for this estimation of ψ−
+2 .
+Table 1. Coverage percentage (as in Theorem 4.1 with ϵ = 0.01)
+of partial identiﬁcation intervals for the value of πe on the Yeast
+dataset at a range of samples sizes n and smoothness parameters
+L. In parentheses are the percent rates at which Assumption 4.2
+is satisﬁed. Results are averaged over 10,000 replications. We
+see that the Lipschitz assumption with L = 1, 2 likely does not
+hold, since Assumption 4.2 is not satisﬁed in larger sample sizes,
+while the Lipschitz assumption for larger values of L seems to
+hold, since Assumption 4.2 is satisﬁed and coverages approach the
+desired 100% rate.
+L
+n = 1000
+n = 2000
+n = 3000
+n = 4000
+n = 5000
+n = 10000
+1
+40.8 (78.5)
+0.03 (2.0)
+0.0 (0)
+0.0 (0)
+0 (0)
+0 (0)
+2
+59.7 (100)
+72.5 (100)
+78.9 (100)
+82.7 (100)
+85.9 (99.5)
+9.5 (10.6)
+3
+64.6 (100)
+77.2 (100)
+82.8 (100)
+86.9 (100)
+89.7 (100)
+96.9 (100)
+4
+68.2 (100)
+80.2 (100)
+85.3 (100)
+89.1 (100)
+91.9 (100)
+98.0 (100)
+5
+70.6 (100)
+82.0 (100)
+86.8 (100)
+90.7 (100)
+93.1 (100)
+98.4 (100)
+∞
+75.0 (100)
+86.1 (100)
+90.7 (100)
+93.5 (100)
+95.6 (100)
+99.2 (100)
+Based on this intuition, we expect that similar lower bounds
+will continue to hold for any non-parametric assumption
+that requires estimation of µ in the overlap region, such
+as monotonicity assumptions or higher-order smoothness
+assumptions. In contrast, we do not need to estimate µ when
+making the boundedness assumption of Pbdd
+ℓ,u , and so the
+resulting bounds will converge at a faster n−1 rate. As a
+consequence, the inferential methods of (Imbens and Man-
+ski, 2004) under the boundedness assumption do not extend
+to more complex smoothness assumptions; developing infer-
+ential methods under smoothness assumptions is therefore
+an interesting direction for future work.
+6. Experiments
+We now demonstrate our methods in two semi-synthetic set-
+tings. In the ﬁrst setting, we study the coverage guarantees
+of Theorem 4.1 and compare the width of our intervals to
+the width of the intervals of Ben-Michael et al. (2021); in
+the second, we demonstrate the utility of our methods in a
+real-world setting.
+1
+For another example of how our methods perform on real
+data, we refer interested readers to Saveski et al. (2023),
+which takes a partial identiﬁcation approach to evaluating
+policies in peer review management systems.
+Yeast dataset: coverage analysis.
+Following prior work
+on OPE, we convert a classic multi-class classiﬁcation
+dataset into an off-policy evaluation dataset (Dud´ık et al.,
+2011; Wang et al., 2017; Wu and Wang, 2018; Su et al.,
+2020; Zhan et al., 2021). Like those prior works, we use
+the Yeast data set from the UCI repository (Dua and Graff,
+1Code
+for
+replicating
+our
+results
+is
+available
+at
+https://github.com/skhan1998/lipschitz-ope.
+6
+
+
+=== PDF PAGE 7 ===
+Off-policy Evaluation Beyond Overlap
+2017), which consists of n = 1, 484 observations of data
+points (Xi, ˜Yi), where Xi ∈[0, 1]8 is a covariate vector of
+length d = 8 and ˜Yi is a class label indicating one of 10
+classes. We remove 6 rare classes from the data, leaving
+n = 1, 299 observations distributed among 4 classes.
+We sample with replacement from the observed data to gen-
+erate samples of different sizes, n (so P0 is the empirical
+distribution of the data). The action set A is the set of 4
+classes in the data, and the evaluation policy, πe, samples
+actions from the ﬁtted probabilities of a logistic regression.
+The behavior policy, πb, samples actions from the ﬁtted
+probabilities of the same logistic regression, but with proba-
+bilities below 0.05 set to zero. This conﬁguration leads to an
+overlap violation between the behavior and evaluation poli-
+cies. The outcomes Yi are 1 when the action taken matches
+the true class label ˜Yi, and 0 otherwise.
+We investigate the guarantees of Theorem 4.1 and the role
+of the parameter L. We can generate partial identiﬁcation
+intervals for the value of πe under the assumption that P0 ∈
+PLip
+L
+∩Pbdd
+0,1 using the methods of Section 4, where the
+Lipschitz assumption is made with respect to Euclidean
+distance. We ﬁt ˆµ using a regularized logistic regression.
+Table 1 shows the coverage rates of these intervals, in the
+sense of Theorem 4.1 with ϵ = 0.01, for a range of values
+of L. In parentheses are the fraction of times that ˆµ is L-
+Lipschitz in the overlap region, i.e., the fraction of times
+that Assumption 4.2 is satisﬁed. When Assumption 4.2 is
+not satisﬁed, the partial identiﬁcation bounds are undeﬁned,
+and so we never cover the off-policy value. Note that L =
+∞corresponds to pure Manski bounding, or equivalently
+to assuming only that P0 ∈Pbdd
+0,1 , an assumption that is
+satisﬁed by construction in this example. We provide a plot
+of the results of Table 1, as well as results with ϵ = 0.005,
+in Appendix C.
+In Table 1, we see a distinction between L = 1, 2 and L > 2.
+For the small values of L, the problem gradually ceases to
+become feasible for larger values of n, and so the resulting
+intervals are undeﬁned and rarely cover the off-policy value.
+For larger values of L, the problem is always feasible at all
+values of n, and the coverage increases with n, approaching
+the desired 100% coverage in large sample sizes. In par-
+ticular, the fact that the coverage of intervals constructed
+assuming, for example, that L = 4 or L = 5 (an assumption
+that is not satisﬁed by construction) is close to the coverage
+of intervals satisﬁed by the L = ∞boundedness assump-
+tion (which is satisﬁed by construction), suggests that the
+smoothness assumption for these larger values of L is quite
+plausible. As a point of reference, the L = 5 assumption
+on these covariates in the Euclidean metric implies, for ex-
+ample, that if two units agree in all but one covariate, and
+disagree by 0.2 in that covariate, their expected outcome can
+differ by 1, so they do not place any bounds on each other.
+Table 2. Average width of the intervals obtained using the pro-
+posed method in semi-synthetic experiments on the Yeast dataset.
+We compare to the intervals of a baseline method proposed by
+Ben-Michael et al. (2021) and compute the ratio between the width
+of the two intervals. We set L = 1, average over 1000 trials, and
+scale the results by 103 for readability. We ﬁnd that the intervals
+of baseline method are 40-50% wider than the proposed method.
+Sample size, n
+Method
+500
+1000
+1500
+2000
+2500
+3000
+Proposed
+4.37
+3.09
+2.59
+2.15
+1.80
+1.68
+Baseline
+6.57
+4.89
+3.89
+3.18
+2.64
+2.41
+Ratio
+1.50
+1.58
+1.50
+1.48
+1.47
+1.43
+Yeast dataset: interval width analysis.
+We now study
+the width of our intervals, using the intervals proposed by
+Ben-Michael et al. (2021) as a baseline, on the Yeast data.
+This baseline method constructs lower bounds on the off-
+policy value using a simultaneous conﬁdence interval for ˆµ,
+rather than the ﬁtted ˆµ itself. We use the same dataset and
+construct the behavior and evaluation policies in the same
+way as in the previous section, but discretize the original
+covariates Xi according to the map Xi 7→1{Xi < 0.5}.
+We discretize since, as the authors descibe, constructing
+the simultaneous conﬁdence interval needed by the baseline
+method is challenging in the case of continuous covariates.
+Table 2 shows the results for L = 1 and a range of sample
+sizes. We ﬁnd that the intervals obtained using the baseline
+methods are, in this setting, consistently 40-50% wider than
+those obtained using the proposed method. This conserva-
+tiveness is induced by the simultaneous conﬁdence interval
+construction, which the baseline method relies on to ob-
+tain better theoretical guarantees for policy learning, but is
+needlessly loose for policy evaluation.
+Yahoo! Front Page Today dataset.
+Our second experi-
+ment uses the Yahoo Webscope’s featured news dataset, a
+standard benchmark for OPE algorithms (Yahoo!, 2011; Li
+et al., 2010; 2011). This dataset was collected over 10 days
+in May 2009, and consists of observations of user visits and
+actions on the front page of the Yahoo! web portal. Each
+observation is a tuple (Xi, Ai, Yi), where Xi ∈[0, 1]5, Ai
+is an article shown to the user in a featured position on the
+page, and Yi is a binary indicator whether the user clicked.
+Each Ai is accompanied by a 5-dimensional covariate vector
+Vi. The articles Ai are chosen from a hand-curated pool of
+articles that is updated every hour. We restrict our focus to a
+single hour of data so that the articles are drawn from a ﬁxed
+pool of articles A, considering n = 16, 628 data points.
+This problem thus has the form of a multi-armed bandit
+problem, as described in Section 3, with action space A.
+7
+
+
+=== PDF PAGE 8 ===
+Off-policy Evaluation Beyond Overlap
+The architects of this dataset sampled Ai ∼Unif(A), which
+guarantees overlap, but requires taking many sub-optimal
+actions. A tuned, non-uniform logging policy would clearly
+be preferable. With our methods, we show that it is possible
+to run a non-uniform policy and yet still evaluate other
+policies that do not satisfy overlap.
+We consider the following scenario: from historical data,
+we know that the user covariate Xi,3 is positively correlated
+with the response Yi and that the article covariate Vi,0 is
+positively correlated with Yi. Based on this, we believe that
+we should avoid showing articles with low values of Vi,0 to
+users with low values of Xi,3. Thus we consider the family
+of policies
+π(T )(Xi, a) =
+(
+1/|A|
+if
+Xi,3 > T,
+1{a ∈A∗}/|A∗|
+if
+Xi,3 ≤T,
+where A∗is a subset of articles we expect to perform well
+and T is a cut-off that identiﬁes users who are unlikely to
+click. Here, we take A∗to be the set of articles with above
+median values of Vi,0.
+We suppose that we have deployed π(0.5) (and simulate
+this by subsampling), and are interested in exploring other
+values of T. The subsampled dataset contains n = 10, 086
+data points. For values of T ≥0.5, the behavior policy
+provides full support for the evaluation policy, and no partial
+identiﬁcation is required. For values of T < 0.5, there
+is an overlap violation, since π(T ) can show users with
+Xi,3 ∈(T, 0.5) articles a ∈A \ A∗, an action that π(0.5)
+assigns zero probability.
+We use the estimators of Section 4 to construct interval
+estimates under the assumption that P0 ∈PLip
+L
+∩Pbdd
+0,1 ,
+where the Lipschitz assumption is made with respect to
+Euclidean distance. Our results are in Figure 3, which plots
+the interval estimators [ ˆψ−, ˆψ+] of the value of π(T ) under
+Lipschitz assumptions for T = 0.25, 0.3, 0.35, 0.4, with ˆµ
+ﬁt using a regularized logistic regression (which leads to
+smooth ˆµ), for a range of L. Results with larger values of L
+and T can be found in Appendix C. As a point of reference,
+the L = 1 assumption on this data implies, for example,
+that if two units agree in all but one covariate, and differ
+by the maximum possible value of 1 in that covariate, their
+expected outcome can differ by the maximum possible value
+of 1, so they place no bounds on each other.
+Also shown are the point estimates obtained by using model
+predictions without any partial identiﬁcation, as well as an
+infeasible sample estimate (and accompanying conﬁdence
+intervals) of the value of π(T ) as estimated on data from a
+uniform policy. This infeasible sample estimate corresponds
+to the results of the experiment we would run (at consider-
+able cost) if unwilling to rely on smoothness assumptions.
+0.2 0.4 0.6 0.8
+1
+0.04
+0.06
+0.08
+0.10
+0.12
+Off-policy value
+T=0.25
+Method
+Imp.
+Lip.
+Manski
+Infeasible samp.
+Quantity
+CI
+Partial id.
+Point estim.
+0.2 0.4 0.6 0.8
+1
+T=0.3
+0.2 0.4 0.6 0.8
+1
+T=0.35
+0.2 0.4 0.6 0.8
+1
+Lipschitz constant, L
+T=0.4
+Figure 3. Partial identiﬁcation bounds assuming that P0 ∈PLip
+L
+∩
+Pbdd
+0,1 (black), Manski bounds assuming that P0 ∈Pbdd
+0,1 (red), and
+pure imputation estimates (blue) of the value of π(T ) estimated
+using data from the behavior policy π(0.5) for a range of T and
+L. The point estimate and conﬁdence intervals from an infeasible
+sample dataset from the uniform behavior policy are in orange.
+Imputation overestimates the value of π(T ), and our bounds correct
+for this—the correction is more aggressive as the model estimate
+and infeasible sample estimate diverge, meaning we correctly
+adjust for the model’s extrapolation power. There are overlap
+violations for 16.8%, 10.8%, 7.0%, and 4.3% of the points when
+T = 0.25, 0.3, 0.35, and 0.4 respectively.
+The key takeaway from Figure 3 is that, as T increases, and
+the imputation estimate and infeasible sample estimate grow
+closer, the width of our partial identiﬁcation interval de-
+creases. This is because, as T becomes smaller, the number
+of units in the no-overlap region {Xi : T ≤Xi,3 ≤0.5}
+increases, and the maximum distance between the over-
+lap region the no-overlap region increases. Our method
+accounts for this, and correctly distinguishes cases where
+the model needs to be corrected only slightly from cases
+where it must be corrected substantially. Furthermore, for
+larger values of L, our intervals consistently overlap with
+the 95% conﬁdence interval from the alternative (“costly”)
+experiment under a uniform policy.
+We also compare to the Manski partial identiﬁcation re-
+gions obtained solely from the assumption that P ∈Pbdd
+0,1,
+shown in red. One may be concerned that the intersection
+between our intervals and the 95% conﬁdence interval is
+not large, but because this is true for the Manski intervals
+as well (whose non-parametric assumption holds exactly),
+we conclude that the small intersection is due to error in the
+estimation of ˆψ1. More importantly, we see that our inter-
+vals are much narrower than the Manski intervals for small
+L and converge to them as L →∞. For example, when
+L = 1, our intervals are 73.5%, 79.1%, 83.7%, and 91.5%
+narrower than the Manksi intervals for T = 0.25, 0.3, 0.35,
+and 0.4 respectively.
+8
+
+
+=== PDF PAGE 9 ===
+Off-policy Evaluation Beyond Overlap
+7. Conclusion
+We have developed partial identiﬁcation results for off-
+policy evaluation under smoothness assumptions, shown
+that our bounds have favorable asymptotics, and demon-
+strated their value in experiments. We emphasize that our
+methods are tied to a choice of covariate space and met-
+ric, and so it is crucial to evaluate the reasonability of the
+smoothness assumption with regard to those choices. The
+bounds we give are only as useful as the underlying assump-
+tions are plausible, and thus it is essential to combine our
+methodological proposals with thoughtful application.
+The proposed methods open many avenues for future work.
+One promissing direction is extending our methods to as-
+sumptions made in action covariate space rather than user
+covariate space and to other kinds of nonparametric as-
+sumptions such as monotonicity, convexity, other kinds of
+smoothness, or combinations of these. In such cases, the no-
+interaction property may no longer hold (see Appendix D
+for such an example), necessitating solving a linear program
+numerically. Such numerical solutions could potentially
+still be analyzed using results on perturbations of linear
+programs, similar to the approach of Kallus et al. (2022).
+It would also be of interest to study a setting in which there
+are points for which πb(Xi) is extremely small but non-zero.
+In this setting, treating such points as though they are in
+fact no-overlap and partially identifying their contribution
+to the off-policy value (rather than point identifying it us-
+ing inverse-propensity based methods) may lead to tighter
+bounds on the off-policy value. The main challenge here
+is selecting a cut-off at which πb(Xi) should be treated
+as “effectively zero,” possibly in a data-adaptive way, and
+accounting for this choice in the resulting intervals.
+Acknowledgements
+This work was supported in part by NSF CAREER Award
+#2143176. We are grateful to Kevin Guo, Tal Wagner, Nihar
+Shah, and Steven Jecmen for helpful discussions.
+Impact Statement
+This paper presents work whose goal is to advance the ﬁeld
+of machine learning. There are many potential societal
+consequences of our work, none which we feel must be
+speciﬁcally highlighted here.
+References
+A. Andoni, P. Indyk, and I. Razenshteyn. Approximate near-
+est neighbor search in high dimensions. In Proceedings
+of the International Congress of Mathematicians: Rio de
+Janeiro 2018, pages 3287–3318. World Scientiﬁc, 2018.
+E. Ben-Michael, D. J. Greiner, K. Imai, and Z. Jiang. Safe
+policy learning through extrapolation: Application to pre-
+trial risk assessment. arXiv preprint arXiv:2109.11679,
+2021.
+J. L. Bentley. Multidimensional binary search trees used for
+associative searching. Communications of the ACM, 18
+(9):509–517, 1975.
+L. Bottou, J. Peters, J. Qui˜nonero-Candela, D. X. Charles,
+D. M. Chickering, E. Portugaly, D. Ray, P. Simard, and
+E. Snelson. Counterfactual reasoning and learning sys-
+tems: The example of computational advertising. Journal
+of Machine Learning Research, 14(11), 2013.
+A. Chin, D. Eckles, and J. Ugander. Evaluating stochastic
+seeding strategies in networks. Management Science, 68
+(3):1714–1736, 2022.
+D. Dua and C. Graff. UCI machine learning repository,
+2017. URL http://archive.ics.uci.edu/ml.
+M. Dud´ık, J. Langford, and L. Li. Doubly robust policy
+evaluation and learning. In Proceedings of the 28th In-
+ternational Conference on International Conference on
+Machine Learning, pages 1097–1104, 2011.
+S. Har-Peled. Geometric approximation algorithms. Num-
+ber 173. American Mathematical Soc., 2011.
+T. Hastie, R. Tibshirani, J. H. Friedman, and J. H. Fried-
+man. The elements of statistical learning: data mining,
+inference, and prediction, volume 2. Springer, 2009.
+S. Higbee. Policy learning with new treatments. arXiv
+preprint arXiv:2210.04703, 2022.
+G. W. Imbens and C. F. Manski. Conﬁdence intervals for par-
+tially identiﬁed parameters. Econometrica, 72(6):1845–
+1857, 2004.
+N. Jiang and J. Huang. Minimax value interval for off-policy
+evaluation and policy optimization. Advances in Neural
+Information Processing Systems, 33:2747–2758, 2020.
+N. Kallus, X. Mao, and A. Zhou. Assessing algorithmic
+fairness with unobserved protected class using data com-
+bination. Management Science, 68(3):1959–1981, 2022.
+L. LeCam. Convergence of estimates under dimensionality
+restrictions. The Annals of Statistics, pages 38–53, 1973.
+Y. T. Lee and A. Sidford. Efﬁcient inverse maintenance and
+faster algorithms for linear programming. In 2015 IEEE
+56th Annual Symposium on Foundations of Computer
+Science, pages 230–249. IEEE, 2015.
+9
+
+
+=== PDF PAGE 10 ===
+Off-policy Evaluation Beyond Overlap
+L. Li, W. Chu, J. Langford, and R. E. Schapire. A contextual-
+bandit approach to personalized news article recommen-
+dation. In Proceedings of the 19th international confer-
+ence on World wide web, pages 661–670, 2010.
+L. Li, W. Chu, J. Langford, and X. Wang. Unbiased ofﬂine
+evaluation of contextual-bandit-based news article recom-
+mendation algorithms. In Proceedings of the fourth ACM
+international conference on Web search and data mining,
+pages 297–306, 2011.
+P. Liao, P. Klasnja, and S. Murphy. Off-policy estimation of
+long-term average outcomes with applications to mobile
+health. Journal of the American Statistical Association,
+116(533):382–391, 2021.
+C. F. Manski. Nonparametric bounds on treatment effects.
+The American Economic Review, 80(2):319–323, 1990.
+W. Mou, P. Ding, M. J. Wainwright, and P. L. Bartlett.
+Kernel-based off-policy estimation without overlap: In-
+stance optimality beyond semiparametric efﬁciency.
+arXiv preprint arXiv:2301.06240, 2023.
+S. M. Omohundro. Five balltree construction algorithms.
+International Computer Science Institute Berkeley, 1989.
+F. P. Preparata and M. I. Shamos. Computational geometry:
+an introduction. Springer Science & Business Media,
+2012.
+N. Sachdeva, Y. Su, and T. Joachims. Off-policy bandits
+with deﬁcient support. In Proceedings of the 26th ACM
+SIGKDD International Conference on Knowledge Dis-
+covery & Data Mining, pages 965–975, 2020.
+M. Saveski, S. Jecmen, N. B. Shah, and J. Ugander. Counter-
+factual evaluation of peer-review assignment policies. Ad-
+vances in Neural Information Processing Systems, 2023.
+C. J. Stone. Optimal global rates of convergence for non-
+parametric regression. The annals of statistics, pages
+1040–1053, 1982.
+J. Stoye. More on conﬁdence intervals for partially identiﬁed
+parameters. Econometrica, 77(4):1299–1315, 2009.
+Y. Su, M. Dimakopoulou, A. Krishnamurthy, and M. Dud´ık.
+Doubly robust off-policy evaluation with shrinkage. In
+International Conference on Machine Learning, pages
+9167–9176. PMLR, 2020.
+A. Swaminathan and T. Joachims. Batch learning from
+logged bandit feedback through counterfactual risk min-
+imization. The Journal of Machine Learning Research,
+16(1):1731–1755, 2015.
+A. Swaminathan, A. Krishnamurthy, A. Agarwal, M. Dudik,
+J. Langford, D. Jose, and I. Zitouni. Off-policy eval-
+uation for slate recommendation. Advances in Neural
+Information Processing Systems, 30, 2017.
+P. Thomas and E. Brunskill. Data-efﬁcient off-policy pol-
+icy evaluation for reinforcement learning. In Interna-
+tional Conference on Machine Learning, pages 2139–
+2148. PMLR, 2016.
+M. J. Wainwright.
+High-dimensional statistics: A non-
+asymptotic viewpoint, volume 48. Cambridge university
+press, 2019.
+Y.-X. Wang, A. Agarwal, and M. Dudık.
+Optimal and
+adaptive off-policy evaluation in contextual bandits. In
+International Conference on Machine Learning, pages
+3589–3597. PMLR, 2017.
+H. Wu and M. Wang. Variance regularized counterfactual
+risk minimization via variational divergence minimiza-
+tion. In International Conference on Machine Learning,
+pages 5353–5362. PMLR, 2018.
+T. Xie, C.-A. Cheng, N. Jiang, P. Mineiro, and A. Agarwal.
+Bellman-consistent pessimism for ofﬂine reinforcement
+learning. Advances in neural information processing
+systems, 34:6683–6694, 2021.
+Yahoo!
+Webscope dataset R6A: ydata-frontpage-
+todaymodule-clicks-v1,
+2011.
+URL https://
+webscope.sandbox.yahoo.com/.
+R. Zhan, V. Hadad, D. A. Hirshberg, and S. Athey. Off-
+policy evaluation via adaptive weighting with data from
+contextual bandits.
+In Proceedings of the 27th ACM
+SIGKDD Conference on Knowledge Discovery & Data
+Mining, pages 2125–2135, 2021.
+10
+
+
+=== PDF PAGE 11 ===
+Off-policy Evaluation Beyond Overlap
+Off-policy Evaluation Beyond Overlap:
+Sharp Partial Identiﬁcation Under Smoothness
+Supplemental material
+A. Proofs of results
+A.1. Proof of Theorem 4.1
+Proof of Theorem 4.1. We begin by writing
+P( ˆψ−−ϵ ≤ψ(P0) ≤ˆψ+ + ϵ) = 1 −P(ψ(P0) < ˆψ−−ϵ or ψ(P0) > ˆψ+ + ϵ),
+(5)
+≥1 −P(ψ(P0) ≤ˆψ−−ϵ) −P(ψ(P0) > ˆψ+ + ϵ),
+(6)
+by the union bound. We now show that P(ψ(P0) > ˆψ+ + ϵ) →0. An analogous argument shows that P(ψ(P0) <
+ˆψ−−ϵ) →0 as well, and these two facts along with (6) imply the result.
+We have
+P(ψ(P0) > ˆψ+ + ϵ) = P(ψ1(P0) + ψ2(P0) > ˆψ1 + ˆψ+
+2 + ϵ),
+(7)
+≤P(ψ1(P0) > ˆψ1 + ϵ/2) + P(ψ2(P0) > ˆψ+
+2 + ϵ/2),
+(8)
+≤P(ψ1(P0) > ˆψ1 + ϵ/2) + P
+
+sup
+P ∈P
+ψ2(P) > ˆψ+
+2 + ϵ/2
+
+,
+(9)
+≤P(|ψ1(P0) −ˆψ1| > ϵ/2) + P
+sup
+P ∈P
+ψ2(P) −ˆψ+
+2
+ > ϵ/2
+
+.
+(10)
+Both terms of (10) are o(1) under the given consistency assumptions, so we conclude that P(ψ(P0) > ˆψ+ + ϵ) = o(1) as
+desired.
+A.2. Proof of Theorem 4.5
+We in fact prove a generalization of Theorem 4.5 that is based on the assumption that P0 ∈PLip
+L
+∩Pbdd
+ℓ,u. In particular,
+consider the optimization problem
+min
+t1, · · · , tn
+1
+n
+n
+X
+i=1
+tiπe(Xi)1{πb(Xi) = 0}
+s.t.
+|ti −tj| ≤Ld(Xi, Xj),
+1 ≤i < j ≤n,
+ti −ˆµ(Xi) = 0,
+1 ≤i ≤n s.t. πb(Xi) > 0,
+ℓ≤ti ≤u,
+1 ≤i ≤n
+(11)
+Then we have the following result.
+Theorem A.1. Suppose that (11) is feasible, that P0 ∈PLip
+L , and that Assumptions 4.3 and 4.4 hold. Then:
+(a) the problem (11) has value
+ˆψ−
+2 = 1
+n
+n
+X
+i=1
+πe(Xi)
+
+ℓ∨
+max
+j:πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj)
+
+1{πb(Xi) = 0};
+(12)
+(b) we have ˆψ−
+2
+P−→ψ−,∞
+2
+where
+ψ−,∞
+2
+= E
+"
+πe(Xi)
+ 
+ℓ∨
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+!
+1{πb(Xi) = 0}
+#
+;
+(13)
+(c) the bound ψ−,∞
+2
+is sharp in the sense that infP ∈PLip
+L
+∩Pbdd
+M
+ψ2(P) = ψ−,∞
+2
+.
+11
+
+
+=== PDF PAGE 12 ===
+Off-policy Evaluation Beyond Overlap
+Theorem 4.5 from the main text follows from sending ℓ→−∞in Theorem A.1. We now prove each part of the theorem in
+turn. In our proofs, we assume for the sake of convenience that the supremum in (13) is attained. This will be the case if, for
+instance, {x : πb(x) > 0} is compact. If the supremum is not attained, slight modiﬁcations of our proofs can be used to
+obtain the result.
+Proof of Theorem A.1(a). To show the result, we must do two things: show that the objective of (3) is bounded below by
+ˆψ−
+2 , and show that this bound is attained.
+For the bound, observe that, for each ti, we have
+ti ≥tj −Ld(Xi, Xj) for 1 ≤j ≤n,
+(14)
+≥
+max
+j:πb(Xj)>0 tj −Ld(Xi, Xj),
+(15)
+≥
+max
+j:πb(Xj)>0 tj −Ld(Xi, Xj),
+(16)
+=
+max
+j:πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj),
+(17)
+where the ﬁrst bound is the Lipschitz constraint and the last equality is the equality constraint. We also have ti ≥ℓfor all i,
+and thus we must have
+n
+X
+i=1
+tiπe(Xi)1{πb(Xi) = 0} ≥
+n
+X
+i=1
+πe(Xi)
+
+ℓ∨
+max
+j:πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj)
+
+1{πb(Xi) = 0} = ˆψ−
+2 ,
+(18)
+as desired.
+Next we will show that there exist a set of feasible ti for which the objective of (3) is equal to ˆψ−
+2 . The construction is
+t∗
+i = ℓ∨
+max
+j:πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj).
+(19)
+This construction clearly has objective value ˆψ−
+2 , so we need only check that it is feasible.
+For the equality constraint, note that if πb(Xi) > 0, then the maximum in (19) includes j = i, and thus is at least ˆµ(Xi).
+But for any j̸ = i, we have |ˆµ(Xj) −ˆµ(Xi)| ≤Ld(Xi, Xj) by the feasibility of (3), and so ˆµ(Xi) ≥ˆµ(Xj) −Ld(Xi, Xj).
+Since ˆµ is range-bounded, we also have ˆµ(Xi) ≥ℓ, and so
+ℓ∨
+max
+j:πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj) = ˆµ(Xi),
+(20)
+for i in the overlap region, and the equality constraint is satisﬁed.
+Next we check the Lipschitz constraint. To do this, we deﬁne
+f(i) =
+argmin
+j:πb(Xj)>0
+ˆµ(Xj) −Ld(Xi, Xj)
+(21)
+so that t∗
+i = ℓ∨(ˆµ(Xf(i)) −Ld(Xi, Xf(i))). We consider any two t∗
+i , t∗
+j, and distinguish three cases.
+First, if ˆµ(Xf(i)) −Ld(Xi, Xf(i)) < ℓand ˆµ(Xf(j)) −Ld(Xj, Xf(j)) < ℓ, then |t∗
+i −t∗
+j| = 0 and the Lipschitz condition
+is satisﬁed.
+Second, if ˆµ(Xf(i))−Ld(Xi, Xf(i)) > ℓand ˆµ(Xf(j))−Ld(Xj, Xf(j)) > ℓ, we may assume without the loss of generality
+that t∗
+i > t∗
+j, and compute
+|t∗
+i −t∗
+j| = t∗
+i −t∗
+j,
+(22)
+=
+ ˆµ(Xf(i)) −Ld(Xi, Xf(i))
+
+−
+ ˆµ(Xf(j)) −Ld(Xj, Xf(j))
+
+,
+(23)
+≤
+ ˆµ(Xf(i)) −Ld(Xi, Xf(i))
+
+−
+ ˆµ(Xf(i)) −Ld(Xj, Xf(i))
+
+,
+(24)
+= L
+ d(Xj, Xf(i)) −d(Xi, Xf(i))
+
+,
+(25)
+≤Ld(Xi, Xj),
+(26)
+12
+
+
+=== PDF PAGE 13 ===
+Off-policy Evaluation Beyond Overlap
+where the ﬁrst inequality uses the maximality (by deﬁnition) of f(j), and the second inequality is the triangle inequality
+d(Xj, Xf(i)) ≤d(Xi, Xf(i)) + d(Xi, Xj). Thus the Lipschitz constraint is satisﬁed in this case.
+Finally, if ˆµ(Xf(i)) −Ld(Xi, Xf(i)) > ℓand ˆµ(Xf(j)) −Ld(Xj, Xf(j)) < ℓ, then
+|t∗
+i −t∗
+j| = ˆµ(Xf(i)) −Ld(Xi, Xf(i)) −(ℓ),
+(27)
+≤ˆµ(Xf(i)) −Ld(Xi, Xf(i)) −(ˆµ(Xf(j)) −Ld(Xj, Xf(j)))
+(28)
+and (28) is bounded by Ld(Xi, Xj) by the arguments of (26).
+Thus we see that the t∗
+i deﬁned in (19) are feasible, and conclude that the value of (3) is ˆψ−
+2 .
+Before proceeding to the proof of Theorem A.1(b), we present two helpful lemmas. The ﬁrst of these controls the difference
+between the suprema of interest in terms of the difference in conditional mean functions, and will essentially be used to
+replace the estimated ˆµ in ˆψ−
+2 with the true µ.
+Lemma A.2. For any conditional mean functions µ1, µ2, we have
+
+max
+j:πb(Xj)>0 µ1(Xj) −Ld(Xi, Xj) −
+max
+j:πb(Xj)>0 µ2(Xj) −Ld(Xi, x)
+ ≤
+sup
+x:πb(x)>0
+|µ1(x) −µ2(x)|.
+(29)
+Proof of Lemma A.2. We have
+max
+j:πb(Xj)>0 µ1(Xj) −Ld(Xi, Xj) ≤
+max
+j:πb(Xj)>0 µ1(Xj) −µ2(Xj) +
+max
+j:πb(Xj)>0 µ2(Xj) −Ld(Xi, Xj),
+(30)
+≤
+sup
+x:πb(x)>0
+|µ1(x) −µ2(x)| +
+max
+j:πb(Xj)>0 µ2(Xj) −Ld(Xi, Xj),
+(31)
+(32)
+The same bounds hold with the roles of µ1 and µ2 reversed, completing the proof.
+The next two lemmas will allow us to replace the maximum in ˆψ−
+2 by a supremum by controlling the difference between the
+maximum and supremum.
+Lemma A.3. Let x∗be the point at which supx:πb(x)>0 µP0(x) −Ld(Xi, x) is attained and let
+j∗=
+argmin
+j:πb(Xj)>0
+d(Xj, x∗)
+(33)
+be the observed point that is closest to x∗. Then
+
+max
+j:πb(Xj)>0 µP0(Xj) −Ld(Xi, Xj) −
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+ ≤2Ld(x∗, Xj∗).
+(34)
+Proof. We have
+µP0(Xj∗) −Ld(Xi, Xj∗) ≥µP0(x∗) −Ld(Xj∗, x∗) −Ld(Xi, Xj∗),
+(35)
+≥µP0(x∗) −Ld(Xi, x∗) −2Ld(x∗, Xj∗),
+(36)
+=
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x) −2Ld(x∗, Xj∗),
+(37)
+where the ﬁrst inequality uses the fact that µP0 is L-Lipschitz and the second is the triangle inequality. Since the supremum
+is greater than the maximium, the result follows.
+Lemma A.4. Fix a point x such that πb(x) > 0 and let
+j∗=
+argmin
+j:πb(Xj)>0
+d(Xj, x)
+(38)
+be the index of the closest observation to x in the overlap region. Then, under either of Assumption 4.4(a) or Assump-
+tion 4.4(b), we have P(d(x, Xj∗) > ϵ)
+n→∞
+−−−−→0 for any ϵ > 0.
+13
+
+
+=== PDF PAGE 14 ===
+Off-policy Evaluation Beyond Overlap
+Proof. We analyze P(d(x, Xj∗) > ϵ) under each of the two possibilities in Assumption 4.4. If Assumption 4.4(a) holds and
+there is an atom at x so that P(Xi = x) = p for some p > 0, we have
+P(d(x, Xj∗) > ϵ) ≤P(Xi̸ = x for 1 ≤i ≤n),
+(39)
+= (1 −p)n,
+(40)
+which goes to 0 as n →∞. Next, if Assumption 4.4(b) holds, let δ be such that P(d(x, Xj∗) ≤ϵ) > δ. Then
+P(d(x, Xj∗) > ϵ) = P(d(x, Xi) > ϵ for 1 ≤i ≤n),
+(41)
+≤(1 −δ)n
+(42)
+which again goes to 0 as n →∞.
+With these lemmas in hand, we begin the main proof.
+Proof of Theorem A.1(b). We begin by deﬁning
+ˆψ−,oracle
+2
+= 1
+n
+n
+X
+i=1
+πe(Xi)
+ 
+ℓ∨
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+!
+1{πb(Xi) = 0}.
+(43)
+The main idea is to show that
+| ˆψ−
+2 −ˆψ−,oracle
+2
+| = oP (1),
+(44)
+and then since ˆψ−,oracle
+2
+is a sum of i.i.d. terms, the desired result follows by the law of large numbers.
+To show (44), we show that for any ﬁxed i,
+ℓ∨
+max
+j:πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj) −
+ 
+ℓ∨
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+! = oP (1).
+(45)
+Indeed, we have by the triangle inequality that
+ℓ∨
+max
+j:πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj) −
+ 
+ℓ∨
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+!
+(46)
+≤
+ℓ∨
+max
+j:πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj) −
+
+ℓ∨
+max
+j:πb(Xj)>0 µP0(Xj) −Ld(Xi, Xj)
+
+(47)
++
+ℓ∨
+max
+j:πb(Xj)>0 µP0(Xj) −Ld(Xi, Xj) −
+ 
+ℓ∨
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+! ,
+(48)
+and now we analyze (47) and (48) separately. In both cases, we will show that if one of the terms is smaller than ℓ, the other
+must be as well with high probability, and then work on the event that they are both smaller than ℓ.
+For (47), we ﬁrst consider the event
+E =
+
+max
+j
+ˆµ(Xj) −Ld(Xi, Xj) > ℓ, max
+j
+µP0(Xj) −Ld(Xi, Xj) < ℓ
+
+.
+(49)
+On the event E, there must exist some j and ϵ > 0 such that ˆµ(Xj) −Ld(Xi, Xj) > ℓ+ ϵ. Then,
+P(E) ≤P(ˆµ(Xj) −Ld(Xi, Xj) > ℓ+ ϵ, µP0(Xj) −Ld(Xi, Xj) < ℓ),
+(50)
+≤P
+ 
+sup
+x:πb(x)>0
+|ˆµ(x) −µP0(x)| > ϵ
+!
+,
+(51)
+= o(1),
+(52)
+14
+
+
+=== PDF PAGE 15 ===
+Off-policy Evaluation Beyond Overlap
+by Assumption 4.3.
+Since P(E) = o(1), it is sufﬁcient to work on the event Ec. On this event, there are two possibilities. Either
+µP0(Xj) −Ld(Xi, Xj) < ℓ
+and
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x) < ℓ,
+(53)
+or
+µP0(Xj) −Ld(Xi, Xj) > ℓ
+and
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x) > ℓ.
+(54)
+If (53) holds, then (47) is 0. On the other hand, if (54) holds, then (47) is oP (1) by Lemma A.2 and Assumption 4.3. Thus
+we conclude that (47) is oP (1) on the event Ec.
+For (48), we distinguish cases. For the ﬁrst case, if
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x) ≤ℓ,
+(55)
+then we must have
+max
+j:πb(Xj)>0 µP0(Xj) −Ld(Xi, Xj) ≤ℓ,
+(56)
+as well, and so (48) is 0.
+Thus it sufﬁces to consider the case where
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x) > ℓ.
+(57)
+In this case, suppose that the supremum is attained at x∗, and that µP0(x∗) −Ld(Xi, x∗) −ℓ= ϵ for some ϵ > 0, and let
+j∗=
+argmin
+j:πb(Xj)>0
+d(Xj, x∗)
+(58)
+be the index of the observed data point that is closest to x∗.
+Then, consider the event
+E =
+
+max
+j:πb(Xj)>0 µP0(Xj) −Ld(Xi, Xj) < ℓ
+
+.
+(59)
+Since we are working in the case where (57) holds, by Lemma A.3, if the event E occurs as well, we must have
+2Ld(x∗, Xj∗) > ϵ. Thus P(E) ≤P(2Ld(x∗, Xj∗) > ϵ), and P(2Ld(x∗, Xj∗) > ϵ) = o(1) by Lemma A.4, so we
+see that P(E) = o(1).
+Thus it sufﬁces to work on the event Ec. On Ec, we have
+max
+j:πb(Xj)>0 µP0(Xj) −Ld(Xi, Xj) ≥
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x) −2Ld(x∗, Xj∗),
+(60)
+by Lemma A.3. Applying Lemma A.4 again, we see that (48) is oP (1).
+Since (47) and (48) are both oP (1), we conclude that (45) holds, implying (44) and ﬁnishing the proof.
+Proof of Theorem A.1(c). The proof of this result is essentially a continuous version of the proof of Theorem A.1(a). We
+would like to show that
+inf
+P ∈PLip
+L
+EP [Yiπe(Xi)1{πb(Xi) = 0}] = EP0
+"
+πe(Xi)
+ 
+ℓ∨
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+!
+1{πb(Xi) = 0}
+#
+.
+(61)
+To do this, we must ﬁrst show that each for each P ∈PLip
+L
+∩Pbdd
+M , ψ2(P) is greater than ψ−,∞
+2
+, and then show that ψ−,∞
+2
+is attained.
+15
+
+
+=== PDF PAGE 16 ===
+Off-policy Evaluation Beyond Overlap
+For the lower bound, note that for any Xi and x such that πb(Xi) = 0 and πb(x) > 0, we must have µP (Xi) ≥
+µP (x) −Ld(Xi, x) since µP is L-Lipschitz. Furthermore, since P is consistent with P0 for x such that πb(x) > 0, we in
+fact have µP (Xi) ≥µP0(x) −Ld(Xi, x) for all such x. Lastly, since µP is bounded, we also have µP (Xi) ≥ℓ. Thus,
+EP [Yiπe(Xi)1{πb(Xi) = 0}] = EP [πe(Xi)µP (Xi)1{πb(Xi) = 0}],
+(62)
+≥EP
+"
+πe(Xi)
+ 
+ℓ∨
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+!
+1{πb(Xi) = 0}
+#
+,
+(63)
+= EP0
+"
+πe(Xi)
+ 
+ℓ∨
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+!
+1{πb(Xi) = 0}
+#
+,
+(64)
+where the ﬁrst equality is the tower rule, the second inquality follows from the arguments of the preceeding paragraph, and
+the third equality uses the fact that P is consistent with P0. Since (64) is exactly ψ−,∞
+2
+, this shows the lower bound.
+To show that this bound is attained, let P ∗be a distribution that has the same marginal Xi distribution as P0, the same
+conditional distribution of Yi | Xi = x for x such that πb(x) > 0, and has
+µP ∗(x) = ℓ∨
+sup
+x′:πb(x′)>0
+µP0(x′) −Ld(x, x′),
+(65)
+for x such that πb(x) = 0. Furthermore, we assume that, for x such that πb(x) = 0 the distribution Yi | Xi = x is a point
+mass at µP ∗(x). This ensures that P ∗∈PM
+bdd. This P ∗clearly attains the bound of ψ−,∞
+2
+so it is sufﬁcient to check that it
+is consistent with P0 and L-Lipschitz to show that P ∗∈PLip
+L .
+The distribution P ∗is consistent with P0 by construction, but we must still check that µP ∗deﬁned in (65) agrees with µP0
+for x in the overlap region. To verify this, note that for any x such that πb(x) > 0, the supremum in (65) is attained at
+x′ = x, since µP0(x) −Ld(x, x) = µP0(x) and µP0(x) ≥µP0(x′) −Ld(x, x′) for any other x′ since µP0 is L-Lipschitz.
+So the supremum is in fact equal to µP0(x), and ℓ∨µP0(x) = µP0(x), which is consistent with P0.
+To check that µP ∗is L-Lipschitz, let f(x) be the value attaining the supremum in (65), so that µP ∗(x) = ℓ∨(µP0(f(x)) −
+Ld(x, f(x))). Then, consider any pair of points x1, x2. We distinguish three cases.
+First, if µP0(f(x1)) −Ld(x1, f(x1)) < ℓand µP0(f(x2)) −Ld(x2, f(x2)) < ℓ, we have µP ∗(x1) −µP ∗(x2) = 0 and the
+Lipschitz condition is satisﬁed.
+Second, if µP0(f(x1)) −Ld(x1, f(x1)) > ℓand µP0(f(x2)) −Ld(x2, f(x2)) > ℓ, assume without the loss of generality
+that µP ∗(x1) > µP ∗(x2). Then we have
+|µP ∗(x1) −µP ∗(x2)| = µP ∗(x1) −µP ∗(x2),
+(66)
+= (µP0(f(x1)) −Ld(x1, f(x1))) −(µP0(f(x2) −Ld(x2, f(x2))) ,
+(67)
+≤(µP0(f(x1)) −Ld(x1, f(x1))) −(µP0(f(x1) −Ld(x2, f(x1))) ,
+(68)
+= L (d(x1, f(x1)) −d(x2, f(x1))) ,
+(69)
+≤Ld(x1, x2),
+(70)
+where the ﬁrst inequality uses the fact that f(x2) attains the supremum and the second uses the triangle inequality.
+Finally, if µP0(f(x1)) −Ld(x1, f(x1)) > ℓand µP0(f(x2)) −Ld(x2, f(x2)) < ℓ, we have
+|µP ∗(x1) −µP ∗(x2)| = (µP0(f(x1)) −Ld(x1, f(x1))) −(ℓ) ,
+(71)
+≤(µP0(f(x1)) −Ld(x1, f(x1))) −(µP0(f(x2) −Ld(x2, f(x2))) ,
+(72)
+≤Ld(x1, x2),
+(73)
+by the same arguments as above.
+This shows that µP ∗is L-Lipschitz, and so P ∗∈PLip
+L . Thus the bound of ψ−,∞
+2
+is attained, completing the proof.
+16
+
+
+=== PDF PAGE 17 ===
+Off-policy Evaluation Beyond Overlap
+A.3. Proof of Theorem 3
+Proof. We follow the approach of the proof of Theorem A.1(b), and begin by deﬁning
+ˆψ−,oracle
+2
+= 1
+n
+n
+X
+i=1
+πe(Xi)
+ 
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+!
+1{πb(Xi) = 0}.
+(74)
+We then decompose
+E[( ˆψ−
+2 −ψ−,∞
+2
+)2] = E[( ˆψ−
+2 −ˆψ−,oracle
+2
++ ˆψ−,oracle
+2
+−ψ−,∞
+2
+)2],
+(75)
+≤2E[( ˆψ−
+2 −ˆψ−,oracle
+2
+)2] + 2E[( ˆψ−,oracle
+2
+−ˆψ−,∞
+2
+)2].
+(76)
+The second term of (76) is the variance of an i.i.d. sum, and is thus equal to C/n for some constant C. The remainder of the
+proof focuses on the ﬁrst term of (76).
+The ﬁrst term of (76) is
+E
+
+
+ 
+1
+n
+n
+X
+i=1
+πe(Xi)
+ 
+max
+j>πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj) −
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+!
+1{πb(Xi) = 0}
+!2
+,
+(77)
+≤1
+n
+n
+X
+i=1
+E
+
+
+ 
+max
+j>πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj) −
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+!2
+,
+(78)
+by the Cauchy-Schwarz inequality and the fact that 0 ≤πe, 1{πb(Xi) = 0} ≤1. A single term of (78) is
+≤2E
+"
+max
+j:πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj) −
+max
+j:πb(Xj)>0 µP0(Xj) −Ld(Xi, Xj)
+2#
+(79)
++ 2E
+
+
+ 
+max
+j:πb(Xj)>0 µP0(Xj) −Ld(Xi, Xj) −
+sup
+x:πb(x)>0
+µP0(x) −Ld(Xi, x)
+!2
+,
+(80)
+≤2E[∥(ˆµ(x) −µ(x))1{πb(x) > 0}∥2
+∞] + 2E[L2d(x∗, Xj∗)2],
+(81)
+≤2E[∥(ˆµ(x) −µ(x))1{πb(x) > 0}∥2
+∞] + 4L2(cdbn)−2/d.
+(82)
+where the second inequality uses Lemmas A.2 and A.3 (here x∗and Xj∗are as deﬁned in Lemma A.3), and the third
+inequality uses Lemma A.6 (proven in Section A.4).
+Proof. Our proof relies on LeCam’s two point method (LeCam, 1973; Wainwright, 2019), which states that if we can ﬁnd
+distributions P1 and P2 in PLip
+L
+with |ψ−,∞
+2
+(P1) −ψ−,∞
+2
+(P2)| ≥2δ, then
+inf
+ˆ
+ψ−
+2
+sup
+P ∈PLip
+L
+EP
+h
+( ˆψ −ψ−,∞
+2
+(P))2i
+≥δ2
+2 (1 −∥P n
+1 −P n
+2 ∥TV) ,
+(83)
+where by a slight abuse of notation we write P n
+1 for the joint distribution of (X1, A1, A1Y1), · · · , (Xn, An, AnYn) when
+(Xi, Yi) are drawn from P1, and similarly for P2. We construct P1 and P2 as follows:
+(i) under P1, the marginal distribution of Xi is uniform on [−1, 1]d, and Yi | Xi = x is N(µ1(x), 1) where µ1(x) = 0
+identically
+(ii) under P2, the marginal distribution of Xi is uniform on [−1, 1]d, and the distribution of Yi | Xi = x is N(µ2(x), 1)
+where
+µ2(x) =
+
+
+
+
+
+0
+if
+x ∈[−1/2 + Lϵ, 1/2 −Lϵ]d,
+˜µ2(x)
+if
+x ∈[−1/2 −Lϵ, 1/2 + Lϵ]d \ [−1/2 + Lϵ, 1/2 −Lϵ]d,
+0
+if
+[−1, 1]d \ [−1/2 −Lϵ, 1/2 + Lϵ]d,
+(84)
+17
+
+
+=== PDF PAGE 18 ===
+Off-policy Evaluation Beyond Overlap
+where ϵ < 1/(2L) is arbitrary and ˜µ2(x) is a function that is equal to ϵ for x on the boundary of the set [−1/2, 1/2]d,
+and is equal to 0 on the boundaries of [−1/2 −ϵ, 1/2 + ϵ]d and [−1/2 + ϵ, 1/2 −ϵ]d, and linearly interpolates between
+these values.
+Essentially, the distribution of Yi | Xi under P2 has a bump of size ϵ at the boundary of the support of πb that decays to zero
+as fast as the Lipschitz assumption will allow.
+We now proceed in two steps: ﬁrst, we verify the separation condition of LeCam’s lemma; second, we upper bound the
+distance between P n
+1 and P n
+2 .
+For the separation condition, we begin by noting that
+ψ−,∞
+2
+(P1) = E
+"
+πe(Xi)
+ 
+sup
+x:πb(x)>0
+µ1(x) −Ld(Xi, x)
+!
+1{πb(Xi) = 0}
+#
+,
+(85)
+= E
+"
+πe(Xi)
+ 
+sup
+x:πb(x)>0
+−Ld(Xi, x)
+!
+1{πb(Xi) = 0}
+#
+.
+(86)
+Suppose that for each Xi, supx:πb(x)>0 −Ld(Xi, x) is attained at a point f(Xi) and note that f(Xi) must lie on the
+boundary of the cube [−1/2, 1/2]d (since it is the projection of Xi onto the support of πb). Then,
+ψ−,∞
+2
+(P2) = E
+"
+πe(Xi)
+ 
+sup
+x:πb(x)>0
+µ2(x) −Ld(Xi, x)
+!
+1{πb(Xi) = 0}
+#
+,
+(87)
+≥E [πe(Xi) (µ2(f(Xi)) −Ld(Xi, f(Xi))) 1{πb(Xi) = 0}] ,
+(88)
+= ϵE[πe(Xi)1{πb(Xi) = 0}] + E [πe(x)(−Ld(Xi, f(Xi)))1{πb(Xi) = 0}] ,
+(89)
+= ϵE[πe(Xi)1{πb(Xi) = 0}] + ψ−,∞
+2
+(P1),
+(90)
+where the ﬁrst inequality bounds the supremum by a particular point, the second equality uses the fact that µ2 is equal to ϵ
+on the boundary of [−1/2, 1/2]d, and the third uses the fact that f attains the supremum in (86). Then, it follows from (90)
+that the separation condition is satisﬁed with δ = ϵE[πe(Xi)1{πb(Xi) = 0}]/2.
+It remains to bound ∥P n
+1 −P n
+2 ∥TV. By Pinsker’s inequality, we have
+∥P n
+1 −P n
+2 ∥TV ≤
+r
+1
+2DKL(P n
+1 ∥P n
+2 ),
+(91)
+≤
+rn
+2 DKL(P1∥P2),
+(92)
+(93)
+Now, letting p1 and p2 be the densities of P1 and P2 respectively, we have
+DKL(P1∥P2) =
+Z
+[−1,1]d
+Z ∞
+−∞
+X
+a∈{0,1}
+p1(x, a, y) log p1(x, a, y)
+p2(x, a, y) dy dx.
+(94)
+Note that
+X
+a∈{0,1}
+p1(x, a, y) log p1(x, a, y)
+p2(x, a, y) =p1(x)(1 −πb(x))p1(y | x) log p1(x)(1 −πb(x))p1(y | x)
+p2(x)(1 −πb(x))p2(y | x)
+(95)
++ p1(x)πb(x)p1(y | x) log p1(x)πb(x)p1(y | x)
+p2(x)πb(x)p2(y | x),
+(96)
+= 1
+2d p1(y | x) log p1(y | x)
+p2(y | x),
+(97)
+18
+
+
+=== PDF PAGE 19 ===
+Off-policy Evaluation Beyond Overlap
+since p1(x) = p2(x) = 1/2d for all x. Thus, (94) is
+=
+Z
+[−1,1]d
+Z ∞
+−∞
+2−dp1(y | x) log p1(y | x)
+p2(y | x) dy dx
+(98)
+=
+Z
+[−1,1]d DKL(N(0, 1)∥N(µ2(x), 1)) dx,
+(99)
+=
+Z
+[−1,1]d
+1
+2µ2(x)2 dx,
+(100)
+=
+Z
+[−1,1]d ˜µ2(x)21{x ∈[−1/2 −Lϵ, 1/2 + Lϵ]d \ [−1/2 + Lϵ, 1/2 −Lϵ]d} dx,
+(101)
+≤ϵ2((1 + 2Lϵ)d −(1 −2Lϵ)d),
+(102)
+≤ϵ2(4Lϵ)d,
+(103)
+where the last line uses Lemma A.5, proven in Section A.4.
+The calculations above show that ∥P n
+1 −P n
+2 ∥2
+TV ≤n
+2 (4L)dϵd+2. If we set ϵ = (2n)−1/(d+2)(4L)−d/(d+2), this gives the
+bound ∥P n
+1 −P n
+2 ∥≤1/2. This choice of ϵ then gives the lower bound
+inf
+ˆ
+ψ−
+2
+sup
+P ∈PLip
+L
+EP
+h
+( ˆψ−
+2 −ψ−,∞
+2
+(P))2i
+≥δ2
+4 ,
+(104)
+= 1
+16E[πe(Xi)1{πb(Xi) = 0}]2ϵ2,
+(105)
+= 1
+16E[πe(Xi)1{πb(Xi) = 0}]2(2n)−2/(d+2)(4L)−2/(d+2),
+(106)
+as long s the condition that ϵ < 1/(2L) is satisﬁed. We can check that this condition holds whenever n ≥2−d+1L2,
+completing the proof.
+A.4. Technical lemmas
+In this section, we collect several lemmas used in the main proofs.
+Lemma A.5. For any 0 < x < 1, we have that (1 + x)d −(1 −x)d ≤(2x)d.
+Proof. We have
+(1 + x)d −(1 −x)d ≤(1 + x)d =
+d
+X
+k=0
+d
+k
+
+xk ≤xd
+d
+X
+k=0
+d
+k
+
+= (2x)d.
+(107)
+Lemma A.6. Let x∗and Xj∗be as in Lemma A.3 and let b be a lower bound on the density of Xi. Then E[d(x∗, Xj∗)2] ≤
+2(cdbn)−2/d, where cd is the volume of the unit ball in n-dimensions, n is the sample size, and d is the dimension of the
+covariate space.
+19
+
+
+=== PDF PAGE 20 ===
+Off-policy Evaluation Beyond Overlap
+Proof. Let cd be the volume of the unit ball in d dimensions. We compute
+E[d(x∗, Xj∗)2] =
+Z ∞
+0
+P(d(x∗, Xj∗) ≥
+√
+t) dt,
+(108)
+=
+Z ∞
+0
+P(d(x∗, Xj) ≥
+√
+t)n dt,
+(109)
+≤
+Z ∞
+0
+(1 −cdtd/2b)n
++,
+(110)
+= (cdb)−2/d
+Z ∞
+0
+(1 −ud/2)n
++ du,
+(u = t(cdb)2/d)
+= (cdb)−2/d
+Z 1
+0
+(1 −ud/2)n du.
+(111)
+If d = 1, we can manually compute that (111) is
+2(cdb)−2/d
+n2 + 3n + 2 ≤2(cdb)−2/d
+n2
+= 2(cdbn)−2/d,
+(112)
+and the result of the lemma is satsiﬁed. We now assume that d > 1, and continue bounding by
+≤(cdb)−2/d
+Z 1
+0
+exp(−ud/2n) du,
+(113)
+≤(cdbn)−2/d
+Z n2/d
+0
+exp(−vd/2) dv, ,
+(v = un2/d)
+= (cdbn)−2/d
+Z n2/d
+0
+exp(−vd/2),
+(114)
+= (cdbn)−2/d
+ Z 1
+0
+exp(−vd/2) dv +
+Z n2/d
+1
+exp(−vd/2) dv
+!
+,
+(115)
+≤(cdbn)−2/d
+ 
+1 +
+Z n2/d
+1
+exp(−v) dv
+!
+,
+(116)
+≤(cdbn)−2/d(1 + e−1),
+(117)
+≤2(cdbn)−2/d.
+(118)
+So, in all cases, E[d(x∗, Xj∗)2] ≤2(cdbn)−d/2.
+B. Computational improvements on ˆψ−
+2
+In this section, we discuss approximations of
+ˆψ−
+2 = 1
+n
+n
+X
+i=1
+πe(Xi)
+
+max
+j:πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj)
+
+1{πb(Xi) = 0}
+(119)
+with favorable computational properties. The idea is to bound the maximum in (119) by the value of ˆµ(Xj) −Ld(Xi, Xj)
+for some particular j. A natural choice of j is the index of the nearest neighbor of Xi in the overlap region,
+nn(i) =
+argmin
+j:πb(Xj)>0
+d(Xi, Xj).
+(120)
+Then, we deﬁne
+ˆψ−,cons
+2
+= 1
+n
+n
+X
+i=1
+πe(Xi)
+ ˆµ(Xnn(i)) −d(Xi, Xnn(i))
+
+1{πb(Xi) = 0},
+(121)
+20
+
+
+=== PDF PAGE 21 ===
+Off-policy Evaluation Beyond Overlap
+as a conservative approximation of ˆψ−
+2 . By conservative, we mean that ˆψ−
+2 ≥ˆψ−,cons
+2
+, so that the bounds obtained by using
+ˆψ−,cons
+2
+are always wider than those obtained by using ˆψ−
+2 . This ensures that the interval [ ˆψ−, ˆψ+] constructed using ˆψ−,cons
+2
+will still be consistent for ψ(P0) in the sense of Lemma 4.1.
+However, computing ˆψ−,cons
+2
+will typically be much faster than computing ˆψ−
+2 . This is because computing ˆψ−,cons
+2
+only
+requires ﬁnding the nearest overlap neighbor of each point in the no-overlap region, and then evaluating ˆµ(Xnn(i)) −
+d(Xi, Xnn(i)) for that nearest neighbor, rather than evaluating over all points in the overlap region and taking the maximum.
+This means that, once we have found the nearest overlap neighbor of each point in the no-overlap region, we need only O(n)
+further computations to compute ˆψ−,cons
+2
+.
+We now consider the complexity of nearest-neighbor search problem. To ﬁnd an exact nearest-neighbor for each point in
+the no-overlap region generally requires computing all of the pairwise distances d(Xi, Xj), and thus will still take time
+O(n2). However, we ﬁnd in practice that since only O(n) further computation is required to compute ˆψ−,cons
+2
+, this approach
+is still faster than exactly computing ˆψ−
+2 . Furthermore, there exist data structures for exact nearest-neighbor search which
+use various heuristics to improve performance, and these can be leveraged for further computational gains (Bentley, 1975;
+Omohundro, 1989).
+For settings that require a method that is faster than O(n2), there are two possibilities depending on the dimensionality of
+the covariates. If the covariates Xi are one-dimensional, methods based on Voronoi diagrams can be used to compute exact
+nearest neighbors for all points in the overlap region in O(n) time (Har-Peled, 2011; Preparata and Shamos, 2012). In higher
+dimensions, we can instead use approximate nearest-neighbor search algorithms. For example, if the covariates Xi lie in Rp,
+and the metric d is Euclidean distance, there exist algorithms that return a point j∗such that d(Xi, Xj∗) ≤cd(Xi, Xnn(i))
+in time O(n1/(2c2−1−o(1) + pno(1))) (Andoni et al., 2018). For a moderate value of c, such as c = 2, this gives a runtime of
+O(n1/(7−o(1) + pno(1)) for each point in the no-overlap region. Since there are O(n) points in the no-overlap region, this
+leads to a total runtime of O(n8/7+o(1) + pn1+o(1)), improving signiﬁcantly on the O(n2) time required when using exact
+nearest neighbors. Appealingly, even if we use an approximate nearest neighbor rather than an exact one, we will still obtain
+a conservative estimate of ˆψ−
+2 , and thus retain statistical validity.
+Finally, another computational advantage of ˆψ−,cons
+2
+is that once we have identiﬁed the nearest-neighbor of each point in the
+overlap region, we can compute ˆψ−,cons
+2
+for any value of L with only O(n) operations. This makes search over a large range
+of values of L, as is done for sensitivity analyses like those shown in Section 6, quite efﬁcient as well.
+C. Additional experimental results
+C.1. Additional results for Yeast dataset
+In Figure 4, we plot the results from Table 1 for L = 3, 4, 5, ∞, since these were the values for which we determined (based
+on the feasibility of the optimization problem) that the smoothness assumption was plausible. We see that, for these values
+of L, the coverage as deﬁned in Theorem 4.1 with ϵ = 0.01 approaches 100%.
+In Table 3, we show the results of Table 1 when deﬁning coverage as in Theorem 4.1 with ϵ = 0.005 rather than ϵ = 0.01,
+as in the main text. We see that coverage rates are lower, but still approach 1 as the sample size increases. Crucially, the
+coverage for large values of L remains comparable to the coverage of the Manski intervals, suggesting that the Lipschitz
+smoothness assumptions for those values of L are plausible.
+C.2. Additional results for Yahoo! Front Page Today dataset
+In Figure 5, we repeat the experiment on the Yahoo! Front Page Today dataset described in Section 6 for a wider range of
+smoothness parameters L and cutoffs T. With this range of values, we make two new observations: ﬁrst, the convergence
+of our interval to the Manski interval in the upper endpoint was not apparent for small values of L, but is apparent for the
+values of L considered here. Second, when T = 0.5, there are no longer any overlap violations, and our partial identiﬁcation
+intervals have length zero and recover the IPW estimator ˆψ1.
+21
+
+
+=== PDF PAGE 22 ===
+Off-policy Evaluation Beyond Overlap
+2500
+5000
+7500
+10000
+Sample size, n
+0.7
+0.8
+0.9
+1
+Coverage
+L
+3
+4
+5
+inf
+Figure 4. Visualization of results from Table 1 for the values of L for which the optimization problem is consistently feasible and thus the
+smoothness assumption is plausible. We see that as n →∞, the coverage (as deﬁned in Theorem 4.1 with ϵ = 0.01) approaches 100%.
+Table 3. The same experiment as in Table 1, but with coverage deﬁned using ϵ = 0.005 in Theorem 4.1 rather than ϵ = 0.01. With the
+smaller value of ϵ, coverage rates are lower, but still approach 1 as the sample size increases. Furthermore, the coverage of the Manski
+intervals is comparable to the coverage of the Lipschitz intervals for large values of L, indicating that those smoothness assumptions are
+plausible.
+L
+n = 1000
+n = 2000
+n = 3000
+n = 4000
+n = 5000
+n = 10000
+1
+0.238 (0.785)
+0.0002 (0.002)
+0 (0.00)
+0 (0.00)
+0 (0.00)
+0 (0.00)
+2
+0.392 (1.00)
+0.493 (1.00)
+0.543 (1.00)
+0.576 (1.00)
+0.603 (0.995)
+0.060 (0.106)
+3
+0.450 (1.00)
+0.561 (1.00)
+0.613 (1.00)
+0.643 (1.00)
+0.676 (1.00)
+0.766 (1.00)
+4
+0.498 (1.00)
+0.6057 (1.00)
+0.657 (1.00)
+0.685 (1.00)
+0.723 (1.00)
+0.810 (1.00)
+5
+0.528 (1.00)
+0.632 (1.00)
+0.687 (1.00)
+0.716 (1.00)
+0.752 (1.00)
+0.841 (1.00)
+∞
+0.591 (1.00)
+0.706 (1.00)
+0.757 (1.00)
+0.789 (1.00)
+0.819 (1.00)
+0.895 (1.00)
+D. Counterexample for no-interaction under smoothness and monotonicity
+In this section, we present an example showing that the no-interaction property fails if we make both smoothness and
+monotonicity assumptions.
+To construct our example, we consider a problem with n = 3 points with two-dimensional covariates Xi such that
+X1 = (0, 0) is the origin, X2 lies in the ﬁrst quadrant, and X3 lies in the fourth quadrant. We assume that X1 is in the
+overlap region, and that X2 and X3 are not. This conﬁguration is illustrated Figure 6.
+We will assume both that the conditional mean µ is L-Lipschitz and that it is monotone with respect to the dictionary order
+≺. That is, we have (x1, y1) ≺(x2, y2) if x1 ≤x2 and y1 ≤y2.
+With this set-up, we have that t1 = ˆµ(X1) since X1 lies in the overlap region. The constraints induced on the t2 point by t1
+are
+t2 ≥ˆµ(X1) −Ld(X1, X2)
+and
+t2 ≥ˆµ(X1),
+(122)
+since X1 ≺X2. The latter of these is always tighter, and so to minimize the objective we set t2 = ˆµ(X1). With this choice
+of t2, the bounds induced on t3 by t1 and t2 are
+t3 ≥ˆµ(X1) −Ld(X1, X3)
+and
+t3 ≥ˆµ(X1) −Ld(X2, X3),
+(123)
+respectively. If we select X2 and X3 so that d(X2, X3) < d(X1, X3), then the bound induced on t3 by t2 will be tighter
+than the bound induced on t3 by t1, and so we see that the constraints in the no-overlap region do interact with each other in
+this case.
+22
+
+
+=== PDF PAGE 23 ===
+Off-policy Evaluation Beyond Overlap
+0.04
+0.06
+0.08
+0.10
+0.12
+Off-policy value
+T=0.25
+Method
+Imputation
+Lipschitz
+Manski
+Infeasible sample
+Quantity
+CI
+Partial id.
+Point estimate
+T=0.3
+T=0.35
+0
+5
+10
+15
+0.04
+0.06
+0.08
+0.10
+0.12
+T=0.4
+0
+5
+10
+15
+T=0.45
+0
+5
+10
+15
+Lipschitz constant, L
+T=0.5
+Figure 5. The same experiment as in Figure 3 over a wider range of values of T and L. With this range of values, we see convergence
+of our bounds to the Manski bounds as L grows large, and also that when T = 0.5 and there are no longer any overlap violations, our
+intervals have width zero as expected.
+x
+y
+X1
+X2
+X3
+Figure 6. Counterexample showing that the no-interaction condition fails when making both a Lipschitz smoothness assumption and a
+monotonicity assumption. Here, X1 lies in the overlap region, but X2 and X3 do not, and the only ordering between the points is that
+X1 ≺X2. Thus, the tight bound that the i = 1 unit implies on the i = 2 unit is t2 ≥ˆµ(X1), and propagating this to the i = 3 unit gives
+that t3 ≥ˆµ(X1) −Ld(X2, X3). This will be tighter than the bound directly coming from the i = 1 unit, t3 ≥ˆµ(X1) −Ld(X1, X3),
+whenever we have d(X2, X3) < d(X1, X3), as in the ﬁgure, and so there is interaction between points in the no-overlap region.
+This example thus highlights that our results in Section 4 are non-trivial and highlight special properties of the smoothness
+assumption that have not been previously observed; further characterization of what kinds of assumptions and combinations
+satisfy the no-interaction property is an interesting direction for future work.
+E. Connections to results of Ben-Michael et al. (2021)
+In this section, we describe how our results build on and extend the work of Ben-Michael et al. (2021). In our notation, the
+procedure of Ben-Michael et al. (2021) for policy learning with no overlap is given by the max-min optimization problem
+argmax
+π∈Π
+min
+P ∈PLip
+L
+1
+n
+n
+X
+i=1
+µP (Xi)π(Xi)1{πb(Xi) = 0},
+(124)
+23
+
+
+=== PDF PAGE 24 ===
+Off-policy Evaluation Beyond Overlap
+for some policy class Π. To solve this problem, Ben-Michael et al. (2021) observe that
+min
+P ∈PLip
+L
+1
+n
+n
+X
+i=1
+µP (Xi)π(Xi)1{πb(Xi) = 0} ≥1
+n
+n
+X
+i=1
+π(Xi)
+
+max
+j:πb(Xj)>0 ˜µ(Xj) −Ld(Xi, Xj
+
+1{πb(Xi) = 0}, (125)
+where ˜µ is a simultaneous lower conﬁdence bound on the conditional mean function µP0, and then solve the more
+conservative problem
+argmax
+π∈Π
+1
+n
+n
+X
+i=1
+π(Xi)
+
+max
+j:πb(Xj)>0 ˜µ(Xj) −Ld(Xi, Xj
+
+1{πb(Xi) = 0}
+(126)
+to learn a policy.
+For the purposes of policy learning, such a conservative lower bound is sufﬁcient—indeed, if we were to subtract a large
+constant, say 100, from the right-hand side of (125), the solution to (126) would remain unchanged. However, for policy
+evaluation, such conservative bounds are not acceptable: we would like to use the exact value of the left-hand side of (125)
+as a lower bound, and not incur needlessly wide bounds.
+The calculation of this exact value is the contribution of our Theorem 4.5(a), which shows that
+min
+P ∈PLip
+L
+1
+n
+n
+X
+i=1
+µP (Xi)π(Xi)1{πb(Xi) = 0} = 1
+n
+n
+X
+i=1
+π(Xi)
+
+max
+j:πb(Xj)>0 ˆµ(Xj) −Ld(Xi, Xj
+
+1{πb(Xi) = 0}, (127)
+where ˆµ is an estimate of µP0. Thus, the right-hand side of the previous display, which is exactly our ˆψ−
+2 , is the correct
+estimator of a bound on the off-policy value. This result, along with its proof based on the no-interaction property, is novel
+to our work, and guides practitioners on dealing with overlap violations in a policy evaluation problem while ensuring tight
+bounds.
+24

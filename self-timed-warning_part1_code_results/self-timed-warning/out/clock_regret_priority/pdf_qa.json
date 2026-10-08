@@ -1,0 +1,8 @@
+{
+  "pdf_sha256": "b482849b9edd85d597c310328a44b6a7c999808833d5b073acd2ff8350c1a327",
+  "pages": 7,
+  "renderer": "PyMuPDF, scale 1.3",
+  "visual_review": "All seven corrected page PNGs inspected by the authoring assistant.",
+  "detected_final_visual_defects": 0,
+  "development_fix": "Figure aspect ratio initialized before assigning draw dimensions."
+}

@@ -1,0 +1,117 @@
+{
+  "passed": true,
+  "check_count": 27,
+  "checks": [
+    {
+      "name": "908 prior artifacts unchanged before audit",
+      "passed": true
+    },
+    {
+      "name": "prospective plan retains its pre-test hash",
+      "passed": true
+    },
+    {
+      "name": "all eight new unit-test groups pass",
+      "passed": true
+    },
+    {
+      "name": "new method takes public recording/cost inputs without hidden lifetimes",
+      "passed": true
+    },
+    {
+      "name": "1,000 unique full-clock cases recorded",
+      "passed": true
+    },
+    {
+      "name": "all 1,000 exhaustive ratios and attaining witnesses independently recompute",
+      "passed": true
+    },
+    {
+      "name": "500 integer and 500 continuous state comparisons recorded",
+      "passed": true
+    },
+    {
+      "name": "every separately structured integer and continuous state optimum recomputes",
+      "passed": true
+    },
+    {
+      "name": "200 integer and 200 continuous common-cost reductions recorded",
+      "passed": true
+    },
+    {
+      "name": "every common-cost reduction matches preserved solver exactly",
+      "passed": true
+    },
+    {
+      "name": "600 epsilon completions on 200 unique cohorts recorded",
+      "passed": true
+    },
+    {
+      "name": "all compatible epsilon sequences and attainment labels recompute",
+      "passed": true
+    },
+    {
+      "name": "1,000 refinement tasks on 200 cohorts recorded",
+      "passed": true
+    },
+    {
+      "name": "every heterogeneous clock-refinement inequality recomputes exactly",
+      "passed": true
+    },
+    {
+      "name": "18 sharpness equalities recorded",
+      "passed": true
+    },
+    {
+      "name": "uniform pairwise constant attains 1+1/r exactly in every sharpness example",
+      "passed": true
+    },
+    {
+      "name": "strict interior optimum invalidates the unchanged two-world extension",
+      "passed": true
+    },
+    {
+      "name": "seven-page attributed draft contains original and added theorems",
+      "passed": true
+    },
+    {
+      "name": "PDF authorship matches the details supplied by the user",
+      "passed": true
+    },
+    {
+      "name": "draft explicitly records unresolved historical status",
+      "passed": true
+    },
+    {
+      "name": "published-paper and earlier inventory-ratio citations appear",
+      "passed": true
+    },
+    {
+      "name": "scientific figures fit completely inside the page content area",
+      "passed": true
+    },
+    {
+      "name": "all seven latest QA page PNGs exist",
+      "passed": true
+    },
+    {
+      "name": "all recovered primary PDF hashes match retrieval records",
+      "passed": true
+    },
+    {
+      "name": "both Fox failures remain recorded as unresolved access",
+      "passed": true
+    },
+    {
+      "name": "experiment summary does not invent historical priority",
+      "passed": true
+    },
+    {
+      "name": "908 prior artifacts unchanged after verification",
+      "passed": true
+    }
+  ],
+  "protected_artifacts_unchanged": 908,
+  "historical_originality_established": false,
+  "public_priority_established": false
+}

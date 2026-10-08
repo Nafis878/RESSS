@@ -1,0 +1,9 @@
+sigma=0.15: optimised P1 lowest M at 7/7 ratios; lowest by ratio: {0.01: 'P1, optimised p_thres', 0.02: 'P1, optimised p_thres', 0.05: 'P1, optimised p_thres', 0.1: 'P1, optimised p_thres', 0.2: 'P1, optimised p_thres', 0.5: 'P1, optimised p_thres', 0.8: 'P1, optimised p_thres'}
+sigma=0.15: P3 < P2 at 7/7 ratios
+sigma=0.15: P2 and P3 < P1(c_p/c_c) at 6/7 ratios
+sigma=0.15: p* < c_p/c_c at 6/7 ratios; p* = {0.01: 0.0122, 0.02: 0.0122, 0.05: 0.0122, 0.1: 0.0122, 0.2: 0.0293, 0.5: 0.0293, 0.8: 0.182}
+sigma=0.4: optimised P1 lowest M at 7/7 ratios; lowest by ratio: {0.01: 'P1, optimised p_thres', 0.02: 'P1, optimised p_thres', 0.05: 'P1, optimised p_thres', 0.1: 'P1, optimised p_thres', 0.2: 'P1, optimised p_thres', 0.5: 'P1, optimised p_thres', 0.8: 'P1, optimised p_thres'}
+sigma=0.4: P3 < P2 at 7/7 ratios
+sigma=0.4: P2 and P3 < P1(c_p/c_c) at 6/7 ratios
+sigma=0.4: p* < c_p/c_c at 7/7 ratios; p* = {0.01: 0.0028, 0.02: 0.0028, 0.05: 0.0065, 0.1: 0.0116, 0.2: 0.028, 0.5: 0.144, 0.8: 0.32}
+M violations (M < 0): []

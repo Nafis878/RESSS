@@ -1,0 +1,14 @@
+{
+  "offdiagonal_tasks": 7296,
+  "observed_fraction_unweighted_tasks": 0.5403309480630676,
+  "full_life_improvements": 3614,
+  "certified_improvements": 1028,
+  "improvements_not_certified": 2586,
+  "ambiguous_improvement_tasks": 4978,
+  "complete_case_false_improvements": 394,
+  "healthy_false_improvements": 87,
+  "complete_case_false_safe": 97,
+  "healthy_false_safe": 418,
+  "interval_false_improvements": 0,
+  "interval_false_safe": 0
+}

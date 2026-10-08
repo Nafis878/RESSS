@@ -1,0 +1,306 @@
+{
+  "passed": true,
+  "checks": 59,
+  "unit_test_groups": 19,
+  "protected_files": 681,
+  "changed_files": [],
+  "verdict": "D. NOT A CONTRIBUTION",
+  "genuinely_new_scientific_contribution": false,
+  "items": [
+    {
+      "name": "All 681 frozen sources/results/inputs unchanged",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Saved pre-experiment plan hash unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Previous investigation completion manifest preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All39 prior investigation checks retained",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "247680 old stress rows independently counted and hashed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "19 unit-test groups pass",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Real grid is 6080 episodes x20 methods",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Real episodes unique method/case",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Six engines and both battery regimes represented",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Every real episode has exactly one seed/lead/cost/split identity",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Ten selection seeds, four leads and four cost asymmetries per regime",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Every validation/test partition contains each unit once",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Meta-validation counts agree with saved partitions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Paired outcomes contain exactly the disjoint test units",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Validation total sample size is 9 to26",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All real RAMPE episodes abstain",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "RAMPE baseline outcome metrics identical",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "RAMPE always gives authority to1SE",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Paired unit actions,costs,lives,failures identical to1SE",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "RAMPE recorded rates/failures equal paired-unit sums",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "1SE recorded rates/failures equal paired-unit sums",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "conventional recorded rates/failures equal paired-unit sums",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "CATc recorded rates/failures equal paired-unit sums",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Causal context inventory unique,1166 rows",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Every paired query uses its pre-extracted causal context",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All four frozen baselines align across all6080 partitions",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "38 outer groups;1026 engines;123 battery cells per regime",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Learned model leaves entire dataset out",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Learned probabilities aligned with fixed meta-features",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Learned unit outcomes align one-to-one without dropped numeric engine ids",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Synthetic8700 episodes x18 methods",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Synthetic288 conditions each30 independent seed cohorts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Synthetic n=1000 target units per episode",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "No duplicate synthetic method/case",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Unseen regime always abstains to safe B",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All-fail attack exposes fallback failure and infeasible oracle",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Large-source hidden shift exceeds .05 mean failure risk",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Matched large-source rate improves vs B only in simulator",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Synthetic all-method value replay shift0.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Synthetic all-method value replay shift1.0",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Validation/support stress complete329080 rows",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Stress validation noise/fractions retain full settings",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "RAMPE remains fallback under validation stress",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Fixed-rule shift45600 rows with frozen selection economics",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "RAMPE and fallback remain identical under lead/cost shifts",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Fixed-rule failures monotone in required lead",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Shifted economic accounting exact",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Temporal30 seeds x8 blocks x2 feedback regimes x18 methods",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Temporal block0 equal before any new feedback",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Temporal reference adapts with complete outcomes only",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Feedback append occurs after evaluation in temporal source",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Inference families768 real,96 LOBO,580 synthetic",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Holm values independently recomputed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All128 RAMPE-vs1SE conditional differences and intervals zero",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "All20 requested report sections present once",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Final report explicit D and NO",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Primary literature includes closest reproducing mechanisms",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Report local links resolve",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Both scientific figures exported PNG/SVG",
+      "passed": true,
+      "detail": null
+    }
+  ]
+}

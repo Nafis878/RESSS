@@ -1,0 +1,17 @@
+// ---------------------------------------------------------------- front matter
+const TITLE = 'Evaluating end-of-life alarms: observation time, alarm timing, maintenance cost and transfer';
+must(Math.abs(pc.STW_const.pct - pc.STW.pct) < 5, 'abstract: constant estimate within a few points pooled');
+const abLost = KDS.filter(d => kpr(d, 0.1, 'STW_window', 'P1_res_opt_mid').v === 'mine');
+must(abLost.length >= 1 && new Set(KDS.map(d => bestM(d).ours)).size === 2, 'abstract: their policy 1 (P-res) loses to our window-tuned alarm on at least one dataset, and the lowest M comes from different families on different datasets');
+must(kpr('fd001', 0.1, 'STW_window', 'P1_res_opt_mid').v === 'theirs', 'abstract: their policy 1 beats our window-tuned alarm on FD001');
+const nWord = n => ['no', 'one', 'two', 'all three'][n];
+const ABSTRACT = `Remaining-useful-life models are mostly scored at evaluator-chosen times, whereas replacement is triggered once, by an alarm. On eight run-to-failure datasets we separate long-range prediction, near-failure estimation, alarm timing and maintenance cost for end-of-life alarms scored by an asymmetric window. With matched training and cross-fitted calibration, a fixed-time model placed ${f1(FMV.fixed_f50.pct)}% of estimates in the window at half of life and ${f1(FMV.fixed_f90.pct)}% at 90% of life on PHM08; a self-timed recipe reached ${f1(FMV.recipe_self.pct)}%, no more than its regressor at 90% of life${f4rep1 && f4rep2 ? ', and FD004 showed the same pattern' : ''}. A constant estimate at the recipe's alarm times scored within ${f1(Math.max(...ctrlDS.map(d => Math.abs(CT[d]['20'].STW_const.pct - CT[d]['20'].STW.pct))))} points of the model's estimate, so the window mainly rewards timing. Under the decision-oriented metric of Kamariotis et al., re-implemented with their 10-cycle grid, their probability-threshold policy on our regressor beat our window-tuned alarm on FD001 (*M* = ${pct2(kt('fd001', 0.1, 'P1_res_opt_mid').M)}% vs ${pct2(kt('fd001', 0.1, 'STW_window').M)}%) but lost on ${andList(abLost.map(d => d.toUpperCase()))}; none won everywhere. With fully nested preprocessing, the recipe was correct for ${f1(BRc.pct)}% of battery cells within batches and ${f1(BRl.pct)}% with a batch held out (${f1(Math.min(...kapVals('lobo')))}–${f1(Math.max(...kapVals('lobo')))}% across time scales), while a capacity-trend baseline reached ${f1(BTl.pct)}% and cost less in most settings. The recipe reached ${f1(NW.pct)}% on N-CMAPSS and failed on bearings (0 of 17).`;
+const HIGHLIGHTS = [
+  'Prediction, alarm timing and maintenance cost of end-of-life alarms are separated',
+  'With matched data, observation time explains most of the fixed-time vs alarm gap',
+  'An asymmetric window score rewards alarm timing and hides notice and cost',
+  'Under the metric M, neither our alarms nor threshold policies won on every dataset',
+  `Batteries: accuracy fell on a held-out batch; a simple capacity trend did better${must(BRl.pct < BRc.pct, 'highlight: battery held-out rate below the within-batch rate') || ''}`];
+must(HIGHLIGHTS.every(h => h.length <= 85), 'highlights at most 85 characters: ' + HIGHLIGHTS.map(h => h.length).join(','));
+must(ABSTRACT.split(/\s+/).length <= 250, 'abstract at most 250 words (' + ABSTRACT.split(/\s+/).length + ')');
+const KEYWORDS = 'Remaining useful life; Predictive maintenance; Alarm timing; Decision-oriented metric; Model evaluation; Distribution shift; Lithium-ion battery';

@@ -1,0 +1,16 @@
+test_bootstrap_reproducibility (__main__.Tests.test_bootstrap_reproducibility) ... ok
+test_empty_and_infinite_fallback (__main__.Tests.test_empty_and_infinite_fallback) ... ok
+test_grid_rounding_and_unavailable_action (__main__.Tests.test_grid_rounding_and_unavailable_action) ... ok
+test_holm (__main__.Tests.test_holm) ... ok
+test_invalid_inputs (__main__.Tests.test_invalid_inputs) ... ok
+test_numerical_and_pair_guard (__main__.Tests.test_numerical_and_pair_guard) ... ok
+test_paired_binary (__main__.Tests.test_paired_binary) ... ok
+test_rank_at_feasibility_boundary (__main__.Tests.test_rank_at_feasibility_boundary) ... ok
+test_renewal_contrast_hand_calculation (__main__.Tests.test_renewal_contrast_hand_calculation) ... ok
+test_selection_independent_of_order (__main__.Tests.test_selection_independent_of_order) ... ok
+test_zero_failure_upper_stability (__main__.Tests.test_zero_failure_upper_stability) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.003s
+
+OK

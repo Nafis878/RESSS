@@ -1,0 +1,4 @@
+PASS  R4a recipe H = 60 cycles, cv123: 117/123 in window; reference 117/123; per-cell outcomes identical: True
+PASS  R4a recipe H = 60 cycles, lobo: 98/123 in window; reference 98/123; per-cell outcomes identical: True
+PASS  R4a capacity_trend H = 60 cycles, cv123: 123/123 in window; reference 123/123; per-cell outcomes identical: True
+PASS  R4a capacity_trend H = 60 cycles, lobo: 121/123 in window; reference 121/123; per-cell outcomes identical: True

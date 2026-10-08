@@ -1,0 +1,20 @@
+test_bad_inputs_and_overflow (clock_regret_linear.test_core.LinearTests.test_bad_inputs_and_overflow) ... ok
+test_both_endpoint_branches_and_equality (clock_regret_linear.test_core.LinearTests.test_both_endpoint_branches_and_equality) ... ok
+test_compatible_epsilon_sequence_approaches_supremum (clock_regret_linear.test_core.LinearTests.test_compatible_epsilon_sequence_approaches_supremum) ... ok
+test_continuous_identical_age_has_no_later_only_phase (clock_regret_linear.test_core.LinearTests.test_continuous_identical_age_has_no_later_only_phase) ... ok
+test_continuous_limit_is_not_an_attaining_witness (clock_regret_linear.test_core.LinearTests.test_continuous_limit_is_not_an_attaining_witness) ... ok
+test_earlier_pair_can_have_strict_interior_count (clock_regret_linear.test_core.LinearTests.test_earlier_pair_can_have_strict_interior_count) ... ok
+test_frozen_quadratic_algorithm_300_larger_cases (clock_regret_linear.test_core.LinearTests.test_frozen_quadratic_algorithm_300_larger_cases) ... ok
+test_full_integer_clock_exhaustion_1000 (clock_regret_linear.test_core.LinearTests.test_full_integer_clock_exhaustion_1000) ... ok
+test_fully_observed_and_duplicates (clock_regret_linear.test_core.LinearTests.test_fully_observed_and_duplicates) ... ok
+test_later_pair_at_most_two_objectives (clock_regret_linear.test_core.LinearTests.test_later_pair_at_most_two_objectives) ... ok
+test_no_life_cap (clock_regret_linear.test_core.LinearTests.test_no_life_cap) ... ok
+test_permutation_and_witness_omission (clock_regret_linear.test_core.LinearTests.test_permutation_and_witness_omission) ... ok
+test_prepared_and_standalone_agree (clock_regret_linear.test_core.LinearTests.test_prepared_and_standalone_agree) ... ok
+test_resolution_error_example_and_bound (clock_regret_linear.test_core.LinearTests.test_resolution_error_example_and_bound) ... ok
+test_separate_general_state_oracle_500 (clock_regret_linear.test_core.LinearTests.test_separate_general_state_oracle_500) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.945s
+
+OK

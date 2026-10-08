@@ -1,0 +1,25 @@
+Dataset,Lead,Units,Failures,Rate %,Screen p,Finite order statistic %,Screen
+PHM08,0,218,6,2.75,0.9636,100.0,not rejected
+PHM08,5,218,8,3.67,0.8569,100.0,not rejected
+PHM08,10,218,9,4.13,0.7658,100.0,not rejected
+PHM08,15,218,7,3.21,0.9225,100.0,not rejected
+FD001,0,100,2,2.0,0.9629,100.0,not rejected
+FD001,5,100,4,4.0,0.7422,100.0,not rejected
+FD001,10,100,2,2.0,0.9629,100.0,not rejected
+FD001,15,100,1,1.0,0.9941,100.0,not rejected
+FD002,0,260,12,4.62,0.6521,100.0,not rejected
+FD002,5,260,4,1.54,0.9991,100.0,not rejected
+FD002,10,260,11,4.23,0.7549,100.0,not rejected
+FD002,15,260,13,5.0,0.5397,100.0,not rejected
+FD003,0,100,3,3.0,0.8817,100.0,not rejected
+FD003,5,100,5,5.0,0.564,100.0,not rejected
+FD003,10,100,2,2.0,0.9629,100.0,not rejected
+FD003,15,100,2,2.0,0.9629,100.0,not rejected
+FD004,0,249,8,3.21,0.9333,100.0,not rejected
+FD004,5,249,10,4.02,0.8016,100.0,not rejected
+FD004,10,249,9,3.61,0.8786,100.0,not rejected
+FD004,15,249,9,3.61,0.8786,100.0,not rejected
+NCMAPSS6,0,99,3,3.03,0.8775,100.0,not rejected
+NCMAPSS6,5,99,3,3.03,0.8775,100.0,not rejected
+NCMAPSS6,10,99,3,3.03,0.8775,100.0,not rejected
+NCMAPSS6,15,99,1,1.01,0.9938,100.0,not rejected

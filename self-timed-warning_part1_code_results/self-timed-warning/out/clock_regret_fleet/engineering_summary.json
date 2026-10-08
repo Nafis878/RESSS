@@ -1,0 +1,22 @@
+{
+  "cohorts": 304,
+  "source": "Frozen engineering lifetime cohorts; constructed public cost scenarios",
+  "scenario_rule": "q_i=(rho-1)*(1+public_unit_class); numeric ID mod 3 or UTF-8 SHA-256 integer mod 3 for nonnumeric IDs",
+  "common_reductions_exact": 304,
+  "approximate_exact_age_matches": 304,
+  "heterogeneous_changes_common_age": 13,
+  "certified_exact_decisions": 304,
+  "certified_unique_decisions": 304,
+  "single_candidate_cohorts": 96,
+  "multiple_candidate_cohorts": 208,
+  "nontrivial_certified_decisions": 208,
+  "max_selection_factor": 1.0,
+  "realized_win_tie_loss": [
+    5,
+    291,
+    8
+  ],
+  "mean_realized_relative_regret_change": 0.00471847698684269,
+  "independent_observations": false,
+  "inferential_test": "None: overlapping frozen cohorts and constructed costs do not justify independent-case significance tests."
+}

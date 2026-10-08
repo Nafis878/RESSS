@@ -1,0 +1,188 @@
+eleven fixed-time models; the stacked hybrid is the best at half of life (33.5%)
+PHM08 H=20: 200/218 = 91.7%
+pooled H=20: 836/927 = 90.2%
+N-CMAPSS primary: 68/99 = 68.7%
+decomposition uses the main self-timed result and the oracle-timed control
+calibrated fixed-time GBM at 90% of life between raw and self-timed; at half of life below 30%
+protocol results as submitted: battery CV 97.6%, leave-one-batch-out 69.9%, bearings 0/17
+bearings with training-only block length: still 0 of 17
+matched analysis: the cross-fitted recipe reproduces the main PHM08 result engine by engine
+matched analysis: frozen 75/25 variants equal the earlier figures
+battery cost rerun reproduces the earlier cross-validation cost results unit by unit for every shared policy
+Phase 2 re-run after the workspace reset reproduces the frozen FD001 tables: 7 files
+metric M on FD001: leakage checks pass and no grid-mapped policy has M < 0
+metric M on FD002: leakage checks pass and no grid-mapped policy has M < 0
+metric M on FD003: leakage checks pass and no grid-mapped policy has M < 0
+metric M on FD004: leakage checks pass and no grid-mapped policy has M < 0
+fully nested battery cost: the window-tuned recipe and the capacity trend at H = 60 cycles reproduce the fully nested window analysis cell by cell
+calibrated health indicator: the uncalibrated indicator reproduces the health-indicator threshold alarm unit by unit on six datasets
+FD004 matched decomposition: the cross-fitted recipe reproduces the main FD004 result engine by engine
+cost analysis complete: 16 lead-time and cost-ratio cells on all seven datasets (battery fully nested)
+cost audit reproduces the window-tuned, cost-tuned, health-indicator, age and perfect-foresight results of an earlier, separate run unit by unit on the six engine datasets
+window-tuned alarm beats their policy 3 on FD001-FD004 at c_p/c_c = 0.1
+introduction: constant estimate within a few points of the model estimate on all seven datasets, none significant
+introduction: calibrated indicator significantly below the recipe on PHM08 and FD001-FD004, not on N-CMAPSS
+introduction: window-tuned alarms cheaper than age replacement in most cells on six of seven datasets, never on N-CMAPSS
+matched decomposition: observation time dominates; self-timing adds nothing measurable over the same regressor at 90% of life; recipe regressor better than the fixed-time GBM at 90% of life
+reported estimate varies about 2 cycles at the alarm, true remaining life more than twice as much (PHM08, H = 20)
+timing controls available for all seven datasets
+constant estimate not significantly different from the model at H = 20 on any dataset (unadjusted)
+health-indicator alarm significantly lower on every dataset after Holm correction
+calibrated indicator: significantly below the recipe on the five C-MAPSS-family datasets, not on N-CMAPSS (Holm, H = 20)
+shift study available for all seven datasets
+a larger shift moves the alarm later on every dataset
+simulator check: optimised policy 1 lowest and policy 3 below policy 2 at 7/7 ratios for both sigma, no M < 0
+reference-grid effect: 1.7-2.3% on PHM08 and C-MAPSS, above 7% on N-CMAPSS
+unmapped alarms can give M < 0 (battery capacity-threshold example, convention B, dT = 30)
+Eq. 7 interval of the perfect policy itself is several points wide on FD001
+FD001: their policy 1 (P-res) beats the window-tuned and 1-SE alarms at c_p/c_c = 0.1
+FD001: window-tuned beats policy 3; unclear against P-cls
+FD004: window-tuned alarm has the lowest M at 0.1 but no clear difference from their policy 1
+largest excess cost: 1-SE < window < plain cost tuning; quantile alarm above window
+window-tuned alarms never significantly cheaper than age replacement on N-CMAPSS, and significantly cheaper in at least 12 of 16 cells on every other dataset
+window-tuned alarms never significantly more expensive than age replacement
+the largest tied optimal threshold is within one step of the first training failure in every five-fold training set (ratios <= 0.1)
+FD001: optimised P-cls thresholds below c_p/c_c at ratios >= 0.05 (median over folds)
+their Fig. 9a pattern on our data: one threshold step beyond the optimised plateau makes training failures and a very large M (FD001 fold 1, c_p/c_c = 0.01, P-cls)
+tie rules compared on every dataset
+bearings corrected: no criterion met
+battery: every held-out-batch rate below every within-batch rate under the fully nested physical task
+capacity trend significantly more correct alarms than the recipe, within and across batches
+battery cost (convention C): no trend policy significantly dearer than its recipe counterpart in any cell, within batches or with a batch held out
+battery cost (convention C): every trend policy point-cheaper than its recipe counterpart in all 16 cells under cross-validation
+battery held out: the window-tuned recipe has the lower point estimate than the window-tuned trend only at one lead time, never significantly
+bearing onset groups consistent with the diagnosis table
+window-tuned alarms significantly cheaper than age replacement in at least 12 of 16 cells on the five C-MAPSS datasets and the batteries (convention C), in none on N-CMAPSS
+every held-out-batch estimate below every within-batch estimate and below 85%
+constant estimate within 5 points of the model estimate on every dataset
+Q1 decomposition: time dominates, target and features significant at 90% of life, self-timing not
+window-tuned alarm: no test failure at c_p/c_c <= 0.1 in any fold of FD001-FD004
+window tuning significantly cheaper than the 1-SE rule in most cells on at least one dataset
+policy 1: heuristic threshold had more failing cells than the optimised one, both probability models
+abstract: constant estimate within a few points pooled
+abstract: their policy 1 (P-res) loses to our window-tuned alarm on at least one dataset, and the lowest M comes from different families on different datasets
+abstract: their policy 1 beats our window-tuned alarm on FD001
+abstract: window-tuned alarms cheaper than age replacement on six of seven datasets
+highlight: battery held-out rate below the within-batch rate
+highlights at most 85 characters: 79,79,83,79,80
+abstract at most 250 words (200)
+battery splits with unchanged kappa differ from the protocol by at most 3 cells (fill change only)
+battery cost tables complete for both analyses and both conventions
+identical protocol: LSTM, similarity, CNN significantly lower after Holm; MLP-KF not significant
+matched inputs: Transformer numerically higher, not significant; LSTM and CNN significantly lower at H=20
+ablation significance pattern
+section number 1 matches LaTeX counter 1
+section number 2 matches LaTeX counter 2
+subsection 2.1 matches LaTeX counter 2.1
+subsection 2.2 matches LaTeX counter 2.2
+subsection 2.3 matches LaTeX counter 2.3
+section number 3 matches LaTeX counter 3
+subsection 3.1 matches LaTeX counter 3.1
+equation mapped: *t*^{*} = min { *t* < *L*_{i} : the policy warns at *t* },
+equation mapped: ŷ_{t*} − 2 ≤ *r*_{t*} ≤ ŷ_{t*} + 13.
+subsection 3.2 matches LaTeX counter 3.2
+subsection 3.3 matches LaTeX counter 3.3
+subsection 3.4 matches LaTeX counter 3.4
+section number 4 matches LaTeX counter 4
+equation mapped: *y*_{t} = min( *r*_{t}, *c* ),   *c* ∈ {40, 60, 90}.
+equation mapped: *t*^{*} = min { *t* : ỹ_{τ} ≤ *H* for all τ = *t* − *k* + 1, …, *t* },
+subsection 4.1 matches LaTeX counter 4.1
+equation mapped: *P*(*s*) = *F*(*b* − *s*) − *F*(*a* − *s*).
+equation mapped: *s*^{*} = (*a* + *b*)/2 − *m* = −5.5 − *m*,
+section number 5 matches LaTeX counter 5
+subsection 5.1 matches LaTeX counter 5.1
+subsection 5.2 matches LaTeX counter 5.2
+subsection 5.3 matches LaTeX counter 5.3
+subsection 5.4 matches LaTeX counter 5.4
+subsection 5.5 matches LaTeX counter 5.5
+subsection 5.6 matches LaTeX counter 5.6
+section number 6 matches LaTeX counter 6
+subsection 6.1 matches LaTeX counter 6.1
+subsection 6.2 matches LaTeX counter 6.2
+section number 7 matches LaTeX counter 7
+subsection 7.1 matches LaTeX counter 7.1
+subsection 7.2 matches LaTeX counter 7.2
+equation mapped: *M* = ( *R* − *R*_{perf} ) / *R*_{perf}.
+subsection 7.3 matches LaTeX counter 7.3
+subsection 7.4 matches LaTeX counter 7.4
+subsection 7.5 matches LaTeX counter 7.5
+section number 8 matches LaTeX counter 8
+subsection 8.1 matches LaTeX counter 8.1
+subsection 8.2 matches LaTeX counter 8.2
+section number 9 matches LaTeX counter 9
+subsection 9.1 matches LaTeX counter 9.1
+subsection 9.2 matches LaTeX counter 9.2
+subsection 9.3 matches LaTeX counter 9.3
+subsection 9.4 matches LaTeX counter 9.4
+subsection 9.5 matches LaTeX counter 9.5
+subsection 9.6 matches LaTeX counter 9.6
+subsection 9.7 matches LaTeX counter 9.7
+section number 10 matches LaTeX counter 10
+reference cited in the main text: de Jonge 2020
+reference cited in the main text: Page 1954
+reference cited in the main text: Roberts 1959
+reference cited in the main text: Arias Chao 2021
+reference cited in the main text: Barlow 1960
+reference cited in the main text: Clopper 1934
+reference cited in the main text: de Pater 2022
+reference cited in the main text: Friedman 2001
+reference cited in the main text: Gebraeel 2005
+reference cited in the main text: Grinsztajn 2022
+reference cited in the main text: Heimes 2008
+reference cited in the main text: Holm 1979
+reference cited in the main text: Kamariotis 2024
+reference cited in the main text: Kapoor 2023
+reference cited in the main text: Lee 2023
+reference cited in the main text: Lei 2018
+reference cited in the main text: Li 2018
+reference cited in the main text: McNemar 1947
+reference cited in the main text: Mitici 2023
+reference cited in the main text: Nguyen 2019
+reference cited in the main text: Nosek 2018
+reference cited in the main text: Nectoux 2012
+reference cited in the main text: Pedregosa 2011
+reference cited in the main text: Peel 2008
+reference cited in the main text: Ramasso 2014
+reference cited in the main text: Rengasamy 2020
+reference cited in the main text: Saxena 2010
+reference cited in the main text: Saxena 2008
+reference cited in the main text: Severson 2019
+reference cited in the main text: Si 2011
+reference cited in the main text: Varma 2006
+reference cited in the main text: Wang 2008
+reference cited in the main text: Xie 2025
+reference cited in the main text: Zheng 2017
+abstract 200 words <= 200 (RESS limit)
+7 keywords within the RESS limit of 1-7
+highlight <= 85 characters (79)
+highlight <= 85 characters (79)
+highlight <= 85 characters (83)
+highlight <= 85 characters (79)
+highlight <= 85 characters (80)
+3-5 highlights
+table or figure T:key is referred to in the text
+table or figure F:recipe is referred to in the text
+table or figure T:datasets is referred to in the text
+table or figure T:status is referred to in the text
+table or figure T:policies is referred to in the text
+table or figure T:matched is referred to in the text
+table or figure F:matched is referred to in the text
+table or figure T:firstwarn is referred to in the text
+table or figure T:controls is referred to in the text
+table or figure F:shift is referred to in the text
+table or figure F:level is referred to in the text
+table or figure F:errlead is referred to in the text
+table or figure T:cost is referred to in the text
+table or figure F:costfig is referred to in the text
+table or figure T:mtab is referred to in the text
+table or figure T:mpairs is referred to in the text
+table or figure F:mfig is referred to in the text
+table or figure T:battery is referred to in the text
+table or figure T:batcost is referred to in the text
+table or figure T:ncmb is referred to in the text
+table or figure F:batfig is referred to in the text
+table or figure T:report is referred to in the text
+
+Words (abstract, text, tables, captions, appendices, references): 20365
+Abstract: 200 words; keywords: 7; highlights: 79, 79, 83, 79, 80 characters
+Unconverted author-year patterns: none

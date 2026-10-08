@@ -1,0 +1,1276 @@
+{
+  "complete": true,
+  "checks": [
+    {
+      "check": "amended plan hash unchanged",
+      "pass": true
+    },
+    {
+      "check": "all 21 supplied input hashes unchanged",
+      "pass": true
+    },
+    {
+      "check": "paper5 numbers match reference values",
+      "pass": true
+    },
+    {
+      "check": "paper5 manuscript.tex text matches reference",
+      "pass": true
+    },
+    {
+      "check": "paper5 supplementary.tex text matches reference",
+      "pass": true
+    },
+    {
+      "check": "paper6 numbers match reference values",
+      "pass": true
+    },
+    {
+      "check": "paper6 manuscript.tex text matches reference",
+      "pass": true
+    },
+    {
+      "check": "paper6 supplementary.tex text matches reference",
+      "pass": true
+    },
+    {
+      "check": "test_cat.log",
+      "pass": true
+    },
+    {
+      "check": "all eight CAT tests completed",
+      "pass": true
+    },
+    {
+      "check": "sim_checks_AC.txt",
+      "pass": true
+    },
+    {
+      "check": "sim_checks_B.txt",
+      "pass": true
+    },
+    {
+      "check": "sim_kmin_checks.txt",
+      "pass": true
+    },
+    {
+      "check": "cat_equiv.txt",
+      "pass": true
+    },
+    {
+      "check": "cat_leakage.txt",
+      "pass": true
+    },
+    {
+      "check": "Battery_check.txt",
+      "pass": true
+    },
+    {
+      "check": "Bearing_check.txt",
+      "pass": true
+    },
+    {
+      "check": "PHM08 unique cost decisions",
+      "pass": true
+    },
+    {
+      "check": "PHM08 positive use and finite costs",
+      "pass": true
+    },
+    {
+      "check": "PHM08 all splits",
+      "pass": true
+    },
+    {
+      "check": "PHM08 all 16 cost cells",
+      "pass": true
+    },
+    {
+      "check": "PHM08 identical unit counts per policy",
+      "pass": true
+    },
+    {
+      "check": "PHM08 CAT_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "PHM08 CATc_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "PHM08 STW_window present",
+      "pass": true
+    },
+    {
+      "check": "PHM08 STW_cost present",
+      "pass": true
+    },
+    {
+      "check": "PHM08 STW_cost_1se present",
+      "pass": true
+    },
+    {
+      "check": "PHM08 age present",
+      "pass": true
+    },
+    {
+      "check": "PHM08 perfect_foresight present",
+      "pass": true
+    },
+    {
+      "check": "PHM08 cost-aware failure is bounded by bare CAT pointwise",
+      "pass": true
+    },
+    {
+      "check": "FD001 unique cost decisions",
+      "pass": true
+    },
+    {
+      "check": "FD001 positive use and finite costs",
+      "pass": true
+    },
+    {
+      "check": "FD001 all splits",
+      "pass": true
+    },
+    {
+      "check": "FD001 all 16 cost cells",
+      "pass": true
+    },
+    {
+      "check": "FD001 identical unit counts per policy",
+      "pass": true
+    },
+    {
+      "check": "FD001 CAT_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "FD001 CATc_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "FD001 STW_window present",
+      "pass": true
+    },
+    {
+      "check": "FD001 STW_cost present",
+      "pass": true
+    },
+    {
+      "check": "FD001 STW_cost_1se present",
+      "pass": true
+    },
+    {
+      "check": "FD001 age present",
+      "pass": true
+    },
+    {
+      "check": "FD001 perfect_foresight present",
+      "pass": true
+    },
+    {
+      "check": "FD001 cost-aware failure is bounded by bare CAT pointwise",
+      "pass": true
+    },
+    {
+      "check": "FD002 unique cost decisions",
+      "pass": true
+    },
+    {
+      "check": "FD002 positive use and finite costs",
+      "pass": true
+    },
+    {
+      "check": "FD002 all splits",
+      "pass": true
+    },
+    {
+      "check": "FD002 all 16 cost cells",
+      "pass": true
+    },
+    {
+      "check": "FD002 identical unit counts per policy",
+      "pass": true
+    },
+    {
+      "check": "FD002 CAT_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "FD002 CATc_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "FD002 STW_window present",
+      "pass": true
+    },
+    {
+      "check": "FD002 STW_cost present",
+      "pass": true
+    },
+    {
+      "check": "FD002 STW_cost_1se present",
+      "pass": true
+    },
+    {
+      "check": "FD002 age present",
+      "pass": true
+    },
+    {
+      "check": "FD002 perfect_foresight present",
+      "pass": true
+    },
+    {
+      "check": "FD002 cost-aware failure is bounded by bare CAT pointwise",
+      "pass": true
+    },
+    {
+      "check": "FD003 unique cost decisions",
+      "pass": true
+    },
+    {
+      "check": "FD003 positive use and finite costs",
+      "pass": true
+    },
+    {
+      "check": "FD003 all splits",
+      "pass": true
+    },
+    {
+      "check": "FD003 all 16 cost cells",
+      "pass": true
+    },
+    {
+      "check": "FD003 identical unit counts per policy",
+      "pass": true
+    },
+    {
+      "check": "FD003 CAT_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "FD003 CATc_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "FD003 STW_window present",
+      "pass": true
+    },
+    {
+      "check": "FD003 STW_cost present",
+      "pass": true
+    },
+    {
+      "check": "FD003 STW_cost_1se present",
+      "pass": true
+    },
+    {
+      "check": "FD003 age present",
+      "pass": true
+    },
+    {
+      "check": "FD003 perfect_foresight present",
+      "pass": true
+    },
+    {
+      "check": "FD003 cost-aware failure is bounded by bare CAT pointwise",
+      "pass": true
+    },
+    {
+      "check": "FD004 unique cost decisions",
+      "pass": true
+    },
+    {
+      "check": "FD004 positive use and finite costs",
+      "pass": true
+    },
+    {
+      "check": "FD004 all splits",
+      "pass": true
+    },
+    {
+      "check": "FD004 all 16 cost cells",
+      "pass": true
+    },
+    {
+      "check": "FD004 identical unit counts per policy",
+      "pass": true
+    },
+    {
+      "check": "FD004 CAT_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "FD004 CATc_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "FD004 STW_window present",
+      "pass": true
+    },
+    {
+      "check": "FD004 STW_cost present",
+      "pass": true
+    },
+    {
+      "check": "FD004 STW_cost_1se present",
+      "pass": true
+    },
+    {
+      "check": "FD004 age present",
+      "pass": true
+    },
+    {
+      "check": "FD004 perfect_foresight present",
+      "pass": true
+    },
+    {
+      "check": "FD004 cost-aware failure is bounded by bare CAT pointwise",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 unique cost decisions",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 positive use and finite costs",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 all splits",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 all 16 cost cells",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 identical unit counts per policy",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 CAT_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 CATc_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 STW_window present",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 STW_cost present",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 STW_cost_1se present",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 age present",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 perfect_foresight present",
+      "pass": true
+    },
+    {
+      "check": "NCMAPSS6 cost-aware failure is bounded by bare CAT pointwise",
+      "pass": true
+    },
+    {
+      "check": "Battery unique cost decisions",
+      "pass": true
+    },
+    {
+      "check": "Battery positive use and finite costs",
+      "pass": true
+    },
+    {
+      "check": "Battery all splits",
+      "pass": true
+    },
+    {
+      "check": "Battery all 16 cost cells",
+      "pass": true
+    },
+    {
+      "check": "Battery identical unit counts per policy",
+      "pass": true
+    },
+    {
+      "check": "Battery CAT_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "Battery CATc_a0.05 present",
+      "pass": true
+    },
+    {
+      "check": "Battery STW_window present",
+      "pass": true
+    },
+    {
+      "check": "Battery STW_cost present",
+      "pass": true
+    },
+    {
+      "check": "Battery STW_cost_1se present",
+      "pass": true
+    },
+    {
+      "check": "Battery age present",
+      "pass": true
+    },
+    {
+      "check": "Battery perfect_foresight present",
+      "pass": true
+    },
+    {
+      "check": "Battery cost-aware failure is bounded by bare CAT pointwise",
+      "pass": true
+    },
+    {
+      "check": "FD001 M unique paired units",
+      "pass": true
+    },
+    {
+      "check": "FD001 M full grids",
+      "pass": true
+    },
+    {
+      "check": "FD001 M equal unit counts",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 1 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 1 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 1 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 1 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 1 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 1 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 1 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 2 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 2 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 2 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 2 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 2 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 2 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 2 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 3 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 3 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 3 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 3 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 3 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 3 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 3 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 4 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 4 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 4 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 4 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 4 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 4 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 4 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 5 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 5 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 5 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 5 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 5 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 5 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD001 fold 5 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 M unique paired units",
+      "pass": true
+    },
+    {
+      "check": "FD002 M full grids",
+      "pass": true
+    },
+    {
+      "check": "FD002 M equal unit counts",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 1 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 1 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 1 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 1 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 1 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 1 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 1 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 2 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 2 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 2 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 2 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 2 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 2 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 2 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 3 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 3 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 3 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 3 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 3 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 3 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 3 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 4 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 4 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 4 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 4 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 4 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 4 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 4 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 5 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 5 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 5 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 5 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 5 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 5 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD002 fold 5 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 M unique paired units",
+      "pass": true
+    },
+    {
+      "check": "FD003 M full grids",
+      "pass": true
+    },
+    {
+      "check": "FD003 M equal unit counts",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 1 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 1 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 1 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 1 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 1 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 1 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 1 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 2 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 2 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 2 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 2 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 2 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 2 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 2 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 3 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 3 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 3 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 3 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 3 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 3 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 3 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 4 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 4 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 4 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 4 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 4 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 4 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 4 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 5 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 5 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 5 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 5 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 5 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 5 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD003 fold 5 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 M unique paired units",
+      "pass": true
+    },
+    {
+      "check": "FD004 M full grids",
+      "pass": true
+    },
+    {
+      "check": "FD004 M equal unit counts",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 1 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 1 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 1 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 1 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 1 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 1 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 1 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 2 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 2 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 2 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 2 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 2 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 2 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 2 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 3 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 3 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 3 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 3 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 3 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 3 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 3 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 4 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 4 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 4 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 4 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 4 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 4 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 4 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 5 q=0.01 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 5 q=0.02 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 5 q=0.05 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 5 q=0.1 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 5 q=0.2 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 5 q=0.5 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "FD004 fold 5 q=0.8 nonnegative grid M",
+      "pass": true
+    },
+    {
+      "check": "bearing outputs present",
+      "pass": true
+    },
+    {
+      "check": "complete engine verdict",
+      "pass": true
+    }
+  ],
+  "sha256": {
+    "Battery_check.txt": "647c54d4c87a952b67f008b3205e61fa4fe55716d34fff5025b4f621483a2ece",
+    "Battery_cost.csv": "7b88d9d9f5b1200c4c5186bd7430d6172c6bc8046172b2a087c15790d7a9a3aa",
+    "Battery_settings.csv": "6537ef49df03c84b8a497e6f7ee411425401db7188c913dd3adde12908610829",
+    "Bearing_check.txt": "047bb2855862939306ed9fe90308750eef3a58cad56038fa113b9e0d1d6bed14",
+    "Bearing_platform.csv": "2637df2b6eba8c9982722ed3adfeb38f8a0babe56cd9ef7b9bae6b8186b51180",
+    "Bearing_settings.csv": "e1f0549f70c32ae34e89f87db0dbe502d444dd52ba6a36cf33771beacd96797c",
+    "Bearing_units.csv": "f11a275b98c5e527713231491d695a9e126b763ab067446f2138fc94b22f6daf",
+    "Bearing_verified.json": "c533d08139d7c0d574bfdd4e7ab1f42ffb64e6cee92fbb7caadf04a0ed149c5f",
+    "cat_equiv.txt": "35667252e73a0f01517c9786099e940b4d96a40e58ce72c97c457d389a1a2941",
+    "cat_leakage.txt": "4d2a49a45379ddf33ccb3641de6c2832b1b71c2c62378e0ad64c31b11efeeac7",
+    "contrib_numbers.json": "0c024c56136df87f2fe8a57e270fc7296a1a4730f11de5711fbc4df44ec039f5",
+    "FD001_cost.csv": "069c7fd45731c9ec648444f8e2122ff399ff1c3003548f839766658234a9d11d",
+    "FD001_M.csv": "ded2d930ee3a776cbe4a430a2cc525c4a30936ae509b9e6c2eb4ae1785199176",
+    "FD001_scores.csv.gz": "968ff925ac77585f38dd800feaf956321bbdeaac78a89b6b24b5d7fedcf6541d",
+    "FD001_selected.csv": "71abe730317ffc41c02942b5d3e26d9035d92d514fd9588a66726bc9faa0819a",
+    "FD001_settings.csv": "7ba8a65b8624224bbdca4247d4eaa7775466d8b6f8bc12554827046952fc3715",
+    "FD001_window20.csv": "bfb532a3de083ba87211db8f22734e0415ae180bbc4a2bcd82d5048b47daa9b2",
+    "FD002_cost.csv": "f745172ed171638ff6235e790970b70670d16203082f546b656c2eec0fd0d8d5",
+    "FD002_M.csv": "b1d72ea593a4a451754957c5012adddc4f5823a13273ec9fe95a9f0819c9f414",
+    "FD002_scores.csv.gz": "fafe6d075e151c28778e5f72b43f966ae64cd97a82de461ba6fd9819e53abb36",
+    "FD002_selected.csv": "d6d35d9881d0222d26fe7af4457e40c7a8271fe6d02685fba4e375a5b7302ecb",
+    "FD002_settings.csv": "d651add72f20324118e3e7324a31ebc1d47e1fe15c63635222a181fed0641fdf",
+    "FD002_window20.csv": "c7b81561324ec4a278b5d4e6754d79aaf049aa2e2e74d79f961b1c33906fd5b4",
+    "FD003_cost.csv": "c137dd094b3ee39b2721739992129fd701c0d9b4b472af6bfdfd9ac2e33926df",
+    "FD003_M.csv": "7f098be358361c0981d78b5c3047c1202e30eb1ee68ec8b248d48d1acb14e70c",
+    "FD003_scores.csv.gz": "2aa87d57e494df1497c5519e97902e7ed9570c4606cb9b6f27d2da897afb4d3a",
+    "FD003_selected.csv": "6abc3e362ff8a680ebbd3dda443e353459b0ba6203b7bd0835dd4fcbcf1f5c3c",
+    "FD003_settings.csv": "edbe97b9dc33ea55d60b0bd28f6fd0d0267d355c9530b35365e45a878eead085",
+    "FD003_window20.csv": "19937f33e68dfdbd529a3ce87b8f680f7937acb14d0dc8ca8b4e0cc7d673cdbe",
+    "FD004_cost.csv": "e303988b3404ea0688f307fcfac2c3ed09356537f8569a8937850856a993ec5d",
+    "FD004_M.csv": "34d452945a73ad1b0b49aa2693202a825550cd86d2ca9faad5907718643be386",
+    "FD004_scores.csv.gz": "9cacc729db8fe8b5bf5a7a739728579818d68b16c2434ab245027c545e4dcfe5",
+    "FD004_selected.csv": "aad7942cdf8398efd58f127e13d3194f00a817c39e99c7919aa899a3ba63daf7",
+    "FD004_settings.csv": "268a532a8a26e7a50cb12760843d0f6c90c98f92373f639cdbca8ea5383b4f75",
+    "FD004_window20.csv": "e611e350b68fc796c066a1d324439b2bc104ef83154a5f95ca186c852e915131",
+    "final_cost_verdicts.csv": "2e4b0573b04cef02ab3cd648302ab620e3b6845b237b0a6d7729b458ce629b54",
+    "final_feasibility.csv": "69313baa2a277c7fc791470e9c835a1a1e01c6c98c252296e51f6e231ec7fb4b",
+    "final_fragility.csv": "42066d45f92eab0af702b68d77fca73c8225f94a86472cad074bb89819da2569",
+    "final_metric_M.csv": "74c582944e4ba3d9c69066b3c2b569b3fde859d884eefd51eee1cb0bcbb496fb",
+    "final_risk.csv": "d89904b39eb85a78421af8e233c8712d91d75aa87b0a8d4d307bd428ff872289",
+    "final_risk_fragility.png": "72957252013dd22fb3d17e90877c7f7e0f05862df814fb1954cad1520d004f95",
+    "final_risk_fragility.svg": "c87d7f447f96c95bcb64ef746087d72acc72a8657bf09bc1058cc29ad452328b",
+    "frozen_reproduction_check.txt": "437c0bcdbe0d1e867c22e22a36608ed03d42ab9df5d6f0ed0af74d7438d2ca40",
+    "NCMAPSS6_cost.csv": "d2f96ad7335b6a90d95eb375abe7a3938859754217d35cd6ef0879f7309907ab",
+    "NCMAPSS6_scores.csv.gz": "af171cdfa858c272f39757a4abdd1a751c197bbf38293129a569c1e4bf599cbe",
+    "NCMAPSS6_selected.csv": "918711fbdf84a65f13884306b9aa8da0c1ae76db74039a51d69250c511cf6c70",
+    "NCMAPSS6_settings.csv": "304bdc28cca0e128094b99030072c248408814263e21797d8d83f5378f26ae77",
+    "NCMAPSS6_window20.csv": "31a1e774226f0714d6bd2bfb47583c2ff49a1955cf035c213082d15eaa6b1333",
+    "PHM08_cost.csv": "d87f2dc6c5a3fcc8ac20137ffe44cb162ab02a4d482c38a3c521f768608eec68",
+    "PHM08_scores.csv.gz": "3235a5faa439c28afd3e5538d54efe9b953f7419f6113c994287c511ac66eb08",
+    "PHM08_selected.csv": "aa9b44f22bf4197634ef08b2b11fbc2175c1f7dcd1e3fde17ecd8ef390583fd0",
+    "PHM08_settings.csv": "e830a747e270025499b50ab8ae38b865c55213f35ff4b26a765be912fd7798c6",
+    "PHM08_window20.csv": "12a9ebc42da26981cc41bac9c8a9a7fc059a0d432e540891e1bc55170db8eec3",
+    "queue_a.json": "04bd04000e9ed6df84d970af5e823bb44af9d3b4c9655de7afa777ff0d1c409c",
+    "queue_b.json": "98df301333d613dbecca0b5a61a1c92436953227aa9a272ad5f0b660378f0afa",
+    "queue_b_first_attempt.json": "193c0e374ab618b3c3164b094349edcf6e2e94b443dd92c836fe6bcc360580a0",
+    "run_Battery_completion.log": "321ab409ca450c736855a193591c2c0819d9142e7e84e32cc7c91018670357b1",
+    "run_Bearing_completion.log": "bf38abc5c0f8ad0583ea5f7ebd5b9efab48e90313ed7196199caee821048f034",
+    "run_Bearing_initial_failure.log": "bf38abc5c0f8ad0583ea5f7ebd5b9efab48e90313ed7196199caee821048f034",
+    "run_Bearing_retry.log": "ab71164d15742cbd0ec70476877c7ef24f023cf139e41c7e76522cfab1437282",
+    "run_completion_audit_initial_failure.log": "98b10aa91e93c380b6ec0f2021cc279f4c158722178f461d7796fbf171df351f",
+    "run_FD001.log": "a590d47d617a44750002be43a375a5f71631c70e33cb52fd21c3d622f6e95640",
+    "run_FD002_completion.log": "1e299149dcd079d5f2fa610fcff9e2a32ab78ca44ed54806532d98b4916225a8",
+    "run_FD003_completion.log": "65287e55ea3baf5ee9fd81a40c7fbc3360ba20f1cdede0dedbe73df9207a05ee",
+    "run_FD004_completion.log": "187326cd1d8604437f070a66d495edea679edef0735807b02183377071940667",
+    "run_frozen_summary.log": "3a73ee92b3aa4b06391a8a25c38d520b0acebc66f38e71d194f42764e53b8ddf",
+    "run_KMIN_recheck.log": "5a754a891a33c8bd1d5ff82b368edee67eea9611f15cbe203d4e8e5a4948f87a",
+    "run_NCMAPSS6_completion.log": "dbbc5232303812e989967eb13905de1bfaf6500e2ae5ee1a1041a1f6db57eb62",
+    "run_PHM08_completion.log": "0a2c569e268d6fe79cead96ef5f611a5a8d1ed996ad0f20241912016379087b5",
+    "run_summary.log": "3888261195236c125841ebf1551393095c63f5ce11ddfe6e6cc368f878df0538",
+    "sim_AC.log": "400e5470a3f4fea225ae9c536cef4d53c9b86fe32337e1ada5f042355dbacfa4",
+    "sim_B.log": "4d414542f4b56b8d59fb40f84532f05fcf0c7fb41eacbc8c87a16b6f44f9cb40",
+    "sim_checks_AC.txt": "751df97058c45dca997dccb0437878b00037e75f3bb10b6ce33a4efd51610138",
+    "sim_checks_B.txt": "5deca4d24ed90434a9bb69b692d152815532a11cc7c20a9415b6f692fad1f2ad",
+    "sim_kmin.csv": "ad185070f11c190bbdadfed847d2320b6b018e06a0cb51af3b1b1c69ccc53667",
+    "sim_kmin_checks.txt": "de775c72527fbb1ff613db71a8edccb568ce8788f5cbbaf22efbf28dec73c6b7",
+    "sim_m_coverage.csv": "b51b10cdbaa89fd1409c7c51012e1a58c72240a0fd9c3c92959586b4c6c268c9",
+    "sim_selection.csv": "f62fb27dd05f6963136d61c1de05e1f22600070bc9eb6b3c741d2f2180dcd119",
+    "sim_validity.csv": "3dd397f89bfec56d8f03066611ebce2197588e9802b809669863fd625f9b8ca9",
+    "test_cat.log": "3a17b6a3116d9d4d50f724cd6c1b6a4f39fcb6630d4db122eaed7128fcfdf6a2"
+  },
+  "environment": {
+    "python": "3.12.4",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scipy": "1.17.1",
+    "scikit_learn": "1.8.0",
+    "threads": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    }
+  },
+  "plan_sha256": "9d2a77f67f3db2d448986a23809aa3644e8a17ca1377d484216adb24adda978b",
+  "input_sha256": {
+    "a/train.txt": "d440a5f7880adcce0bda63a0e05a781d544fac7599ce6dcedea70821fb2851e0",
+    "battery/BATTERY_PROTOCOL.md": "d7e4a6ae5766f7cd3fb2024c18dba7a2e871c5b56ba79a82995fe700f9dacaab",
+    "battery/severson_cells.csv": "5b35836a3fecbb6ca758521ec8d1177176fafe10036ebe6e5bbd208c5982cbca",
+    "battery/severson_cycle_summary.csv.gz": "dcd578fa68d2f293569d93d2351e963c2fde62213847a7f3d4fd8b70d6b98bbc",
+    "bearing/BEARING_PROTOCOL.md": "6120e68d8aa343264380d377f8b26be5dfb61fa44b62af82757e4bb165222a5a",
+    "bearing/femto_snapshot_features.csv.gz": "6a6cafaf7be407376d0e2841e4b3f587d69816eb10b278ef21d64c4446a4255b",
+    "cmapss/RUL_FD001.txt": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca",
+    "cmapss/RUL_FD002.txt": "c851dd96a6ea6998d3c4a8f834d3c8013aa90e93a6ed950dc826ad0655b2906b",
+    "cmapss/RUL_FD003.txt": "df1e0566306b174a2de41c67a3e7a51877889598b78643fc3e5685259091b7cb",
+    "cmapss/RUL_FD004.txt": "196b836b85a95ac7fdbbf29c5fdf1657382eafa445644d114ffaaf50dc2975e1",
+    "cmapss/readme.txt": "4f5270554b775c67e73aff383c5436fd329d6e4cc3d3a116913276fae511269b",
+    "cmapss/test_FD001.txt": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "cmapss/test_FD002.txt": "de7b5bf7e998a985c378488480528b7c02cff1406a46740def362dda8d9b4e02",
+    "cmapss/test_FD003.txt": "299babd63c8d987cef079c4a425429f33b3a34797d803bbe2ad48c29dbd0d790",
+    "cmapss/test_FD004.txt": "1dc675fff0624bac10786927c6715b37d1297657137400d2b1a3138d777a3ba5",
+    "cmapss/train_FD001.txt": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "cmapss/train_FD002.txt": "dac6c4dbc4e7c1bdeb5747da3d313d05c395bb99801b44a002b26a2ba13d788f",
+    "cmapss/train_FD003.txt": "2abbe9968cc5e8eb091980f51b20f62bb4127336d3482cb52071d53bf23329e2",
+    "cmapss/train_FD004.txt": "27ef6160b6a1dcb2613a88de9c239f763b223f02cdc41dc5cdedc5dc189b6218",
+    "ncm/WARNING_PROTOCOL.md": "644898b1f720be2c2267d8f6daf26b1d04b71a3daf2bc9eae7af2cd9bc612040",
+    "ncm/ncmapss_cycle_summary.csv.gz": "8792c9e31dd9a5986973ab2f21d0ff241dcbba2771a73e0a00e82915d46bbf6a"
+  },
+  "source_sha256": {
+    "ablate_hybrid.py": "57e284f41b1a47ac914c53afae591440fce276038910c3cd6ff0291bb9a5e332",
+    "audit_battery_controls.py": "bcfbd5b61326cd3762265a8adcc57f23c3dfad6a71e64432a74cb137cb362940",
+    "audit_battery_cost2.py": "14b9dd3ba4288dfa249d42f0a880c82250a4f5d12994e3f179b0ffca1153fe98",
+    "audit_battery_cost_nested.py": "e70bf333662339f2868aec92f19d05138f3477f139e6a4a6827f7bc7ae04fc13",
+    "audit_battery_physical.py": "9e2b93b28d4d1e239f5a0379ffcc6c9c1c25f774243ffc168bc4f1f22a2946d4",
+    "audit_confirmations.py": "ed5df3570649964fe5d1ec1c442d122f4be58dd92e285b3565ce7791ff095160",
+    "audit_cost.py": "bb893a7989e3e9726494de8235d5d73d393039ab3bd905144f9134ce82682ee9",
+    "audit_fixed_matched.py": "2db845d575e4edfd5e2a96c3a701311e414153daec880836147fe45123701297",
+    "audit_fixed_time.py": "74ddf58336c90df1eb08b1721603cdec4f23c92b89e45d8879c6b81769a83b25",
+    "audit_hi_calibrated.py": "2fec05443322488812d54fcfb00abca1e06c1c5b5d0cd958be0c2aaf04df9056",
+    "audit_summarize.py": "66ec30507cc4a858a8145ad3dd2369b495e2abc3f5cebb2a5f3340ceb5bb88dc",
+    "audit_summarize2.py": "58a80740b16df55d4ebb8602a8e89e9444ee6d7c3afa5315e1646b019ea3547e",
+    "battery_cost.py": "1b2a2313fd08c8a3f0391b5178d62ace28ef6c7b23d10a91a16d33c31c5c1373",
+    "battery_warning.py": "83a3b52d76533ae031f2cc1a88c261cced6957d1c6b91a9035287e57546eb048",
+    "bayes_phys.py": "a37ea2f3ba6ebb4effcc1a3d030d1b20fb5fe7a429df611bf4954331832a158f",
+    "bearing_extract.py": "92a49bb0fe8f02be5dcc1394fe2854fa4a04f6d0d4b72730d52a9588cdee3cce",
+    "bearing_warning.py": "7f66642aeed713ce63dab45531a26f0c626992397b99b0385ade2fbe999bb6be",
+    "collect_base.py": "df801181381140c31e3944dae369243f386510bddaa752944685c50442055109",
+    "countdown_hmm.py": "a17980d06c68989f0f8e98bf3a9c9493ae31ce0a95557bdfc4f0c68dc32f277e",
+    "dl_warning.py": "08553bdc1a42483abdac03bd66ae420bff34753abe069a499203facca3d5835a",
+    "eol_leakage.py": "22bebe6a53942c80ee7f5bdacd72f869f3d0039db543f06fbb6b22f6aa358925",
+    "eol_window2.py": "dd5c092f9a3ac7ed17ede745a6089f55d0f8fa7705f75a4ad5cb55b6953d6bd8",
+    "ext_data.py": "342b56cdf292d63409356da43d2ecc0d0392ca49a03a0e9f09c7b1f7a9293ea2",
+    "ext_stack.py": "5b9e7384f5a2177ff45f920050dad585f56fa2541acd4ee79363f16cba41fe4e",
+    "feats.py": "38997348798ba49c3edb8d8e7a4a76d77a82055dbe7bb351c290a6546634844e",
+    "fig_audit.py": "424426bf3e639bf28d7a600dd935b79293bcd02c8ac080231e3f7ad7951a9cf2",
+    "fig_audit2.py": "4a60b041f2f80ffa0cd86c2726ef6f25fd69fddc17e582bc478034eb365f0b32",
+    "fig_future_work.py": "90a7f52bf8fc67fee98759f9a3aaf5131938c9fc3d872f2ef47901dd931292be",
+    "fig_rep30.py": "b22b71f5e13d6805daf9fb06fb6134849b3648e45acdae89cc9c3b05f973b289",
+    "fig_rev.py": "c8b5de3558830cf147f9dc60a46c047583b4d62779f8505862c31d5216225c8c",
+    "fig_rev5.py": "c0b0b0e2b0130a8ecd72652f349e45e423e2f9564574a40c0ad9c3ef626d3858",
+    "fig_stw_architecture.py": "d4893a04ad33968b1741425b0036ee727e2ab4c0d404b64fcfd8b47dedf3ad55",
+    "fixed_gbm.py": "2f0a1e8d25e8b85314b4efeddea7d43a4aea2c7f8a7662d443d4f343ab342819",
+    "h2h.py": "9feae4cfe156a5d3bc09e6c464371e3e3b48e8298c40e5389ee9c2f550cd01ed",
+    "hybrid_tf.py": "7088f096249ea4b9e05dc60233da6730e433004278815be68d8139078ccae775",
+    "make_paper2_numbers.py": "266e5c2af6885fc7e0e25b985e3967610725da3bef288e27d844e449141127e7",
+    "make_rev_numbers.py": "575b7263de812cfc534d7c0b57a98b8d041c7f0da618a7585b60d872427462e5",
+    "multi_eval.py": "ee9073653f07cde32efd27a65c8121af4f205a41041ea5482a6b5a291fb4c661",
+    "ncm_warning.py": "176fb1fb76711a157067ac9661170f0b1b9ab49761fc01095d6055483d15d822",
+    "oracle_check.py": "b603103280183f8ce334bb3db321fc2ce333d07d9a6cac2e7180efbb50f42566",
+    "paper2_figures.py": "0f5dfa597961f16abd2accd96e505c4a4c668645e4543f29c22d1521cd9e1dce",
+    "paper2_figures_rev.py": "efe4d1d6133e2d4c2eb4c80be07584300663ce64c3d9169279cb762679379c62",
+    "README.md": "b63d00232ab0eeb25a14b33845c96ff90152d772f1f5ed8071f570114596f3ee",
+    "rep30.py": "6dc76cf3386a2343bcbf85728c7a899739377ddc32ce69c5dee95089292690b5",
+    "rep30_excel.py": "23bc6d4910e52010fdac1cb97360be94c7c6838cd3c077ee0a8cd1f686449b32",
+    "rep50.py": "1724b2c569e0a072ba47954888a6be0cf2d706c2440b039dd32688bc45bcc17e",
+    "rep50_excel.py": "c4cf86326d0c0095701c16f4f2da513919df55f1a476e092061ade4e5590ff39",
+    "REPRODUCIBILITY_TEST.md": "806d3bdfa90fc1c219914a7357431f62c123b7526ccd5fa139ce9c5ac22f146a",
+    "requirements.txt": "fc6735e50df9ee90587f8d02f7e86e032bc67f362817a4b191a9592b84505144",
+    "rev_analyze.py": "36d8bef98b59f57e5611a119fbb49e8972dffe1c438b6ba7729f4a7e2e3553f9",
+    "rev_experiments.py": "4616c4770d7222d5b59d2ffdfdfa27ab0e764eda8285c1ed21d015375054547b",
+    "safe_analyze.py": "a24fe561dc9dfebd5298c83aade7b1f1f9861824497f5b140f64211a09adb3b1",
+    "safe_common.py": "3b379e474baddad2301451f1b03865e8040f826fe07c8914a8a9f8e90097b358",
+    "safe_methods.py": "c9b3525427bbf80b50eb19d0283d766fb6dfa1d1bc05dd35dcad07dd026db624",
+    "safe_run.py": "92ac755c958bef75bb6420b4bbe1d2893e7de71d95d88334e75f88a1234aed71",
+    "similarity.py": "0021e88eb20145f527737757478c9a79a99253f82157c602e38715b382a38641",
+    "stw_timing.py": "64b6a3622e152f6216c675aecfc8e4527554782cc8bbd2534432f89f454b821b",
+    "stwt.py": "c24fde39d95290e2481cd61fb4d4f61a8f30fcaf5067cb86576a983f277da86f",
+    "stwt_all.py": "89d96b7b38e27eb0bdbf58839a66546a25db739cb8ed9c78bddbc57098e3d2c5",
+    "tcn_eval.py": "00667577f2a46de5f8efd786de57c01b172aa1a90fe566ccf0a5b211f2a9b74f",
+    "tcn_gan.py": "6dee2653b3cf5d00f9f550edf5952277898bf0337be2c190bba0618cc5197a58",
+    "theory_check.py": "bf915688bae7bd2bf6cdb940b8d076ef3e6f70bdf3f1b5dca40484f47b554d09",
+    "verify_audit.py": "f1bac53a381ef48c97b20b8056a4154f95fe7cdec630636b4323584aa6cc8de3",
+    "verify_reproduction.py": "cafe8eaa036c5a80e501f6c14424bc83362bb2bfb8d4fa6a41e68e129d8c0c71",
+    "verify_revision5.py": "57265ba26a8706d6f93baf6dd4a89b43cef0b2c30829cdc202a3987cb5006e87",
+    "warn_ablation.py": "ebb135358abe88913f8eb30cbc0af4ed98af38a195cec5b7461eac27bfa2a34c",
+    "kam/check_r0.py": "ce6c4efbaa2503ace0c8f8434b3ffca60134386a9082fd2975617e04efa816f2",
+    "kam/kam_fd001.py": "93eba9257890c5f34510695168caa90ba6d672effb2e6a0796164bd925251e94",
+    "kam/kam_fd001_summarize.py": "cc2808893edacb4d1335d941bcdf2be07a40fe9e5bfed9430b2f94d17b7f5434",
+    "kam/kam_fragility.py": "59b7a6417749d57c02820e673422d2bb1c44efb895d1e137d09d529409f18997",
+    "kam/kam_grid_effect.py": "8f04396e6ac704ab529e7a500fd15e9d8ef2ec59db4e86a0f1bffede3f891137",
+    "kam/kam_metric.py": "c0262c831bcd406dfc1fde814df41000afaf7667a318923fcf260ee6a45f8e53",
+    "kam/kam_simulator.py": "82a6ecc69245e235e198ce461e1f622ea7e9104c480af1c49ba9fea43dcf1601",
+    "kam/make_key_numbers.py": "2b51b9162823fcf31603c829bc6fe0de1885e3f68583128b55700305cef112b7",
+    "kam/make_rev5_numbers.py": "b097c2670fa0d056ede00e8783f043b6713cd1495455c084e8f7af87e8425079",
+    "kam/PHASE2_PLAN.md": "1f3115fb150ea0a12f9efa651dd31f4d69e78eeff8614cbd560eadcd893b1f18",
+    "kam/PHASE2_PLAN.sha256": "23ee43f4ba6b1103b59165f04ed840993f355325039c9fca7512ef62019a4e23",
+    "kam/PHASE3_4_PLAN.md": "91c180685b3ce28555ab305477c8432d268d141ee4457c4c9b86ce62986d3488",
+    "kam/PHASE3_4_PLAN.sha256": "3481cbba4b71891d8f94ef555b7d450b6a6eb2e436b5709f069dc6f250dac676",
+    "kam/README.md": "6a5cf26e9ab37223e8c52d343a8d142de419d8b217554232c9a40c1e2f31e32c",
+    "kam/test_kam_metric.py": "6874529830ccbaf9f1dc0b11b8d8eb59c7b34d6e64a4a3b714a0972c9e46cb49",
+    "contrib/build_report.py": "afb49ca3549264671c91334595085198760226c387ac9d574158135e6dd02c12",
+    "contrib/cat.py": "244aa3a32eb4645de66d284e92d85145444d88e729850a088596b703e20f944e",
+    "contrib/cat_battery.py": "bfef86fb1def44a94d36433e809a6bebdf025bfc69be050e8d9eb425dfc01fe8",
+    "contrib/cat_bearing.py": "acf2d305ec0beea4508e1ae536512947158c80182d49fa11df589f4797d6c43a",
+    "contrib/cat_equiv.py": "5fad9ac94d24e0fa0c616d99739f1ce35c6d80f8598ec6e82cd1e0ad46bdecb4",
+    "contrib/cat_kmin_sim.py": "59bc8f89cc0dd356cc75001ebd800df8f75df680631d9a39bf8bae35ee1f4f7d",
+    "contrib/cat_leak.py": "34f3aa00d4e415ffa1e710e5c99dd59de1de0ee689710284497974487f25d748",
+    "contrib/cat_run.py": "dfa496674e6c26033da9cd25fc50bec6ca86a5becf7f9eae0b9472423ac888c4",
+    "contrib/cat_sim.py": "b53c715cd09facdd59fa46af01065d0b2cf66f65d7e3eb3051f2d3c4b8a8d0d0",
+    "contrib/cat_summarize.py": "2597cb5bf0f05aa8a59f294aea5585a5d45b900111875f820c79bc42a6523784",
+    "contrib/PLAN.md": "9d2a77f67f3db2d448986a23809aa3644e8a17ca1377d484216adb24adda978b",
+    "contrib/PLAN.sha256": "69cb2baf24d4173781bdfacf3798a91f6779c6641baa48668a27cac79e90d29e",
+    "contrib/README.md": "9167d90266b7087449eb2d8892e4b4f8a268d21bfc3779fb9fc240f039c6e835",
+    "contrib/requirements_cpu.txt": "a8eb3ae8faf9c2f2fb0ead5cd62076fdf150dbec9f951860c88536efabc7027b",
+    "contrib/run_remaining.py": "4a4869a28633d50a380da9e5639f5457afbbd88da091810946d7f791d6a3170e",
+    "contrib/test_cat.py": "ded05580dd792f7d323dd9b11832524f512be61d726e983c3b8ef08bf919df69",
+    "contrib/verify_completion.py": "dc3d3d87da831404c40daba8b375c2ec568bc2b851035ae8067e770e16e1ff99",
+    "contrib/verify_plan.py": "eb2c47a72c096df5c9f69679a70df4ac1e4d159f5f1bb3201c28bf30061a87a8",
+    "docs_contrib/EXECUTION_NOTES.md": "e18830aa81958101bde93c12eabf8d900f9e9c541c7263bfe8c1ee92197de516",
+    "docs_contrib/LITERATURE_AUDIT.md": "c7858366ff3599947dec7e29c46b7c0ecaded2114816e01ae1a17a314cf09f61",
+    "docs_contrib/theory.md": "623f77d3dbccb15ecb958ac31ca75f68b48c6f6cc73da4e7f9f6e13ba7d6abd5"
+  }
+}

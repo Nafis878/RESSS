@@ -1,0 +1,2 @@
+# Preserve exact source/data/artifact bytes for the frozen SHA-256 audits.
+* -text

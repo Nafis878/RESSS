@@ -1,0 +1,5 @@
+Prediction, alarm timing, maintenance cost and transfer of alarms are separated
+Observation time, not self-timing, explains most of the fixed-time vs alarm gap
+A constant estimate at the alarm times scores like the model: windows reward timing
+Window-tuned alarms are not cost-optimal; no policy family won on every dataset
+Batteries: accuracy fell on a held-out batch; a simple capacity trend did better

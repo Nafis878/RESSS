@@ -1,0 +1,16 @@
+{
+  "pages": 7,
+  "rendered_pages": 7,
+  "visual_inspection_complete": true,
+  "inspected_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "issues": [],
+  "notes": "All seven latest rendered pages inspected; equations stay together, figure and table legible, no overlap or clipping."
+}

@@ -1,0 +1,120 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "858 earlier artifacts unchanged before the audit",
+      "passed": true
+    },
+    {
+      "name": "retained PLAN.md matches its pre-experiment hash",
+      "passed": true
+    },
+    {
+      "name": "retained PLAN_AMENDMENT.md matches its pre-experiment hash",
+      "passed": true
+    },
+    {
+      "name": "retained PLAN_RESOLUTION.md matches its pre-experiment hash",
+      "passed": true
+    },
+    {
+      "name": "all 15 mathematical unit-test groups pass",
+      "passed": true
+    },
+    {
+      "name": "selection API accepts public records without hidden lifetimes",
+      "passed": true
+    },
+    {
+      "name": "39,448 stored pairwise rows and 2,704 unique cohorts",
+      "passed": true
+    },
+    {
+      "name": "every frozen exact objective and selected age is reproduced",
+      "passed": true
+    },
+    {
+      "name": "every stored integer witness is compatible and attains its exact ratio",
+      "passed": true
+    },
+    {
+      "name": "later comparisons use at most two objective evaluations",
+      "passed": true
+    },
+    {
+      "name": "252 positive timing observations, no duplicate repetitions",
+      "passed": true
+    },
+    {
+      "name": "84 independent timing inputs reproduce the prospective seed and exact objectives",
+      "passed": true
+    },
+    {
+      "name": "three repeats aggregate to one median per independent statistical unit",
+      "passed": true
+    },
+    {
+      "name": "independent exact sign-test and seven-contrast Holm calculations agree",
+      "passed": true
+    },
+    {
+      "name": "all seven specified later-pair timing contrasts are corrected significant",
+      "passed": true
+    },
+    {
+      "name": "120 recorded separately structured small-input diagnostics agree",
+      "passed": true
+    },
+    {
+      "name": "300 distinct continuous audit cases",
+      "passed": true
+    },
+    {
+      "name": "all continuous optima match a separate phase-labeled state optimizer",
+      "passed": true
+    },
+    {
+      "name": "900 exact epsilon completions are compatible and approach the declared suprema",
+      "passed": true
+    },
+    {
+      "name": "1,500 refinement tasks on 300 distinct independent cohorts",
+      "passed": true
+    },
+    {
+      "name": "all stored pairwise, policywise and selected-policy refinement bounds independently recompute",
+      "passed": true
+    },
+    {
+      "name": "integer/continuous counterexample and branch switch reproduce",
+      "passed": true
+    },
+    {
+      "name": "five-page manuscript contains all three theorems and human-readable references",
+      "passed": true
+    },
+    {
+      "name": "manuscript attributes the verified block-replacement author correctly",
+      "passed": true
+    },
+    {
+      "name": "all manuscript pages rendered for visual review",
+      "passed": true
+    },
+    {
+      "name": "858 earlier artifacts unchanged after all evidence checks",
+      "passed": true
+    },
+    {
+      "name": "run_summary.json does not fabricate priority",
+      "passed": true
+    },
+    {
+      "name": "resolution_summary.json does not fabricate priority",
+      "passed": true
+    }
+  ],
+  "check_count": 28,
+  "protected_artifacts_unchanged": 858,
+  "scientific_priority_established": false
+}

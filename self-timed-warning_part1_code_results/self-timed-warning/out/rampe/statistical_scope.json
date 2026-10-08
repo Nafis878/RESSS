@@ -1,0 +1,10 @@
+{
+  "real_method_rows": 121600,
+  "real_episodes": 6080,
+  "synthetic_method_rows": 156600,
+  "synthetic_episodes": 8700,
+  "synthetic_comparisons": 580,
+  "synthetic_holm_significant": 386,
+  "conditional_real_comparisons": 768,
+  "lobo_holm_family": 96
+}

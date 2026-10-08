@@ -1,0 +1,13 @@
+// ---------------------------------------------------------------- front matter
+const TITLE = 'Evaluating end-of-life alarms: observation time, alarm timing, maintenance cost and transfer';
+must(Math.abs(pc.STW_const.pct - pc.STW.pct) < 5, 'abstract: constant estimate within a few points pooled');
+const ABSTRACT = `Remaining-useful-life models are usually scored at evaluator-chosen times, whereas replacement is triggered once, by an alarm. On eight run-to-failure datasets we separate long-range prediction, near-failure estimation, alarm timing and maintenance cost for single end-of-life alarms scored by an asymmetric acceptance window. On PHM08, with matched training data and cross-fitted calibration, one fixed-time model placed ${f1(FMV.fixed_f50.pct)}% of estimates in the window at half of life and ${f1(FMV.fixed_f90.pct)}% at 90% of life; a self-timed recipe reached ${f1(FMV.recipe_self.pct)}%, no more than its regressor at 90% of life. A constant estimate at the recipe's alarm times scored within ${f1(Math.max(...ctrlDS.map(d => Math.abs(CT[d]['20'].STW_const.pct - CT[d]['20'].STW.pct))))} points of the model's estimate, so the window mainly rewards timing; it also conceals the notice given. In a renewal–reward model, window-tuned alarms were cheaper than age replacement on five of six engine datasets, but direct cost tuning was better on some datasets and worse on others. In post hoc analyses of battery cells with fully nested preprocessing, the recipe was correct for ${f1(BRc.pct)}% of cells within batches and ${f1(BRl.pct)}% with a batch held out, where a capacity-trend baseline reached ${f1(BTl.pct)}%; in a separate cost analysis the trend was significantly cheaper. The recipe reached ${f1(NW.pct)}% on N-CMAPSS and failed on bearings (0 of 17).`;
+const HIGHLIGHTS = [
+  'Prediction, alarm timing and maintenance cost of end-of-life alarms are separated',
+  'With matched data, observation time explains most of the fixed-time vs alarm gap',
+  'An asymmetric window score rewards alarm timing and hides notice and cost',
+  'Window tuning is not a reliable surrogate for direct cost optimisation',
+  `Batteries: ${f1(BRc.pct)}% within batches, ${f1(BRl.pct)}% on a held-out batch; a trend did better`];
+must(HIGHLIGHTS.every(h => h.length <= 85), 'highlights at most 85 characters: ' + HIGHLIGHTS.map(h => h.length).join(','));
+must(ABSTRACT.split(/\s+/).length <= 250, 'abstract at most 250 words (' + ABSTRACT.split(/\s+/).length + ')');
+const KEYWORDS = 'Remaining useful life; Predictive maintenance; Alarm timing; Renewal–reward model; Model evaluation; Distribution shift; Lithium-ion battery';

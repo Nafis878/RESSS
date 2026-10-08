@@ -1,0 +1,6 @@
+PASS  R4b PHM08: uncalibrated indicator reproduces the HI threshold alarm of results/rev (577 in-window over all H; identical per unit: True)
+PASS  R4b FD001: uncalibrated indicator reproduces the HI threshold alarm of results/rev (275 in-window over all H; identical per unit: True)
+PASS  R4b FD002: uncalibrated indicator reproduces the HI threshold alarm of results/rev (687 in-window over all H; identical per unit: True)
+PASS  R4b FD003: uncalibrated indicator reproduces the HI threshold alarm of results/rev (266 in-window over all H; identical per unit: True)
+PASS  R4b FD004: uncalibrated indicator reproduces the HI threshold alarm of results/rev (597 in-window over all H; identical per unit: True)
+PASS  R4b NCMAPSS6: uncalibrated indicator reproduces the HI threshold alarm of results/rev (273 in-window over all H; identical per unit: True)

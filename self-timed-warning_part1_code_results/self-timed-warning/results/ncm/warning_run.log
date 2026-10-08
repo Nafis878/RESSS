@@ -1,0 +1,49 @@
+fold 1 done
+fold 2 done
+fold 3 done
+fold 4 done
+fold 5 done
+/usr/local/lib/python3.11/dist-packages/sklearn/neural_network/_multilayer_perceptron.py:785: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (200) reached and the optimization hasn't converged yet.
+  warnings.warn(
+official done
+       split   method  H  n  IN  pct           ci  late  early  missed  median_true_left  median_error
+    official age_only 10 39  12 30.8 [17.0, 47.6]     8     17       2              21.0    -11.000000
+    official age_only 15 39  10 25.6 [13.0, 42.1]    10     19       0              26.0    -12.000000
+    official age_only 20 39  12 30.8 [17.0, 47.6]    10     17       0              29.0    -10.019241
+    official   mlp_kf 10 39  21 53.8 [37.2, 69.9]     5      4       9              10.0     -4.416674
+    official   mlp_kf 15 39  21 53.8 [37.2, 69.9]     6      3       9              12.0     -3.811198
+    official   mlp_kf 20 39  17 43.6 [27.8, 60.4]     7     14       1              23.0     -7.136830
+    official  warning 10 39  29 74.4 [57.9, 87.0]     0      5       5              13.5     -6.096953
+    official  warning 15 39  26 66.7 [49.8, 80.9]     4      5       4              14.0     -3.547847
+    official  warning 20 39  22 56.4 [39.6, 72.2]    10      6       1              19.0     -2.450840
+cv (primary) age_only 10 99  36 36.4 [26.9, 46.6]    14     28      21              17.5     -7.891959
+cv (primary) age_only 15 99  30 30.3 [21.5, 40.4]    23     25      21              17.0     -3.150314
+cv (primary) age_only 20 99  24 24.2 [16.2, 33.9]    37     25      13              19.5     -0.512473
+cv (primary)   mlp_kf 10 99  66 66.7 [56.5, 75.8]     9     13      11              12.5     -5.214735
+cv (primary)   mlp_kf 15 99  59 59.6 [49.3, 69.3]    17     19       4              15.0     -5.285853
+cv (primary)   mlp_kf 20 99  58 58.6 [48.2, 68.4]    16     25       0              20.0     -6.722956
+cv (primary)  warning 10 99  74 74.7 [65.0, 82.9]     4      7      14              10.0     -4.108803
+cv (primary)  warning 15 99  70 70.7 [60.7, 79.4]    11     10       8              13.0     -4.235136
+cv (primary)  warning 20 99  68 68.7 [58.6, 77.6]    18      8       5              17.0     -2.738202
+{
+ "W1_in_window_ge_85pct": {
+  "value": 68.7,
+  "supported": false
+ },
+ "W2_late_plus_missed_le_10pct": {
+  "value": 23.2,
+  "supported": false
+ },
+ "W3_vs_age_only": {
+  "only_warning": 49,
+  "only_other": 5,
+  "p": 3.8913883226854296e-10,
+  "supported": true
+ },
+ "W4_vs_mlp_kf": {
+  "only_warning": 25,
+  "only_other": 15,
+  "p": 0.1538599441628321,
+  "supported": false
+ }
+}

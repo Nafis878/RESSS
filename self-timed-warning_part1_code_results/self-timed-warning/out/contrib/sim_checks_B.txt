@@ -1,0 +1,2 @@
+PASS  B Theorem 2 (rho = 1000): realised P(fail) of plain minimisation <= min(1, G/(n+1)) + 3 MCSE in 56/56 cells
+PASS  B Theorem 2, single setting (rho = 1000): P(fail) <= 1/(n+1) + 3 MCSE in 8/8 cells

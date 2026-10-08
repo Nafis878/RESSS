@@ -1,0 +1,15 @@
+test_actual_trimming_and_exponential_exact_frontier (clock_regret_fleet.test_core.FleetTests.test_actual_trimming_and_exponential_exact_frontier) ... ok
+test_approximate_permutation_invariance_100 (clock_regret_fleet.test_core.FleetTests.test_approximate_permutation_invariance_100) ... ok
+test_bucket_boundaries_and_huge_rationals (clock_regret_fleet.test_core.FleetTests.test_bucket_boundaries_and_huge_rationals) ... ok
+test_common_cost_reduction_200 (clock_regret_fleet.test_core.FleetTests.test_common_cost_reduction_200) ... ok
+test_continuous_closure_200 (clock_regret_fleet.test_core.FleetTests.test_continuous_closure_200) ... ok
+test_full_clock_pairs_1000 (clock_regret_fleet.test_core.FleetTests.test_full_clock_pairs_1000) ... ok
+test_full_family_200 (clock_regret_fleet.test_core.FleetTests.test_full_family_200) ... ok
+test_joint_clock_and_optimization_bound (clock_regret_fleet.test_core.FleetTests.test_joint_clock_and_optimization_bound) ... ok
+test_permutations_and_certificate (clock_regret_fleet.test_core.FleetTests.test_permutations_and_certificate) ... ok
+test_validation (clock_regret_fleet.test_core.FleetTests.test_validation) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.091s
+
+OK

@@ -1,0 +1,17 @@
+{
+  "synthetic_independent_cohorts": 2400,
+  "synthetic_tests": 48,
+  "synthetic_holm_significant_better": 13,
+  "synthetic_holm_significant_worse": 15,
+  "synthetic_holm_not_significant": 20,
+  "synthetic_choices_differ_rectangle": 1463,
+  "synthetic_choices_differ_upper_rate": 624,
+  "real_cases": 304,
+  "real_choices_differ_rectangle": 32,
+  "real_choices_differ_upper_rate": 23,
+  "real_primary_group_tests_significant": 0,
+  "generic_oracle_matches": 120,
+  "protected_artifacts": "read-only inputs",
+  "population_superiority_established": false,
+  "specific_algorithm_priority_established": false
+}

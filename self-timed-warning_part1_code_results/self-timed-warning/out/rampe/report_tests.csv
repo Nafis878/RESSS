@@ -1,0 +1,7 @@
+shift,baseline,conditions,significant_Holm,wins,ties,losses
+0.0,B,96,56,1698,1182,0
+0.0,conventional,96,75,720,522,1638
+0.5,B,96,56,841,1182,857
+0.5,conventional,96,62,1394,522,964
+1.0,B,96,56,0,1182,1698
+1.0,conventional,96,79,2283,522,75

@@ -1,0 +1,14 @@
+# Exact versions used for the reported results. Do not upgrade: with scikit-learn 1.9.1, for example, the gradient-boosted
+# predictions change and the per-engine results no longer match. Original runs: Python 3.11.15 (CPU only, 2 cores, Intel Xeon
+# 2.8 GHz); re-verified with Python 3.13 and these versions, with identical outputs. Pillow is installed with matplotlib.
+numpy==2.4.4
+pandas==3.0.2
+scikit-learn==1.8.0
+scipy==1.17.1
+numba==0.67.0
+matplotlib==3.10.9
+jax==0.10.2
+keras==3.15.1
+openpyxl==3.1.5
+optax==0.2.8
+h5py  # only for tools/ncmapss_colab_extract.py

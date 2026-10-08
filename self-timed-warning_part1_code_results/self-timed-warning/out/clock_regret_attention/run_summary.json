@@ -1,0 +1,15 @@
+{
+  "training_cohorts": 1600,
+  "validation_cohorts": 200,
+  "held_out_cohorts": 600,
+  "model_seeds": [
+    11,
+    22,
+    33
+  ],
+  "epochs": 25,
+  "focus_budget": 4,
+  "protected_artifacts_unchanged": 1025,
+  "torch_version": "2.14.1+cpu",
+  "sealed_lifetimes_used": false
+}

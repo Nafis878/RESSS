@@ -1,0 +1,15 @@
+repetition 16: 48/50 in window  (late 1, early 1, missed 0)  settings cap 60 span 6 k 5 shift -6.0, inner-OOF 0.940
+repetition 17: 45/50 in window  (late 3, early 2, missed 0)  settings cap 60 span 1 k 5 shift -3.5, inner-OOF 0.940
+repetition 18: 45/50 in window  (late 3, early 2, missed 0)  settings cap 60 span 3 k 5 shift -5.0, inner-OOF 0.952
+repetition 19: 48/50 in window  (late 1, early 1, missed 0)  settings cap 40 span 6 k 5 shift -7.0, inner-OOF 0.952
+repetition 20: 44/50 in window  (late 3, early 3, missed 0)  settings cap 40 span 3 k 5 shift -4.5, inner-OOF 0.946
+repetition 21: 47/50 in window  (late 3, early 0, missed 0)  settings cap 60 span 1 k 3 shift -3.5, inner-OOF 0.935
+repetition 22: 45/50 in window  (late 2, early 3, missed 0)  settings cap 60 span 3 k 5 shift -5.0, inner-OOF 0.929
+repetition 23: 46/50 in window  (late 1, early 3, missed 0)  settings cap 60 span 1 k 5 shift -3.5, inner-OOF 0.946
+repetition 24: 42/50 in window  (late 3, early 5, missed 0)  settings cap 40 span 1 k 5 shift -4.0, inner-OOF 0.952
+repetition 25: 49/50 in window  (late 1, early 0, missed 0)  settings cap 60 span 6 k 5 shift -6.0, inner-OOF 0.935
+repetition 26: 44/50 in window  (late 3, early 3, missed 0)  settings cap 40 span 1 k 5 shift -4.0, inner-OOF 0.964
+repetition 27: 47/50 in window  (late 2, early 1, missed 0)  settings cap 60 span 6 k 5 shift -6.0, inner-OOF 0.946
+repetition 28: 44/50 in window  (late 2, early 4, missed 0)  settings cap 60 span 1 k 5 shift -3.5, inner-OOF 0.940
+repetition 29: 45/50 in window  (late 4, early 1, missed 0)  settings cap 60 span 1 k 5 shift -3.5, inner-OOF 0.970
+repetition 30: 45/50 in window  (late 2, early 3, missed 0)  settings cap 60 span 3 k 5 shift -5.5, inner-OOF 0.946

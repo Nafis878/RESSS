@@ -1,0 +1,20 @@
+{
+  "1/2": {
+    "cases": 30,
+    "max_pair_gap": 1.0011382382030627,
+    "mean_pair_gap": 1.000175239675637,
+    "median_state_ratio": 2.0576570277812634
+  },
+  "1/4": {
+    "cases": 30,
+    "max_pair_gap": 1.0002545401965133,
+    "mean_pair_gap": 1.0000084846732171,
+    "median_state_ratio": 1.458735700237507
+  },
+  "1/10": {
+    "cases": 30,
+    "max_pair_gap": 1.0,
+    "mean_pair_gap": 1.0,
+    "median_state_ratio": 1.1487420269312545
+  }
+}

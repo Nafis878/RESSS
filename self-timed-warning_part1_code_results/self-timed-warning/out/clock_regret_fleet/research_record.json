@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-08",
+  "python": "3.12.4 (tags/v3.12.4:8e8a4ba, Jun  6 2024, 19:30:16) [MSC v.1940 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "plan_sha256": "b255a76378126d87655a6de3b7149aa475288ebc3a83a46a30285e3c9647fc3c",
+  "source_inputs": {
+    "out/clock_regret/real_public.csv.gz": "9eb96f9259164b697caa1461ecda4341695f49267fbabbbc6cb37211c332477a",
+    "out/clock_regret/real_sealed.csv.gz": "21f690d2792543b61a1281fa9676d14d80cc2c762cdf012af6341f511c68d300",
+    "out/clock_regret/real_results.csv.gz": "ddece6c8b2cec7f8c4afa18a7d88eb686486a29bfef41ee7dc6c077d5427bcdd"
+  },
+  "source_artifacts_preserved": 974,
+  "novelty_verdict": "B",
+  "historical_priority_established": false
+}

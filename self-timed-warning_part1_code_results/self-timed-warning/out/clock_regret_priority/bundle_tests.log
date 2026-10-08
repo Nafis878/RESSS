@@ -1,0 +1,13 @@
+test_common_cost_reduction (clock_regret_priority.test_heterogeneous.HeterogeneousTests.test_common_cost_reduction) ... ok
+test_exact_epsilon_sequences_and_attainment (clock_regret_priority.test_heterogeneous.HeterogeneousTests.test_exact_epsilon_sequences_and_attainment) ... ok
+test_full_clock_exhaustion_1000 (clock_regret_priority.test_heterogeneous.HeterogeneousTests.test_full_clock_exhaustion_1000) ... ok
+test_permutation_tied_premiums_and_observed_failures (clock_regret_priority.test_heterogeneous.HeterogeneousTests.test_permutation_tied_premiums_and_observed_failures) ... ok
+test_rational_premiums_and_validation (clock_regret_priority.test_heterogeneous.HeterogeneousTests.test_rational_premiums_and_validation) ... ok
+test_separate_phase_oracles_500 (clock_regret_priority.test_heterogeneous.HeterogeneousTests.test_separate_phase_oracles_500) ... ok
+test_strict_interior_counterexample (clock_regret_priority.test_heterogeneous.HeterogeneousTests.test_strict_interior_counterexample) ... ok
+test_uniform_pairwise_constant_is_sharp (clock_regret_priority.test_heterogeneous.HeterogeneousTests.test_uniform_pairwise_constant_is_sharp) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 2.715s
+
+OK

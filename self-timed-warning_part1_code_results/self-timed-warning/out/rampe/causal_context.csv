@@ -1,0 +1,1167 @@
+dataset,unit,context,observed_at_cycle,definition
+PHM08,1,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,2,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,3,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,4,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,5,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,6,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,7,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,8,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,9,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,10,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,11,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,12,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,13,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,14,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,15,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,16,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,17,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,18,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,19,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,20,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,21,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,22,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,23,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,24,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,25,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,26,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,27,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,28,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,29,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,30,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,31,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,32,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,33,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,34,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,35,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,36,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,37,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,38,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,39,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,40,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,41,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,42,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,43,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,44,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,45,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,46,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,47,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,48,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,49,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,50,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,51,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,52,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,53,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,54,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,55,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,56,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,57,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,58,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,59,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,60,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,61,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,62,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,63,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,64,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,65,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,66,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,67,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,68,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,69,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,70,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,71,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,72,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,73,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,74,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,75,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,76,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,77,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,78,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,79,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,80,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,81,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,82,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,83,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,84,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,85,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,86,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,87,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,88,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,89,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,90,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,91,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,92,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,93,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,94,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,95,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,96,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,97,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,98,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,99,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,100,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,101,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,102,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,103,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,104,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,105,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,106,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,107,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,108,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,109,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,110,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,111,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,112,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,113,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,114,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,115,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,116,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,117,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,118,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,119,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,120,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,121,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,122,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,123,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,124,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,125,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,126,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,127,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,128,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,129,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,130,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,131,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,132,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,133,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,134,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,135,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,136,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,137,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,138,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,139,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,140,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,141,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,142,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,143,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,144,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,145,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,146,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,147,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,148,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,149,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,150,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,151,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,152,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,153,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,154,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,155,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,156,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,157,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,158,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,159,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,160,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,161,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,162,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,163,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,164,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,165,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,166,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,167,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,168,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,169,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,170,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,171,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,172,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,173,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,174,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,175,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,176,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,177,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,178,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,179,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,180,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,181,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,182,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,183,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,184,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,185,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,186,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,187,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,188,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,189,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,190,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,191,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,192,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,193,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,194,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,195,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,196,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,197,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,198,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,199,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,200,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,201,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,202,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,203,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,204,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,205,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,206,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,207,35060,1,first observed operating regime; fixed rounding in original protocol
+PHM08,208,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,209,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,210,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,211,25080,1,first observed operating regime; fixed rounding in original protocol
+PHM08,212,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,213,20000,1,first observed operating regime; fixed rounding in original protocol
+PHM08,214,42040,1,first observed operating regime; fixed rounding in original protocol
+PHM08,215,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,216,100,1,first observed operating regime; fixed rounding in original protocol
+PHM08,217,10020,1,first observed operating regime; fixed rounding in original protocol
+PHM08,218,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,1,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,2,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,3,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,4,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,5,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,6,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,7,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,8,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,9,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,10,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,11,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,12,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,13,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,14,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,15,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,16,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,17,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,18,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,19,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,20,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,21,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,22,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,23,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,24,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,25,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,26,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,27,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,28,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,29,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,30,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,31,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,32,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,33,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,34,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,35,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,36,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,37,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,38,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,39,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,40,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,41,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,42,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,43,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,44,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,45,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,46,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,47,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,48,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,49,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,50,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,51,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,52,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,53,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,54,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,55,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,56,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,57,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,58,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,59,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,60,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,61,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,62,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,63,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,64,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,65,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,66,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,67,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,68,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,69,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,70,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,71,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,72,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,73,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,74,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,75,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,76,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,77,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,78,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,79,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,80,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,81,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,82,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,83,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,84,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,85,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,86,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,87,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,88,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,89,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,90,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,91,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,92,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,93,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,94,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,95,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,96,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,97,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,98,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,99,100,1,first observed operating regime; fixed rounding in original protocol
+FD001,100,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,1,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,2,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,3,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,4,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,5,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,6,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,7,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,8,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,9,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,10,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,11,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,12,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,13,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,14,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,15,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,16,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,17,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,18,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,19,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,20,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,21,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,22,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,23,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,24,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,25,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,26,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,27,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,28,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,29,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,30,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,31,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,32,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,33,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,34,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,35,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,36,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,37,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,38,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,39,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,40,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,41,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,42,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,43,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,44,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,45,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,46,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,47,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,48,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,49,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,50,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,51,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,52,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,53,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,54,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,55,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,56,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,57,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,58,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,59,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,60,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,61,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,62,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,63,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,64,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,65,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,66,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,67,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,68,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,69,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,70,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,71,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,72,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,73,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,74,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,75,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,76,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,77,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,78,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,79,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,80,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,81,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,82,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,83,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,84,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,85,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,86,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,87,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,88,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,89,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,90,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,91,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,92,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,93,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,94,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,95,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,96,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,97,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,98,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,99,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,100,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,101,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,102,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,103,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,104,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,105,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,106,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,107,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,108,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,109,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,110,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,111,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,112,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,113,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,114,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,115,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,116,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,117,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,118,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,119,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,120,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,121,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,122,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,123,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,124,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,125,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,126,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,127,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,128,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,129,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,130,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,131,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,132,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,133,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,134,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,135,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,136,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,137,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,138,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,139,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,140,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,141,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,142,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,143,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,144,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,145,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,146,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,147,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,148,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,149,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,150,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,151,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,152,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,153,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,154,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,155,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,156,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,157,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,158,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,159,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,160,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,161,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,162,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,163,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,164,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,165,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,166,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,167,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,168,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,169,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,170,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,171,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,172,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,173,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,174,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,175,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,176,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,177,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,178,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,179,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,180,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,181,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,182,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,183,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,184,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,185,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,186,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,187,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,188,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,189,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,190,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,191,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,192,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,193,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,194,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,195,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,196,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,197,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,198,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,199,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,200,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,201,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,202,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,203,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,204,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,205,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,206,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,207,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,208,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,209,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,210,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,211,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,212,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,213,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,214,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,215,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,216,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,217,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,218,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,219,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,220,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,221,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,222,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,223,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,224,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,225,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,226,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,227,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,228,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,229,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,230,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,231,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,232,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,233,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,234,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,235,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,236,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,237,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,238,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,239,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,240,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,241,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,242,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,243,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,244,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,245,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,246,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,247,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,248,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,249,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,250,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,251,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,252,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,253,100,1,first observed operating regime; fixed rounding in original protocol
+FD002,254,42100,1,first observed operating regime; fixed rounding in original protocol
+FD002,255,25060,1,first observed operating regime; fixed rounding in original protocol
+FD002,256,20100,1,first observed operating regime; fixed rounding in original protocol
+FD002,257,10100,1,first observed operating regime; fixed rounding in original protocol
+FD002,258,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,259,35100,1,first observed operating regime; fixed rounding in original protocol
+FD002,260,35100,1,first observed operating regime; fixed rounding in original protocol
+FD003,1,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,2,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,3,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,4,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,5,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,6,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,7,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,8,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,9,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,10,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,11,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,12,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,13,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,14,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,15,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,16,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,17,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,18,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,19,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,20,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,21,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,22,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,23,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,24,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,25,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,26,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,27,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,28,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,29,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,30,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,31,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,32,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,33,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,34,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,35,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,36,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,37,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,38,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,39,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,40,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,41,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,42,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,43,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,44,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,45,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,46,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,47,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,48,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,49,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,50,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,51,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,52,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,53,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,54,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,55,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,56,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,57,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,58,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,59,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,60,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,61,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,62,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,63,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,64,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,65,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,66,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,67,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,68,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,69,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,70,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,71,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,72,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,73,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,74,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,75,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,76,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,77,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,78,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,79,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,80,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,81,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,82,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,83,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,84,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,85,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,86,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,87,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,88,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,89,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,90,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,91,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,92,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,93,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,94,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,95,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,96,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,97,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,98,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,99,100,1,first observed operating regime; fixed rounding in original protocol
+FD003,100,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,1,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,2,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,3,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,4,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,5,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,6,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,7,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,8,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,9,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,10,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,11,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,12,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,13,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,14,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,15,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,16,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,17,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,18,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,19,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,20,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,21,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,22,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,23,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,24,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,25,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,26,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,27,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,28,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,29,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,30,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,31,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,32,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,33,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,34,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,35,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,36,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,37,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,38,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,39,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,40,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,41,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,42,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,43,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,44,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,45,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,46,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,47,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,48,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,49,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,50,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,51,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,52,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,53,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,54,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,55,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,56,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,57,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,58,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,59,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,60,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,61,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,62,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,63,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,64,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,65,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,66,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,67,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,68,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,69,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,70,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,71,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,72,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,73,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,74,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,75,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,76,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,77,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,78,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,79,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,80,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,81,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,82,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,83,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,84,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,85,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,86,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,87,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,88,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,89,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,90,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,91,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,92,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,93,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,94,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,95,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,96,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,97,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,98,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,99,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,100,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,101,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,102,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,103,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,104,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,105,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,106,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,107,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,108,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,109,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,110,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,111,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,112,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,113,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,114,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,115,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,116,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,117,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,118,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,119,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,120,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,121,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,122,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,123,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,124,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,125,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,126,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,127,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,128,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,129,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,130,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,131,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,132,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,133,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,134,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,135,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,136,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,137,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,138,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,139,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,140,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,141,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,142,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,143,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,144,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,145,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,146,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,147,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,148,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,149,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,150,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,151,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,152,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,153,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,154,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,155,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,156,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,157,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,158,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,159,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,160,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,161,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,162,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,163,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,164,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,165,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,166,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,167,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,168,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,169,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,170,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,171,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,172,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,173,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,174,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,175,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,176,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,177,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,178,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,179,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,180,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,181,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,182,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,183,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,184,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,185,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,186,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,187,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,188,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,189,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,190,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,191,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,192,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,193,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,194,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,195,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,196,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,197,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,198,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,199,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,200,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,201,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,202,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,203,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,204,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,205,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,206,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,207,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,208,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,209,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,210,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,211,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,212,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,213,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,214,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,215,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,216,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,217,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,218,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,219,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,220,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,221,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,222,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,223,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,224,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,225,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,226,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,227,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,228,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,229,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,230,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,231,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,232,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,233,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,234,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,235,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,236,20100,1,first observed operating regime; fixed rounding in original protocol
+FD004,237,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,238,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,239,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,240,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,241,42100,1,first observed operating regime; fixed rounding in original protocol
+FD004,242,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,243,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,244,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,245,100,1,first observed operating regime; fixed rounding in original protocol
+FD004,246,35100,1,first observed operating regime; fixed rounding in original protocol
+FD004,247,10100,1,first observed operating regime; fixed rounding in original protocol
+FD004,248,25060,1,first observed operating regime; fixed rounding in original protocol
+FD004,249,42100,1,first observed operating regime; fixed rounding in original protocol
+NCMAPSS6,1,1,1,first observed flight class
+NCMAPSS6,2,3,1,first observed flight class
+NCMAPSS6,3,2,1,first observed flight class
+NCMAPSS6,4,1,1,first observed flight class
+NCMAPSS6,5,3,1,first observed flight class
+NCMAPSS6,6,2,1,first observed flight class
+NCMAPSS6,7,3,1,first observed flight class
+NCMAPSS6,8,1,1,first observed flight class
+NCMAPSS6,9,2,1,first observed flight class
+NCMAPSS6,10,1,1,first observed flight class
+NCMAPSS6,11,3,1,first observed flight class
+NCMAPSS6,12,3,1,first observed flight class
+NCMAPSS6,13,3,1,first observed flight class
+NCMAPSS6,14,3,1,first observed flight class
+NCMAPSS6,15,3,1,first observed flight class
+NCMAPSS6,16,3,1,first observed flight class
+NCMAPSS6,17,3,1,first observed flight class
+NCMAPSS6,18,1,1,first observed flight class
+NCMAPSS6,19,2,1,first observed flight class
+NCMAPSS6,20,1,1,first observed flight class
+NCMAPSS6,21,2,1,first observed flight class
+NCMAPSS6,22,2,1,first observed flight class
+NCMAPSS6,23,2,1,first observed flight class
+NCMAPSS6,24,1,1,first observed flight class
+NCMAPSS6,25,3,1,first observed flight class
+NCMAPSS6,26,2,1,first observed flight class
+NCMAPSS6,27,3,1,first observed flight class
+NCMAPSS6,28,1,1,first observed flight class
+NCMAPSS6,29,3,1,first observed flight class
+NCMAPSS6,30,3,1,first observed flight class
+NCMAPSS6,31,1,1,first observed flight class
+NCMAPSS6,32,3,1,first observed flight class
+NCMAPSS6,33,1,1,first observed flight class
+NCMAPSS6,34,2,1,first observed flight class
+NCMAPSS6,35,2,1,first observed flight class
+NCMAPSS6,36,3,1,first observed flight class
+NCMAPSS6,37,2,1,first observed flight class
+NCMAPSS6,38,3,1,first observed flight class
+NCMAPSS6,39,3,1,first observed flight class
+NCMAPSS6,40,3,1,first observed flight class
+NCMAPSS6,41,3,1,first observed flight class
+NCMAPSS6,42,2,1,first observed flight class
+NCMAPSS6,43,2,1,first observed flight class
+NCMAPSS6,44,2,1,first observed flight class
+NCMAPSS6,45,2,1,first observed flight class
+NCMAPSS6,46,3,1,first observed flight class
+NCMAPSS6,47,2,1,first observed flight class
+NCMAPSS6,48,1,1,first observed flight class
+NCMAPSS6,49,1,1,first observed flight class
+NCMAPSS6,50,3,1,first observed flight class
+NCMAPSS6,51,1,1,first observed flight class
+NCMAPSS6,52,2,1,first observed flight class
+NCMAPSS6,53,1,1,first observed flight class
+NCMAPSS6,54,3,1,first observed flight class
+NCMAPSS6,55,2,1,first observed flight class
+NCMAPSS6,56,3,1,first observed flight class
+NCMAPSS6,57,2,1,first observed flight class
+NCMAPSS6,58,1,1,first observed flight class
+NCMAPSS6,59,1,1,first observed flight class
+NCMAPSS6,60,3,1,first observed flight class
+NCMAPSS6,61,1,1,first observed flight class
+NCMAPSS6,62,2,1,first observed flight class
+NCMAPSS6,63,1,1,first observed flight class
+NCMAPSS6,64,3,1,first observed flight class
+NCMAPSS6,65,2,1,first observed flight class
+NCMAPSS6,66,3,1,first observed flight class
+NCMAPSS6,67,2,1,first observed flight class
+NCMAPSS6,68,1,1,first observed flight class
+NCMAPSS6,69,1,1,first observed flight class
+NCMAPSS6,70,3,1,first observed flight class
+NCMAPSS6,71,1,1,first observed flight class
+NCMAPSS6,72,2,1,first observed flight class
+NCMAPSS6,73,1,1,first observed flight class
+NCMAPSS6,74,3,1,first observed flight class
+NCMAPSS6,75,1,1,first observed flight class
+NCMAPSS6,76,3,1,first observed flight class
+NCMAPSS6,77,1,1,first observed flight class
+NCMAPSS6,78,2,1,first observed flight class
+NCMAPSS6,79,2,1,first observed flight class
+NCMAPSS6,80,3,1,first observed flight class
+NCMAPSS6,81,2,1,first observed flight class
+NCMAPSS6,82,2,1,first observed flight class
+NCMAPSS6,83,1,1,first observed flight class
+NCMAPSS6,84,1,1,first observed flight class
+NCMAPSS6,85,2,1,first observed flight class
+NCMAPSS6,86,3,1,first observed flight class
+NCMAPSS6,87,3,1,first observed flight class
+NCMAPSS6,88,3,1,first observed flight class
+NCMAPSS6,89,1,1,first observed flight class
+NCMAPSS6,90,3,1,first observed flight class
+NCMAPSS6,91,3,1,first observed flight class
+NCMAPSS6,92,3,1,first observed flight class
+NCMAPSS6,93,3,1,first observed flight class
+NCMAPSS6,94,3,1,first observed flight class
+NCMAPSS6,95,2,1,first observed flight class
+NCMAPSS6,96,2,1,first observed flight class
+NCMAPSS6,97,2,1,first observed flight class
+NCMAPSS6,98,2,1,first observed flight class
+NCMAPSS6,99,2,1,first observed flight class
+Battery,b1c0,1,0,known experiment batch metadata
+Battery,b1c1,1,0,known experiment batch metadata
+Battery,b1c2,1,0,known experiment batch metadata
+Battery,b1c3,1,0,known experiment batch metadata
+Battery,b1c4,1,0,known experiment batch metadata
+Battery,b1c5,1,0,known experiment batch metadata
+Battery,b1c6,1,0,known experiment batch metadata
+Battery,b1c7,1,0,known experiment batch metadata
+Battery,b1c8,1,0,known experiment batch metadata
+Battery,b1c9,1,0,known experiment batch metadata
+Battery,b1c10,1,0,known experiment batch metadata
+Battery,b1c11,1,0,known experiment batch metadata
+Battery,b1c12,1,0,known experiment batch metadata
+Battery,b1c13,1,0,known experiment batch metadata
+Battery,b1c14,1,0,known experiment batch metadata
+Battery,b1c15,1,0,known experiment batch metadata
+Battery,b1c16,1,0,known experiment batch metadata
+Battery,b1c17,1,0,known experiment batch metadata
+Battery,b1c18,1,0,known experiment batch metadata
+Battery,b1c19,1,0,known experiment batch metadata
+Battery,b1c20,1,0,known experiment batch metadata
+Battery,b1c21,1,0,known experiment batch metadata
+Battery,b1c22,1,0,known experiment batch metadata
+Battery,b1c23,1,0,known experiment batch metadata
+Battery,b1c24,1,0,known experiment batch metadata
+Battery,b1c25,1,0,known experiment batch metadata
+Battery,b1c26,1,0,known experiment batch metadata
+Battery,b1c27,1,0,known experiment batch metadata
+Battery,b1c28,1,0,known experiment batch metadata
+Battery,b1c29,1,0,known experiment batch metadata
+Battery,b1c30,1,0,known experiment batch metadata
+Battery,b1c31,1,0,known experiment batch metadata
+Battery,b1c32,1,0,known experiment batch metadata
+Battery,b1c33,1,0,known experiment batch metadata
+Battery,b1c34,1,0,known experiment batch metadata
+Battery,b1c35,1,0,known experiment batch metadata
+Battery,b1c36,1,0,known experiment batch metadata
+Battery,b1c37,1,0,known experiment batch metadata
+Battery,b1c38,1,0,known experiment batch metadata
+Battery,b1c39,1,0,known experiment batch metadata
+Battery,b1c40,1,0,known experiment batch metadata
+Battery,b1c41,1,0,known experiment batch metadata
+Battery,b1c42,1,0,known experiment batch metadata
+Battery,b1c43,1,0,known experiment batch metadata
+Battery,b1c44,1,0,known experiment batch metadata
+Battery,b1c45,1,0,known experiment batch metadata
+Battery,b2c0,2,0,known experiment batch metadata
+Battery,b2c1,2,0,known experiment batch metadata
+Battery,b2c2,2,0,known experiment batch metadata
+Battery,b2c3,2,0,known experiment batch metadata
+Battery,b2c4,2,0,known experiment batch metadata
+Battery,b2c5,2,0,known experiment batch metadata
+Battery,b2c6,2,0,known experiment batch metadata
+Battery,b2c7,2,0,known experiment batch metadata
+Battery,b2c8,2,0,known experiment batch metadata
+Battery,b2c9,2,0,known experiment batch metadata
+Battery,b2c10,2,0,known experiment batch metadata
+Battery,b2c11,2,0,known experiment batch metadata
+Battery,b2c12,2,0,known experiment batch metadata
+Battery,b2c13,2,0,known experiment batch metadata
+Battery,b2c14,2,0,known experiment batch metadata
+Battery,b2c15,2,0,known experiment batch metadata
+Battery,b2c16,2,0,known experiment batch metadata
+Battery,b2c17,2,0,known experiment batch metadata
+Battery,b2c18,2,0,known experiment batch metadata
+Battery,b2c19,2,0,known experiment batch metadata
+Battery,b2c20,2,0,known experiment batch metadata
+Battery,b2c21,2,0,known experiment batch metadata
+Battery,b2c22,2,0,known experiment batch metadata
+Battery,b2c23,2,0,known experiment batch metadata
+Battery,b2c24,2,0,known experiment batch metadata
+Battery,b2c25,2,0,known experiment batch metadata
+Battery,b2c26,2,0,known experiment batch metadata
+Battery,b2c27,2,0,known experiment batch metadata
+Battery,b2c28,2,0,known experiment batch metadata
+Battery,b2c29,2,0,known experiment batch metadata
+Battery,b2c30,2,0,known experiment batch metadata
+Battery,b2c31,2,0,known experiment batch metadata
+Battery,b2c32,2,0,known experiment batch metadata
+Battery,b2c33,2,0,known experiment batch metadata
+Battery,b2c34,2,0,known experiment batch metadata
+Battery,b2c35,2,0,known experiment batch metadata
+Battery,b2c36,2,0,known experiment batch metadata
+Battery,b2c37,2,0,known experiment batch metadata
+Battery,b2c38,2,0,known experiment batch metadata
+Battery,b2c39,2,0,known experiment batch metadata
+Battery,b2c40,2,0,known experiment batch metadata
+Battery,b2c41,2,0,known experiment batch metadata
+Battery,b2c42,2,0,known experiment batch metadata
+Battery,b2c43,2,0,known experiment batch metadata
+Battery,b2c44,2,0,known experiment batch metadata
+Battery,b2c45,2,0,known experiment batch metadata
+Battery,b2c46,2,0,known experiment batch metadata
+Battery,b2c47,2,0,known experiment batch metadata
+Battery,b3c0,3,0,known experiment batch metadata
+Battery,b3c1,3,0,known experiment batch metadata
+Battery,b3c2,3,0,known experiment batch metadata
+Battery,b3c3,3,0,known experiment batch metadata
+Battery,b3c4,3,0,known experiment batch metadata
+Battery,b3c5,3,0,known experiment batch metadata
+Battery,b3c6,3,0,known experiment batch metadata
+Battery,b3c7,3,0,known experiment batch metadata
+Battery,b3c8,3,0,known experiment batch metadata
+Battery,b3c9,3,0,known experiment batch metadata
+Battery,b3c10,3,0,known experiment batch metadata
+Battery,b3c11,3,0,known experiment batch metadata
+Battery,b3c12,3,0,known experiment batch metadata
+Battery,b3c13,3,0,known experiment batch metadata
+Battery,b3c14,3,0,known experiment batch metadata
+Battery,b3c15,3,0,known experiment batch metadata
+Battery,b3c16,3,0,known experiment batch metadata
+Battery,b3c17,3,0,known experiment batch metadata
+Battery,b3c18,3,0,known experiment batch metadata
+Battery,b3c19,3,0,known experiment batch metadata
+Battery,b3c20,3,0,known experiment batch metadata
+Battery,b3c21,3,0,known experiment batch metadata
+Battery,b3c22,3,0,known experiment batch metadata
+Battery,b3c23,3,0,known experiment batch metadata
+Battery,b3c24,3,0,known experiment batch metadata
+Battery,b3c25,3,0,known experiment batch metadata
+Battery,b3c26,3,0,known experiment batch metadata
+Battery,b3c27,3,0,known experiment batch metadata
+Battery,b3c28,3,0,known experiment batch metadata
+Battery,b3c29,3,0,known experiment batch metadata
+Battery,b3c30,3,0,known experiment batch metadata
+Battery,b3c31,3,0,known experiment batch metadata
+Battery,b3c32,3,0,known experiment batch metadata
+Battery,b3c33,3,0,known experiment batch metadata
+Battery,b3c34,3,0,known experiment batch metadata
+Battery,b3c35,3,0,known experiment batch metadata
+Battery,b3c36,3,0,known experiment batch metadata
+Battery,b3c37,3,0,known experiment batch metadata
+Battery,b3c38,3,0,known experiment batch metadata
+Battery,b3c39,3,0,known experiment batch metadata
+Battery,b3c40,3,0,known experiment batch metadata
+Battery,b3c41,3,0,known experiment batch metadata
+Battery,b3c42,3,0,known experiment batch metadata
+Battery,b3c43,3,0,known experiment batch metadata
+Battery,b3c44,3,0,known experiment batch metadata
+Battery,b3c45,3,0,known experiment batch metadata

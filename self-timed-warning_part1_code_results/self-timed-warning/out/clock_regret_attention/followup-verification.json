@@ -1,0 +1,10 @@
+{
+  "validation_only_selector_choice_reproduced": true,
+  "fresh_confirmation_cohorts_disjoint": 600,
+  "ablation_confirmation_budget_exact_intervals": 21000,
+  "fresh_prediction_and_greedy_rows_reproduced": 6000,
+  "confirmation_corrected_tests_reproduced": 4,
+  "additional_validation_checkpoint_selections": 6,
+  "final_default_and_trained_full_family_checks": 40,
+  "protected_artifacts_unchanged": 1025
+}

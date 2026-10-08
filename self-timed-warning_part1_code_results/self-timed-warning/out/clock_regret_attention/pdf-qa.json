@@ -1,0 +1,76 @@
+{
+  "pages": 8,
+  "metadata": {
+    "format": "PDF 1.4",
+    "title": "Certified Focus Search for Relative-Regret Replacement from Censored Fleets",
+    "author": "Nafis Wadud Ansari",
+    "subject": "Attention ablations, sharp omission bounds and a complete-family fallback",
+    "keywords": "",
+    "creator": "(unspecified)",
+    "producer": "ReportLab PDF Library - (opensource)",
+    "creationDate": "D:20261008204756+06'00'",
+    "modDate": "D:20261008204756+06'00'",
+    "trapped": "",
+    "encryption": null
+  },
+  "page_checks": [
+    {
+      "page": 1,
+      "characters": 2386,
+      "first_line": "Ansari | Certified focus search | Working paper, 8 October 2026",
+      "body_bottom": 496.8504638671875,
+      "render": "out\\clock_regret_attention\\qa\\page-1.png"
+    },
+    {
+      "page": 2,
+      "characters": 2420,
+      "first_line": "Ansari | Certified focus search | Working paper, 8 October 2026",
+      "body_bottom": 506.05047607421875,
+      "render": "out\\clock_regret_attention\\qa\\page-2.png"
+    },
+    {
+      "page": 3,
+      "characters": 2388,
+      "first_line": "Ansari | Certified focus search | Working paper, 8 October 2026",
+      "body_bottom": 549.6504516601562,
+      "render": "out\\clock_regret_attention\\qa\\page-3.png"
+    },
+    {
+      "page": 4,
+      "characters": 2577,
+      "first_line": "Ansari | Certified focus search | Working paper, 8 October 2026",
+      "body_bottom": 628.1447143554688,
+      "render": "out\\clock_regret_attention\\qa\\page-4.png"
+    },
+    {
+      "page": 5,
+      "characters": 2370,
+      "first_line": "Ansari | Certified focus search | Working paper, 8 October 2026",
+      "body_bottom": 641.8504638671875,
+      "render": "out\\clock_regret_attention\\qa\\page-5.png"
+    },
+    {
+      "page": 6,
+      "characters": 1715,
+      "first_line": "Ansari | Certified focus search | Working paper, 8 October 2026",
+      "body_bottom": 699.697265625,
+      "render": "out\\clock_regret_attention\\qa\\page-6.png"
+    },
+    {
+      "page": 7,
+      "characters": 2522,
+      "first_line": "Ansari | Certified focus search | Working paper, 8 October 2026",
+      "body_bottom": 478.25048828125,
+      "render": "out\\clock_regret_attention\\qa\\page-7.png"
+    },
+    {
+      "page": 8,
+      "characters": 3422,
+      "first_line": "Ansari | Certified focus search | Working paper, 8 October 2026",
+      "body_bottom": 602.1447143554688,
+      "render": "out\\clock_regret_attention\\qa\\page-8.png"
+    }
+  ],
+  "text_bounds_pass": true,
+  "visual_review": "All eight final rendered pages visually inspected: clear margins, tables, formulas, plots and footers; no clipping or overlap."
+}

@@ -1,0 +1,15 @@
+# Local dependencies, caches and temporary work; research outputs are committed.
+**/.venv/
+**/venv/
+**/node_modules/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.ipynb_checkpoints/
+**/tmp/
+.publish-state/
+.DS_Store
+Thumbs.db

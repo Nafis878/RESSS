@@ -1,0 +1,32 @@
+[
+  {
+    "split": "id",
+    "method": "sequential_greedy",
+    "mean_log_gap": 0.004608151624280427,
+    "median_log_gap": 0.0,
+    "mean_certificate_factor": 2.9540013929939595,
+    "mean_optimum_coverage": 0.7633333333333333,
+    "mean_attention_minus_greedy": 9.795404087710874e-05,
+    "attention_win_tie_loss": [
+      0,
+      286,
+      14
+    ],
+    "status": "exploratory challenger added after planned outcomes; descriptive, not part of the four-test family"
+  },
+  {
+    "split": "shift",
+    "method": "sequential_greedy",
+    "mean_log_gap": 0.01527231489354886,
+    "median_log_gap": 0.00761309815018584,
+    "mean_certificate_factor": 11.074191432201838,
+    "mean_optimum_coverage": 0.38333333333333336,
+    "mean_attention_minus_greedy": 0.0004124074172379772,
+    "attention_win_tie_loss": [
+      2,
+      266,
+      32
+    ],
+    "status": "exploratory challenger added after planned outcomes; descriptive, not part of the four-test family"
+  }
+]

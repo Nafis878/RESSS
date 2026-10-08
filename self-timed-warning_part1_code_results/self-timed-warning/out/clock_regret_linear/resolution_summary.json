@@ -1,0 +1,16 @@
+{
+  "continuous_independent_oracle_cases": 300,
+  "all_exact_matches": true,
+  "independent_resolution_cohorts": 300,
+  "resolution_factors": [
+    1,
+    2,
+    4,
+    16,
+    64
+  ],
+  "full_family_resolution_tasks": 1500,
+  "all_bounds_hold": true,
+  "priority_established": false,
+  "protected_artifacts_unchanged": 858
+}

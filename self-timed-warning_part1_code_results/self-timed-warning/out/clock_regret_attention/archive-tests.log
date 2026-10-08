@@ -1,0 +1,14 @@
+test_500_full_clock_random_focus_certificates (clock_regret_attention.test_core.FocusTests.test_500_full_clock_random_focus_certificates) ... ok
+test_attention_permutation_equivariance (clock_regret_attention.test_core.FocusTests.test_attention_permutation_equivariance) ... ok
+test_invalid_focus_and_all_focus_exact (clock_regret_attention.test_core.FocusTests.test_invalid_focus_and_all_focus_exact) ... ok
+test_minimal_certificate_budget (clock_regret_attention.test_core.FocusTests.test_minimal_certificate_budget) ... ok
+test_no_known_between_requires_no_attention (clock_regret_attention.test_core.FocusTests.test_no_known_between_requires_no_attention) ... ok
+test_premium_ranking_minimizes_all_focus_factors (clock_regret_attention.test_core.FocusTests.test_premium_ranking_minimizes_all_focus_factors) ... ok
+test_sharpness_and_unsafe_omission (clock_regret_attention.test_core.FocusTests.test_sharpness_and_unsafe_omission) ... ok
+test_100_full_clock_families_and_adversarial_proposals (clock_regret_attention.test_integration.IntegrationTests.test_100_full_clock_families_and_adversarial_proposals) ... ok
+test_learned_selector_and_finite_validation (clock_regret_attention.test_integration.IntegrationTests.test_learned_selector_and_finite_validation) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.533s
+
+OK

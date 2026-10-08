@@ -1,0 +1,15 @@
+{
+  "unit-tests.log": {
+    "exit_code": 0
+  },
+  "verification.json": {
+    "exit_code": 0
+  },
+  "followup-verification.json": {
+    "exit_code": 0
+  },
+  "hybrid-demo.log": {
+    "exit_code": 0
+  },
+  "protected_artifacts_unchanged": 1025
+}

@@ -1,0 +1,19 @@
+dataset,comparator,wins,ties,losses,dataset_verdict,note
+PHM08,STW_cost,0,16,0,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+PHM08,STW_cost_1se,0,8,8,loses,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+PHM08,STW_window,0,15,1,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+FD001,STW_cost,0,12,4,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+FD001,STW_cost_1se,5,11,0,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+FD001,STW_window,10,5,1,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+FD002,STW_cost,0,16,0,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+FD002,STW_cost_1se,4,9,3,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+FD002,STW_window,6,10,0,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+FD003,STW_cost,0,0,16,loses,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+FD003,STW_cost_1se,4,12,0,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+FD003,STW_window,8,8,0,beats,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+FD004,STW_cost,0,16,0,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+FD004,STW_cost_1se,2,11,3,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+FD004,STW_window,8,8,0,beats,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+NCMAPSS6,STW_cost,0,10,6,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+NCMAPSS6,STW_cost_1se,2,11,3,mixed,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions
+NCMAPSS6,STW_window,9,7,0,beats,Legacy paired-bootstrap intervals; no across-cell correction; fixed fitted predictions

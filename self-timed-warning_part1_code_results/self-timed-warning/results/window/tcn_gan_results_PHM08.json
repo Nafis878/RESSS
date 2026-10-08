@@ -1,0 +1,87 @@
+{
+ "single": {
+  "tcn_median": {
+   "in_window": 36,
+   "pct": 16.5,
+   "late": 123,
+   "early": 59,
+   "mae": 27.6
+  },
+  "tcn_window": {
+   "in_window": 35,
+   "pct": 16.1,
+   "late": 23,
+   "early": 160,
+   "mae": 36.3
+  },
+  "tcn_90pct_interval": {
+   "width": 99.6,
+   "coverage": 81.2
+  },
+  "tcngan_median": {
+   "in_window": 40,
+   "pct": 18.3,
+   "late": 125,
+   "early": 53,
+   "mae": 28.3
+  },
+  "tcngan_window": {
+   "in_window": 26,
+   "pct": 11.9,
+   "late": 24,
+   "early": 168,
+   "mae": 38.9
+  },
+  "tcngan_90pct_interval": {
+   "width": 102.7,
+   "coverage": 81.2
+  },
+  "tstr_median": {
+   "in_window": 25,
+   "pct": 11.5,
+   "late": 151,
+   "early": 42,
+   "mae": 33.6
+  },
+  "tstr_window": {
+   "in_window": 25,
+   "pct": 11.5,
+   "late": 25,
+   "early": 168,
+   "mae": 46.7
+  },
+  "tstr_90pct_interval": {
+   "width": 123.3,
+   "coverage": 87.6
+  }
+ },
+ "hybrid_previous": {
+  "in_window": 73,
+  "pct": 33.5,
+  "late": 70,
+  "early": 75,
+  "mae": 16.8
+ },
+ "hybrid_with_tcn_and_gan": {
+  "cal_cv_hit": 46.8,
+  "in_window": 67,
+  "pct": 30.7,
+  "late": 73,
+  "early": 78,
+  "mae": 17.7
+ },
+ "hybrid_plus_tcn_only": {
+  "in_window": 70,
+  "pct": 32.1,
+  "late": 77,
+  "early": 71,
+  "mae": 17.1
+ },
+ "hybrid_plus_tcngan_only": {
+  "in_window": 74,
+  "pct": 33.9,
+  "late": 73,
+  "early": 71,
+  "mae": 16.8
+ }
+}

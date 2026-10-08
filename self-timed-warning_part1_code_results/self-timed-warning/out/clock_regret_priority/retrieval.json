@@ -1,0 +1,65 @@
+[
+  {
+    "name": "drent2020_preprint",
+    "url": "https://www.eurandom.tue.nl/wp-content/uploads/2020/04/005-report.pdf",
+    "status": 200,
+    "resolved_url": "https://www.eurandom.tue.nl/wp-content/uploads/2020/04/005-report.pdf",
+    "bytes": 331911,
+    "pdf_recovered": true,
+    "pages": 9,
+    "text_characters": 38375,
+    "sha256": "8a5369796ac9d4e742a42c84446ca00edf0e3d5fc713f5472d8a3c3f8f1542d2",
+    "local_pdf": "out/clock_regret_priority/primary_cache/drent2020_preprint.pdf"
+  },
+  {
+    "name": "khan2024_final",
+    "url": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/khan24b/khan24b.pdf",
+    "status": 200,
+    "resolved_url": "https://raw.githubusercontent.com/mlresearch/v235/main/assets/khan24b/khan24b.pdf",
+    "bytes": 526605,
+    "pdf_recovered": true,
+    "pages": 24,
+    "text_characters": 81059,
+    "sha256": "93cc6faa9ddb0a5f28a0cc8ddf79e18c0ca7aaa4a2683ca3f48243f84b02bcf0",
+    "local_pdf": "out/clock_regret_priority/primary_cache/khan2024_final.pdf"
+  },
+  {
+    "name": "khan2024_arxiv",
+    "url": "https://arxiv.org/pdf/2305.11812v2",
+    "status": 200,
+    "resolved_url": "https://arxiv.org/pdf/2305.11812v2",
+    "bytes": 651899,
+    "pdf_recovered": true,
+    "pages": 33,
+    "text_characters": 89031,
+    "sha256": "2e9689485b41342e25a3016a201b9c59c9886d66bc8950c85564b36aa2d3a283",
+    "local_pdf": "out/clock_regret_priority/primary_cache/khan2024_arxiv.pdf"
+  },
+  {
+    "name": "fox1966_publisher",
+    "url": "https://pubsonline.informs.org/doi/pdf/10.1287/opre.14.3.533",
+    "pdf_recovered": false,
+    "reason": "HTTP Error 403: Forbidden"
+  },
+  {
+    "name": "fox1966_jstor",
+    "url": "https://www.jstor.org/stable/pdf/168209.pdf",
+    "status": 200,
+    "resolved_url": "https://www.jstor.org/stable/pdf/168209.pdf",
+    "bytes": 3038,
+    "pdf_recovered": false,
+    "reason": "Response was not a PDF"
+  },
+  {
+    "name": "newsvendor_relative2006",
+    "url": "https://web.stanford.edu/~yyye/REVDreport.pdf",
+    "status": 200,
+    "resolved_url": "https://web.stanford.edu/~yyye/REVDreport.pdf",
+    "bytes": 509482,
+    "pdf_recovered": true,
+    "pages": 35,
+    "text_characters": 48871,
+    "sha256": "09981e6aa0276443f9be67beb8a9be34c6dac390ba9fa52a5a044aeccc437ce8",
+    "local_pdf": "out/clock_regret_priority/primary_cache/newsvendor_relative2006.pdf"
+  }
+]

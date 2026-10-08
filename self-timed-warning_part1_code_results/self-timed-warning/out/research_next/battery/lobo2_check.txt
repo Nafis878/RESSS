@@ -1,0 +1,1 @@
+PASS lobo2: 5504 frozen CAT/CAT-c unit decisions match; setting (180.0, 1, 5), 23s

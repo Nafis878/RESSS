@@ -1,0 +1,9 @@
+{
+  "signature": "7b34ef0bab14138a2527dbb5ddef254ab1829cec7ce6998d8ad2125c61add61e",
+  "outputs": {
+    "Bearing_units.csv": "f11a275b98c5e527713231491d695a9e126b763ab067446f2138fc94b22f6daf",
+    "Bearing_settings.csv": "e1f0549f70c32ae34e89f87db0dbe502d444dd52ba6a36cf33771beacd96797c",
+    "Bearing_platform.csv": "2637df2b6eba8c9982722ed3adfeb38f8a0babe56cd9ef7b9bae6b8186b51180",
+    "Bearing_check.txt": "047bb2855862939306ed9fe90308750eef3a58cad56038fa113b9e0d1d6bed14"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "recorded_at_utc": "2026-10-08T09:36:37.814802+00:00",
+  "title": "Exact Relative-Regret Age Replacement under Censoring: Two Extremal Worlds and a Clock-Resolution Guarantee",
+  "authorship": "Pending actual author names and affiliations",
+  "status": "B: potentially novel specialized contribution; historical originality and public priority unestablished",
+  "mathematical_claims": [
+    "Two-world integer later-pair characterization",
+    "Exact O(n log n + K^2 n) full-family solver",
+    "Continuous limiting-world supremum",
+    "Uniform (1+1/r) refinement and selected-policy guarantee"
+  ],
+  "public_priority_established": false,
+  "externally_peer_reviewed": false,
+  "public_deposit": null,
+  "license": "Unspecified; review artifact only",
+  "scope": "Finite recorded cohort, fixed integer ages and horizons, common integer cost ratio > 1, Cartesian completions",
+  "unchanged_prior_artifacts": 858,
+  "unchanged_prior_population_performance": true,
+  "verification_checks": 28,
+  "all_verification_checks_passed": true,
+  "environment": {
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scipy": "1.17.1",
+    "matplotlib": "3.10.9",
+    "reportlab": "5.0.1",
+    "pypdf": "6.19.0",
+    "pymupdf": "1.28.2"
+  },
+  "python": "3.12.4 (tags/v3.12.4:8e8a4ba, Jun  6 2024, 19:30:16) [MSC v.1940 64 bit (AMD64)]",
+  "source_sha256": {
+    "clock_regret_linear/continuous.py": "a050642fb521fae2b4dc1b182ddf5e6524b4561684aff914c5d091a9ec19544b",
+    "clock_regret_linear/core.py": "669bd650114d4538c857e9aa73fdce8cce910d91854373760565a52ccd3a6bb6",
+    "clock_regret_linear/report.py": "c42258824517b7f496a36044ea2b92f0419b50610ac0fe5e8812774179ce67c8",
+    "clock_regret_linear/resolution_run.py": "99914f49d39b74d3a4144900c167fecc37ed19d21a0c4140fb9c5e838a7bbd7e",
+    "clock_regret_linear/run.py": "f83a8b35652829a437dd51c8b9f4cecf1ca09de71b1dcb82dd8a9bf0f8488602",
+    "clock_regret_linear/test_core.py": "93be2f8a79f51c174626219a6b870e0c0cedf158e4a94bf495e029e81ed6196d",
+    "clock_regret_linear/verify.py": "85ed29be8691fa0416d928ba8cf1a099b342ff28b48be4c5a99c82fe824703ff"
+  }
+}

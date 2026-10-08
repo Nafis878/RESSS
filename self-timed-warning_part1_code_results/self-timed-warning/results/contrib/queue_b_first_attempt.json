@@ -1,0 +1,37 @@
+[
+  {
+    "stage": "FD003",
+    "started_utc": "2026-10-07T13:12:26.623330+00:00",
+    "state": "passed",
+    "exit_code": 0,
+    "finished_utc": "2026-10-07T13:27:43.710244+00:00"
+  },
+  {
+    "stage": "PHM08",
+    "started_utc": "2026-10-07T13:27:43.711250+00:00",
+    "state": "passed",
+    "exit_code": 0,
+    "finished_utc": "2026-10-07T13:50:26.946402+00:00"
+  },
+  {
+    "stage": "NCMAPSS6",
+    "started_utc": "2026-10-07T13:50:26.946402+00:00",
+    "state": "passed",
+    "exit_code": 0,
+    "finished_utc": "2026-10-07T13:57:44.138612+00:00"
+  },
+  {
+    "stage": "Battery",
+    "started_utc": "2026-10-07T13:57:44.139616+00:00",
+    "state": "passed",
+    "exit_code": 0,
+    "finished_utc": "2026-10-07T14:25:00.432360+00:00"
+  },
+  {
+    "stage": "Bearing",
+    "started_utc": "2026-10-07T14:25:00.433374+00:00",
+    "state": "failed",
+    "exit_code": 1,
+    "finished_utc": "2026-10-07T14:25:02.726769+00:00"
+  }
+]

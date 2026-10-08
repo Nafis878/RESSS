@@ -1,0 +1,31 @@
+{
+ "single_gbm_ext": {
+  "in_window": 55,
+  "pct": 25.2,
+  "late": 100,
+  "early": 63,
+  "mae": 19.6
+ },
+ "single_bayes_ext": {
+  "in_window": 61,
+  "pct": 28.0,
+  "late": 101,
+  "early": 56,
+  "mae": 15.1
+ },
+ "hybrid_with_external": {
+  "cal_cv_hit": 47.9,
+  "in_window": 73,
+  "pct": 33.5,
+  "late": 70,
+  "early": 75,
+  "mae": 16.1
+ },
+ "selective": {
+  "10%": 45.5,
+  "20%": 47.7,
+  "30%": 41.5,
+  "50%": 38.5,
+  "100%": 33.5
+ }
+}

@@ -1,0 +1,5559 @@
+[
+  {
+    "case": 0,
+    "h": [
+      5
+    ],
+    "f": [
+      true
+    ],
+    "a": 6,
+    "b": 4,
+    "q": [
+      "12/5"
+    ],
+    "truth": "68/25",
+    "lower": "68/25",
+    "upper": "68/25",
+    "limiting_lifetimes": [
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 1,
+    "h": [
+      5
+    ],
+    "f": [
+      true
+    ],
+    "a": 5,
+    "b": 1,
+    "q": [
+      "12/5"
+    ],
+    "truth": "17/25",
+    "lower": "17/25",
+    "upper": "17/25",
+    "limiting_lifetimes": [
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 2,
+    "h": [
+      4,
+      4
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 3,
+    "q": [
+      "6",
+      "2/5"
+    ],
+    "truth": "3",
+    "lower": "3",
+    "upper": "3",
+    "limiting_lifetimes": [
+      5,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 3,
+    "h": [
+      2,
+      3,
+      5
+    ],
+    "f": [
+      false,
+      true,
+      true
+    ],
+    "a": 2,
+    "b": 7,
+    "q": [
+      "17/5",
+      "29/5",
+      "18/5"
+    ],
+    "truth": "75/124",
+    "lower": "75/124",
+    "upper": "75/124",
+    "limiting_lifetimes": [
+      8,
+      3,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 4,
+    "h": [
+      6
+    ],
+    "f": [
+      false
+    ],
+    "a": 3,
+    "b": 7,
+    "q": [
+      "2"
+    ],
+    "truth": "7/3",
+    "lower": "7/3",
+    "upper": "7/3",
+    "limiting_lifetimes": [
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 5,
+    "h": [
+      3,
+      1,
+      2
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 7,
+    "b": 7,
+    "q": [
+      "4/5",
+      "24/5",
+      "1/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      8,
+      8,
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 6,
+    "h": [
+      3
+    ],
+    "f": [
+      true
+    ],
+    "a": 1,
+    "b": 6,
+    "q": [
+      "16/5"
+    ],
+    "truth": "5/7",
+    "lower": "5/7",
+    "upper": "5/7",
+    "limiting_lifetimes": [
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 7,
+    "h": [
+      2,
+      4,
+      2
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 4,
+    "b": 4,
+    "q": [
+      "19/5",
+      "3/5",
+      "13/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      5,
+      5,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 8,
+    "h": [
+      4,
+      2,
+      5,
+      5
+    ],
+    "f": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "a": 2,
+    "b": 4,
+    "q": [
+      "23/5",
+      "3/5",
+      "27/5",
+      "1/5"
+    ],
+    "truth": "40/43",
+    "lower": "40/43",
+    "upper": "40/43",
+    "limiting_lifetimes": [
+      4,
+      5,
+      6,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 9,
+    "h": [
+      4,
+      2,
+      5,
+      4
+    ],
+    "f": [
+      false,
+      true,
+      true,
+      false
+    ],
+    "a": 7,
+    "b": 5,
+    "q": [
+      "21/5",
+      "23/5",
+      "17/5",
+      "21/5"
+    ],
+    "truth": "17/10",
+    "lower": "17/10",
+    "upper": "17/10",
+    "limiting_lifetimes": [
+      5,
+      2,
+      5,
+      5
+    ],
+    "approach_indices": [
+      0,
+      3
+    ]
+  },
+  {
+    "case": 10,
+    "h": [
+      4,
+      5,
+      2
+    ],
+    "f": [
+      false,
+      true,
+      false
+    ],
+    "a": 7,
+    "b": 6,
+    "q": [
+      "19/5",
+      "3/5",
+      "12/5"
+    ],
+    "truth": "49/18",
+    "lower": "49/18",
+    "upper": "49/18",
+    "limiting_lifetimes": [
+      6,
+      5,
+      6
+    ],
+    "approach_indices": [
+      0,
+      2
+    ]
+  },
+  {
+    "case": 11,
+    "h": [
+      4,
+      5
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 3,
+    "b": 3,
+    "q": [
+      "29/5",
+      "4/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      5,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 12,
+    "h": [
+      4,
+      5
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 7,
+    "b": 2,
+    "q": [
+      "22/5",
+      "6/5"
+    ],
+    "truth": "76/45",
+    "lower": "76/45",
+    "upper": "76/45",
+    "limiting_lifetimes": [
+      4,
+      5
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 13,
+    "h": [
+      1,
+      1
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 2,
+    "b": 2,
+    "q": [
+      "19/5",
+      "3"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      1,
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 14,
+    "h": [
+      3,
+      6,
+      5,
+      1
+    ],
+    "f": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "a": 5,
+    "b": 3,
+    "q": [
+      "1",
+      "7/5",
+      "4/5",
+      "21/5"
+    ],
+    "truth": "69/40",
+    "lower": "69/40",
+    "upper": "69/40",
+    "limiting_lifetimes": [
+      3,
+      7,
+      6,
+      3
+    ],
+    "approach_indices": [
+      3,
+      0
+    ]
+  },
+  {
+    "case": 15,
+    "h": [
+      6,
+      6,
+      3,
+      2
+    ],
+    "f": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "a": 2,
+    "b": 2,
+    "q": [
+      "7/5",
+      "18/5",
+      "11/5",
+      "4/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      7,
+      6,
+      4,
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 16,
+    "h": [
+      6
+    ],
+    "f": [
+      true
+    ],
+    "a": 4,
+    "b": 2,
+    "q": [
+      "9/5"
+    ],
+    "truth": "1/2",
+    "lower": "1/2",
+    "upper": "1/2",
+    "limiting_lifetimes": [
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 17,
+    "h": [
+      5,
+      3
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 2,
+    "b": 3,
+    "q": [
+      "26/5",
+      "1"
+    ],
+    "truth": "3/2",
+    "lower": "3/2",
+    "upper": "3/2",
+    "limiting_lifetimes": [
+      6,
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 18,
+    "h": [
+      1
+    ],
+    "f": [
+      false
+    ],
+    "a": 4,
+    "b": 6,
+    "q": [
+      "4"
+    ],
+    "truth": "3/2",
+    "lower": "3/2",
+    "upper": "3/2",
+    "limiting_lifetimes": [
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 19,
+    "h": [
+      3,
+      5
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 1,
+    "b": 3,
+    "q": [
+      "19/5",
+      "2"
+    ],
+    "truth": "30/29",
+    "lower": "30/29",
+    "upper": "30/29",
+    "limiting_lifetimes": [
+      3,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 20,
+    "h": [
+      5
+    ],
+    "f": [
+      false
+    ],
+    "a": 5,
+    "b": 2,
+    "q": [
+      "4/5"
+    ],
+    "truth": "2/5",
+    "lower": "2/5",
+    "upper": "2/5",
+    "limiting_lifetimes": [
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 21,
+    "h": [
+      3,
+      2,
+      6,
+      5
+    ],
+    "f": [
+      true,
+      true,
+      true,
+      false
+    ],
+    "a": 3,
+    "b": 2,
+    "q": [
+      "21/5",
+      "27/5",
+      "2/5",
+      "3"
+    ],
+    "truth": "544/517",
+    "lower": "544/517",
+    "upper": "544/517",
+    "limiting_lifetimes": [
+      3,
+      2,
+      6,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 22,
+    "h": [
+      5,
+      2,
+      4,
+      6
+    ],
+    "f": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 3,
+    "q": [
+      "17/5",
+      "19/5",
+      "24/5",
+      "7/5"
+    ],
+    "truth": "8/3",
+    "lower": "8/3",
+    "upper": "8/3",
+    "limiting_lifetimes": [
+      5,
+      3,
+      4,
+      7
+    ],
+    "approach_indices": [
+      1,
+      2
+    ]
+  },
+  {
+    "case": 23,
+    "h": [
+      6,
+      3
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 3,
+    "q": [
+      "8/5",
+      "24/5"
+    ],
+    "truth": "3",
+    "lower": "3",
+    "upper": "3",
+    "limiting_lifetimes": [
+      7,
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 24,
+    "h": [
+      6
+    ],
+    "f": [
+      true
+    ],
+    "a": 6,
+    "b": 7,
+    "q": [
+      "27/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 25,
+    "h": [
+      2,
+      6
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 1,
+    "q": [
+      "8/5",
+      "2/5"
+    ],
+    "truth": "9/20",
+    "lower": "9/20",
+    "upper": "9/20",
+    "limiting_lifetimes": [
+      2,
+      7
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 26,
+    "h": [
+      2
+    ],
+    "f": [
+      false
+    ],
+    "a": 3,
+    "b": 6,
+    "q": [
+      "2"
+    ],
+    "truth": "2",
+    "lower": "2",
+    "upper": "2",
+    "limiting_lifetimes": [
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 27,
+    "h": [
+      2,
+      4,
+      6
+    ],
+    "f": [
+      true,
+      false,
+      false
+    ],
+    "a": 5,
+    "b": 3,
+    "q": [
+      "3/5",
+      "8/5",
+      "6/5"
+    ],
+    "truth": "104/99",
+    "lower": "104/99",
+    "upper": "104/99",
+    "limiting_lifetimes": [
+      2,
+      4,
+      7
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 28,
+    "h": [
+      1,
+      2,
+      4
+    ],
+    "f": [
+      true,
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 2,
+    "q": [
+      "19/5",
+      "1/5",
+      "3/5"
+    ],
+    "truth": "95/119",
+    "lower": "95/119",
+    "upper": "95/119",
+    "limiting_lifetimes": [
+      1,
+      2,
+      4
+    ],
+    "approach_indices": [
+      1,
+      2
+    ]
+  },
+  {
+    "case": 29,
+    "h": [
+      3
+    ],
+    "f": [
+      true
+    ],
+    "a": 4,
+    "b": 4,
+    "q": [
+      "3"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 30,
+    "h": [
+      2,
+      1,
+      6
+    ],
+    "f": [
+      true,
+      false,
+      false
+    ],
+    "a": 3,
+    "b": 2,
+    "q": [
+      "22/5",
+      "12/5",
+      "23/5"
+    ],
+    "truth": "42/37",
+    "lower": "42/37",
+    "upper": "42/37",
+    "limiting_lifetimes": [
+      2,
+      2,
+      7
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 31,
+    "h": [
+      6,
+      1
+    ],
+    "f": [
+      true,
+      true
+    ],
+    "a": 5,
+    "b": 5,
+    "q": [
+      "12/5",
+      "22/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      6,
+      1
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 32,
+    "h": [
+      6,
+      4
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 3,
+    "b": 3,
+    "q": [
+      "14/5",
+      "23/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      6,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 33,
+    "h": [
+      1,
+      4,
+      2
+    ],
+    "f": [
+      true,
+      false,
+      false
+    ],
+    "a": 7,
+    "b": 5,
+    "q": [
+      "23/5",
+      "29/5",
+      "1"
+    ],
+    "truth": "36/19",
+    "lower": "36/19",
+    "upper": "36/19",
+    "limiting_lifetimes": [
+      1,
+      5,
+      5
+    ],
+    "approach_indices": [
+      1,
+      2
+    ]
+  },
+  {
+    "case": 34,
+    "h": [
+      1,
+      4,
+      4,
+      6
+    ],
+    "f": [
+      true,
+      true,
+      false,
+      false
+    ],
+    "a": 3,
+    "b": 3,
+    "q": [
+      "16/5",
+      "18/5",
+      "28/5",
+      "1"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      1,
+      4,
+      5,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 35,
+    "h": [
+      4,
+      3
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 6,
+    "q": [
+      "19/5",
+      "17/5"
+    ],
+    "truth": "6",
+    "lower": "6",
+    "upper": "6",
+    "limiting_lifetimes": [
+      7,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 36,
+    "h": [
+      2,
+      6
+    ],
+    "f": [
+      false,
+      true
+    ],
+    "a": 1,
+    "b": 3,
+    "q": [
+      "14/5",
+      "27/5"
+    ],
+    "truth": "3",
+    "lower": "3",
+    "upper": "3",
+    "limiting_lifetimes": [
+      4,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 37,
+    "h": [
+      6,
+      4,
+      5
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 2,
+    "b": 5,
+    "q": [
+      "3",
+      "17/5",
+      "7/5"
+    ],
+    "truth": "5/2",
+    "lower": "5/2",
+    "upper": "5/2",
+    "limiting_lifetimes": [
+      7,
+      6,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 38,
+    "h": [
+      2,
+      1,
+      4,
+      1
+    ],
+    "f": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 4,
+    "q": [
+      "16/5",
+      "19/5",
+      "12/5",
+      "23/5"
+    ],
+    "truth": "13/4",
+    "lower": "13/4",
+    "upper": "13/4",
+    "limiting_lifetimes": [
+      5,
+      1,
+      5,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 39,
+    "h": [
+      1,
+      1
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 7,
+    "b": 4,
+    "q": [
+      "27/5",
+      "8/5"
+    ],
+    "truth": "45/37",
+    "lower": "45/37",
+    "upper": "45/37",
+    "limiting_lifetimes": [
+      1,
+      4
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 40,
+    "h": [
+      4
+    ],
+    "f": [
+      false
+    ],
+    "a": 5,
+    "b": 1,
+    "q": [
+      "4/5"
+    ],
+    "truth": "9/20",
+    "lower": "9/20",
+    "upper": "9/20",
+    "limiting_lifetimes": [
+      4
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 41,
+    "h": [
+      5,
+      2,
+      2
+    ],
+    "f": [
+      true,
+      false,
+      false
+    ],
+    "a": 3,
+    "b": 2,
+    "q": [
+      "4",
+      "8/5",
+      "5"
+    ],
+    "truth": "96/35",
+    "lower": "96/35",
+    "upper": "96/35",
+    "limiting_lifetimes": [
+      5,
+      2,
+      2
+    ],
+    "approach_indices": [
+      1,
+      2
+    ]
+  },
+  {
+    "case": 42,
+    "h": [
+      6,
+      1,
+      3
+    ],
+    "f": [
+      true,
+      true,
+      false
+    ],
+    "a": 2,
+    "b": 3,
+    "q": [
+      "16/5",
+      "17/5",
+      "21/5"
+    ],
+    "truth": "7/5",
+    "lower": "7/5",
+    "upper": "7/5",
+    "limiting_lifetimes": [
+      6,
+      1,
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 43,
+    "h": [
+      4
+    ],
+    "f": [
+      false
+    ],
+    "a": 1,
+    "b": 1,
+    "q": [
+      "26/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 44,
+    "h": [
+      5,
+      3,
+      2,
+      2
+    ],
+    "f": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "a": 2,
+    "b": 6,
+    "q": [
+      "23/5",
+      "9/5",
+      "29/5",
+      "3/5"
+    ],
+    "truth": "19/16",
+    "lower": "19/16",
+    "upper": "19/16",
+    "limiting_lifetimes": [
+      5,
+      7,
+      7,
+      2
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 45,
+    "h": [
+      5,
+      2,
+      1
+    ],
+    "f": [
+      false,
+      false,
+      true
+    ],
+    "a": 4,
+    "b": 5,
+    "q": [
+      "3",
+      "2/5",
+      "14/5"
+    ],
+    "truth": "11/9",
+    "lower": "11/9",
+    "upper": "11/9",
+    "limiting_lifetimes": [
+      6,
+      6,
+      1
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 46,
+    "h": [
+      1,
+      4,
+      2
+    ],
+    "f": [
+      true,
+      false,
+      false
+    ],
+    "a": 7,
+    "b": 2,
+    "q": [
+      "29/5",
+      "9/5",
+      "16/5"
+    ],
+    "truth": "345/308",
+    "lower": "345/308",
+    "upper": "345/308",
+    "limiting_lifetimes": [
+      1,
+      4,
+      2
+    ],
+    "approach_indices": [
+      1,
+      2
+    ]
+  },
+  {
+    "case": 47,
+    "h": [
+      5,
+      5,
+      6
+    ],
+    "f": [
+      false,
+      false,
+      true
+    ],
+    "a": 1,
+    "b": 3,
+    "q": [
+      "11/5",
+      "6/5",
+      "13/5"
+    ],
+    "truth": "3",
+    "lower": "3",
+    "upper": "3",
+    "limiting_lifetimes": [
+      6,
+      6,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 48,
+    "h": [
+      6,
+      5
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 5,
+    "b": 2,
+    "q": [
+      "21/5",
+      "16/5"
+    ],
+    "truth": "2/5",
+    "lower": "2/5",
+    "upper": "2/5",
+    "limiting_lifetimes": [
+      7,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 49,
+    "h": [
+      2,
+      2,
+      4
+    ],
+    "f": [
+      true,
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 6,
+    "q": [
+      "14/5",
+      "3",
+      "14/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      2,
+      7,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 50,
+    "h": [
+      3,
+      1
+    ],
+    "f": [
+      false,
+      true
+    ],
+    "a": 2,
+    "b": 6,
+    "q": [
+      "29/5",
+      "2/5"
+    ],
+    "truth": "7/3",
+    "lower": "7/3",
+    "upper": "7/3",
+    "limiting_lifetimes": [
+      7,
+      1
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 51,
+    "h": [
+      3,
+      1,
+      4,
+      6
+    ],
+    "f": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "a": 4,
+    "b": 7,
+    "q": [
+      "22/5",
+      "6/5",
+      "29/5",
+      "1"
+    ],
+    "truth": "7/4",
+    "lower": "7/4",
+    "upper": "7/4",
+    "limiting_lifetimes": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 52,
+    "h": [
+      1,
+      2,
+      3
+    ],
+    "f": [
+      false,
+      false,
+      true
+    ],
+    "a": 4,
+    "b": 3,
+    "q": [
+      "29/5",
+      "28/5",
+      "13/5"
+    ],
+    "truth": "85/28",
+    "lower": "85/28",
+    "upper": "85/28",
+    "limiting_lifetimes": [
+      3,
+      3,
+      3
+    ],
+    "approach_indices": [
+      0,
+      1
+    ]
+  },
+  {
+    "case": 53,
+    "h": [
+      1,
+      4,
+      2
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 1,
+    "q": [
+      "3/5",
+      "18/5",
+      "12/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      2,
+      5,
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 54,
+    "h": [
+      3,
+      5,
+      5
+    ],
+    "f": [
+      false,
+      true,
+      true
+    ],
+    "a": 3,
+    "b": 2,
+    "q": [
+      "3/5",
+      "22/5",
+      "4/5"
+    ],
+    "truth": "2/3",
+    "lower": "2/3",
+    "upper": "2/3",
+    "limiting_lifetimes": [
+      4,
+      5,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 55,
+    "h": [
+      4,
+      3
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 6,
+    "b": 2,
+    "q": [
+      "17/5",
+      "6/5"
+    ],
+    "truth": "66/35",
+    "lower": "66/35",
+    "upper": "66/35",
+    "limiting_lifetimes": [
+      4,
+      3
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 56,
+    "h": [
+      5,
+      3,
+      5,
+      6
+    ],
+    "f": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "a": 5,
+    "b": 6,
+    "q": [
+      "6/5",
+      "18/5",
+      "21/5",
+      "13/5"
+    ],
+    "truth": "133/153",
+    "lower": "133/153",
+    "upper": "133/153",
+    "limiting_lifetimes": [
+      7,
+      3,
+      7,
+      6
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 57,
+    "h": [
+      6,
+      2,
+      6
+    ],
+    "f": [
+      false,
+      false,
+      true
+    ],
+    "a": 7,
+    "b": 7,
+    "q": [
+      "2/5",
+      "16/5",
+      "19/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      8,
+      8,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 58,
+    "h": [
+      4,
+      3,
+      3,
+      5
+    ],
+    "f": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "a": 5,
+    "b": 3,
+    "q": [
+      "6/5",
+      "17/5",
+      "14/5",
+      "27/5"
+    ],
+    "truth": "57/25",
+    "lower": "57/25",
+    "upper": "57/25",
+    "limiting_lifetimes": [
+      4,
+      3,
+      3,
+      6
+    ],
+    "approach_indices": [
+      1,
+      2
+    ]
+  },
+  {
+    "case": 59,
+    "h": [
+      4
+    ],
+    "f": [
+      false
+    ],
+    "a": 1,
+    "b": 7,
+    "q": [
+      "2/5"
+    ],
+    "truth": "7",
+    "lower": "7",
+    "upper": "7",
+    "limiting_lifetimes": [
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 60,
+    "h": [
+      3,
+      2,
+      5
+    ],
+    "f": [
+      true,
+      false,
+      false
+    ],
+    "a": 3,
+    "b": 6,
+    "q": [
+      "28/5",
+      "4/5",
+      "24/5"
+    ],
+    "truth": "5/3",
+    "lower": "5/3",
+    "upper": "5/3",
+    "limiting_lifetimes": [
+      3,
+      7,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 61,
+    "h": [
+      5,
+      4
+    ],
+    "f": [
+      false,
+      true
+    ],
+    "a": 6,
+    "b": 4,
+    "q": [
+      "29/5",
+      "3"
+    ],
+    "truth": "48/25",
+    "lower": "48/25",
+    "upper": "48/25",
+    "limiting_lifetimes": [
+      5,
+      4
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 62,
+    "h": [
+      4,
+      1,
+      4
+    ],
+    "f": [
+      false,
+      true,
+      false
+    ],
+    "a": 6,
+    "b": 4,
+    "q": [
+      "6",
+      "21/5",
+      "4/5"
+    ],
+    "truth": "35/18",
+    "lower": "35/18",
+    "upper": "35/18",
+    "limiting_lifetimes": [
+      4,
+      1,
+      4
+    ],
+    "approach_indices": [
+      0,
+      2
+    ]
+  },
+  {
+    "case": 63,
+    "h": [
+      6,
+      2,
+      6
+    ],
+    "f": [
+      true,
+      true,
+      false
+    ],
+    "a": 4,
+    "b": 5,
+    "q": [
+      "8/5",
+      "27/5",
+      "9/5"
+    ],
+    "truth": "6/5",
+    "lower": "6/5",
+    "upper": "6/5",
+    "limiting_lifetimes": [
+      6,
+      2,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 64,
+    "h": [
+      2
+    ],
+    "f": [
+      true
+    ],
+    "a": 6,
+    "b": 5,
+    "q": [
+      "6/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      2
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 65,
+    "h": [
+      2
+    ],
+    "f": [
+      true
+    ],
+    "a": 5,
+    "b": 2,
+    "q": [
+      "3"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      2
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 66,
+    "h": [
+      3
+    ],
+    "f": [
+      false
+    ],
+    "a": 2,
+    "b": 1,
+    "q": [
+      "2"
+    ],
+    "truth": "1/2",
+    "lower": "1/2",
+    "upper": "1/2",
+    "limiting_lifetimes": [
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 67,
+    "h": [
+      6,
+      2,
+      2
+    ],
+    "f": [
+      false,
+      true,
+      false
+    ],
+    "a": 4,
+    "b": 3,
+    "q": [
+      "13/5",
+      "29/5",
+      "14/5"
+    ],
+    "truth": "116/99",
+    "lower": "116/99",
+    "upper": "116/99",
+    "limiting_lifetimes": [
+      7,
+      2,
+      3
+    ],
+    "approach_indices": [
+      2
+    ]
+  },
+  {
+    "case": 68,
+    "h": [
+      6,
+      1,
+      4
+    ],
+    "f": [
+      false,
+      true,
+      false
+    ],
+    "a": 4,
+    "b": 7,
+    "q": [
+      "4/5",
+      "9/5",
+      "18/5"
+    ],
+    "truth": "5/3",
+    "lower": "5/3",
+    "upper": "5/3",
+    "limiting_lifetimes": [
+      8,
+      1,
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 69,
+    "h": [
+      5,
+      1
+    ],
+    "f": [
+      false,
+      true
+    ],
+    "a": 6,
+    "b": 2,
+    "q": [
+      "17/5",
+      "4/5"
+    ],
+    "truth": "31/28",
+    "lower": "31/28",
+    "upper": "31/28",
+    "limiting_lifetimes": [
+      5,
+      1
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 70,
+    "h": [
+      2,
+      4
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 4,
+    "b": 1,
+    "q": [
+      "1",
+      "1"
+    ],
+    "truth": "1/2",
+    "lower": "1/2",
+    "upper": "1/2",
+    "limiting_lifetimes": [
+      2,
+      5
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 71,
+    "h": [
+      1
+    ],
+    "f": [
+      false
+    ],
+    "a": 7,
+    "b": 4,
+    "q": [
+      "13/5"
+    ],
+    "truth": "18/5",
+    "lower": "18/5",
+    "upper": "18/5",
+    "limiting_lifetimes": [
+      4
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 72,
+    "h": [
+      2,
+      6,
+      4
+    ],
+    "f": [
+      false,
+      false,
+      true
+    ],
+    "a": 6,
+    "b": 6,
+    "q": [
+      "4",
+      "2",
+      "27/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      7,
+      7,
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 73,
+    "h": [
+      5,
+      3,
+      4,
+      1
+    ],
+    "f": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "a": 3,
+    "b": 4,
+    "q": [
+      "4",
+      "7/5",
+      "9/5",
+      "6/5"
+    ],
+    "truth": "4/3",
+    "lower": "4/3",
+    "upper": "4/3",
+    "limiting_lifetimes": [
+      5,
+      5,
+      5,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 74,
+    "h": [
+      6
+    ],
+    "f": [
+      true
+    ],
+    "a": 3,
+    "b": 2,
+    "q": [
+      "1"
+    ],
+    "truth": "2/3",
+    "lower": "2/3",
+    "upper": "2/3",
+    "limiting_lifetimes": [
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 75,
+    "h": [
+      6,
+      3,
+      5
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 4,
+    "b": 1,
+    "q": [
+      "4",
+      "28/5",
+      "27/5"
+    ],
+    "truth": "43/55",
+    "lower": "43/55",
+    "upper": "43/55",
+    "limiting_lifetimes": [
+      7,
+      3,
+      6
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 76,
+    "h": [
+      1,
+      4
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 4,
+    "q": [
+      "11/5",
+      "13/5"
+    ],
+    "truth": "4",
+    "lower": "4",
+    "upper": "4",
+    "limiting_lifetimes": [
+      5,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 77,
+    "h": [
+      2
+    ],
+    "f": [
+      false
+    ],
+    "a": 2,
+    "b": 3,
+    "q": [
+      "8/5"
+    ],
+    "truth": "3/2",
+    "lower": "3/2",
+    "upper": "3/2",
+    "limiting_lifetimes": [
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 78,
+    "h": [
+      4,
+      1,
+      4,
+      6
+    ],
+    "f": [
+      false,
+      true,
+      true,
+      false
+    ],
+    "a": 3,
+    "b": 6,
+    "q": [
+      "2/5",
+      "28/5",
+      "3/5",
+      "6"
+    ],
+    "truth": "8/5",
+    "lower": "8/5",
+    "upper": "8/5",
+    "limiting_lifetimes": [
+      7,
+      1,
+      4,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 79,
+    "h": [
+      3,
+      5
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 3,
+    "q": [
+      "27/5",
+      "12/5"
+    ],
+    "truth": "147/40",
+    "lower": "147/40",
+    "upper": "147/40",
+    "limiting_lifetimes": [
+      3,
+      5
+    ],
+    "approach_indices": [
+      0,
+      1
+    ]
+  },
+  {
+    "case": 80,
+    "h": [
+      4,
+      4,
+      1
+    ],
+    "f": [
+      false,
+      true,
+      false
+    ],
+    "a": 1,
+    "b": 6,
+    "q": [
+      "11/5",
+      "4",
+      "4"
+    ],
+    "truth": "16/7",
+    "lower": "16/7",
+    "upper": "16/7",
+    "limiting_lifetimes": [
+      7,
+      4,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 81,
+    "h": [
+      2,
+      3
+    ],
+    "f": [
+      false,
+      true
+    ],
+    "a": 6,
+    "b": 1,
+    "q": [
+      "26/5",
+      "29/5"
+    ],
+    "truth": "13/5",
+    "lower": "13/5",
+    "upper": "13/5",
+    "limiting_lifetimes": [
+      2,
+      3
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 82,
+    "h": [
+      5,
+      6,
+      5
+    ],
+    "f": [
+      false,
+      false,
+      true
+    ],
+    "a": 1,
+    "b": 1,
+    "q": [
+      "11/5",
+      "17/5",
+      "6/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      6,
+      7,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 83,
+    "h": [
+      5,
+      4,
+      1,
+      1
+    ],
+    "f": [
+      false,
+      false,
+      true,
+      true
+    ],
+    "a": 2,
+    "b": 2,
+    "q": [
+      "19/5",
+      "6/5",
+      "11/5",
+      "6"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      6,
+      5,
+      1,
+      1
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 84,
+    "h": [
+      3,
+      3,
+      2
+    ],
+    "f": [
+      false,
+      true,
+      false
+    ],
+    "a": 7,
+    "b": 6,
+    "q": [
+      "7/5",
+      "1",
+      "29/5"
+    ],
+    "truth": "14/5",
+    "lower": "14/5",
+    "upper": "14/5",
+    "limiting_lifetimes": [
+      6,
+      3,
+      6
+    ],
+    "approach_indices": [
+      0,
+      2
+    ]
+  },
+  {
+    "case": 85,
+    "h": [
+      4,
+      2,
+      4,
+      3
+    ],
+    "f": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "a": 5,
+    "b": 4,
+    "q": [
+      "16/5",
+      "19/5",
+      "26/5",
+      "24/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      4,
+      2,
+      4,
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 86,
+    "h": [
+      5,
+      6,
+      6,
+      2
+    ],
+    "f": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 5,
+    "q": [
+      "11/5",
+      "4",
+      "3/5",
+      "9/5"
+    ],
+    "truth": "100/31",
+    "lower": "100/31",
+    "upper": "100/31",
+    "limiting_lifetimes": [
+      5,
+      7,
+      7,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 87,
+    "h": [
+      3,
+      1,
+      5,
+      4
+    ],
+    "f": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "a": 5,
+    "b": 5,
+    "q": [
+      "7/5",
+      "27/5",
+      "27/5",
+      "21/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      6,
+      6,
+      6,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 88,
+    "h": [
+      5
+    ],
+    "f": [
+      false
+    ],
+    "a": 1,
+    "b": 3,
+    "q": [
+      "11/5"
+    ],
+    "truth": "3",
+    "lower": "3",
+    "upper": "3",
+    "limiting_lifetimes": [
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 89,
+    "h": [
+      5,
+      5,
+      1,
+      4
+    ],
+    "f": [
+      true,
+      true,
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 1,
+    "q": [
+      "1",
+      "27/5",
+      "1",
+      "1/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      5,
+      5,
+      2,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 90,
+    "h": [
+      4,
+      6,
+      4
+    ],
+    "f": [
+      false,
+      false,
+      true
+    ],
+    "a": 4,
+    "b": 5,
+    "q": [
+      "11/5",
+      "18/5",
+      "12/5"
+    ],
+    "truth": "7/6",
+    "lower": "7/6",
+    "upper": "7/6",
+    "limiting_lifetimes": [
+      6,
+      7,
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 91,
+    "h": [
+      4,
+      5
+    ],
+    "f": [
+      false,
+      true
+    ],
+    "a": 6,
+    "b": 6,
+    "q": [
+      "13/5",
+      "21/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      7,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 92,
+    "h": [
+      3,
+      6,
+      4,
+      4
+    ],
+    "f": [
+      true,
+      true,
+      false,
+      false
+    ],
+    "a": 4,
+    "b": 7,
+    "q": [
+      "24/5",
+      "6",
+      "26/5",
+      "21/5"
+    ],
+    "truth": "506/555",
+    "lower": "506/555",
+    "upper": "506/555",
+    "limiting_lifetimes": [
+      3,
+      6,
+      8,
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 93,
+    "h": [
+      6
+    ],
+    "f": [
+      false
+    ],
+    "a": 6,
+    "b": 1,
+    "q": [
+      "3/5"
+    ],
+    "truth": "1/6",
+    "lower": "1/6",
+    "upper": "1/6",
+    "limiting_lifetimes": [
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 94,
+    "h": [
+      3,
+      4,
+      3,
+      1
+    ],
+    "f": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "a": 4,
+    "b": 5,
+    "q": [
+      "18/5",
+      "5",
+      "18/5",
+      "13/5"
+    ],
+    "truth": "6/5",
+    "lower": "6/5",
+    "upper": "6/5",
+    "limiting_lifetimes": [
+      6,
+      6,
+      3,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 95,
+    "h": [
+      5,
+      3,
+      4,
+      4
+    ],
+    "f": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "a": 5,
+    "b": 1,
+    "q": [
+      "6",
+      "3",
+      "17/5",
+      "29/5"
+    ],
+    "truth": "81/80",
+    "lower": "81/80",
+    "upper": "81/80",
+    "limiting_lifetimes": [
+      6,
+      3,
+      4,
+      4
+    ],
+    "approach_indices": [
+      2,
+      3
+    ]
+  },
+  {
+    "case": 96,
+    "h": [
+      6,
+      5,
+      4,
+      2
+    ],
+    "f": [
+      false,
+      true,
+      true,
+      false
+    ],
+    "a": 1,
+    "b": 5,
+    "q": [
+      "12/5",
+      "22/5",
+      "9/5",
+      "23/5"
+    ],
+    "truth": "95/51",
+    "lower": "95/51",
+    "upper": "95/51",
+    "limiting_lifetimes": [
+      7,
+      5,
+      4,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 97,
+    "h": [
+      1,
+      5,
+      3
+    ],
+    "f": [
+      true,
+      false,
+      true
+    ],
+    "a": 7,
+    "b": 6,
+    "q": [
+      "6/5",
+      "2",
+      "3"
+    ],
+    "truth": "23/18",
+    "lower": "23/18",
+    "upper": "23/18",
+    "limiting_lifetimes": [
+      1,
+      6,
+      3
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 98,
+    "h": [
+      4,
+      1,
+      6,
+      6
+    ],
+    "f": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "a": 2,
+    "b": 3,
+    "q": [
+      "2",
+      "8/5",
+      "1",
+      "8/5"
+    ],
+    "truth": "3/2",
+    "lower": "3/2",
+    "upper": "3/2",
+    "limiting_lifetimes": [
+      4,
+      4,
+      7,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 99,
+    "h": [
+      2,
+      1,
+      3
+    ],
+    "f": [
+      true,
+      true,
+      true
+    ],
+    "a": 7,
+    "b": 5,
+    "q": [
+      "6/5",
+      "5",
+      "22/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      2,
+      1,
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 100,
+    "h": [
+      5,
+      2
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 4,
+    "q": [
+      "3",
+      "17/5"
+    ],
+    "truth": "4",
+    "lower": "4",
+    "upper": "4",
+    "limiting_lifetimes": [
+      6,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 101,
+    "h": [
+      6,
+      3
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 2,
+    "b": 1,
+    "q": [
+      "3",
+      "3/5"
+    ],
+    "truth": "1/2",
+    "lower": "1/2",
+    "upper": "1/2",
+    "limiting_lifetimes": [
+      7,
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 102,
+    "h": [
+      6,
+      5
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 2,
+    "b": 3,
+    "q": [
+      "13/5",
+      "4/5"
+    ],
+    "truth": "3/2",
+    "lower": "3/2",
+    "upper": "3/2",
+    "limiting_lifetimes": [
+      6,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 103,
+    "h": [
+      6
+    ],
+    "f": [
+      false
+    ],
+    "a": 2,
+    "b": 5,
+    "q": [
+      "4"
+    ],
+    "truth": "5/2",
+    "lower": "5/2",
+    "upper": "5/2",
+    "limiting_lifetimes": [
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 104,
+    "h": [
+      6,
+      4,
+      5,
+      4
+    ],
+    "f": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "a": 4,
+    "b": 3,
+    "q": [
+      "3",
+      "2",
+      "9/5",
+      "8/5"
+    ],
+    "truth": "3/4",
+    "lower": "3/4",
+    "upper": "3/4",
+    "limiting_lifetimes": [
+      7,
+      5,
+      5,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 105,
+    "h": [
+      6,
+      6,
+      6
+    ],
+    "f": [
+      true,
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 7,
+    "q": [
+      "26/5",
+      "11/5",
+      "6"
+    ],
+    "truth": "10/9",
+    "lower": "10/9",
+    "upper": "10/9",
+    "limiting_lifetimes": [
+      6,
+      8,
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 106,
+    "h": [
+      1
+    ],
+    "f": [
+      true
+    ],
+    "a": 6,
+    "b": 3,
+    "q": [
+      "2"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      1
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 107,
+    "h": [
+      1
+    ],
+    "f": [
+      false
+    ],
+    "a": 5,
+    "b": 1,
+    "q": [
+      "29/5"
+    ],
+    "truth": "34/5",
+    "lower": "34/5",
+    "upper": "34/5",
+    "limiting_lifetimes": [
+      1
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 108,
+    "h": [
+      4,
+      4,
+      4,
+      2
+    ],
+    "f": [
+      true,
+      false,
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 2,
+    "q": [
+      "9/5",
+      "17/5",
+      "29/5",
+      "17/5"
+    ],
+    "truth": "92/35",
+    "lower": "92/35",
+    "upper": "92/35",
+    "limiting_lifetimes": [
+      4,
+      4,
+      4,
+      2
+    ],
+    "approach_indices": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "case": 109,
+    "h": [
+      4,
+      4
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 3,
+    "q": [
+      "3/5",
+      "3"
+    ],
+    "truth": "21/10",
+    "lower": "21/10",
+    "upper": "21/10",
+    "limiting_lifetimes": [
+      4,
+      4
+    ],
+    "approach_indices": [
+      0,
+      1
+    ]
+  },
+  {
+    "case": 110,
+    "h": [
+      5
+    ],
+    "f": [
+      true
+    ],
+    "a": 7,
+    "b": 4,
+    "q": [
+      "2/5"
+    ],
+    "truth": "28/25",
+    "lower": "28/25",
+    "upper": "28/25",
+    "limiting_lifetimes": [
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 111,
+    "h": [
+      5,
+      6
+    ],
+    "f": [
+      false,
+      true
+    ],
+    "a": 6,
+    "b": 1,
+    "q": [
+      "16/5",
+      "21/5"
+    ],
+    "truth": "47/55",
+    "lower": "47/55",
+    "upper": "47/55",
+    "limiting_lifetimes": [
+      5,
+      6
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 112,
+    "h": [
+      5,
+      5
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 6,
+    "q": [
+      "16/5",
+      "3"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      7,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 113,
+    "h": [
+      6,
+      6,
+      2
+    ],
+    "f": [
+      false,
+      true,
+      false
+    ],
+    "a": 2,
+    "b": 1,
+    "q": [
+      "24/5",
+      "2/5",
+      "3"
+    ],
+    "truth": "1/2",
+    "lower": "1/2",
+    "upper": "1/2",
+    "limiting_lifetimes": [
+      7,
+      6,
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 114,
+    "h": [
+      3,
+      6,
+      2,
+      1
+    ],
+    "f": [
+      false,
+      true,
+      true,
+      false
+    ],
+    "a": 6,
+    "b": 2,
+    "q": [
+      "16/5",
+      "28/5",
+      "2",
+      "21/5"
+    ],
+    "truth": "76/39",
+    "lower": "76/39",
+    "upper": "76/39",
+    "limiting_lifetimes": [
+      3,
+      6,
+      2,
+      2
+    ],
+    "approach_indices": [
+      3,
+      0
+    ]
+  },
+  {
+    "case": 115,
+    "h": [
+      3,
+      1,
+      6
+    ],
+    "f": [
+      true,
+      false,
+      false
+    ],
+    "a": 2,
+    "b": 3,
+    "q": [
+      "29/5",
+      "28/5",
+      "8/5"
+    ],
+    "truth": "301/360",
+    "lower": "301/360",
+    "upper": "301/360",
+    "limiting_lifetimes": [
+      3,
+      1,
+      7
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 116,
+    "h": [
+      2
+    ],
+    "f": [
+      false
+    ],
+    "a": 4,
+    "b": 4,
+    "q": [
+      "29/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 117,
+    "h": [
+      6,
+      6,
+      3
+    ],
+    "f": [
+      false,
+      true,
+      true
+    ],
+    "a": 1,
+    "b": 6,
+    "q": [
+      "8/5",
+      "6/5",
+      "4"
+    ],
+    "truth": "75/41",
+    "lower": "75/41",
+    "upper": "75/41",
+    "limiting_lifetimes": [
+      7,
+      6,
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 118,
+    "h": [
+      1,
+      4
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 4,
+    "b": 1,
+    "q": [
+      "6/5",
+      "22/5"
+    ],
+    "truth": "16/25",
+    "lower": "16/25",
+    "upper": "16/25",
+    "limiting_lifetimes": [
+      1,
+      5
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 119,
+    "h": [
+      2
+    ],
+    "f": [
+      true
+    ],
+    "a": 7,
+    "b": 6,
+    "q": [
+      "26/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      2
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 120,
+    "h": [
+      1
+    ],
+    "f": [
+      false
+    ],
+    "a": 4,
+    "b": 2,
+    "q": [
+      "14/5"
+    ],
+    "truth": "19/5",
+    "lower": "19/5",
+    "upper": "19/5",
+    "limiting_lifetimes": [
+      2
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 121,
+    "h": [
+      6,
+      6,
+      4
+    ],
+    "f": [
+      true,
+      false,
+      false
+    ],
+    "a": 2,
+    "b": 6,
+    "q": [
+      "18/5",
+      "17/5",
+      "1"
+    ],
+    "truth": "15/11",
+    "lower": "15/11",
+    "upper": "15/11",
+    "limiting_lifetimes": [
+      6,
+      7,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 122,
+    "h": [
+      4
+    ],
+    "f": [
+      true
+    ],
+    "a": 7,
+    "b": 4,
+    "q": [
+      "3"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 123,
+    "h": [
+      6,
+      3,
+      4
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 4,
+    "q": [
+      "4/5",
+      "23/5",
+      "21/5"
+    ],
+    "truth": "4",
+    "lower": "4",
+    "upper": "4",
+    "limiting_lifetimes": [
+      7,
+      5,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 124,
+    "h": [
+      6
+    ],
+    "f": [
+      false
+    ],
+    "a": 2,
+    "b": 5,
+    "q": [
+      "29/5"
+    ],
+    "truth": "5/2",
+    "lower": "5/2",
+    "upper": "5/2",
+    "limiting_lifetimes": [
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 125,
+    "h": [
+      4,
+      1,
+      4,
+      3
+    ],
+    "f": [
+      false,
+      true,
+      true,
+      false
+    ],
+    "a": 7,
+    "b": 1,
+    "q": [
+      "18/5",
+      "17/5",
+      "2",
+      "19/5"
+    ],
+    "truth": "28/37",
+    "lower": "28/37",
+    "upper": "28/37",
+    "limiting_lifetimes": [
+      4,
+      1,
+      4,
+      3
+    ],
+    "approach_indices": [
+      0,
+      3
+    ]
+  },
+  {
+    "case": 126,
+    "h": [
+      4
+    ],
+    "f": [
+      true
+    ],
+    "a": 5,
+    "b": 4,
+    "q": [
+      "18/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 127,
+    "h": [
+      1
+    ],
+    "f": [
+      true
+    ],
+    "a": 3,
+    "b": 6,
+    "q": [
+      "19/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      1
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 128,
+    "h": [
+      5,
+      1,
+      6,
+      1
+    ],
+    "f": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 7,
+    "q": [
+      "14/5",
+      "21/5",
+      "21/5",
+      "7/5"
+    ],
+    "truth": "11/2",
+    "lower": "11/2",
+    "upper": "11/2",
+    "limiting_lifetimes": [
+      8,
+      1,
+      8,
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 129,
+    "h": [
+      6,
+      6,
+      2,
+      3
+    ],
+    "f": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "a": 4,
+    "b": 7,
+    "q": [
+      "26/5",
+      "5",
+      "9/5",
+      "4/5"
+    ],
+    "truth": "594/767",
+    "lower": "594/767",
+    "upper": "594/767",
+    "limiting_lifetimes": [
+      6,
+      8,
+      2,
+      3
+    ],
+    "approach_indices": [
+      2
+    ]
+  },
+  {
+    "case": 130,
+    "h": [
+      6,
+      4
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 5,
+    "b": 7,
+    "q": [
+      "19/5",
+      "26/5"
+    ],
+    "truth": "7/5",
+    "lower": "7/5",
+    "upper": "7/5",
+    "limiting_lifetimes": [
+      8,
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 131,
+    "h": [
+      3,
+      3,
+      5
+    ],
+    "f": [
+      false,
+      true,
+      false
+    ],
+    "a": 5,
+    "b": 4,
+    "q": [
+      "4",
+      "22/5",
+      "27/5"
+    ],
+    "truth": "209/148",
+    "lower": "209/148",
+    "upper": "209/148",
+    "limiting_lifetimes": [
+      4,
+      3,
+      6
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 132,
+    "h": [
+      3
+    ],
+    "f": [
+      true
+    ],
+    "a": 3,
+    "b": 4,
+    "q": [
+      "3/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 133,
+    "h": [
+      4,
+      3,
+      5
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 3,
+    "b": 5,
+    "q": [
+      "6/5",
+      "8/5",
+      "26/5"
+    ],
+    "truth": "5/3",
+    "lower": "5/3",
+    "upper": "5/3",
+    "limiting_lifetimes": [
+      6,
+      6,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 134,
+    "h": [
+      1,
+      4,
+      2
+    ],
+    "f": [
+      true,
+      true,
+      true
+    ],
+    "a": 1,
+    "b": 5,
+    "q": [
+      "27/5",
+      "2",
+      "21/5"
+    ],
+    "truth": "98/73",
+    "lower": "98/73",
+    "upper": "98/73",
+    "limiting_lifetimes": [
+      1,
+      4,
+      2
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 135,
+    "h": [
+      1,
+      3
+    ],
+    "f": [
+      true,
+      true
+    ],
+    "a": 4,
+    "b": 4,
+    "q": [
+      "19/5",
+      "21/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      1,
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 136,
+    "h": [
+      6,
+      3,
+      4,
+      5
+    ],
+    "f": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 7,
+    "q": [
+      "4/5",
+      "22/5",
+      "4",
+      "8/5"
+    ],
+    "truth": "7",
+    "lower": "7",
+    "upper": "7",
+    "limiting_lifetimes": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 137,
+    "h": [
+      5,
+      4,
+      6
+    ],
+    "f": [
+      true,
+      false,
+      true
+    ],
+    "a": 1,
+    "b": 7,
+    "q": [
+      "27/5",
+      "13/5",
+      "28/5"
+    ],
+    "truth": "9/7",
+    "lower": "9/7",
+    "upper": "9/7",
+    "limiting_lifetimes": [
+      5,
+      8,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 138,
+    "h": [
+      2,
+      3
+    ],
+    "f": [
+      false,
+      true
+    ],
+    "a": 3,
+    "b": 1,
+    "q": [
+      "12/5",
+      "11/5"
+    ],
+    "truth": "33/25",
+    "lower": "33/25",
+    "upper": "33/25",
+    "limiting_lifetimes": [
+      2,
+      3
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 139,
+    "h": [
+      6,
+      2
+    ],
+    "f": [
+      true,
+      true
+    ],
+    "a": 7,
+    "b": 6,
+    "q": [
+      "23/5",
+      "1/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      6,
+      2
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 140,
+    "h": [
+      1
+    ],
+    "f": [
+      true
+    ],
+    "a": 4,
+    "b": 1,
+    "q": [
+      "22/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      1
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 141,
+    "h": [
+      1,
+      6,
+      3,
+      5
+    ],
+    "f": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "a": 6,
+    "b": 3,
+    "q": [
+      "11/5",
+      "6",
+      "9/5",
+      "19/5"
+    ],
+    "truth": "177/85",
+    "lower": "177/85",
+    "upper": "177/85",
+    "limiting_lifetimes": [
+      3,
+      7,
+      3,
+      5
+    ],
+    "approach_indices": [
+      0,
+      2
+    ]
+  },
+  {
+    "case": 142,
+    "h": [
+      2,
+      6
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 5,
+    "b": 4,
+    "q": [
+      "26/5",
+      "19/5"
+    ],
+    "truth": "16/5",
+    "lower": "16/5",
+    "upper": "16/5",
+    "limiting_lifetimes": [
+      4,
+      7
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 143,
+    "h": [
+      2
+    ],
+    "f": [
+      false
+    ],
+    "a": 2,
+    "b": 6,
+    "q": [
+      "3/5"
+    ],
+    "truth": "3",
+    "lower": "3",
+    "upper": "3",
+    "limiting_lifetimes": [
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 144,
+    "h": [
+      3
+    ],
+    "f": [
+      true
+    ],
+    "a": 3,
+    "b": 6,
+    "q": [
+      "3"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 145,
+    "h": [
+      6,
+      5,
+      5
+    ],
+    "f": [
+      true,
+      false,
+      true
+    ],
+    "a": 3,
+    "b": 4,
+    "q": [
+      "26/5",
+      "16/5",
+      "7/5"
+    ],
+    "truth": "4/3",
+    "lower": "4/3",
+    "upper": "4/3",
+    "limiting_lifetimes": [
+      6,
+      6,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 146,
+    "h": [
+      3,
+      2
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 2,
+    "b": 6,
+    "q": [
+      "3",
+      "5"
+    ],
+    "truth": "3",
+    "lower": "3",
+    "upper": "3",
+    "limiting_lifetimes": [
+      7,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 147,
+    "h": [
+      5
+    ],
+    "f": [
+      true
+    ],
+    "a": 7,
+    "b": 6,
+    "q": [
+      "27/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 148,
+    "h": [
+      6,
+      4,
+      6
+    ],
+    "f": [
+      false,
+      false,
+      true
+    ],
+    "a": 1,
+    "b": 3,
+    "q": [
+      "5",
+      "13/5",
+      "7/5"
+    ],
+    "truth": "3",
+    "lower": "3",
+    "upper": "3",
+    "limiting_lifetimes": [
+      7,
+      5,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 149,
+    "h": [
+      3
+    ],
+    "f": [
+      false
+    ],
+    "a": 5,
+    "b": 1,
+    "q": [
+      "3"
+    ],
+    "truth": "4/3",
+    "lower": "4/3",
+    "upper": "4/3",
+    "limiting_lifetimes": [
+      3
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 150,
+    "h": [
+      6,
+      4,
+      5
+    ],
+    "f": [
+      true,
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 2,
+    "q": [
+      "6",
+      "22/5",
+      "28/5"
+    ],
+    "truth": "38/15",
+    "lower": "38/15",
+    "upper": "38/15",
+    "limiting_lifetimes": [
+      6,
+      4,
+      5
+    ],
+    "approach_indices": [
+      1,
+      2
+    ]
+  },
+  {
+    "case": 151,
+    "h": [
+      4,
+      3,
+      6
+    ],
+    "f": [
+      false,
+      false,
+      true
+    ],
+    "a": 2,
+    "b": 2,
+    "q": [
+      "27/5",
+      "2/5",
+      "9/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      5,
+      4,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 152,
+    "h": [
+      6,
+      4,
+      2
+    ],
+    "f": [
+      false,
+      false,
+      true
+    ],
+    "a": 6,
+    "b": 2,
+    "q": [
+      "3/5",
+      "29/5",
+      "24/5"
+    ],
+    "truth": "34/39",
+    "lower": "34/39",
+    "upper": "34/39",
+    "limiting_lifetimes": [
+      7,
+      4,
+      2
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 153,
+    "h": [
+      3,
+      4
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 2,
+    "b": 2,
+    "q": [
+      "2/5",
+      "3/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      3,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 154,
+    "h": [
+      6,
+      2
+    ],
+    "f": [
+      true,
+      true
+    ],
+    "a": 7,
+    "b": 4,
+    "q": [
+      "7/5",
+      "27/5"
+    ],
+    "truth": "33/37",
+    "lower": "33/37",
+    "upper": "33/37",
+    "limiting_lifetimes": [
+      6,
+      2
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 155,
+    "h": [
+      1,
+      4,
+      5
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 5,
+    "b": 4,
+    "q": [
+      "29/5",
+      "3/5",
+      "1/5"
+    ],
+    "truth": "188/65",
+    "lower": "188/65",
+    "upper": "188/65",
+    "limiting_lifetimes": [
+      4,
+      4,
+      6
+    ],
+    "approach_indices": [
+      0,
+      1
+    ]
+  },
+  {
+    "case": 156,
+    "h": [
+      5,
+      1,
+      3
+    ],
+    "f": [
+      true,
+      false,
+      true
+    ],
+    "a": 7,
+    "b": 5,
+    "q": [
+      "19/5",
+      "23/5",
+      "5"
+    ],
+    "truth": "82/59",
+    "lower": "82/59",
+    "upper": "82/59",
+    "limiting_lifetimes": [
+      5,
+      5,
+      3
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 157,
+    "h": [
+      1
+    ],
+    "f": [
+      false
+    ],
+    "a": 1,
+    "b": 3,
+    "q": [
+      "27/5"
+    ],
+    "truth": "3",
+    "lower": "3",
+    "upper": "3",
+    "limiting_lifetimes": [
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 158,
+    "h": [
+      5,
+      5,
+      6
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 6,
+    "q": [
+      "8/5",
+      "5",
+      "2"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      7,
+      7,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 159,
+    "h": [
+      4
+    ],
+    "f": [
+      false
+    ],
+    "a": 1,
+    "b": 5,
+    "q": [
+      "18/5"
+    ],
+    "truth": "5",
+    "lower": "5",
+    "upper": "5",
+    "limiting_lifetimes": [
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 160,
+    "h": [
+      2
+    ],
+    "f": [
+      false
+    ],
+    "a": 1,
+    "b": 1,
+    "q": [
+      "11/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 161,
+    "h": [
+      1,
+      2,
+      2
+    ],
+    "f": [
+      false,
+      true,
+      false
+    ],
+    "a": 7,
+    "b": 7,
+    "q": [
+      "28/5",
+      "14/5",
+      "13/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      8,
+      2,
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 162,
+    "h": [
+      3,
+      3
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 4,
+    "b": 7,
+    "q": [
+      "12/5",
+      "3/5"
+    ],
+    "truth": "10/7",
+    "lower": "10/7",
+    "upper": "10/7",
+    "limiting_lifetimes": [
+      3,
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 163,
+    "h": [
+      3,
+      2,
+      2,
+      4
+    ],
+    "f": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 5,
+    "q": [
+      "4",
+      "12/5",
+      "3",
+      "1"
+    ],
+    "truth": "18/5",
+    "lower": "18/5",
+    "upper": "18/5",
+    "limiting_lifetimes": [
+      5,
+      5,
+      5,
+      5
+    ],
+    "approach_indices": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "case": 164,
+    "h": [
+      6,
+      2
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 7,
+    "b": 5,
+    "q": [
+      "6/5",
+      "27/5"
+    ],
+    "truth": "43/11",
+    "lower": "43/11",
+    "upper": "43/11",
+    "limiting_lifetimes": [
+      6,
+      5
+    ],
+    "approach_indices": [
+      1,
+      0
+    ]
+  },
+  {
+    "case": 165,
+    "h": [
+      6,
+      3,
+      4
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 7,
+    "b": 1,
+    "q": [
+      "8/5",
+      "2",
+      "9/5"
+    ],
+    "truth": "42/65",
+    "lower": "42/65",
+    "upper": "42/65",
+    "limiting_lifetimes": [
+      6,
+      3,
+      4
+    ],
+    "approach_indices": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "case": 166,
+    "h": [
+      6
+    ],
+    "f": [
+      true
+    ],
+    "a": 6,
+    "b": 1,
+    "q": [
+      "6/5"
+    ],
+    "truth": "11/30",
+    "lower": "11/30",
+    "upper": "11/30",
+    "limiting_lifetimes": [
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 167,
+    "h": [
+      5,
+      2
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 5,
+    "b": 1,
+    "q": [
+      "3/5",
+      "28/5"
+    ],
+    "truth": "41/35",
+    "lower": "41/35",
+    "upper": "41/35",
+    "limiting_lifetimes": [
+      5,
+      2
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 168,
+    "h": [
+      1,
+      2,
+      6,
+      5
+    ],
+    "f": [
+      false,
+      false,
+      true,
+      true
+    ],
+    "a": 4,
+    "b": 2,
+    "q": [
+      "3/5",
+      "18/5",
+      "16/5",
+      "4/5"
+    ],
+    "truth": "41/30",
+    "lower": "41/30",
+    "upper": "41/30",
+    "limiting_lifetimes": [
+      2,
+      2,
+      6,
+      5
+    ],
+    "approach_indices": [
+      0,
+      1
+    ]
+  },
+  {
+    "case": 169,
+    "h": [
+      5,
+      1
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 5,
+    "b": 4,
+    "q": [
+      "27/5",
+      "6"
+    ],
+    "truth": "32/9",
+    "lower": "32/9",
+    "upper": "32/9",
+    "limiting_lifetimes": [
+      6,
+      4
+    ],
+    "approach_indices": [
+      1
+    ]
+  },
+  {
+    "case": 170,
+    "h": [
+      2,
+      6
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 5,
+    "q": [
+      "14/5",
+      "5"
+    ],
+    "truth": "24/11",
+    "lower": "24/11",
+    "upper": "24/11",
+    "limiting_lifetimes": [
+      5,
+      7
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 171,
+    "h": [
+      3
+    ],
+    "f": [
+      false
+    ],
+    "a": 7,
+    "b": 6,
+    "q": [
+      "14/5"
+    ],
+    "truth": "19/5",
+    "lower": "19/5",
+    "upper": "19/5",
+    "limiting_lifetimes": [
+      6
+    ],
+    "approach_indices": [
+      0
+    ]
+  },
+  {
+    "case": 172,
+    "h": [
+      3
+    ],
+    "f": [
+      false
+    ],
+    "a": 2,
+    "b": 3,
+    "q": [
+      "9/5"
+    ],
+    "truth": "3/2",
+    "lower": "3/2",
+    "upper": "3/2",
+    "limiting_lifetimes": [
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 173,
+    "h": [
+      2,
+      5
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 6,
+    "b": 6,
+    "q": [
+      "18/5",
+      "3/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      2,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 174,
+    "h": [
+      6,
+      5,
+      6,
+      3
+    ],
+    "f": [
+      false,
+      true,
+      false,
+      false
+    ],
+    "a": 3,
+    "b": 1,
+    "q": [
+      "24/5",
+      "17/5",
+      "1/5",
+      "24/5"
+    ],
+    "truth": "1/3",
+    "lower": "1/3",
+    "upper": "1/3",
+    "limiting_lifetimes": [
+      7,
+      5,
+      7,
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 175,
+    "h": [
+      6,
+      3
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 5,
+    "b": 7,
+    "q": [
+      "2",
+      "3/5"
+    ],
+    "truth": "13/20",
+    "lower": "13/20",
+    "upper": "13/20",
+    "limiting_lifetimes": [
+      6,
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 176,
+    "h": [
+      1
+    ],
+    "f": [
+      false
+    ],
+    "a": 5,
+    "b": 6,
+    "q": [
+      "28/5"
+    ],
+    "truth": "6/5",
+    "lower": "6/5",
+    "upper": "6/5",
+    "limiting_lifetimes": [
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 177,
+    "h": [
+      1,
+      2
+    ],
+    "f": [
+      false,
+      true
+    ],
+    "a": 5,
+    "b": 7,
+    "q": [
+      "4",
+      "6"
+    ],
+    "truth": "9/7",
+    "lower": "9/7",
+    "upper": "9/7",
+    "limiting_lifetimes": [
+      8,
+      2
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 178,
+    "h": [
+      4,
+      5,
+      6,
+      4
+    ],
+    "f": [
+      false,
+      false,
+      true,
+      true
+    ],
+    "a": 6,
+    "b": 3,
+    "q": [
+      "17/5",
+      "5",
+      "24/5",
+      "4"
+    ],
+    "truth": "318/95",
+    "lower": "318/95",
+    "upper": "318/95",
+    "limiting_lifetimes": [
+      4,
+      5,
+      6,
+      4
+    ],
+    "approach_indices": [
+      0,
+      1
+    ]
+  },
+  {
+    "case": 179,
+    "h": [
+      3,
+      5,
+      3,
+      2
+    ],
+    "f": [
+      false,
+      true,
+      false,
+      true
+    ],
+    "a": 3,
+    "b": 3,
+    "q": [
+      "12/5",
+      "14/5",
+      "16/5",
+      "22/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      4,
+      5,
+      4,
+      2
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 180,
+    "h": [
+      6
+    ],
+    "f": [
+      false
+    ],
+    "a": 2,
+    "b": 5,
+    "q": [
+      "16/5"
+    ],
+    "truth": "5/2",
+    "lower": "5/2",
+    "upper": "5/2",
+    "limiting_lifetimes": [
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 181,
+    "h": [
+      3,
+      5,
+      5
+    ],
+    "f": [
+      false,
+      true,
+      false
+    ],
+    "a": 1,
+    "b": 5,
+    "q": [
+      "28/5",
+      "27/5",
+      "1"
+    ],
+    "truth": "25/14",
+    "lower": "25/14",
+    "upper": "25/14",
+    "limiting_lifetimes": [
+      6,
+      5,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 182,
+    "h": [
+      2,
+      2,
+      2,
+      6
+    ],
+    "f": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "a": 2,
+    "b": 1,
+    "q": [
+      "2/5",
+      "26/5",
+      "8/5",
+      "16/5"
+    ],
+    "truth": "1/2",
+    "lower": "1/2",
+    "upper": "1/2",
+    "limiting_lifetimes": [
+      3,
+      3,
+      3,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 183,
+    "h": [
+      3
+    ],
+    "f": [
+      true
+    ],
+    "a": 4,
+    "b": 4,
+    "q": [
+      "6/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      3
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 184,
+    "h": [
+      4,
+      1,
+      6,
+      3
+    ],
+    "f": [
+      false,
+      false,
+      false,
+      true
+    ],
+    "a": 7,
+    "b": 1,
+    "q": [
+      "22/5",
+      "1",
+      "18/5",
+      "29/5"
+    ],
+    "truth": "47/35",
+    "lower": "47/35",
+    "upper": "47/35",
+    "limiting_lifetimes": [
+      4,
+      1,
+      6,
+      3
+    ],
+    "approach_indices": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "case": 185,
+    "h": [
+      3,
+      1,
+      1,
+      4
+    ],
+    "f": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "a": 2,
+    "b": 2,
+    "q": [
+      "5",
+      "26/5",
+      "28/5",
+      "1"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      4,
+      3,
+      3,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 186,
+    "h": [
+      5,
+      5
+    ],
+    "f": [
+      true,
+      false
+    ],
+    "a": 5,
+    "b": 4,
+    "q": [
+      "28/5",
+      "4/5"
+    ],
+    "truth": "76/25",
+    "lower": "76/25",
+    "upper": "76/25",
+    "limiting_lifetimes": [
+      5,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 187,
+    "h": [
+      2,
+      4,
+      3
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 5,
+    "b": 4,
+    "q": [
+      "2/5",
+      "22/5",
+      "12/5"
+    ],
+    "truth": "17/5",
+    "lower": "17/5",
+    "upper": "17/5",
+    "limiting_lifetimes": [
+      4,
+      4,
+      4
+    ],
+    "approach_indices": [
+      0,
+      2,
+      1
+    ]
+  },
+  {
+    "case": 188,
+    "h": [
+      3,
+      6,
+      4
+    ],
+    "f": [
+      true,
+      false,
+      true
+    ],
+    "a": 6,
+    "b": 4,
+    "q": [
+      "18/5",
+      "6",
+      "24/5"
+    ],
+    "truth": "11/13",
+    "lower": "11/13",
+    "upper": "11/13",
+    "limiting_lifetimes": [
+      3,
+      7,
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 189,
+    "h": [
+      2,
+      5,
+      6,
+      2
+    ],
+    "f": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "a": 6,
+    "b": 6,
+    "q": [
+      "19/5",
+      "4",
+      "6",
+      "3/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      7,
+      7,
+      6,
+      7
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 190,
+    "h": [
+      4,
+      6,
+      4,
+      4
+    ],
+    "f": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "a": 3,
+    "b": 7,
+    "q": [
+      "11/5",
+      "9/5",
+      "26/5",
+      "2"
+    ],
+    "truth": "110/123",
+    "lower": "110/123",
+    "upper": "110/123",
+    "limiting_lifetimes": [
+      4,
+      8,
+      8,
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 191,
+    "h": [
+      2,
+      5,
+      6,
+      5
+    ],
+    "f": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "a": 4,
+    "b": 7,
+    "q": [
+      "23/5",
+      "17/5",
+      "8/5",
+      "16/5"
+    ],
+    "truth": "7/4",
+    "lower": "7/4",
+    "upper": "7/4",
+    "limiting_lifetimes": [
+      8,
+      8,
+      8,
+      8
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 192,
+    "h": [
+      6,
+      2
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 2,
+    "b": 5,
+    "q": [
+      "22/5",
+      "2"
+    ],
+    "truth": "5/2",
+    "lower": "5/2",
+    "upper": "5/2",
+    "limiting_lifetimes": [
+      7,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 193,
+    "h": [
+      2,
+      5,
+      4,
+      6
+    ],
+    "f": [
+      false,
+      false,
+      true,
+      false
+    ],
+    "a": 7,
+    "b": 3,
+    "q": [
+      "8/5",
+      "7/5",
+      "18/5",
+      "6"
+    ],
+    "truth": "83/30",
+    "lower": "83/30",
+    "upper": "83/30",
+    "limiting_lifetimes": [
+      3,
+      5,
+      4,
+      6
+    ],
+    "approach_indices": [
+      0,
+      1,
+      3
+    ]
+  },
+  {
+    "case": 194,
+    "h": [
+      1,
+      1,
+      1
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 5,
+    "b": 5,
+    "q": [
+      "1/5",
+      "4",
+      "23/5"
+    ],
+    "truth": "1",
+    "lower": "1",
+    "upper": "1",
+    "limiting_lifetimes": [
+      6,
+      6,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 195,
+    "h": [
+      3,
+      4,
+      2
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 3,
+    "q": [
+      "11/5",
+      "7/5",
+      "13/5"
+    ],
+    "truth": "69/25",
+    "lower": "69/25",
+    "upper": "69/25",
+    "limiting_lifetimes": [
+      3,
+      4,
+      3
+    ],
+    "approach_indices": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "case": 196,
+    "h": [
+      4,
+      2
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 5,
+    "q": [
+      "17/5",
+      "9/5"
+    ],
+    "truth": "5",
+    "lower": "5",
+    "upper": "5",
+    "limiting_lifetimes": [
+      6,
+      6
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 197,
+    "h": [
+      4
+    ],
+    "f": [
+      true
+    ],
+    "a": 2,
+    "b": 5,
+    "q": [
+      "3/5"
+    ],
+    "truth": "5/4",
+    "lower": "5/4",
+    "upper": "5/4",
+    "limiting_lifetimes": [
+      4
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 198,
+    "h": [
+      5,
+      4,
+      1
+    ],
+    "f": [
+      false,
+      false,
+      false
+    ],
+    "a": 1,
+    "b": 4,
+    "q": [
+      "26/5",
+      "13/5",
+      "3"
+    ],
+    "truth": "4",
+    "lower": "4",
+    "upper": "4",
+    "limiting_lifetimes": [
+      6,
+      5,
+      5
+    ],
+    "approach_indices": []
+  },
+  {
+    "case": 199,
+    "h": [
+      3,
+      4
+    ],
+    "f": [
+      false,
+      false
+    ],
+    "a": 6,
+    "b": 4,
+    "q": [
+      "7/5",
+      "21/5"
+    ],
+    "truth": "19/5",
+    "lower": "19/5",
+    "upper": "19/5",
+    "limiting_lifetimes": [
+      4,
+      4
+    ],
+    "approach_indices": [
+      0,
+      1
+    ]
+  }
+]

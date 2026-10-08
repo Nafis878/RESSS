@@ -1,0 +1,20 @@
+# Completion audit, 7–8 October 2026
+
+The author's instruction to complete all phases authorizes the remaining compute. The hashed `contrib/PLAN.md` is preserved. These notes record implementation repairs and interpretation corrections, not revised hypotheses or grids.
+
+1. Restored Python 3.12.4 with numpy 2.4.4, pandas 3.0.2, scikit-learn 1.8.0 and scipy 1.17.1 in `.venv`. Single-threaded numerical libraries; at most two experiment processes.
+2. Fixed `cat_leak.py` calling a removed `fit_predict` name: the existing fitting function is `cat_run.fit_all`.
+3. Applied already-hashed Amendment 1 to the summarizer: compare CAT against the baselines emitted by the same platform run, including under M. Combining those rows with frozen baseline fits would both mismatch platforms and duplicate policies. Duplicate comparison rows now stop summarization.
+4. Applied Amendment 1 to batteries: rerun `audit_battery_cost_nested.run_split` for each split, preserve its rows, and check three copied STW policies against that original implementation. Bearings similarly compare window outcomes with `bearing_warning.run_split` on this machine. Historical outputs remain separate.
+5. The implementation has 36 alarm settings (3 caps, 3 spans, 4 debounces), although the plan says 27 in its Bonferroni example. The existing code uses `len(SETS) = 36`; this has not been changed after results. Report the actual correction and its sample-size requirement.
+6. The proposed exact guarantee does not apply to CAT-CF after refitting. SPLIT and KMIN also choose cap/span/debounce using all outer-training OOF outcomes, including their calibration units. They are retained as planned empirical variants but cannot be called exact as implemented. The Bonferroni CF ablation corrects setting selection, not refitting.
+7. Noncertifiable maximum-threshold fallbacks have no certificate. A finite issued order statistic does not establish a conditional guarantee given that certification succeeded. The standard marginal rank statement requires the fixed-rule/exchangeability assumptions and a feasible action domain, or an explicitly defined abstention policy.
+8. The plan's pooled binomial screening and paired bootstrap verdicts are computed unchanged. Overlapping CV training sets make the pooled failures dependent; failure to reject is not proof of validity. Comparisons condition on the realized fitted predictions and omit training-sample uncertainty. No multiplicity correction was specified across lead times/cost cells.
+9. Theorem 2's equality for a single setting requires selecting the exact zero-failure edge; a threshold above the edge only inherits an upper bound. Rank/union-bound arguments and the influence-function ratio interval are established statistics, not general theoretical novelty.
+
+10. Explicit KMIN synthetic checking was absent from the saved Phase 1 outputs. Added a fixed-rule earliest-of-five Monte Carlo check with the original simulator/degradation settings (20,000 replicates per cell; pool seeds 2026, 2027 and 9000; resampling seed 9400 + cell index; 200,000 synthetic pool units). This is a supplemental post hoc check, not a preregistered experiment. The single-rule lower bound is inapplicable to an earliest-of-many alarm; only the valid upper bound is checked.
+11. Enforced the plan's negative-grid-M stop rule on new and cached engine folds; it was previously described but not enforced in `cat_run.py`.
+12. Corrected `last_admissible`/`planned_matrix` to include a nonzero lead together with a decision grid. Added eight hand-worked strict-deadline cases. Planned real-data decisions are unchanged: grid runs use zero lead; nonzero-lead runs use one-cycle decisions.
+13. The first bearing stage stopped before fitting because the new baseline accumulator initialized four variables from five lists. Corrected that initialization and reran the stage. The first-attempt queue status and traceback are retained separately; the final queue is resumed from completed checkpoints.
+
+The final phase ledger and verdict are generated from the complete output suite. Partial suites must remain labelled incomplete.

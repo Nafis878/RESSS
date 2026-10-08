@@ -1,0 +1,24 @@
+test_binomial_boundary (__main__.Tests.test_binomial_boundary) ... ok
+test_bootstrap_reproducibility (__main__.Tests.test_bootstrap_reproducibility) ... ok
+test_component_removal (__main__.Tests.test_component_removal) ... ok
+test_fractional_context_oracle (__main__.Tests.test_fractional_context_oracle) ... ok
+test_invalid_counts (__main__.Tests.test_invalid_counts) ... ok
+test_large_sample_eligible (__main__.Tests.test_large_sample_eligible) ... ok
+test_lottery_selects_policies (__main__.Tests.test_lottery_selects_policies) ... ok
+test_metrics_hand_calculation (__main__.Tests.test_metrics_hand_calculation) ... ok
+test_mixture_renewal_rate (__main__.Tests.test_mixture_renewal_rate) ... ok
+test_no_abstention (__main__.Tests.test_no_abstention) ... ok
+test_no_reliable_oracle (__main__.Tests.test_no_reliable_oracle) ... ok
+test_one_unit_numerics (__main__.Tests.test_one_unit_numerics) ... ok
+test_ratio_of_sums (__main__.Tests.test_ratio_of_sums) ... ok
+test_small_sample_abstention (__main__.Tests.test_small_sample_abstention) ... ok
+test_stability_ties (__main__.Tests.test_stability_ties) ... ok
+test_unknown_context_and_transfer_removal (__main__.Tests.test_unknown_context_and_transfer_removal) ... ok
+test_unsupported_selector (__main__.Tests.test_unsupported_selector) ... ok
+test_validated_inputs (__main__.Tests.test_validated_inputs) ... ok
+test_weight_normalization_and_repro (__main__.Tests.test_weight_normalization_and_repro) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.222s
+
+OK

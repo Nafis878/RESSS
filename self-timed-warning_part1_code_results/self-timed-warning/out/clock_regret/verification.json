@@ -1,0 +1,140 @@
+{
+  "passed": true,
+  "checks": 32,
+  "details": [
+    {
+      "check": "all 809 prior protected artifact hashes unchanged before audit",
+      "passed": true
+    },
+    {
+      "check": "pre-run research plan hash unchanged",
+      "passed": true
+    },
+    {
+      "check": "selector API receives only public records, candidate ages and common cost",
+      "passed": true
+    },
+    {
+      "check": "12 unit-test groups: 250 exhaustive and 100 independent generic-state comparisons",
+      "passed": true
+    },
+    {
+      "check": "synthetic: public records exclude hidden truth; sealed keys align uniquely",
+      "passed": true
+    },
+    {
+      "check": "synthetic: all planned cases and four aligned selectors present",
+      "passed": true
+    },
+    {
+      "check": "synthetic: every sealed lifetime satisfies its public censoring record",
+      "passed": true
+    },
+    {
+      "check": "synthetic: all pairwise witnesses attain their stored exact fractions",
+      "passed": true
+    },
+    {
+      "check": "synthetic: all policy pairs present; diagonal cancellation and marginal domination hold",
+      "passed": true
+    },
+    {
+      "check": "synthetic: all four choices recomputed with exact fractions and specified tie breaks",
+      "passed": true
+    },
+    {
+      "check": "synthetic: recorded rates, regret, risk and worst-case certificates recomputed from truth",
+      "passed": true
+    },
+    {
+      "check": "real: public records exclude hidden truth; sealed keys align uniquely",
+      "passed": true
+    },
+    {
+      "check": "real: all planned cases and four aligned selectors present",
+      "passed": true
+    },
+    {
+      "check": "real: every sealed lifetime satisfies its public censoring record",
+      "passed": true
+    },
+    {
+      "check": "real: all pairwise witnesses attain their stored exact fractions",
+      "passed": true
+    },
+    {
+      "check": "real: all policy pairs present; diagonal cancellation and marginal domination hold",
+      "passed": true
+    },
+    {
+      "check": "real: all four choices recomputed with exact fractions and specified tie breaks",
+      "passed": true
+    },
+    {
+      "check": "real: recorded rates, regret, risk and worst-case certificates recomputed from truth",
+      "passed": true
+    },
+    {
+      "check": "all 39,448 exact attaining witnesses checked",
+      "passed": true
+    },
+    {
+      "check": "2,400 synthetic cohorts regenerated from predeclared settings and unique seed mapping",
+      "passed": true
+    },
+    {
+      "check": "all 38 real policy pools reproduced from hashed frozen conventional age schedules",
+      "passed": true
+    },
+    {
+      "check": "all 304 real logging records and sealed lifetimes reproduced from frozen source rows",
+      "passed": true
+    },
+    {
+      "check": "synthetic: all paired effects recomputed on aligned cases",
+      "passed": true
+    },
+    {
+      "check": "real: all paired effects recomputed on aligned cases",
+      "passed": true
+    },
+    {
+      "check": "48 independent-cohort sign tests, wins/ties/losses and Holm family reproduced",
+      "passed": true
+    },
+    {
+      "check": "all 48 nominal paired-mean bootstrap intervals reproduced from fixed resampling seed",
+      "passed": true
+    },
+    {
+      "check": "real repeated settings aggregated by outer split; 21 primary and 3 sensitivity tests separated",
+      "passed": true
+    },
+    {
+      "check": "120 additional generic-state audit matches and positive runtime records retained",
+      "passed": true
+    },
+    {
+      "check": "positive and negative findings reproduced; superiority and priority remain unestablished",
+      "passed": true
+    },
+    {
+      "check": "strict method-distinguishing example retained with the matching upper-rate control",
+      "passed": true
+    },
+    {
+      "check": "both scientific figure pairs produced; PNGs visually inspected in the working session",
+      "passed": true
+    },
+    {
+      "check": "all 809 prior protected artifact hashes unchanged after complete audit",
+      "passed": true
+    }
+  ],
+  "unit_test_groups": 12,
+  "exhaustive_cases": 250,
+  "generic_cases_in_tests": 100,
+  "generic_cases_in_audit": 120,
+  "attaining_pairwise_witnesses": 39448,
+  "protected_unchanged": 809
+}

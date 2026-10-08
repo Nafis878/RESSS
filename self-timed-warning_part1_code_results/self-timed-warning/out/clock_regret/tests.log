@@ -1,0 +1,17 @@
+test_all_lifetimes_observed_collapse (clock_regret.test_core.ClockTests.test_all_lifetimes_observed_collapse) ... ok
+test_duplicate_policy_does_not_change_optimum (clock_regret.test_core.ClockTests.test_duplicate_policy_does_not_change_optimum) ... ok
+test_equal_ages_cancel_exactly (clock_regret.test_core.ClockTests.test_equal_ages_cancel_exactly) ... ok
+test_failure_at_deadline_is_failure (clock_regret.test_core.ClockTests.test_failure_at_deadline_is_failure) ... ok
+test_full_clock_exhaustion_250_cases (clock_regret.test_core.ClockTests.test_full_clock_exhaustion_250_cases) ... ok
+test_generic_endpoint_dp_100_cases (clock_regret.test_core.ClockTests.test_generic_endpoint_dp_100_cases) ... ok
+test_hidden_lifetime_mutation_leaves_selection_unchanged (clock_regret.test_core.ClockTests.test_hidden_lifetime_mutation_leaves_selection_unchanged) ... ok
+test_invalid_inputs_rejected (clock_regret.test_core.ClockTests.test_invalid_inputs_rejected) ... ok
+test_marginal_bounds_are_individually_sharp (clock_regret.test_core.ClockTests.test_marginal_bounds_are_individually_sharp) ... ok
+test_no_lifetime_cap_needed (clock_regret.test_core.ClockTests.test_no_lifetime_cap_needed) ... ok
+test_permutation_of_assets_and_policies (clock_regret.test_core.ClockTests.test_permutation_of_assets_and_policies) ... ok
+test_rectangle_is_strictly_looser_same_information (clock_regret.test_core.ClockTests.test_rectangle_is_strictly_looser_same_information) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.146s
+
+OK

@@ -1,0 +1,134 @@
+{
+  "passed": true,
+  "checks": 31,
+  "unit_tests": 13,
+  "protected_files": 747,
+  "changed_files": [],
+  "novelty": "B: candidate benchmark/empirical contribution; methodological novelty not established",
+  "items": [
+    {
+      "name": "Every original and RAMPE artifact remains byte-identical",
+      "passed": true
+    },
+    {
+      "name": "Pre-run pivot plan hash retained",
+      "passed": true
+    },
+    {
+      "name": "Completed59-check RAMPE verdict D unchanged",
+      "passed": true
+    },
+    {
+      "name": "13 mathematical/leakage/witness unit tests pass",
+      "passed": true
+    },
+    {
+      "name": "9728 tasks325632 unit pairs and29184 cap evaluations",
+      "passed": true
+    },
+    {
+      "name": "486400 information-release evaluations",
+      "passed": true
+    },
+    {
+      "name": "Public and truth task/unit keys unique",
+      "passed": true
+    },
+    {
+      "name": "Public and sealed truth align one-to-one",
+      "passed": true
+    },
+    {
+      "name": "Visibility contract matches logger endpoint/completion",
+      "passed": true
+    },
+    {
+      "name": "Every unresolved target field is absent",
+      "passed": true
+    },
+    {
+      "name": "Observable values exactly reproduce original outcomes",
+      "passed": true
+    },
+    {
+      "name": "Public schema contains no future RUL/lifetime/true target fields",
+      "passed": true
+    },
+    {
+      "name": "Declared caps exceed every sampled completion",
+      "passed": true
+    },
+    {
+      "name": "All truth rates contained by all rate intervals",
+      "passed": true
+    },
+    {
+      "name": "All truth risks contained by all risk intervals",
+      "passed": true
+    },
+    {
+      "name": "No false interval economic or risk declarations",
+      "passed": true
+    },
+    {
+      "name": "Self-policy pairs fully observable and point-identified",
+      "passed": true
+    },
+    {
+      "name": "All eight original evaluation regimes included",
+      "passed": true
+    },
+    {
+      "name": "All sixteen logger-target pairs included",
+      "passed": true
+    },
+    {
+      "name": "All settings have four leads/four cost asymmetries per regime",
+      "passed": true
+    },
+    {
+      "name": "No duplicate cap/task or release/task/seed results",
+      "passed": true
+    },
+    {
+      "name": "All9728 intervals independently reproduced using only public data",
+      "passed": true
+    },
+    {
+      "name": "Cap sensitivity leaves all upper rate endpoints unchanged",
+      "passed": true
+    },
+    {
+      "name": "Lower rates monotonically decrease when caps relax",
+      "passed": true
+    },
+    {
+      "name": "All97280 release paths have nested intervals",
+      "passed": true
+    },
+    {
+      "name": "Full reveal collapses to exact cohort truths",
+      "passed": true
+    },
+    {
+      "name": "Zero-budget release repeats initial identification",
+      "passed": true
+    },
+    {
+      "name": "Report discloses candidate B and no established novel method",
+      "passed": true
+    },
+    {
+      "name": "Report retains physical/causal/sensor scope limitations",
+      "passed": true
+    },
+    {
+      "name": "Reported7296 distinct-policy tasks and false claims match output",
+      "passed": true
+    },
+    {
+      "name": "Report source/output links resolve",
+      "passed": true
+    }
+  ]
+}

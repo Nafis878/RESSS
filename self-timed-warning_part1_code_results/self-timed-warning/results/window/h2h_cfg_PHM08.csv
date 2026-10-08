@@ -1,0 +1,51 @@
+fold,method,H,option,span,k,shift,cal_in
+1,ours,10,cap 40,1,2,-2.5,1.0
+1,ours,20,cap 60,1,5,-3.5,1.0
+1,mlp_kf,10,kalman q/r=1/25,1,2,-5.5,0.932
+1,mlp_kf,20,kalman q/r=1/25,1,5,-7.0,0.886
+1,similarity,10,median,1,5,-6.0,0.75
+1,similarity,20,median,1,5,-8.0,0.591
+1,rnn,10,stored,1,2,-3.0,0.773
+1,rnn,20,stored,1,3,-2.0,0.727
+1,cnn,10,stored,3,1,-10.0,0.795
+1,cnn,20,stored,1,5,-7.0,0.682
+2,ours,10,cap 40,1,5,-5.5,1.0
+2,ours,20,cap 40,3,5,-4.5,1.0
+2,mlp_kf,10,kalman q/r=1/25,1,5,-6.5,0.909
+2,mlp_kf,20,kalman q/r=1/25,1,5,-4.5,0.886
+2,similarity,10,median,1,1,-8.0,0.795
+2,similarity,20,median,1,5,-7.0,0.704
+2,rnn,10,stored,1,2,-4.5,0.932
+2,rnn,20,stored,1,5,-3.5,0.818
+2,cnn,10,stored,1,2,-7.5,0.75
+2,cnn,20,stored,1,5,-7.5,0.659
+3,ours,10,cap 60,3,2,-3.0,1.0
+3,ours,20,cap 40,1,5,-3.5,0.954
+3,mlp_kf,10,kalman q/r=1/25,1,3,-6.5,0.932
+3,mlp_kf,20,kalman q/r=1/25,6,5,-9.5,0.932
+3,similarity,10,median,1,5,-9.0,0.704
+3,similarity,20,median,1,5,-10.0,0.613
+3,rnn,10,stored,1,3,-5.5,0.841
+3,rnn,20,stored,1,5,-7.0,0.818
+3,cnn,10,stored,1,2,-7.5,0.841
+3,cnn,20,stored,1,5,-7.0,0.773
+4,ours,10,cap 90,1,2,-3.5,1.0
+4,ours,20,cap 60,3,5,-5.0,0.977
+4,mlp_kf,10,kalman q/r=1/25,1,5,-4.5,0.977
+4,mlp_kf,20,kalman q/r=1/25,1,5,-5.5,0.932
+4,similarity,10,median,1,5,-12.0,0.75
+4,similarity,20,median,1,5,-9.0,0.636
+4,rnn,10,stored,1,5,-6.5,0.841
+4,rnn,20,stored,3,5,-8.5,0.773
+4,cnn,10,stored,1,5,-9.5,0.704
+4,cnn,20,stored,1,5,-6.0,0.682
+5,ours,10,cap 40,1,1,-0.5,1.0
+5,ours,20,cap 40,1,1,-4.5,1.0
+5,mlp_kf,10,kalman q/r=1/100,1,5,-5.5,0.932
+5,mlp_kf,20,kalman q/r=1/25,1,3,-4.5,0.909
+5,similarity,10,median,1,3,-7.0,0.795
+5,similarity,20,median,1,5,-8.0,0.75
+5,rnn,10,stored,1,3,-2.5,0.886
+5,rnn,20,stored,1,5,-1.0,0.795
+5,cnn,10,stored,6,5,-14.5,0.818
+5,cnn,20,stored,1,3,-7.0,0.636

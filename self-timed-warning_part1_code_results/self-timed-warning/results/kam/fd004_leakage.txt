@@ -1,0 +1,3 @@
+PASS  E2 causality (regressor cap 60 and classifier): max |prefix - full| = 0.00e+00 over 90 checks
+PASS  E3 permuted-life labels: policy 1 (classifier, p = 0.1) M = 364.7% vs real labels 75.8%
+PASS  E4 rerun of fold 1 reproduces every decision of every policy and cost ratio

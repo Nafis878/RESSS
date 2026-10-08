@@ -1,0 +1,14 @@
+{
+  "question": "Does this project currently have an established novel method?",
+  "answer": "NO",
+  "method_novelty_established": false,
+  "benchmark_priority_established": false,
+  "benchmark_candidate_retained": true,
+  "equivalent_generic_baseline": true,
+  "primary_asset_tests_significant": 21,
+  "primary_asset_tests_total": 21,
+  "largest_primary_holm_p": 0.0196901847998468,
+  "exploratory_outer_group_tests_significant": 0,
+  "exploratory_outer_group_tests_total": 21,
+  "scope": "conditional fixed-policy empirical evidence; not deployment or new-domain validation"
+}

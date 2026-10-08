@@ -1,0 +1,5582 @@
+[
+  {
+    "case": 0,
+    "ages": [
+      22,
+      58,
+      68
+    ],
+    "selected_age": 22,
+    "lower_scores": [
+      "20925/12512",
+      "2475/64",
+      "2475/64"
+    ],
+    "upper_scores": [
+      "751981725/409993216",
+      "2475/64",
+      "2475/64"
+    ],
+    "exact_scores": [
+      "20925/12512",
+      "2475/64",
+      "2475/64"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            49,
+            23
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "2325/1564",
+          "upper": "83553525/51249152",
+          "witness": [
+            59,
+            20,
+            59,
+            9,
+            9,
+            59,
+            59,
+            59,
+            49,
+            23
+          ],
+          "proposal_focus": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "proposal_lower": "2325/1564",
+          "proposal_upper": "141825/29716",
+          "fallback_lower": "2325/1564",
+          "fallback_upper": "83553525/51249152",
+          "premium_focus": [
+            1,
+            3,
+            4,
+            2
+          ],
+          "premium_lower": "2325/1564",
+          "premium_upper": "141825/29716"
+        },
+        {
+          "lower": "20925/12512",
+          "upper": "751981725/409993216",
+          "witness": [
+            69,
+            20,
+            69,
+            9,
+            9,
+            69,
+            69,
+            69,
+            49,
+            23
+          ],
+          "proposal_focus": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "proposal_lower": "20925/12512",
+          "proposal_upper": "1276425/237728",
+          "fallback_lower": "20925/12512",
+          "fallback_upper": "751981725/409993216",
+          "premium_focus": [
+            1,
+            3,
+            4,
+            2
+          ],
+          "premium_lower": "20925/12512",
+          "premium_upper": "1276425/237728"
+        }
+      ],
+      [
+        {
+          "lower": "2475/64",
+          "upper": "2475/64",
+          "witness": [
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            49,
+            23
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "2475/64",
+          "fallback_upper": "2475/64",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            49,
+            23
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "77/67",
+          "upper": "77/67",
+          "witness": [
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            49,
+            23
+          ],
+          "proposal_focus": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "proposal_lower": "77/67",
+          "proposal_upper": "77/67",
+          "fallback_lower": "77/67",
+          "fallback_upper": "2767149/2195456",
+          "premium_focus": [
+            1,
+            3,
+            4,
+            2
+          ],
+          "premium_lower": "77/67",
+          "premium_upper": "77/67"
+        }
+      ],
+      [
+        {
+          "lower": "2475/64",
+          "upper": "2475/64",
+          "witness": [
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            23,
+            49,
+            23
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "2475/64",
+          "fallback_upper": "2475/64",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "15075/4148",
+          "upper": "15075/4148",
+          "witness": [
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            49,
+            23
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "15075/4148",
+          "fallback_upper": "15075/4148",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            49,
+            23
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 1,
+    "ages": [
+      25,
+      45,
+      55
+    ],
+    "selected_age": 25,
+    "lower_scores": [
+      "7336/6561",
+      "12700/283",
+      "12700/283"
+    ],
+    "upper_scores": [
+      "10087/8748",
+      "12700/283",
+      "12700/283"
+    ],
+    "exact_scores": [
+      "7336/6561",
+      "12700/283",
+      "12700/283"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            32,
+            43
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "37147/37842",
+          "upper": "408617/403648",
+          "witness": [
+            21,
+            46,
+            22,
+            20,
+            46,
+            46,
+            46,
+            46,
+            32,
+            43
+          ],
+          "proposal_focus": [
+            0,
+            2,
+            3,
+            5
+          ],
+          "proposal_lower": "37147/37842",
+          "proposal_upper": "3008907/1242479",
+          "fallback_lower": "37147/37842",
+          "fallback_upper": "408617/403648",
+          "premium_focus": [
+            2,
+            0,
+            3,
+            5
+          ],
+          "premium_lower": "37147/37842",
+          "premium_upper": "3008907/1242479"
+        },
+        {
+          "lower": "7336/6561",
+          "upper": "10087/8748",
+          "witness": [
+            21,
+            56,
+            22,
+            56,
+            56,
+            56,
+            56,
+            56,
+            32,
+            43
+          ],
+          "proposal_focus": [
+            0,
+            2,
+            3,
+            5
+          ],
+          "proposal_lower": "7336/6561",
+          "proposal_upper": "14672/5319",
+          "fallback_lower": "7336/6561",
+          "fallback_upper": "10087/8748",
+          "premium_focus": [
+            2,
+            0,
+            3,
+            5
+          ],
+          "premium_lower": "7336/6561",
+          "premium_upper": "14672/5319"
+        }
+      ],
+      [
+        {
+          "lower": "12700/283",
+          "upper": "12700/283",
+          "witness": [
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            32,
+            43
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "12700/283",
+          "fallback_upper": "12700/283",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            32,
+            43
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "103/87",
+          "upper": "103/87",
+          "witness": [
+            56,
+            56,
+            56,
+            56,
+            56,
+            56,
+            56,
+            56,
+            32,
+            43
+          ],
+          "proposal_focus": [
+            0,
+            2,
+            3,
+            5
+          ],
+          "proposal_lower": "103/87",
+          "proposal_upper": "103/87",
+          "fallback_lower": "103/87",
+          "fallback_upper": "1133/928",
+          "premium_focus": [
+            2,
+            0,
+            3,
+            5
+          ],
+          "premium_lower": "103/87",
+          "premium_upper": "103/87"
+        }
+      ],
+      [
+        {
+          "lower": "12700/283",
+          "upper": "12700/283",
+          "witness": [
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            26,
+            32,
+            43
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "12700/283",
+          "fallback_upper": "12700/283",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "3683/1329",
+          "upper": "3683/1329",
+          "witness": [
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            32,
+            43
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "3683/1329",
+          "fallback_upper": "3683/1329",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            56,
+            56,
+            56,
+            56,
+            56,
+            56,
+            56,
+            56,
+            32,
+            43
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 2,
+    "ages": [
+      41,
+      54,
+      64
+    ],
+    "selected_age": 41,
+    "lower_scores": [
+      "1",
+      "18204/437",
+      "18204/437"
+    ],
+    "upper_scores": [
+      "1",
+      "18204/437",
+      "18204/437"
+    ],
+    "exact_scores": [
+      "1",
+      "18204/437",
+      "18204/437"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            53,
+            48
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1909/3741",
+          "upper": "692967/1276928",
+          "witness": [
+            55,
+            55,
+            55,
+            14,
+            36,
+            55,
+            41,
+            7,
+            53,
+            48
+          ],
+          "proposal_focus": [
+            3,
+            4,
+            6,
+            7
+          ],
+          "proposal_lower": "1909/3741",
+          "proposal_upper": "36271/38700",
+          "fallback_lower": "1909/3741",
+          "fallback_upper": "692967/1276928",
+          "premium_focus": [
+            7,
+            6,
+            3,
+            4
+          ],
+          "premium_lower": "1909/3741",
+          "premium_upper": "36271/38700"
+        },
+        {
+          "lower": "2093/3741",
+          "upper": "759759/1276928",
+          "witness": [
+            65,
+            65,
+            65,
+            14,
+            36,
+            65,
+            41,
+            7,
+            53,
+            48
+          ],
+          "proposal_focus": [
+            3,
+            4,
+            6,
+            7
+          ],
+          "proposal_lower": "2093/3741",
+          "proposal_upper": "39767/38700",
+          "fallback_lower": "2093/3741",
+          "fallback_upper": "759759/1276928",
+          "premium_focus": [
+            7,
+            6,
+            3,
+            4
+          ],
+          "premium_lower": "2093/3741",
+          "premium_upper": "39767/38700"
+        }
+      ],
+      [
+        {
+          "lower": "18204/437",
+          "upper": "18204/437",
+          "witness": [
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            53,
+            48
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "18204/437",
+          "fallback_upper": "18204/437",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            55,
+            55,
+            55,
+            55,
+            55,
+            55,
+            55,
+            55,
+            53,
+            48
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "613/533",
+          "upper": "613/533",
+          "witness": [
+            65,
+            65,
+            65,
+            65,
+            65,
+            65,
+            65,
+            65,
+            53,
+            48
+          ],
+          "proposal_focus": [
+            3,
+            4,
+            6,
+            7
+          ],
+          "proposal_lower": "613/533",
+          "proposal_upper": "613/533",
+          "fallback_lower": "613/533",
+          "fallback_upper": "667557/545792",
+          "premium_focus": [
+            7,
+            6,
+            3,
+            4
+          ],
+          "premium_lower": "613/533",
+          "premium_upper": "613/533"
+        }
+      ],
+      [
+        {
+          "lower": "18204/437",
+          "upper": "18204/437",
+          "witness": [
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            53,
+            48
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "18204/437",
+          "fallback_upper": "18204/437",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "78884/47067",
+          "upper": "78884/47067",
+          "witness": [
+            55,
+            55,
+            55,
+            55,
+            55,
+            55,
+            55,
+            55,
+            53,
+            48
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "78884/47067",
+          "fallback_upper": "78884/47067",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            65,
+            65,
+            65,
+            65,
+            65,
+            65,
+            65,
+            65,
+            53,
+            48
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 3,
+    "ages": [
+      40,
+      68,
+      78
+    ],
+    "selected_age": 40,
+    "lower_scores": [
+      "1",
+      "6300/113",
+      "6300/113"
+    ],
+    "upper_scores": [
+      "1",
+      "6300/113",
+      "6300/113"
+    ],
+    "exact_scores": [
+      "1",
+      "6300/113",
+      "6300/113"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            68,
+            56
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "8651/15141",
+          "upper": "8651/15141",
+          "witness": [
+            69,
+            24,
+            69,
+            69,
+            21,
+            10,
+            23,
+            16,
+            68,
+            56
+          ],
+          "proposal_focus": [
+            1,
+            5,
+            6,
+            7
+          ],
+          "proposal_lower": "26264/46637",
+          "proposal_upper": "6897583/3031405",
+          "fallback_lower": "8651/15141",
+          "fallback_upper": "8651/15141",
+          "premium_focus": [
+            5,
+            6,
+            7,
+            1
+          ],
+          "premium_lower": "26264/46637",
+          "premium_upper": "6897583/3031405"
+        },
+        {
+          "lower": "9266/15141",
+          "upper": "9266/15141",
+          "witness": [
+            79,
+            24,
+            79,
+            79,
+            21,
+            10,
+            23,
+            16,
+            68,
+            56
+          ],
+          "proposal_focus": [
+            1,
+            5,
+            6,
+            7
+          ],
+          "proposal_lower": "28504/46637",
+          "proposal_upper": "7485863/3031405",
+          "fallback_lower": "9266/15141",
+          "fallback_upper": "9266/15141",
+          "premium_focus": [
+            5,
+            6,
+            7,
+            1
+          ],
+          "premium_lower": "28504/46637",
+          "premium_upper": "7485863/3031405"
+        }
+      ],
+      [
+        {
+          "lower": "6300/113",
+          "upper": "6300/113",
+          "witness": [
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            68,
+            56
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "6300/113",
+          "fallback_upper": "6300/113",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            68,
+            56
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "187/167",
+          "upper": "187/167",
+          "witness": [
+            79,
+            79,
+            79,
+            79,
+            79,
+            79,
+            79,
+            79,
+            68,
+            56
+          ],
+          "proposal_focus": [
+            1,
+            5,
+            6,
+            7
+          ],
+          "proposal_lower": "187/167",
+          "proposal_upper": "187/167",
+          "fallback_lower": "187/167",
+          "fallback_upper": "187/167",
+          "premium_focus": [
+            5,
+            6,
+            7,
+            1
+          ],
+          "premium_lower": "187/167",
+          "premium_upper": "187/167"
+        }
+      ],
+      [
+        {
+          "lower": "6300/113",
+          "upper": "6300/113",
+          "witness": [
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            68,
+            56
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "6300/113",
+          "fallback_upper": "6300/113",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "52605/32279",
+          "upper": "52605/32279",
+          "witness": [
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            68,
+            56
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "52605/32279",
+          "fallback_upper": "52605/32279",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            79,
+            79,
+            79,
+            79,
+            79,
+            79,
+            79,
+            79,
+            68,
+            56
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 4,
+    "ages": [
+      31,
+      38,
+      48
+    ],
+    "selected_age": 31,
+    "lower_scores": [
+      "1",
+      "9517/323",
+      "9517/323"
+    ],
+    "upper_scores": [
+      "1",
+      "9517/323",
+      "9517/323"
+    ],
+    "exact_scores": [
+      "1",
+      "9517/323",
+      "9517/323"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            33,
+            34
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1539/2828",
+          "upper": "1675971/2895872",
+          "witness": [
+            2,
+            10,
+            30,
+            5,
+            28,
+            39,
+            39,
+            25,
+            33,
+            34
+          ],
+          "proposal_focus": [
+            2,
+            3,
+            4,
+            7
+          ],
+          "proposal_lower": "43287/80008",
+          "proposal_upper": "34846035/28162816",
+          "fallback_lower": "1539/2828",
+          "fallback_upper": "1675971/2895872",
+          "premium_focus": [
+            2,
+            3,
+            4,
+            7
+          ],
+          "premium_lower": "43287/80008",
+          "premium_upper": "34846035/28162816"
+        },
+        {
+          "lower": "48927/80008",
+          "upper": "53281503/81928192",
+          "witness": [
+            49,
+            49,
+            30,
+            5,
+            28,
+            49,
+            49,
+            25,
+            33,
+            34
+          ],
+          "proposal_focus": [
+            2,
+            3,
+            4,
+            7
+          ],
+          "proposal_lower": "48927/80008",
+          "proposal_upper": "39386235/28162816",
+          "fallback_lower": "48927/80008",
+          "fallback_upper": "53281503/81928192",
+          "premium_focus": [
+            2,
+            3,
+            4,
+            7
+          ],
+          "premium_lower": "48927/80008",
+          "premium_upper": "39386235/28162816"
+        }
+      ],
+      [
+        {
+          "lower": "9517/323",
+          "upper": "9517/323",
+          "witness": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            33,
+            34
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "9517/323",
+          "fallback_upper": "9517/323",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            33,
+            34
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "451/371",
+          "upper": "451/371",
+          "witness": [
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            33,
+            34
+          ],
+          "proposal_focus": [
+            0,
+            2,
+            3,
+            4
+          ],
+          "proposal_lower": "451/371",
+          "proposal_upper": "451/371",
+          "fallback_lower": "451/371",
+          "fallback_upper": "491139/379904",
+          "premium_focus": [
+            2,
+            3,
+            4,
+            7
+          ],
+          "premium_lower": "451/371",
+          "premium_upper": "451/371"
+        }
+      ],
+      [
+        {
+          "lower": "9517/323",
+          "upper": "9517/323",
+          "witness": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            33,
+            34
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "9517/323",
+          "fallback_upper": "9517/323",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "16271/8717",
+          "upper": "16271/8717",
+          "witness": [
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            33,
+            34
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "16271/8717",
+          "fallback_upper": "16271/8717",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            33,
+            34
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 5,
+    "ages": [
+      30,
+      61,
+      71
+    ],
+    "selected_age": 30,
+    "lower_scores": [
+      "1",
+      "2292/67",
+      "2292/67"
+    ],
+    "upper_scores": [
+      "1",
+      "2292/67",
+      "2292/67"
+    ],
+    "exact_scores": [
+      "1",
+      "2292/67",
+      "2292/67"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            43,
+            44
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1685/2562",
+          "upper": "1685/2562",
+          "witness": [
+            62,
+            62,
+            6,
+            62,
+            8,
+            26,
+            13,
+            14,
+            43,
+            44
+          ],
+          "proposal_focus": [
+            2,
+            4,
+            5,
+            6
+          ],
+          "proposal_lower": "17920/27261",
+          "proposal_upper": "44608/18873",
+          "fallback_lower": "1685/2562",
+          "fallback_upper": "1685/2562",
+          "premium_focus": [
+            6,
+            5,
+            2,
+            4
+          ],
+          "premium_lower": "17920/27261",
+          "premium_upper": "44608/18873"
+        },
+        {
+          "lower": "59360/81783",
+          "upper": "59360/81783",
+          "witness": [
+            72,
+            72,
+            6,
+            72,
+            8,
+            26,
+            13,
+            72,
+            43,
+            44
+          ],
+          "proposal_focus": [
+            2,
+            4,
+            5,
+            6
+          ],
+          "proposal_lower": "59360/81783",
+          "proposal_upper": "147764/56619",
+          "fallback_lower": "59360/81783",
+          "fallback_upper": "59360/81783",
+          "premium_focus": [
+            6,
+            5,
+            2,
+            4
+          ],
+          "premium_lower": "59360/81783",
+          "premium_upper": "147764/56619"
+        }
+      ],
+      [
+        {
+          "lower": "2292/67",
+          "upper": "2292/67",
+          "witness": [
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            43,
+            44
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "2292/67",
+          "fallback_upper": "2292/67",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            43,
+            44
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "131/115",
+          "upper": "131/115",
+          "witness": [
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            43,
+            44
+          ],
+          "proposal_focus": [
+            2,
+            4,
+            5,
+            6
+          ],
+          "proposal_lower": "131/115",
+          "proposal_upper": "131/115",
+          "fallback_lower": "131/115",
+          "fallback_upper": "131/115",
+          "premium_focus": [
+            6,
+            5,
+            2,
+            4
+          ],
+          "premium_lower": "131/115",
+          "premium_upper": "131/115"
+        }
+      ],
+      [
+        {
+          "lower": "2292/67",
+          "upper": "2292/67",
+          "witness": [
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            43,
+            44
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "2292/67",
+          "fallback_upper": "2292/67",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "219650/128843",
+          "upper": "219650/128843",
+          "witness": [
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            43,
+            44
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "219650/128843",
+          "fallback_upper": "219650/128843",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            43,
+            44
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 6,
+    "ages": [
+      30,
+      58,
+      68
+    ],
+    "selected_age": 30,
+    "lower_scores": [
+      "15066/14443",
+      "2445/88",
+      "2445/88"
+    ],
+    "upper_scores": [
+      "22599/21008",
+      "2445/88",
+      "2445/88"
+    ],
+    "exact_scores": [
+      "15066/14443",
+      "2445/88",
+      "2445/88"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            58,
+            46
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "13446/14443",
+          "upper": "20169/21008",
+          "witness": [
+            59,
+            59,
+            59,
+            16,
+            59,
+            59,
+            59,
+            30,
+            58,
+            46
+          ],
+          "proposal_focus": [
+            1,
+            2,
+            3,
+            7
+          ],
+          "proposal_lower": "13446/14443",
+          "proposal_upper": "61155/28886",
+          "fallback_lower": "13446/14443",
+          "fallback_upper": "20169/21008",
+          "premium_focus": [
+            3,
+            7,
+            5,
+            1
+          ],
+          "premium_lower": "13446/14443",
+          "premium_upper": "4060692/2325323"
+        },
+        {
+          "lower": "15066/14443",
+          "upper": "22599/21008",
+          "witness": [
+            69,
+            69,
+            69,
+            16,
+            69,
+            69,
+            69,
+            30,
+            58,
+            46
+          ],
+          "proposal_focus": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "proposal_lower": "15066/14443",
+          "proposal_upper": "4549932/2325323",
+          "fallback_lower": "15066/14443",
+          "fallback_upper": "22599/21008",
+          "premium_focus": [
+            3,
+            7,
+            5,
+            1
+          ],
+          "premium_lower": "15066/14443",
+          "premium_upper": "4549932/2325323"
+        }
+      ],
+      [
+        {
+          "lower": "2445/88",
+          "upper": "2445/88",
+          "witness": [
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            58,
+            46
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "2445/88",
+          "fallback_upper": "2445/88",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            58,
+            46
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "81/71",
+          "upper": "81/71",
+          "witness": [
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            58,
+            46
+          ],
+          "proposal_focus": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "proposal_lower": "81/71",
+          "proposal_upper": "81/71",
+          "fallback_lower": "81/71",
+          "fallback_upper": "2673/2272",
+          "premium_focus": [
+            3,
+            7,
+            5,
+            1
+          ],
+          "premium_lower": "81/71",
+          "premium_upper": "81/71"
+        }
+      ],
+      [
+        {
+          "lower": "2445/88",
+          "upper": "2445/88",
+          "witness": [
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            58,
+            46
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "2445/88",
+          "fallback_upper": "2445/88",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "11573/5436",
+          "upper": "11573/5436",
+          "witness": [
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            58,
+            46
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "11573/5436",
+          "fallback_upper": "11573/5436",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            58,
+            46
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 7,
+    "ages": [
+      16,
+      40,
+      50
+    ],
+    "selected_age": 16,
+    "lower_scores": [
+      "34917/25760",
+      "3600/197",
+      "3600/197"
+    ],
+    "upper_scores": [
+      "38024613/26378240",
+      "3600/197",
+      "3600/197"
+    ],
+    "exact_scores": [
+      "34917/25760",
+      "3600/197",
+      "3600/197"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            17,
+            17,
+            17,
+            17,
+            17,
+            17,
+            17,
+            17,
+            21,
+            40
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "29972/25671",
+          "upper": "2719959/2190592",
+          "witness": [
+            11,
+            4,
+            13,
+            41,
+            5,
+            41,
+            41,
+            41,
+            21,
+            40
+          ],
+          "proposal_focus": [
+            0,
+            1,
+            2,
+            4
+          ],
+          "proposal_lower": "29972/25671",
+          "proposal_upper": "419608/128355",
+          "fallback_lower": "29972/25671",
+          "fallback_upper": "2719959/2190592",
+          "premium_focus": [
+            1,
+            0,
+            2,
+            6
+          ],
+          "premium_lower": "32488/28085",
+          "premium_upper": "2956408/1039145"
+        },
+        {
+          "lower": "34917/25760",
+          "upper": "38024613/26378240",
+          "witness": [
+            11,
+            4,
+            13,
+            51,
+            51,
+            51,
+            51,
+            51,
+            21,
+            40
+          ],
+          "proposal_focus": [
+            0,
+            1,
+            2,
+            4
+          ],
+          "proposal_lower": "34917/25760",
+          "proposal_upper": "34917/9200",
+          "fallback_lower": "34917/25760",
+          "fallback_upper": "38024613/26378240",
+          "premium_focus": [
+            1,
+            0,
+            2,
+            6
+          ],
+          "premium_lower": "34917/25760",
+          "premium_upper": "453921/136160"
+        }
+      ],
+      [
+        {
+          "lower": "3600/197",
+          "upper": "3600/197",
+          "witness": [
+            17,
+            17,
+            17,
+            17,
+            17,
+            17,
+            17,
+            17,
+            21,
+            40
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "3600/197",
+          "fallback_upper": "3600/197",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            21,
+            40
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "461/381",
+          "upper": "461/381",
+          "witness": [
+            51,
+            51,
+            51,
+            51,
+            51,
+            51,
+            51,
+            51,
+            21,
+            40
+          ],
+          "proposal_focus": [
+            0,
+            1,
+            2,
+            6
+          ],
+          "proposal_lower": "461/381",
+          "proposal_upper": "461/381",
+          "fallback_lower": "461/381",
+          "fallback_upper": "167343/130048",
+          "premium_focus": [
+            1,
+            0,
+            2,
+            6
+          ],
+          "premium_lower": "461/381",
+          "premium_upper": "461/381"
+        }
+      ],
+      [
+        {
+          "lower": "3600/197",
+          "upper": "3600/197",
+          "witness": [
+            17,
+            17,
+            17,
+            17,
+            17,
+            17,
+            17,
+            17,
+            21,
+            40
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "3600/197",
+          "fallback_upper": "3600/197",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "85725/35399",
+          "upper": "85725/35399",
+          "witness": [
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            41,
+            21,
+            40
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "85725/35399",
+          "fallback_upper": "85725/35399",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            51,
+            51,
+            51,
+            51,
+            51,
+            51,
+            51,
+            51,
+            21,
+            40
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 8,
+    "ages": [
+      48,
+      54,
+      64
+    ],
+    "selected_age": 48,
+    "lower_scores": [
+      "1",
+      "17040/499",
+      "17040/499"
+    ],
+    "upper_scores": [
+      "1",
+      "17040/499",
+      "17040/499"
+    ],
+    "exact_scores": [
+      "1",
+      "17040/499",
+      "17040/499"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            54,
+            53
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "17225/54516",
+          "upper": "17225/52864",
+          "witness": [
+            16,
+            15,
+            46,
+            29,
+            15,
+            55,
+            17,
+            26,
+            54,
+            53
+          ],
+          "proposal_focus": [
+            2,
+            3,
+            6,
+            7
+          ],
+          "proposal_lower": "189/638",
+          "proposal_upper": "73143/108460",
+          "fallback_lower": "17225/54516",
+          "fallback_upper": "17225/52864",
+          "premium_focus": [
+            2,
+            3,
+            7,
+            1
+          ],
+          "premium_lower": "1317/4444",
+          "premium_upper": "509679/755480"
+        },
+        {
+          "lower": "22032/65275",
+          "upper": "45441/130550",
+          "witness": [
+            65,
+            15,
+            46,
+            29,
+            65,
+            65,
+            17,
+            26,
+            54,
+            53
+          ],
+          "proposal_focus": [
+            2,
+            3,
+            6,
+            7
+          ],
+          "proposal_lower": "1443/4466",
+          "proposal_upper": "558441/759220",
+          "fallback_lower": "22032/65275",
+          "fallback_upper": "45441/130550",
+          "premium_focus": [
+            2,
+            3,
+            7,
+            1
+          ],
+          "premium_lower": "1437/4444",
+          "premium_upper": "556119/755480"
+        }
+      ],
+      [
+        {
+          "lower": "17040/499",
+          "upper": "17040/499",
+          "witness": [
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            54,
+            53
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "17040/499",
+          "fallback_upper": "17040/499",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            55,
+            55,
+            55,
+            55,
+            55,
+            55,
+            55,
+            55,
+            54,
+            53
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "619/539",
+          "upper": "619/539",
+          "witness": [
+            65,
+            65,
+            65,
+            65,
+            65,
+            65,
+            65,
+            65,
+            54,
+            53
+          ],
+          "proposal_focus": [
+            1,
+            2,
+            3,
+            6
+          ],
+          "proposal_lower": "619/539",
+          "proposal_upper": "619/539",
+          "fallback_lower": "619/539",
+          "fallback_upper": "1857/1568",
+          "premium_focus": [
+            2,
+            3,
+            7,
+            1
+          ],
+          "premium_lower": "619/539",
+          "premium_upper": "619/539"
+        }
+      ],
+      [
+        {
+          "lower": "17040/499",
+          "upper": "17040/499",
+          "witness": [
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            54,
+            53
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "17040/499",
+          "fallback_upper": "17040/499",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "191345/141126",
+          "upper": "191345/141126",
+          "witness": [
+            55,
+            55,
+            55,
+            55,
+            55,
+            55,
+            55,
+            55,
+            54,
+            53
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "191345/141126",
+          "fallback_upper": "191345/141126",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            65,
+            65,
+            65,
+            65,
+            65,
+            65,
+            65,
+            65,
+            54,
+            53
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 9,
+    "ages": [
+      23,
+      61,
+      71
+    ],
+    "selected_age": 23,
+    "lower_scores": [
+      "64253/58307",
+      "7153/268",
+      "7153/268"
+    ],
+    "upper_scores": [
+      "2120349/1865824",
+      "7153/268",
+      "7153/268"
+    ],
+    "exact_scores": [
+      "64253/58307",
+      "7153/268",
+      "7153/268"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            30,
+            46
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "57403/58307",
+          "upper": "1894299/1865824",
+          "witness": [
+            62,
+            18,
+            62,
+            15,
+            5,
+            62,
+            62,
+            62,
+            30,
+            46
+          ],
+          "proposal_focus": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "proposal_lower": "57403/58307",
+          "proposal_upper": "90524531/51018625",
+          "fallback_lower": "57403/58307",
+          "fallback_upper": "1894299/1865824",
+          "premium_focus": [
+            1,
+            3,
+            4,
+            2
+          ],
+          "premium_lower": "57403/58307",
+          "premium_upper": "90524531/51018625"
+        },
+        {
+          "lower": "64253/58307",
+          "upper": "2120349/1865824",
+          "witness": [
+            72,
+            18,
+            72,
+            15,
+            5,
+            72,
+            72,
+            72,
+            30,
+            46
+          ],
+          "proposal_focus": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "proposal_lower": "64253/58307",
+          "proposal_upper": "14475283/7288375",
+          "fallback_lower": "64253/58307",
+          "fallback_upper": "2120349/1865824",
+          "premium_focus": [
+            1,
+            3,
+            4,
+            2
+          ],
+          "premium_lower": "64253/58307",
+          "premium_upper": "14475283/7288375"
+        }
+      ],
+      [
+        {
+          "lower": "7153/268",
+          "upper": "7153/268",
+          "witness": [
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            30,
+            46
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "7153/268",
+          "fallback_upper": "7153/268",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            30,
+            46
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "161/141",
+          "upper": "161/141",
+          "witness": [
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            30,
+            46
+          ],
+          "proposal_focus": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "proposal_lower": "161/141",
+          "proposal_upper": "161/141",
+          "fallback_lower": "161/141",
+          "fallback_upper": "1771/1504",
+          "premium_focus": [
+            1,
+            3,
+            4,
+            2
+          ],
+          "premium_lower": "161/141",
+          "premium_upper": "161/141"
+        }
+      ],
+      [
+        {
+          "lower": "7153/268",
+          "upper": "7153/268",
+          "witness": [
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            30,
+            46
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "7153/268",
+          "fallback_upper": "7153/268",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "43851/23738",
+          "upper": "43851/23738",
+          "witness": [
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            30,
+            46
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "43851/23738",
+          "fallback_upper": "43851/23738",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            30,
+            46
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 10,
+    "ages": [
+      38,
+      70,
+      80
+    ],
+    "selected_age": 38,
+    "lower_scores": [
+      "1",
+      "24814/431",
+      "24814/431"
+    ],
+    "upper_scores": [
+      "1",
+      "24814/431",
+      "24814/431"
+    ],
+    "exact_scores": [
+      "1",
+      "24814/431",
+      "24814/431"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            60,
+            59
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "156065/178352",
+          "upper": "156065/178352",
+          "witness": [
+            71,
+            3,
+            71,
+            26,
+            24,
+            3,
+            71,
+            71,
+            60,
+            59
+          ],
+          "proposal_focus": [
+            1,
+            3,
+            4,
+            5
+          ],
+          "proposal_lower": "156065/178352",
+          "proposal_upper": "64454845/22829056",
+          "fallback_lower": "156065/178352",
+          "fallback_upper": "156065/178352",
+          "premium_focus": [
+            3,
+            5,
+            4,
+            1
+          ],
+          "premium_lower": "156065/178352",
+          "premium_upper": "64454845/22829056"
+        },
+        {
+          "lower": "169785/178352",
+          "upper": "169785/178352",
+          "witness": [
+            81,
+            3,
+            81,
+            26,
+            24,
+            3,
+            81,
+            81,
+            60,
+            59
+          ],
+          "proposal_focus": [
+            1,
+            3,
+            4,
+            5
+          ],
+          "proposal_lower": "169785/178352",
+          "proposal_upper": "70121205/22829056",
+          "fallback_lower": "169785/178352",
+          "fallback_upper": "169785/178352",
+          "premium_focus": [
+            3,
+            5,
+            4,
+            1
+          ],
+          "premium_lower": "169785/178352",
+          "premium_upper": "70121205/22829056"
+        }
+      ],
+      [
+        {
+          "lower": "24814/431",
+          "upper": "24814/431",
+          "witness": [
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            60,
+            59
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "24814/431",
+          "fallback_upper": "24814/431",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            71,
+            71,
+            71,
+            71,
+            71,
+            71,
+            71,
+            71,
+            60,
+            59
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "759/679",
+          "upper": "759/679",
+          "witness": [
+            81,
+            81,
+            81,
+            81,
+            81,
+            81,
+            81,
+            81,
+            60,
+            59
+          ],
+          "proposal_focus": [
+            1,
+            3,
+            4,
+            5
+          ],
+          "proposal_lower": "759/679",
+          "proposal_upper": "759/679",
+          "fallback_lower": "759/679",
+          "fallback_upper": "759/679",
+          "premium_focus": [
+            3,
+            5,
+            4,
+            1
+          ],
+          "premium_lower": "759/679",
+          "premium_upper": "759/679"
+        }
+      ],
+      [
+        {
+          "lower": "24814/431",
+          "upper": "24814/431",
+          "witness": [
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            39,
+            60,
+            59
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "24814/431",
+          "fallback_upper": "24814/431",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "443387/202665",
+          "upper": "443387/202665",
+          "witness": [
+            71,
+            71,
+            71,
+            71,
+            71,
+            71,
+            71,
+            71,
+            60,
+            59
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "443387/202665",
+          "fallback_upper": "443387/202665",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            81,
+            81,
+            81,
+            81,
+            81,
+            81,
+            81,
+            81,
+            60,
+            59
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 11,
+    "ages": [
+      37,
+      65,
+      75
+    ],
+    "selected_age": 37,
+    "lower_scores": [
+      "1",
+      "14208/413",
+      "14208/413"
+    ],
+    "upper_scores": [
+      "1",
+      "14208/413",
+      "14208/413"
+    ],
+    "exact_scores": [
+      "1",
+      "14208/413",
+      "14208/413"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            38,
+            38,
+            38,
+            38,
+            38,
+            38,
+            38,
+            38,
+            49,
+            60
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "2400/8149",
+          "upper": "2475/8149",
+          "witness": [
+            25,
+            11,
+            10,
+            34,
+            66,
+            66,
+            66,
+            16,
+            49,
+            60
+          ],
+          "proposal_focus": [
+            0,
+            1,
+            3,
+            7
+          ],
+          "proposal_lower": "2405/8206",
+          "proposal_upper": "3121209/5251840",
+          "fallback_lower": "2400/8149",
+          "fallback_upper": "2475/8149",
+          "premium_focus": [
+            0,
+            3,
+            1,
+            7
+          ],
+          "premium_lower": "2405/8206",
+          "premium_upper": "3121209/5251840"
+        },
+        {
+          "lower": "1665/5222",
+          "upper": "54945/167104",
+          "witness": [
+            25,
+            11,
+            76,
+            34,
+            76,
+            76,
+            76,
+            16,
+            49,
+            60
+          ],
+          "proposal_focus": [
+            0,
+            1,
+            3,
+            7
+          ],
+          "proposal_lower": "1665/5222",
+          "proposal_upper": "308691/477440",
+          "fallback_lower": "1665/5222",
+          "fallback_upper": "54945/167104",
+          "premium_focus": [
+            0,
+            3,
+            1,
+            7
+          ],
+          "premium_lower": "1665/5222",
+          "premium_upper": "308691/477440"
+        }
+      ],
+      [
+        {
+          "lower": "14208/413",
+          "upper": "14208/413",
+          "witness": [
+            38,
+            38,
+            38,
+            38,
+            38,
+            38,
+            38,
+            38,
+            49,
+            60
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "14208/413",
+          "fallback_upper": "14208/413",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            66,
+            66,
+            66,
+            66,
+            66,
+            66,
+            66,
+            66,
+            49,
+            60
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "709/629",
+          "upper": "709/629",
+          "witness": [
+            76,
+            76,
+            76,
+            76,
+            76,
+            76,
+            76,
+            76,
+            49,
+            60
+          ],
+          "proposal_focus": [
+            0,
+            1,
+            3,
+            7
+          ],
+          "proposal_lower": "709/629",
+          "proposal_upper": "709/629",
+          "fallback_lower": "709/629",
+          "fallback_upper": "23397/20128",
+          "premium_focus": [
+            0,
+            3,
+            1,
+            7
+          ],
+          "premium_lower": "709/629",
+          "premium_upper": "709/629"
+        }
+      ],
+      [
+        {
+          "lower": "14208/413",
+          "upper": "14208/413",
+          "witness": [
+            38,
+            38,
+            38,
+            38,
+            38,
+            38,
+            38,
+            38,
+            49,
+            60
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "14208/413",
+          "fallback_upper": "14208/413",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "80512/65611",
+          "upper": "80512/65611",
+          "witness": [
+            66,
+            66,
+            66,
+            66,
+            66,
+            66,
+            66,
+            66,
+            49,
+            60
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "80512/65611",
+          "fallback_upper": "80512/65611",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            76,
+            76,
+            76,
+            76,
+            76,
+            76,
+            76,
+            76,
+            49,
+            60
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 12,
+    "ages": [
+      23,
+      32,
+      42
+    ],
+    "selected_age": 23,
+    "lower_scores": [
+      "1946/1611",
+      "2576/61",
+      "2576/61"
+    ],
+    "upper_scores": [
+      "1946/1611",
+      "2576/61",
+      "2576/61"
+    ],
+    "exact_scores": [
+      "1946/1611",
+      "2576/61",
+      "2576/61"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            26,
+            26
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "6060/6083",
+          "upper": "6060/6083",
+          "witness": [
+            2,
+            33,
+            33,
+            2,
+            33,
+            33,
+            13,
+            3,
+            26,
+            26
+          ],
+          "proposal_focus": [
+            0,
+            3,
+            6,
+            7
+          ],
+          "proposal_lower": "6060/6083",
+          "proposal_upper": "4069896/942865",
+          "fallback_lower": "6060/6083",
+          "fallback_upper": "6060/6083",
+          "premium_focus": [
+            6,
+            3,
+            7,
+            2
+          ],
+          "premium_lower": "65835/66299",
+          "premium_upper": "3358782/861887"
+        },
+        {
+          "lower": "1946/1611",
+          "upper": "1946/1611",
+          "witness": [
+            43,
+            43,
+            43,
+            2,
+            43,
+            43,
+            13,
+            3,
+            26,
+            26
+          ],
+          "proposal_focus": [
+            0,
+            3,
+            6,
+            7
+          ],
+          "proposal_lower": "1946/1611",
+          "proposal_upper": "6534668/1248525",
+          "fallback_lower": "1946/1611",
+          "fallback_upper": "1946/1611",
+          "premium_focus": [
+            6,
+            3,
+            7,
+            2
+          ],
+          "premium_lower": "1946/1611",
+          "premium_upper": "5460476/1151865"
+        }
+      ],
+      [
+        {
+          "lower": "2576/61",
+          "upper": "2576/61",
+          "witness": [
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            26,
+            26
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "2576/61",
+          "fallback_upper": "2576/61",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            33,
+            33,
+            33,
+            33,
+            33,
+            33,
+            33,
+            33,
+            26,
+            26
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "97/77",
+          "upper": "97/77",
+          "witness": [
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            26,
+            26
+          ],
+          "proposal_focus": [
+            0,
+            3,
+            6,
+            7
+          ],
+          "proposal_lower": "97/77",
+          "proposal_upper": "97/77",
+          "fallback_lower": "97/77",
+          "fallback_upper": "97/77",
+          "premium_focus": [
+            6,
+            3,
+            7,
+            2
+          ],
+          "premium_lower": "97/77",
+          "premium_upper": "97/77"
+        }
+      ],
+      [
+        {
+          "lower": "2576/61",
+          "upper": "2576/61",
+          "witness": [
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            24,
+            26,
+            26
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "2576/61",
+          "fallback_upper": "2576/61",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "8624/1817",
+          "upper": "8624/1817",
+          "witness": [
+            33,
+            33,
+            33,
+            33,
+            33,
+            33,
+            33,
+            33,
+            26,
+            26
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "8624/1817",
+          "fallback_upper": "8624/1817",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            26,
+            26
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 13,
+    "ages": [
+      48,
+      61,
+      71
+    ],
+    "selected_age": 48,
+    "lower_scores": [
+      "1",
+      "5616/167",
+      "5616/167"
+    ],
+    "upper_scores": [
+      "1",
+      "5616/167",
+      "5616/167"
+    ],
+    "exact_scores": [
+      "1",
+      "5616/167",
+      "5616/167"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            60
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "232/339",
+          "upper": "232/339",
+          "witness": [
+            46,
+            62,
+            32,
+            21,
+            10,
+            15,
+            62,
+            62,
+            49,
+            60
+          ],
+          "proposal_focus": [
+            0,
+            2,
+            3,
+            5
+          ],
+          "proposal_lower": "28487/42746",
+          "proposal_upper": "43670571/19021970",
+          "fallback_lower": "232/339",
+          "fallback_upper": "232/339",
+          "premium_focus": [
+            2,
+            0,
+            5,
+            4
+          ],
+          "premium_lower": "83448/124729",
+          "premium_upper": "127925784/55504405"
+        },
+        {
+          "lower": "6467/8814",
+          "upper": "6467/8814",
+          "witness": [
+            46,
+            72,
+            32,
+            21,
+            10,
+            15,
+            72,
+            72,
+            49,
+            60
+          ],
+          "proposal_focus": [
+            0,
+            2,
+            4,
+            5
+          ],
+          "proposal_lower": "90768/124729",
+          "proposal_upper": "139147344/55504405",
+          "fallback_lower": "6467/8814",
+          "fallback_upper": "6467/8814",
+          "premium_focus": [
+            2,
+            0,
+            5,
+            4
+          ],
+          "premium_lower": "90768/124729",
+          "premium_upper": "139147344/55504405"
+        }
+      ],
+      [
+        {
+          "lower": "5616/167",
+          "upper": "5616/167",
+          "witness": [
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            60
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "5616/167",
+          "fallback_upper": "5616/167",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            49,
+            60
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "677/597",
+          "upper": "677/597",
+          "witness": [
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            49,
+            60
+          ],
+          "proposal_focus": [
+            0,
+            2,
+            4,
+            5
+          ],
+          "proposal_lower": "677/597",
+          "proposal_upper": "677/597",
+          "fallback_lower": "677/597",
+          "fallback_upper": "677/597",
+          "premium_focus": [
+            2,
+            0,
+            5,
+            4
+          ],
+          "premium_lower": "677/597",
+          "premium_upper": "677/597"
+        }
+      ],
+      [
+        {
+          "lower": "5616/167",
+          "upper": "5616/167",
+          "witness": [
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            49,
+            60
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "5616/167",
+          "fallback_upper": "5616/167",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "209547/88330",
+          "upper": "209547/88330",
+          "witness": [
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            62,
+            49,
+            60
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "209547/88330",
+          "fallback_upper": "209547/88330",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            72,
+            49,
+            60
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 14,
+    "ages": [
+      30,
+      52,
+      62
+    ],
+    "selected_age": 30,
+    "lower_scores": [
+      "1",
+      "626/11",
+      "626/11"
+    ],
+    "upper_scores": [
+      "1",
+      "626/11",
+      "626/11"
+    ],
+    "exact_scores": [
+      "1",
+      "626/11",
+      "626/11"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            32,
+            50
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "24287/31158",
+          "upper": "24287/31158",
+          "witness": [
+            53,
+            53,
+            2,
+            53,
+            6,
+            2,
+            53,
+            26,
+            32,
+            50
+          ],
+          "proposal_focus": [
+            2,
+            4,
+            5,
+            7
+          ],
+          "proposal_lower": "24287/31158",
+          "proposal_upper": "414117637/105314040",
+          "fallback_lower": "24287/31158",
+          "fallback_upper": "24287/31158",
+          "premium_focus": [
+            7,
+            2,
+            4,
+            0
+          ],
+          "premium_lower": "8836/11407",
+          "premium_upper": "1201696/365695"
+        },
+        {
+          "lower": "10011/11407",
+          "upper": "10011/11407",
+          "witness": [
+            63,
+            63,
+            2,
+            63,
+            6,
+            63,
+            63,
+            26,
+            32,
+            50
+          ],
+          "proposal_focus": [
+            2,
+            4,
+            5,
+            7
+          ],
+          "proposal_lower": "10011/11407",
+          "proposal_upper": "10041033/2267980",
+          "fallback_lower": "10011/11407",
+          "fallback_upper": "10011/11407",
+          "premium_focus": [
+            7,
+            2,
+            4,
+            0
+          ],
+          "premium_lower": "10011/11407",
+          "premium_upper": "1361496/365695"
+        }
+      ],
+      [
+        {
+          "lower": "626/11",
+          "upper": "626/11",
+          "witness": [
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            32,
+            50
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "626/11",
+          "fallback_upper": "626/11",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            53,
+            53,
+            53,
+            53,
+            53,
+            53,
+            53,
+            53,
+            32,
+            50
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "289/249",
+          "upper": "289/249",
+          "witness": [
+            63,
+            63,
+            63,
+            63,
+            63,
+            63,
+            63,
+            63,
+            32,
+            50
+          ],
+          "proposal_focus": [
+            2,
+            4,
+            5,
+            7
+          ],
+          "proposal_lower": "289/249",
+          "proposal_upper": "289/249",
+          "fallback_lower": "289/249",
+          "fallback_upper": "289/249",
+          "premium_focus": [
+            7,
+            2,
+            4,
+            0
+          ],
+          "premium_lower": "289/249",
+          "premium_upper": "289/249"
+        }
+      ],
+      [
+        {
+          "lower": "626/11",
+          "upper": "626/11",
+          "witness": [
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            31,
+            32,
+            50
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "626/11",
+          "fallback_upper": "626/11",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "155874/73117",
+          "upper": "155874/73117",
+          "witness": [
+            53,
+            53,
+            53,
+            53,
+            53,
+            53,
+            53,
+            53,
+            32,
+            50
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "155874/73117",
+          "fallback_upper": "155874/73117",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            63,
+            63,
+            63,
+            63,
+            63,
+            63,
+            63,
+            63,
+            32,
+            50
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 15,
+    "ages": [
+      42,
+      58,
+      68
+    ],
+    "selected_age": 42,
+    "lower_scores": [
+      "1",
+      "5796/113",
+      "5796/113"
+    ],
+    "upper_scores": [
+      "1",
+      "5796/113",
+      "5796/113"
+    ],
+    "exact_scores": [
+      "1",
+      "5796/113",
+      "5796/113"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            51,
+            57
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "5206/8027",
+          "upper": "49799589939/67895296000",
+          "witness": [
+            35,
+            27,
+            59,
+            19,
+            16,
+            59,
+            59,
+            59,
+            51,
+            57
+          ],
+          "proposal_focus": [
+            0,
+            1,
+            3,
+            4
+          ],
+          "proposal_lower": "5206/8027",
+          "proposal_upper": "1517549/770592",
+          "fallback_lower": "125977/194250",
+          "fallback_upper": "49799589939/67895296000",
+          "premium_focus": [
+            0,
+            3,
+            1,
+            4
+          ],
+          "premium_lower": "5206/8027",
+          "premium_upper": "1517549/770592"
+        },
+        {
+          "lower": "139127/194250",
+          "upper": "54997876989/67895296000",
+          "witness": [
+            35,
+            27,
+            69,
+            19,
+            69,
+            69,
+            69,
+            69,
+            51,
+            57
+          ],
+          "proposal_focus": [
+            0,
+            1,
+            3,
+            4
+          ],
+          "proposal_lower": "139127/194250",
+          "proposal_upper": "81111041/37296000",
+          "fallback_lower": "139127/194250",
+          "fallback_upper": "54997876989/67895296000",
+          "premium_focus": [
+            0,
+            3,
+            1,
+            4
+          ],
+          "premium_lower": "139127/194250",
+          "premium_upper": "81111041/37296000"
+        }
+      ],
+      [
+        {
+          "lower": "5796/113",
+          "upper": "5796/113",
+          "witness": [
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            51,
+            57
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "5796/113",
+          "fallback_upper": "5796/113",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            51,
+            57
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "163/143",
+          "upper": "163/143",
+          "witness": [
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            51,
+            57
+          ],
+          "proposal_focus": [
+            0,
+            1,
+            3,
+            4
+          ],
+          "proposal_lower": "163/143",
+          "proposal_upper": "163/143",
+          "fallback_lower": "163/143",
+          "fallback_upper": "17573193/13631488",
+          "premium_focus": [
+            0,
+            3,
+            1,
+            4
+          ],
+          "premium_lower": "163/143",
+          "premium_upper": "163/143"
+        }
+      ],
+      [
+        {
+          "lower": "5796/113",
+          "upper": "5796/113",
+          "witness": [
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            43,
+            51,
+            57
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "5796/113",
+          "fallback_upper": "5796/113",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "78936/38425",
+          "upper": "78936/38425",
+          "witness": [
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            59,
+            51,
+            57
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "78936/38425",
+          "fallback_upper": "78936/38425",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            69,
+            51,
+            57
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 16,
+    "ages": [
+      31,
+      60,
+      70
+    ],
+    "selected_age": 31,
+    "lower_scores": [
+      "54868/42795",
+      "10757/326",
+      "10757/326"
+    ],
+    "upper_scores": [
+      "1659757/1217280",
+      "10757/326",
+      "10757/326"
+    ],
+    "exact_scores": [
+      "54868/42795",
+      "10757/326",
+      "10757/326"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            33,
+            37
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "5452/4755",
+          "upper": "494769/405760",
+          "witness": [
+            61,
+            10,
+            61,
+            23,
+            61,
+            61,
+            61,
+            20,
+            33,
+            37
+          ],
+          "proposal_focus": [
+            1,
+            3,
+            6,
+            7
+          ],
+          "proposal_lower": "5452/4755",
+          "proposal_upper": "103588/36455",
+          "fallback_lower": "5452/4755",
+          "fallback_upper": "494769/405760",
+          "premium_focus": [
+            1,
+            3,
+            7,
+            5
+          ],
+          "premium_lower": "5452/4755",
+          "premium_upper": "233073/88760"
+        },
+        {
+          "lower": "54868/42795",
+          "upper": "1659757/1217280",
+          "witness": [
+            71,
+            10,
+            71,
+            23,
+            71,
+            71,
+            71,
+            20,
+            33,
+            37
+          ],
+          "proposal_focus": [
+            1,
+            3,
+            6,
+            7
+          ],
+          "proposal_lower": "54868/42795",
+          "proposal_upper": "1042492/328095",
+          "fallback_lower": "54868/42795",
+          "fallback_upper": "1659757/1217280",
+          "premium_focus": [
+            1,
+            3,
+            7,
+            5
+          ],
+          "premium_lower": "54868/42795",
+          "premium_upper": "260623/88760"
+        }
+      ],
+      [
+        {
+          "lower": "10757/326",
+          "upper": "10757/326",
+          "witness": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            33,
+            37
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "10757/326",
+          "fallback_upper": "10757/326",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            61,
+            61,
+            61,
+            61,
+            61,
+            61,
+            61,
+            61,
+            33,
+            37
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "63/55",
+          "upper": "63/55",
+          "witness": [
+            71,
+            71,
+            71,
+            71,
+            71,
+            71,
+            71,
+            71,
+            33,
+            37
+          ],
+          "proposal_focus": [
+            1,
+            3,
+            6,
+            7
+          ],
+          "proposal_lower": "63/55",
+          "proposal_upper": "63/55",
+          "fallback_lower": "63/55",
+          "fallback_upper": "6237/5120",
+          "premium_focus": [
+            1,
+            3,
+            7,
+            5
+          ],
+          "premium_lower": "63/55",
+          "premium_upper": "63/55"
+        }
+      ],
+      [
+        {
+          "lower": "10757/326",
+          "upper": "10757/326",
+          "witness": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            33,
+            37
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "10757/326",
+          "fallback_upper": "10757/326",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "19085/5301",
+          "upper": "19085/5301",
+          "witness": [
+            61,
+            61,
+            61,
+            61,
+            61,
+            61,
+            61,
+            61,
+            33,
+            37
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "19085/5301",
+          "fallback_upper": "19085/5301",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            71,
+            71,
+            71,
+            71,
+            71,
+            71,
+            71,
+            71,
+            33,
+            37
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 17,
+    "ages": [
+      45,
+      81,
+      91
+    ],
+    "selected_age": 45,
+    "lower_scores": [
+      "1",
+      "3315/86",
+      "3315/86"
+    ],
+    "upper_scores": [
+      "1",
+      "3315/86",
+      "3315/86"
+    ],
+    "exact_scores": [
+      "1",
+      "3315/86",
+      "3315/86"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            71,
+            77
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "18864/35659",
+          "upper": "42369723/73029632",
+          "witness": [
+            82,
+            82,
+            10,
+            82,
+            5,
+            8,
+            82,
+            82,
+            71,
+            77
+          ],
+          "proposal_focus": [
+            0,
+            2,
+            4,
+            5
+          ],
+          "proposal_lower": "18864/35659",
+          "proposal_upper": "3548790/2817061",
+          "fallback_lower": "18864/35659",
+          "fallback_upper": "42369723/73029632",
+          "premium_focus": [
+            2,
+            5,
+            0,
+            3
+          ],
+          "premium_lower": "20701/39501",
+          "premium_upper": "3560572/2962575"
+        },
+        {
+          "lower": "41003/71318",
+          "upper": "1473524811/2336948224",
+          "witness": [
+            92,
+            92,
+            10,
+            92,
+            5,
+            8,
+            92,
+            92,
+            71,
+            77
+          ],
+          "proposal_focus": [
+            0,
+            2,
+            4,
+            5
+          ],
+          "proposal_lower": "41003/71318",
+          "proposal_upper": "61709515/45072976",
+          "fallback_lower": "41003/71318",
+          "fallback_upper": "1473524811/2336948224",
+          "premium_focus": [
+            2,
+            5,
+            0,
+            3
+          ],
+          "premium_lower": "22606/39501",
+          "premium_upper": "3888232/2962575"
+        }
+      ],
+      [
+        {
+          "lower": "3315/86",
+          "upper": "3315/86",
+          "witness": [
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            71,
+            77
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "3315/86",
+          "fallback_upper": "3315/86",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            82,
+            82,
+            82,
+            82,
+            82,
+            82,
+            82,
+            82,
+            71,
+            77
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "219/199",
+          "upper": "219/199",
+          "witness": [
+            92,
+            92,
+            92,
+            92,
+            92,
+            92,
+            92,
+            92,
+            71,
+            77
+          ],
+          "proposal_focus": [
+            0,
+            2,
+            4,
+            5
+          ],
+          "proposal_lower": "219/199",
+          "proposal_upper": "219/199",
+          "fallback_lower": "219/199",
+          "fallback_upper": "7870203/6520832",
+          "premium_focus": [
+            2,
+            5,
+            0,
+            3
+          ],
+          "premium_lower": "219/199",
+          "premium_upper": "219/199"
+        }
+      ],
+      [
+        {
+          "lower": "3315/86",
+          "upper": "3315/86",
+          "witness": [
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            46,
+            71,
+            77
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "3315/86",
+          "fallback_upper": "3315/86",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "87958/60501",
+          "upper": "87958/60501",
+          "witness": [
+            82,
+            82,
+            82,
+            82,
+            82,
+            82,
+            82,
+            82,
+            71,
+            77
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "87958/60501",
+          "fallback_upper": "87958/60501",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            92,
+            92,
+            92,
+            92,
+            92,
+            92,
+            92,
+            92,
+            71,
+            77
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 18,
+    "ages": [
+      43,
+      56,
+      66
+    ],
+    "selected_age": 43,
+    "lower_scores": [
+      "1",
+      "10793/224",
+      "10793/224"
+    ],
+    "upper_scores": [
+      "1",
+      "10793/224",
+      "10793/224"
+    ],
+    "exact_scores": [
+      "1",
+      "10793/224",
+      "10793/224"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            44,
+            44,
+            44,
+            44,
+            44,
+            44,
+            44,
+            44,
+            51,
+            45
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "639/910",
+          "upper": "22963743/29818880",
+          "witness": [
+            57,
+            32,
+            57,
+            57,
+            57,
+            31,
+            18,
+            25,
+            51,
+            45
+          ],
+          "proposal_focus": [
+            1,
+            5,
+            6,
+            7
+          ],
+          "proposal_lower": "639/910",
+          "proposal_upper": "51759/29575",
+          "fallback_lower": "639/910",
+          "fallback_upper": "22963743/29818880",
+          "premium_focus": [
+            7,
+            6,
+            1,
+            5
+          ],
+          "premium_lower": "639/910",
+          "premium_upper": "51759/29575"
+        },
+        {
+          "lower": "699/910",
+          "upper": "25119963/29818880",
+          "witness": [
+            67,
+            32,
+            67,
+            67,
+            67,
+            31,
+            18,
+            25,
+            51,
+            45
+          ],
+          "proposal_focus": [
+            1,
+            5,
+            6,
+            7
+          ],
+          "proposal_lower": "699/910",
+          "proposal_upper": "56619/29575",
+          "fallback_lower": "699/910",
+          "fallback_upper": "25119963/29818880",
+          "premium_focus": [
+            7,
+            6,
+            1,
+            5
+          ],
+          "premium_lower": "699/910",
+          "premium_upper": "56619/29575"
+        }
+      ],
+      [
+        {
+          "lower": "10793/224",
+          "upper": "10793/224",
+          "witness": [
+            44,
+            44,
+            44,
+            44,
+            44,
+            44,
+            44,
+            44,
+            51,
+            45
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "10793/224",
+          "fallback_upper": "10793/224",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57,
+            57,
+            57,
+            51,
+            45
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "39/34",
+          "upper": "39/34",
+          "witness": [
+            67,
+            67,
+            67,
+            67,
+            67,
+            67,
+            67,
+            67,
+            51,
+            45
+          ],
+          "proposal_focus": [
+            1,
+            5,
+            6,
+            7
+          ],
+          "proposal_lower": "39/34",
+          "proposal_upper": "39/34",
+          "fallback_lower": "39/34",
+          "fallback_upper": "1401543/1114112",
+          "premium_focus": [
+            7,
+            6,
+            1,
+            5
+          ],
+          "premium_lower": "39/34",
+          "premium_upper": "39/34"
+        }
+      ],
+      [
+        {
+          "lower": "10793/224",
+          "upper": "10793/224",
+          "witness": [
+            44,
+            44,
+            44,
+            44,
+            44,
+            44,
+            44,
+            44,
+            51,
+            45
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "10793/224",
+          "fallback_upper": "10793/224",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "502/207",
+          "upper": "502/207",
+          "witness": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57,
+            57,
+            57,
+            51,
+            45
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "502/207",
+          "fallback_upper": "502/207",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            67,
+            67,
+            67,
+            67,
+            67,
+            67,
+            67,
+            67,
+            51,
+            45
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  },
+  {
+    "case": 19,
+    "ages": [
+      19,
+      31,
+      41
+    ],
+    "selected_age": 19,
+    "lower_scores": [
+      "1776/1169",
+      "8721/217",
+      "8721/217"
+    ],
+    "upper_scores": [
+      "3663/2338",
+      "8721/217",
+      "8721/217"
+    ],
+    "exact_scores": [
+      "1776/1169",
+      "8721/217",
+      "8721/217"
+    ],
+    "certified_exact_decision": true,
+    "pairs": [
+      [
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            30,
+            27
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1476/1169",
+          "upper": "12177/9352",
+          "witness": [
+            32,
+            32,
+            32,
+            32,
+            11,
+            8,
+            32,
+            15,
+            30,
+            27
+          ],
+          "proposal_focus": [
+            2,
+            4,
+            5,
+            7
+          ],
+          "proposal_lower": "1476/1169",
+          "proposal_upper": "31980/8183",
+          "fallback_lower": "1476/1169",
+          "fallback_upper": "12177/9352",
+          "premium_focus": [
+            7,
+            4,
+            5,
+            2
+          ],
+          "premium_lower": "1476/1169",
+          "premium_upper": "31980/8183"
+        },
+        {
+          "lower": "1776/1169",
+          "upper": "3663/2338",
+          "witness": [
+            42,
+            42,
+            42,
+            42,
+            11,
+            8,
+            42,
+            15,
+            30,
+            27
+          ],
+          "proposal_focus": [
+            2,
+            4,
+            5,
+            7
+          ],
+          "proposal_lower": "1776/1169",
+          "proposal_upper": "38480/8183",
+          "fallback_lower": "1776/1169",
+          "fallback_upper": "3663/2338",
+          "premium_focus": [
+            7,
+            4,
+            5,
+            2
+          ],
+          "premium_lower": "1776/1169",
+          "premium_upper": "38480/8183"
+        }
+      ],
+      [
+        {
+          "lower": "8721/217",
+          "upper": "8721/217",
+          "witness": [
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            30,
+            27
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "8721/217",
+          "fallback_upper": "8721/217",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            30,
+            27
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "77/61",
+          "upper": "77/61",
+          "witness": [
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            30,
+            27
+          ],
+          "proposal_focus": [
+            2,
+            4,
+            5,
+            7
+          ],
+          "proposal_lower": "77/61",
+          "proposal_upper": "77/61",
+          "fallback_lower": "77/61",
+          "fallback_upper": "2541/1952",
+          "premium_focus": [
+            7,
+            4,
+            5,
+            2
+          ],
+          "premium_lower": "77/61",
+          "premium_upper": "77/61"
+        }
+      ],
+      [
+        {
+          "lower": "8721/217",
+          "upper": "8721/217",
+          "witness": [
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            30,
+            27
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "8721/217",
+          "fallback_upper": "8721/217",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "27999/4069",
+          "upper": "27999/4069",
+          "witness": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            30,
+            27
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "27999/4069",
+          "fallback_upper": "27999/4069",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        },
+        {
+          "lower": "1",
+          "upper": "1",
+          "witness": [
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            42,
+            30,
+            27
+          ],
+          "proposal_focus": [],
+          "proposal_lower": null,
+          "proposal_upper": null,
+          "fallback_lower": "1",
+          "fallback_upper": "1",
+          "premium_focus": [],
+          "premium_lower": null,
+          "premium_upper": null
+        }
+      ]
+    ]
+  }
+]

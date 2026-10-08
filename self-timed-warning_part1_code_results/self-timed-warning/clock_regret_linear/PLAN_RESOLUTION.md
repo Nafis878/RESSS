@@ -1,0 +1,9 @@
+# Prospective continuous-clock and resolution investigation
+
+8 October 2026. The two-world tests and timing study have completed. A further derivation suggests an exact continuous-clock counterpart and a uniform discretization bound. This addition is motivated by the proved integer theorem, not independently preregistered. Preserve the completed timing tables and earlier artifacts.
+
+For exact integer-valued public H and ages but compatible real lifetimes L>H, conjectured later-pair supremum: all eligible unknown assets fail only under the later age, at limiting times max(H,b). There is one limiting world, often unattainable. Earlier-pair comparisons retain sorted prefixes with H rather than H+1. Supremum witnesses must be labeled limits, not compatible measured or imputed lifetimes; provide compatible epsilon approximations separately.
+
+For refinement factor r, scale the integer logging times and ages by r, keeping common costs. Conjectured uniform bound: for each pair and each policy, grid score <= continuous score <= (1+1/r)*grid score, since original times/ages are at least one. Thus the selected grid policy is a (1+1/r)-approximation for continuous worst-case regret. Derive and test without claiming future-population guarantees.
+
+Tests: 300 independent random comparisons to an explicit phase-labeled endpoint-state optimizer for the continuous closure, 300 random full-family resolution sandwiches at r=1,2,4,16,64, and independent unit checks of unattained limits, compatible epsilon sequences and both integer endpoint branches. Include the example four known failures at time1 and one censored record H1, ages3/2, rho2: integer factor1, continuous supremum10/9. Keep negative empirical maintenance outcomes unchanged. This extension changes the ambiguity model, not the measured old data or experiments.

@@ -1,0 +1,36 @@
+A1 sigma=0.4 done (8s)
+A1 sigma=0.15 done (17s)
+PASS  A Theorem 1: realised P(fail) within [alpha - 1/(n+1) - 3 MCSE (continuous only), alpha + 3 MCSE] in 208/208 certifiable cells (largest excess over alpha +0.01 points)
+PASS  A descriptive: per-time-step conformal bound, unit-level P(fail) / alpha ranges 0.00-0.01 (not controlled at alpha in 0/96 cells)
+Part A done (73s)
+C P1 p=c_p/c_c ratio 0.1 n 20 done (5s)
+C P1 p=c_p/c_c ratio 0.1 n 100 done (24s)
+C P1 p=c_p/c_c ratio 0.01 n 20 done (29s)
+C P1 p=c_p/c_c ratio 0.01 n 100 done (47s)
+C age T=180 ratio 0.1 n 20 done (51s)
+C age T=180 ratio 0.1 n 100 done (69s)
+      policy  cp_over_cc   n  interval  M_true_pct  coverage   mcse  mean_width_pct
+P1 p=c_p/c_c        0.10  20     Eq. 7     19.3721    0.2894 0.0064         68.4119
+P1 p=c_p/c_c        0.10  20 influence     19.3721    0.2890 0.0064         56.3410
+P1 p=c_p/c_c        0.10  20 bootstrap     19.3721    0.2890 0.0064         47.2785
+P1 p=c_p/c_c        0.10 100     Eq. 7     19.3721    0.8086 0.0056         42.1673
+P1 p=c_p/c_c        0.10 100 influence     19.3721    0.8086 0.0056         40.0079
+P1 p=c_p/c_c        0.10 100 bootstrap     19.3721    0.8030 0.0056         36.7029
+P1 p=c_p/c_c        0.01  20     Eq. 7     20.6519    0.2358 0.0060         69.7491
+P1 p=c_p/c_c        0.01  20 influence     20.6519    0.0250 0.0022         54.9555
+P1 p=c_p/c_c        0.01  20 bootstrap     20.6519    0.0262 0.0023         44.7653
+P1 p=c_p/c_c        0.01 100     Eq. 7     20.6519    0.1030 0.0043         52.6250
+P1 p=c_p/c_c        0.01 100 influence     20.6519    0.1030 0.0043         46.8435
+P1 p=c_p/c_c        0.01 100 bootstrap     20.6519    0.1030 0.0043         37.7283
+   age T=180        0.10  20     Eq. 7    169.0559    0.9356 0.0035        320.8185
+   age T=180        0.10  20 influence    169.0559    0.9244 0.0037        287.2068
+   age T=180        0.10  20 bootstrap    169.0559    0.9260 0.0037        275.6016
+   age T=180        0.10 100     Eq. 7    169.0559    0.9516 0.0030        150.2080
+   age T=180        0.10 100 influence    169.0559    0.9396 0.0034        137.9702
+   age T=180        0.10 100 bootstrap    169.0559    0.9426 0.0033        137.0466
+     perfect        0.10  20     Eq. 7      0.0000    1.0000 0.0000         15.5870
+     perfect        0.10  20 influence      0.0000    1.0000 0.0000          0.0000
+     perfect        0.10 100     Eq. 7      0.0000    1.0000 0.0000          7.1454
+     perfect        0.10 100 influence      0.0000    1.0000 0.0000          0.0000
+PASS  C descriptive: coverage of the three intervals for M written to sim_m_coverage.csv
+Part C done (70s)

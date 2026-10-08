@@ -1,0 +1,114 @@
+[
+  {
+    "split": "id",
+    "method": "attention",
+    "mean_log_gap": 0.004706105665157536,
+    "median_log_gap": 0.0,
+    "mean_certificate_factor": 2.995015518869542,
+    "mean_optimum_coverage": 0.7522222222222222
+  },
+  {
+    "split": "id",
+    "method": "horizon",
+    "mean_log_gap": 0.2993394200772694,
+    "median_log_gap": 0.21953208105813754,
+    "mean_certificate_factor": 7.003635030436405,
+    "mean_optimum_coverage": 0.08333333333333333
+  },
+  {
+    "split": "id",
+    "method": "mlp",
+    "mean_log_gap": 0.005142722991880635,
+    "median_log_gap": 0.0,
+    "mean_certificate_factor": 2.9819553290115883,
+    "mean_optimum_coverage": 0.7422222222222222
+  },
+  {
+    "split": "id",
+    "method": "premium",
+    "mean_log_gap": 0.005341983258876257,
+    "median_log_gap": 0.0,
+    "mean_certificate_factor": 2.930020498066644,
+    "mean_optimum_coverage": 0.7266666666666667
+  },
+  {
+    "split": "id",
+    "method": "premium_per_use",
+    "mean_log_gap": 0.011473657066907495,
+    "median_log_gap": 0.0,
+    "mean_certificate_factor": 3.274979668443665,
+    "mean_optimum_coverage": 0.6466666666666666
+  },
+  {
+    "split": "id",
+    "method": "random",
+    "mean_log_gap": 0.3616108034897702,
+    "median_log_gap": 0.2600309964310139,
+    "mean_certificate_factor": 7.300930572527495,
+    "mean_optimum_coverage": 0.04666666666666667
+  },
+  {
+    "split": "id",
+    "method": "singleton",
+    "mean_log_gap": 0.005341983258876257,
+    "median_log_gap": 0.0,
+    "mean_certificate_factor": 2.930020498066644,
+    "mean_optimum_coverage": 0.7266666666666667
+  },
+  {
+    "split": "shift",
+    "method": "attention",
+    "mean_log_gap": 0.01568472231078684,
+    "median_log_gap": 0.0076544731867988075,
+    "mean_certificate_factor": 11.152094873329554,
+    "mean_optimum_coverage": 0.3655555555555555
+  },
+  {
+    "split": "shift",
+    "method": "horizon",
+    "mean_log_gap": 0.632216403826181,
+    "median_log_gap": 0.5781794254446091,
+    "mean_certificate_factor": 23.438644581385162,
+    "mean_optimum_coverage": 0.0
+  },
+  {
+    "split": "shift",
+    "method": "mlp",
+    "mean_log_gap": 0.019922213524395906,
+    "median_log_gap": 0.01124770085909356,
+    "mean_certificate_factor": 11.456261037963843,
+    "mean_optimum_coverage": 0.30333333333333334
+  },
+  {
+    "split": "shift",
+    "method": "premium",
+    "mean_log_gap": 0.01725728129381214,
+    "median_log_gap": 0.01128702697735065,
+    "mean_certificate_factor": 11.004580000461486,
+    "mean_optimum_coverage": 0.31
+  },
+  {
+    "split": "shift",
+    "method": "premium_per_use",
+    "mean_log_gap": 0.04086400200382622,
+    "median_log_gap": 0.020946649132041625,
+    "mean_certificate_factor": 12.507989567722825,
+    "mean_optimum_coverage": 0.20666666666666667
+  },
+  {
+    "split": "shift",
+    "method": "random",
+    "mean_log_gap": 0.29419041633733006,
+    "median_log_gap": 0.25295172502031293,
+    "mean_certificate_factor": 18.638417778325817,
+    "mean_optimum_coverage": 0.013333333333333334
+  },
+  {
+    "split": "shift",
+    "method": "singleton",
+    "mean_log_gap": 0.017086944580569224,
+    "median_log_gap": 0.011064299099848157,
+    "mean_certificate_factor": 11.005390440292949,
+    "mean_optimum_coverage": 0.31333333333333335
+  }
+]

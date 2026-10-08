@@ -1,0 +1,507 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{charter}
+\usepackage{textcomp,amsmath,amssymb,graphicx,booktabs,array,longtable,enumitem,xurl}
+\usepackage[expansion=false]{microtype}
+\urlstyle{same}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage[labelfont=bf,labelsep=period,font=small,justification=raggedright,singlelinecheck=false]{caption}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\begin{document}
+\begin{center}{\Large\bfseries Supplementary material}\\[6pt]{\large Self-timed end-of-life alarms: timing, maintenance cost and limits}\\[6pt]{\small Anonymized for review. Reference numbers in brackets refer to the reference list of the main article.}\end{center}
+\section*{S1. Fixed-time reference models}
+
+\noindent For Section 6.1, the models were evaluated at 30, 50, 70 and 90\% of each test engine's life in the same outer folds. They were trained on the fit engines (75\% of each outer training part); stacking and the calibration shifts of Fig. 2 used only the calibration engines (the other 25\%). The eleven models at half of life are: age only; an input--output hidden Markov model; the similarity model; gradient-boosted trees; a temporal convolutional network with and without augmentation by a conditional generative adversarial network; a hybrid Transformer with an engineered-feature branch; the convolutional and LSTM networks; a physics-informed Bayesian exponential-degradation model with a population prior in the style of Gebraeel et al. [21]; and a stacked hybrid of ten base models and the cycle count, whose quantile stacker and shift were learned on calibration engines pooled over life stages.
+
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item \textbf{Age only}: the mean remaining life of the training engines that survived beyond the current cycle.
+\item \textbf{Gradient-boosted trees}: histogram gradient boosting with absolute-error loss (400 iterations, learning rate 0.05, 31 leaves, minimum 40 samples per leaf, no target cap) on features of the seven temperature and speed sensors (exponential mean with span 5, expanding level, slope and standard deviation, a pooled health index, early-life baseline and age).
+\item \textbf{Input--output hidden Markov model}: three health states and an absorbing failure state, four discrete symbols from a principal-component quantisation, one transition matrix per operating regime; remaining life = expected time to absorption.
+\item \textbf{LSTM and CNN}: as in Section 5.4 of the main text.
+\item \textbf{Similarity}: principal-component trajectories matched to all training trajectories over a 60-cycle window; the remaining lives of the 30 closest matches are kernel-weighted into a distribution.
+\item \textbf{Physics-informed Bayesian model}: a linear health index with a path a + exp($\theta$ + $\beta$t) and a failure level D, with a multivariate normal population prior; posterior by importance sampling (20,000 samples) conditioned on survival.
+\item \textbf{Hybrid Transformer, TCN, TCN with GAN augmentation, stacked hybrid}: quantile models as described in the reproduction package.
+\end{itemize}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.2268\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1546\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1546\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1546\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1546\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1546\linewidth-2\tabcolsep\relax}@{}}
+\caption{Fixed-time models on PHM08 at four fractions of life: share of predictions in [\textminus{}13, +2], raw and with a shift chosen on the calibration engines of the same fold at the same fraction (218 test engines).}\\
+\toprule
+Model & 30\%: raw / calibrated & 50\% & 70\% & 90\% & MAE at 90\% (cycles) \\
+\midrule\endfirsthead
+\toprule
+Model & 30\%: raw / calibrated & 50\% & 70\% & 90\% & MAE at 90\% (cycles) \\
+\midrule\endhead
+\bottomrule\endfoot
+Age only & 11.9 / 12.8 & 11.9 / 12.8 & 20.6 / 19.3 & 6.9 / 32.1 & 27.7 \\
+Gradient-boosted trees & 14.2 / 10.6 & 20.6 / 20.2 & 36.7 / 40.8 & 64.7 / 81.2 & 4.5 \\
+LSTM & 10.6 / 13.8 & 30.3 / 22.5 & 25.7 / 17.9 & 49.1 / 54.6 & 7.7 \\
+CNN & 11.5 / 12.8 & 24.8 / 27.5 & 16.1 / 24.8 & 43.1 / 60.6 & 7.6 \\
+Hidden Markov model & 7.8 / 6.9 & 6.4 / 12.4 & 8.3 / 7.8 & 0.0 / 61.9 & 46.9 \\
+\end{longtable}}
+{\scriptsize Median true cycles left: 147, 105, 63, 21 at 30, 50, 70 and 90\% of life. The calibration shift is chosen by the in-window count on the calibration engines (grid \textminus{}30 to +30 in steps of 0.5; ties to the smaller |\textit{s}|).\par}\medskip
+
+\section*{S2. Proof of Proposition 1}
+
+\noindent If $\varepsilon$ has distribution \textit{F} not depending on \textit{s}, the warning is correct if and only if \textit{a} $\le$ $\varepsilon$ + \textit{s} $\le$ \textit{b}, that is, $\varepsilon$ $\in$ [\textit{a} \textminus{} \textit{s}, \textit{b} \textminus{} \textit{s}], an interval of width \textit{w} = \textit{b} \textminus{} \textit{a}. Hence \textit{P}(\textit{s}) = \textit{F}(\textit{b} \textminus{} \textit{s}) \textminus{} \textit{F}(\textit{a} \textminus{} \textit{s}) $\le$ sup\textsubscript{x} [\textit{F}(\textit{x} + \textit{w}) \textminus{} \textit{F}(\textit{x})] = \textit{C}\textsubscript{w}(\textit{F}), which is part (i).
+
+\noindent For part (ii), let \textit{f} be the density, unimodal and symmetric about \textit{m}, and write \textit{g}(\textit{x}) = \textit{F}(\textit{x} + \textit{w}) \textminus{} \textit{F}(\textit{x}). Then \textit{g}'(\textit{x}) = \textit{f}(\textit{x} + \textit{w}) \textminus{} \textit{f}(\textit{x}). For \textit{x} < \textit{m} \textminus{} \textit{w}/2 the point \textit{x} + \textit{w} is closer to \textit{m} than \textit{x}, so \textit{f}(\textit{x} + \textit{w}) $\ge$ \textit{f}(\textit{x}) and \textit{g} is non-decreasing; for \textit{x} > \textit{m} \textminus{} \textit{w}/2 the reverse holds. Therefore \textit{g} is maximal at \textit{x} = \textit{m} \textminus{} \textit{w}/2, and \textit{g}(\textit{m} \textminus{} \textit{w}/2) = Pr(|$\varepsilon$ \textminus{} \textit{m}| $\le$ \textit{w}/2). The interval [\textit{a} \textminus{} \textit{s}, \textit{b} \textminus{} \textit{s}] is centred at \textit{m} when \textit{s}\textsuperscript{*} = (\textit{a} + \textit{b})/2 \textminus{} \textit{m}; for [\textminus{}13, +2] this is \textminus{}5.5 \textminus{} \textit{m}. \hfill$\blacksquare$
+
+\noindent The proposition concerns a fixed distribution. In the sequential policy, a different shift moves the alarm to a different cycle, where the unshifted error has a different distribution; Section 6.5 of the main text measures this. The submitted version compared the realised in-window rate with the concentration Pr(|$\varepsilon$ \textminus{} \textit{m}| $\le$ 7.5) computed from the same test alarms; since both come from the same alarms, their agreement does not test the assumption, and that comparison has been removed.
+
+\section*{S3. Example engines}
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=1.00\linewidth]{img/Fig3_example_engines.png}
+\caption{Three PHM08 test engines at \textit{H} = 20, each with the settings selected for its own outer fold. The calibrated estimate $\tilde{y}$ (blue) stays flat while the engine looks healthy and falls as wear appears; the dot marks the first warning. Left: correct. Centre: too early. Right: too late.}
+\end{figure}
+
+\section*{S4. Leakage checks and preprocessing audit}
+
+\begin{itemize}[leftmargin=1.2em,itemsep=2pt]
+\item (E1) outer and inner unit sets are disjoint in every fold;
+\item (E2) causality: for 15 test engines and six random cut-offs each, predictions from truncated histories equal those from full histories;
+\item (E3) a negative control at \textit{H} = 10 in outer fold 1 trained on remaining-life labels built from lives permuted across engines;
+\item (E4) refitting fold 1 with its stored settings reproduces the stored outcome of each of its test engines at \textit{H} = 10.
+\end{itemize}
+
+\noindent All four checks passed on PHM08: disjoint sets (E1); a maximum absolute difference of 0 over 90 truncation checks (E2); permuted lives reduced the fold-1 in-window rate at \textit{H} = 10 from 97.7\% to 15.9\% (E3); exact reproduction of fold 1 (E4).
+
+\noindent For this revision every preprocessing step was checked for use of test units. Regime z-scores and the removal of constant sensors use the training (or fit) units of each split; regimes are obtained by rounding the operating settings, without fitting; the N-CMAPSS channels were fixed in the protocol; bearing condition statistics come from training bearings, pooled when a condition has no training bearing; the threshold grid of the health-indicator alarm, the constant of the constant-estimate control and the capacity thresholds come from training values. The one dependency found was the block length $\kappa$ of the battery and bearing data (Section 5.2 of the main text), which has been corrected, together with a backward fill of missing per-cycle battery values within a cell.
+
+\section*{S5. Battery analyses}
+
+\noindent \textbf{Data curation (fixed before any model was run).} Structural checks required three deviations, recorded below the hashed section of the protocol. (D1) In the first and third batches the cycle at which capacity falls below 80\% of nominal is not in the summary, so a record counts as complete if it runs to the cycle before. (D2) Five cells of the first batch were continued as five cells of the second; the ten records were identified from the providers' loading code and excluded. (D3) Five cells with a finite official life never fall below 0.91 Ah in the cleaned data and were excluded as censored. Two further records have no official cycle life in the providers' cell list and were not used. This leaves 123 cells (36, 43 and 44 from the three batches). A secondary analysis without four channels flagged as noisy by the providers uses 119 cells. The batches were started in May 2017, June 2017 and April 2018, used different rest periods and share almost no charging protocol (of the 41 protocols of the second batch, 2 occur in another batch); their median lives are 772, 481 and 1006 cycles.
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1563\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0938\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1042\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1563\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1146\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1354\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1250\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1146\linewidth-2\tabcolsep\relax}@{}}
+\caption{Battery: first warnings at \textit{H} = 20 blocks per outer split, with the block length $\kappa$ from the training cells of the split (corrected analysis) and as in the protocol ($\kappa$ = 3 from all cells).}\\
+\toprule
+Split & Test cells & $\kappa$ (training cells) & Window and \textit{H} in cycles & Correct (corrected) & Late / early / missed (corrected) & MLP + Kalman filter correct & Age-only correct \\
+\midrule\endfirsthead
+\toprule
+Split & Test cells & $\kappa$ (training cells) & Window and \textit{H} in cycles & Correct (corrected) & Late / early / missed (corrected) & MLP + Kalman filter correct & Age-only correct \\
+\midrule\endhead
+\bottomrule\endfoot
+fold 1 & 25 & 4 & [\textminus{}52, +8]; 80 & 23 & 0 / 2 / 0 & 20 & 0 \\
+fold 2 & 25 & 3 & [\textminus{}39, +6]; 60 & 25 & 0 / 0 / 0 & 21 & 0 \\
+fold 3 & 25 & 4 & [\textminus{}52, +8]; 80 & 23 & 1 / 0 / 1 & 18 & 2 \\
+fold 4 & 24 & 3 & [\textminus{}39, +6]; 60 & 23 & 1 / 0 / 0 & 19 & 0 \\
+fold 5 & 24 & 3 & [\textminus{}39, +6]; 60 & 24 & 0 / 0 / 0 & 21 & 1 \\
+batch 1 held out & 36 & 3 & [\textminus{}39, +6]; 60 & 30 & 0 / 6 / 0 & 17 & 0 \\
+batch 2 held out & 43 & 4 & [\textminus{}52, +8]; 80 & 15 & 26 / 0 / 2 & 27 & 0 \\
+batch 3 held out & 44 & 3 & [\textminus{}39, +6]; 60 & 35 & 4 / 3 / 2 & 18 & 4 \\
+\end{longtable}}
+{\scriptsize Protocol analysis ($\kappa$ = 3 in every split): cross-validation 120/123, leave-one-batch-out 86/123 (batch 1: 30/36; batch 2: 24/43; batch 3: 32/44).\par}\medskip
+
+\noindent Training-only $\kappa$ differed from the protocol value ($\kappa$ = 3) in 4 of the 13 battery splits (cv1, cv119\_3, cv3, lobo2; $\kappa$ = 4 in each). In those splits the number of correct first warnings changed by -2, +1, -1, -9 cells. In the splits where $\kappa$ was unchanged, the only difference from the protocol analysis is the first-block value of the cells with a missing first cycle (forward instead of backward filling). Even so, counts changed by up to 3 cells (cv119\_2: 23 $\rightarrow$ 24; cv119\_4: 22 $\rightarrow$ 23; cv119\_5: 22 $\rightarrow$ 23; cv5: 23 $\rightarrow$ 24; lobo3: 32 $\rightarrow$ 35). This sensitivity of refitted trees to small input changes is a source of variability that the binomial intervals do not cover. With a batch held out, batch 1 gave 30/36, batch 2 15/43 (26 late; MLP with Kalman filter 27/43) and batch 3 35/44. The 119-cell analysis without the four noisy channels gave 117/119 (98.3\%; protocol analysis 95.0\%). The capacity-trend baseline uses the least-squares slope of block-mean discharge capacity over the last \textit{w} $\in$ \{10, 20, 40\} blocks; its extrapolated remaining life to 0.88 Ah goes through the same smoothing, debounce and shift grid, with all settings chosen on training cells. The capacity-threshold baseline alarms when smoothed capacity stays below a threshold (120 quantiles of training values) for \textit{k} blocks and reports a constant in [\textit{H} \textminus{} 6, \textit{H}].
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1354\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1979\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1146\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0938\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1354\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1458\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1771\linewidth-2\tabcolsep\relax}@{}}
+\caption{Battery: sensitivity to the block length with the physical task fixed (\textit{H} = 60 cycles, window [\textminus{}39, +6] cycles; five-fold cross-validation by cell, 123 cells).}\\
+\toprule
+$\kappa$ (cycles per block) & \textit{H} and window in blocks & Correct & \% & 95\% CI & Late / early / missed & True cycles left at alarm, median \\
+\midrule\endfirsthead
+\toprule
+$\kappa$ (cycles per block) & \textit{H} and window in blocks & Correct & \% & 95\% CI & Late / early / missed & True cycles left at alarm, median \\
+\midrule\endhead
+\bottomrule\endfoot
+1 & 60.0; [\textminus{}39.0, 6.0] & 121/123 & 98.4 & 94.2--99.8 & 1 / 1 / 0 & 65 \\
+2 & 30.0; [\textminus{}19.5, 3.0] & 117/123 & 95.1 & 89.7--98.2 & 3 / 2 / 1 & 62 \\
+3 & 20.0; [\textminus{}13.0, 2.0] & 121/123 & 98.4 & 94.2--99.8 & 1 / 0 / 1 & 54 \\
+4 & 15.0; [\textminus{}9.8, 1.5] & 117/123 & 95.1 & 89.7--98.2 & 3 / 2 / 1 & 51 \\
+5 & 12.0; [\textminus{}7.8, 1.2] & 120/123 & 97.6 & 93.0--99.5 & 2 / 0 / 1 & 46 \\
+6 & 10.0; [\textminus{}6.5, 1.0] & 121/123 & 98.4 & 94.2--99.8 & 0 / 1 / 1 & 42 \\
+\end{longtable}}
+{\scriptsize Caps \{120, 180, 270\} cycles and shifts \textminus{}36 to +24 cycles (step 1.5 cycles), converted to blocks. $\kappa$ = 3 is the protocol task; its result differs from the protocol analysis only through the forward fill.\par}\medskip
+
+\section*{S6. N-CMAPSS: secondary results}
+
+\noindent At \textit{H} = 10 and 15 the recipe reached 74.7\% and 70.7\%. On the official split (39 test engines) it reached 22/39 = 56.4\% at \textit{H} = 20, compared with 43.6\% for the MLP with Kalman filter and 30.8\% for age-only. The median error at \textit{H} = 20 was \textminus{}2.7 cycles; the debounce selected in every fold was \textit{k} = 5. Two deviations are recorded: seed 106 was used for the inner split of the official split, which has no fold number, and the protocol calls the Kalman filter of the MLP competitor constant-velocity, whereas it is the scalar filter with a fixed decrease of one cycle per cycle. In an exploratory re-run with all 14 channels, the rate at \textit{H} = 20 was 65.7\%.
+
+\section*{S7. Bearing analyses}
+
+\noindent The 17 bearings ran under condition 1 (1800 rpm, 4000 N; seven bearings), condition 2 (1650 rpm, 4200 N; seven) and condition 3 (1500 rpm, 5000 N; three). Lives ranged from 230 to 2803 snapshots (median 1428, about 4 h). \textbf{Protocol analysis} ($\kappa$ = 7 from all bearings): 0 of 17 first warnings in the window at \textit{H} = 20 (7 too early, 10 missed); 0 of 11 on the official split. \textbf{Corrected analysis} ($\kappa$ from training bearings: 7, 4, 9, 6, 7 in the five folds, 4 on the official split): 0 of 17 in cross-validation (7 too early, 0 late, 10 missed), 1 of 11 on the official split; age-only 1 and the MLP with Kalman filter 0 of 17 in cross-validation. Folds with $\kappa$ = 7 reproduced the protocol results exactly. With the physical task fixed (\textit{H} = 140 snapshots, window [\textminus{}91, +14] snapshots), $\kappa$ $\in$ \{3, 5, 7, 10, 14\} gave 1, 0, 0, 0, 1 correct first warnings of 17. The pre-specified theory-guided shift (STW-T) gave 1 of 17 in the corrected analysis.
+
+\noindent Table S4 lists the bearings with a diagnosis made after the run with an ad hoc criterion: the number of blocks ($\kappa$ = 7) before failure from which the summed RMS of the two channels stayed above 1.5 times its mean over the first 20 blocks (0: never sustained; 1: only the final block). In 11 of 17 bearings the rise came within the last six blocks (about seven minutes). This is consistent with the hypothesis that, with these features, most failures gave too little notice for a 20-block alarm, but it does not explain the misses and very early alarms on bearings with long degradation; small numbers (13--14 training bearings per fold), three operating conditions and the feature set are competing explanations, and none was tested.
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1662\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1108\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0997\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1883\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1329\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1580\linewidth-2\tabcolsep\relax}@{}}
+\caption{Bearings (protocol analysis, cross-validation, \textit{H} = 20). Onset: blocks before failure from which the vibration RMS stayed above 1.5 times its early-life level (post hoc, ad hoc criterion; 0 = never sustained).}\\
+\toprule
+Bearing & Condition & Life (snapshots) & Blocks & Onset (blocks before failure) & Outcome & True blocks left at warning \\
+\midrule\endfirsthead
+\toprule
+Bearing & Condition & Life (snapshots) & Blocks & Onset (blocks before failure) & Outcome & True blocks left at warning \\
+\midrule\endhead
+\bottomrule\endfoot
+Bearing1\_1 & 1 & 2803 & 400 & 68 & EARLY & 84.4 \\
+Bearing1\_2 & 1 & 871 & 124 & 6 & MISSED & -- \\
+Bearing1\_3 & 1 & 2375 & 339 & 106 & EARLY & 45.3 \\
+Bearing1\_4 & 1 & 1428 & 204 & 49 & MISSED & -- \\
+Bearing1\_5 & 1 & 2463 & 351 & 2 & MISSED & -- \\
+Bearing1\_6 & 1 & 2448 & 349 & 3 & EARLY & 210.7 \\
+Bearing1\_7 & 1 & 2259 & 322 & 6 & MISSED & -- \\
+Bearing2\_1 & 2 & 911 & 130 & 108 & MISSED & -- \\
+Bearing2\_2 & 2 & 797 & 113 & 81 & MISSED & -- \\
+Bearing2\_3 & 2 & 1955 & 279 & 1 & EARLY & 177.3 \\
+Bearing2\_4 & 2 & 751 & 107 & 1 & MISSED & -- \\
+Bearing2\_5 & 2 & 2311 & 330 & 1 & EARLY & 132.1 \\
+Bearing2\_6 & 2 & 701 & 100 & 2 & EARLY & 63.1 \\
+Bearing2\_7 & 2 & 230 & 32 & 0 & MISSED & -- \\
+Bearing3\_1 & 3 & 515 & 73 & 3 & MISSED & -- \\
+Bearing3\_2 & 3 & 1637 & 233 & 4 & EARLY & 138.9 \\
+Bearing3\_3 & 3 & 434 & 62 & 15 & MISSED & -- \\
+\end{longtable}}
+
+\section*{S8. Other tolerance windows}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.2881\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1773\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1773\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1773\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1801\linewidth-2\tabcolsep\relax}@{}}
+\caption{In-window rate (\%) of first warnings at \textit{H} = 20 for four tolerance windows (settings re-selected for each window; five-fold cross-validation; exploratory).}\\
+\toprule
+Dataset & [\textminus{}10, +2] & [\textminus{}13, +2] & [\textminus{}20, +5] & [\textminus{}30, +10] \\
+\midrule\endfirsthead
+\toprule
+Dataset & [\textminus{}10, +2] & [\textminus{}13, +2] & [\textminus{}20, +5] & [\textminus{}30, +10] \\
+\midrule\endhead
+\bottomrule\endfoot
+PHM08 & 87.6 & 91.7 & 98.2 & 99.5 \\
+FD001 & 82.0 & 88.0 & 99.0 & 100.0 \\
+FD002 & 90.0 & 94.6 & 98.8 & 99.6 \\
+FD003 & 89.0 & 96.0 & 99.0 & 100.0 \\
+FD004 & 78.3 & 82.7 & 93.6 & 97.2 \\
+N-CMAPSS (6 channels) & 63.6 & 68.7 & 80.8 & 93.9 \\
+N-CMAPSS (14 channels) & 58.6 & 65.7 & 83.8 & 97.0 \\
+\end{longtable}}
+
+\noindent The rate grew with the width of the window on every dataset. FD004 and N-CMAPSS had the lowest rates for every window.
+
+\section*{S9. Thirty random 50-engine test sets}
+
+\noindent With 50 random test and 168 training engines, drawn thirty times on PHM08 (seeds 1001--1030; settings re-selected inside the training engines), the number of correct first warnings per 50 engines at \textit{H} = 20 averaged 45.9 (91.8\%, standard deviation 3.3 points, range 42--49); on average 2.1 alarms per 50 were late and 2.0 too early, and no engine was missed. At least 48 of 50 were correct in 4 of 30 iterations. The iterations share engines, so they are not independent samples; they indicate the variability of a single 50-engine test, including refitting and selection.
+
+\begin{figure}[!htbp]\centering
+\includegraphics[width=1.00\linewidth]{img/Fig_rep30.png}
+\caption{Thirty random 50-engine test sets on PHM08 (\textit{H} = 20). (a) Share of the 50 first warnings in the window in each iteration; dashed: mean; dotted: 48 of 50. (b) True cycles left at the warning: mean (line) and interquartile range (band); dotted: 13 cycles.}
+\end{figure}
+
+\section*{S10. Timing controls at every warning level}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1883\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0665\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1551\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1662\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1358\linewidth-2\tabcolsep\relax}@{}}
+\caption{In-window rate (\%) at every warning level: the recipe, the same alarm times with a constant estimate, and the health-indicator threshold alarm (five-fold cross-validation; exact McNemar \textit{p}, unadjusted).}\\
+\toprule
+Dataset & \textit{H} & Recipe & Constant estimate & \textit{p} & Health-indicator alarm & \textit{p} \\
+\midrule\endfirsthead
+\toprule
+Dataset & \textit{H} & Recipe & Constant estimate & \textit{p} & Health-indicator alarm & \textit{p} \\
+\midrule\endhead
+\bottomrule\endfoot
+PHM08 & 10 & 96.3 & 97.2 & 0.625 & 58.7 & < 0.001 \\
+ & 15 & 94.0 & 92.2 & 0.481 & 60.6 & < 0.001 \\
+ & 20 & 91.7 & 91.7 & 1.000 & 56.0 & < 0.001 \\
+ & 30 & 83.5 & 84.9 & 0.690 & 50.5 & < 0.001 \\
+ & 40 & 79.4 & 78.9 & 1.000 & 39.0 & < 0.001 \\
+FD001 & 10 & 98.0 & 96.0 & 0.500 & 62.0 & < 0.001 \\
+ & 15 & 95.0 & 94.0 & 1.000 & 62.0 & < 0.001 \\
+ & 20 & 88.0 & 90.0 & 0.688 & 51.0 & < 0.001 \\
+ & 30 & 82.0 & 83.0 & 1.000 & 51.0 & < 0.001 \\
+ & 40 & 70.0 & 79.0 & 0.064 & 49.0 & 0.002 \\
+FD002 & 10 & 96.2 & 98.1 & 0.180 & 57.7 & < 0.001 \\
+ & 15 & 96.9 & 96.5 & 1.000 & 56.5 & < 0.001 \\
+ & 20 & 94.6 & 93.5 & 0.607 & 54.6 & < 0.001 \\
+ & 30 & 84.6 & 85.4 & 0.845 & 48.8 & < 0.001 \\
+ & 40 & 75.8 & 71.2 & 0.126 & 46.5 & < 0.001 \\
+FD003 & 10 & 94.0 & 95.0 & 1.000 & 64.0 & < 0.001 \\
+ & 15 & 94.0 & 93.0 & 1.000 & 64.0 & < 0.001 \\
+ & 20 & 96.0 & 94.0 & 0.688 & 57.0 & < 0.001 \\
+ & 30 & 84.0 & 81.0 & 0.648 & 49.0 & < 0.001 \\
+ & 40 & 70.0 & 70.0 & 1.000 & 32.0 & < 0.001 \\
+FD004 & 10 & 90.4 & 90.0 & 1.000 & 55.0 & < 0.001 \\
+ & 15 & 85.9 & 87.1 & 0.701 & 53.8 & < 0.001 \\
+ & 20 & 82.7 & 86.3 & 0.064 & 49.4 & < 0.001 \\
+ & 30 & 82.7 & 81.1 & 0.557 & 41.0 & < 0.001 \\
+ & 40 & 68.3 & 73.1 & 0.111 & 40.6 & < 0.001 \\
+N-CMAPSS & 10 & 74.7 & 70.7 & 0.219 & 77.8 & 0.607 \\
+ & 15 & 70.7 & 74.7 & 0.388 & 69.7 & 1.000 \\
+ & 20 & 68.7 & 70.7 & 0.804 & 53.5 & 0.020 \\
+ & 30 & 50.5 & 51.5 & 1.000 & 44.4 & 0.461 \\
+ & 40 & 41.4 & 55.6 & 0.013 & 30.3 & 0.169 \\
+Battery & 10 & 99.2 & 99.2 & 1.000 & 84.6 & < 0.001 \\
+ & 15 & 98.4 & 96.7 & 0.625 & 68.3 & < 0.001 \\
+ & 20 & 95.9 & 93.5 & 0.549 & 54.5 & < 0.001 \\
+ & 30 & 85.4 & 82.9 & 0.581 & 43.1 & < 0.001 \\
+ & 40 & 79.7 & 77.2 & 0.453 & 34.1 & < 0.001 \\
+\end{longtable}}
+{\scriptsize Battery: training-only $\kappa$ (rerun for this revision); N-CMAPSS: six pre-specified channels. Over the 35 dataset--level combinations, the constant estimate differed significantly from the recipe (unadjusted \textit{p} < 0.05) once (N-CMAPSS, \textit{H} = 40, higher than the recipe).\par}\medskip
+
+\section*{S11. Maintenance cost: all lead times, cost ratios and policies}
+
+\noindent Tables S7--S13 give, for every dataset, lead time $\ell$ (cycles) and cost ratio $\rho$, the long-run cost rate of each policy relative to perfect foresight (1.00 = replacement one cycle before every failure). All policies were tuned on the same out-of-fold predictions of the training units of each outer fold and applied once to its test units. The window-tuned, plain cost-tuned, health-indicator, age-replacement and perfect-foresight results reproduce those of the submitted version unit by unit on the six engine datasets; the battery results use the training-only $\kappa$ and lead times in cycles. Run-to-failure cost 4.93--4.98 times perfect foresight at $\rho$ = 5 and up to 49.8 at $\rho$ = 50.
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}@{}}
+\caption{Cost rate relative to perfect foresight, PHM08.}\\
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Age \\
+\midrule\endfirsthead
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Age \\
+\midrule\endhead
+\bottomrule\endfoot
+0 & 5 & 1.07 & 1.07 & 1.05 & 1.07 & 1.06 & 1.06 & 1.11 & 1.70 \\
+0 & 10 & 1.09 & 1.12 & 1.05 & 1.12 & 1.09 & 1.06 & 1.14 & 1.77 \\
+0 & 20 & 1.14 & 1.21 & 1.05 & 1.21 & 1.13 & 1.06 & 1.19 & 1.92 \\
+0 & 50 & 1.28 & 1.50 & 1.05 & 1.50 & 1.28 & 1.06 & 1.34 & 2.37 \\
+5 & 5 & 1.07 & 1.09 & 1.05 & 1.09 & 1.07 & 1.08 & 1.12 & 1.70 \\
+5 & 10 & 1.07 & 1.16 & 1.05 & 1.16 & 1.09 & 1.11 & 1.15 & 1.77 \\
+5 & 20 & 1.07 & 1.31 & 1.05 & 1.31 & 1.14 & 1.15 & 1.20 & 1.92 \\
+5 & 50 & 1.07 & 1.73 & 1.05 & 1.73 & 1.28 & 1.30 & 1.35 & 2.37 \\
+10 & 5 & 1.07 & 1.10 & 1.08 & 1.10 & 1.11 & 1.09 & 1.12 & 1.70 \\
+10 & 10 & 1.10 & 1.17 & 1.10 & 1.17 & 1.18 & 1.11 & 1.12 & 1.77 \\
+10 & 20 & 1.10 & 1.32 & 1.15 & 1.32 & 1.32 & 1.16 & 1.12 & 1.92 \\
+10 & 50 & 1.10 & 1.75 & 1.30 & 1.75 & 1.76 & 1.31 & 1.12 & 2.37 \\
+15 & 5 & 1.09 & 1.11 & 1.09 & 1.11 & 1.07 & 1.08 & 1.14 & 1.70 \\
+15 & 10 & 1.12 & 1.18 & 1.11 & 1.18 & 1.06 & 1.08 & 1.16 & 1.77 \\
+15 & 20 & 1.10 & 1.32 & 1.16 & 1.33 & 1.06 & 1.08 & 1.22 & 1.92 \\
+15 & 50 & 1.10 & 1.76 & 1.31 & 1.76 & 1.06 & 1.08 & 1.37 & 2.37 \\
+\end{longtable}}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}@{}}
+\caption{Cost rate relative to perfect foresight, FD001.}\\
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Age \\
+\midrule\endfirsthead
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Age \\
+\midrule\endhead
+\bottomrule\endfoot
+0 & 5 & 1.06 & 1.09 & 1.08 & 1.09 & 1.03 & 1.06 & 1.17 & 1.69 \\
+0 & 10 & 1.06 & 1.14 & 1.08 & 1.14 & 1.03 & 1.06 & 1.28 & 1.74 \\
+0 & 20 & 1.06 & 1.25 & 1.08 & 1.25 & 1.03 & 1.06 & 1.50 & 1.90 \\
+0 & 50 & 1.06 & 1.56 & 1.08 & 1.56 & 1.03 & 1.06 & 2.15 & 2.38 \\
+5 & 5 & 1.08 & 1.05 & 1.07 & 1.05 & 1.03 & 1.06 & 1.13 & 1.69 \\
+5 & 10 & 1.08 & 1.05 & 1.07 & 1.05 & 1.03 & 1.06 & 1.18 & 1.74 \\
+5 & 20 & 1.08 & 1.05 & 1.07 & 1.05 & 1.03 & 1.06 & 1.29 & 1.90 \\
+5 & 50 & 1.08 & 1.05 & 1.07 & 1.05 & 1.03 & 1.06 & 1.62 & 2.38 \\
+10 & 5 & 1.09 & 1.10 & 1.08 & 1.10 & 1.04 & 1.06 & 1.15 & 1.69 \\
+10 & 10 & 1.10 & 1.15 & 1.08 & 1.15 & 1.04 & 1.06 & 1.21 & 1.74 \\
+10 & 20 & 1.10 & 1.25 & 1.08 & 1.25 & 1.04 & 1.06 & 1.32 & 1.90 \\
+10 & 50 & 1.10 & 1.57 & 1.08 & 1.57 & 1.04 & 1.06 & 1.65 & 2.38 \\
+15 & 5 & 1.09 & 1.10 & 1.09 & 1.10 & 1.05 & 1.08 & 1.20 & 1.69 \\
+15 & 10 & 1.10 & 1.16 & 1.09 & 1.16 & 1.05 & 1.08 & 1.32 & 1.74 \\
+15 & 20 & 1.10 & 1.26 & 1.09 & 1.26 & 1.05 & 1.08 & 1.54 & 1.90 \\
+15 & 50 & 1.10 & 1.58 & 1.09 & 1.58 & 1.05 & 1.08 & 2.21 & 2.38 \\
+\end{longtable}}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}@{}}
+\caption{Cost rate relative to perfect foresight, FD002.}\\
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Age \\
+\midrule\endfirsthead
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Age \\
+\midrule\endhead
+\bottomrule\endfoot
+0 & 5 & 1.05 & 1.06 & 1.06 & 1.04 & 1.04 & 1.06 & 1.13 & 1.61 \\
+0 & 10 & 1.06 & 1.08 & 1.06 & 1.04 & 1.04 & 1.06 & 1.15 & 1.67 \\
+0 & 20 & 1.06 & 1.12 & 1.06 & 1.04 & 1.04 & 1.06 & 1.19 & 1.74 \\
+0 & 50 & 1.06 & 1.24 & 1.06 & 1.04 & 1.04 & 1.06 & 1.32 & 1.92 \\
+5 & 5 & 1.07 & 1.09 & 1.07 & 1.09 & 1.08 & 1.06 & 1.11 & 1.61 \\
+5 & 10 & 1.07 & 1.15 & 1.09 & 1.15 & 1.12 & 1.06 & 1.11 & 1.67 \\
+5 & 20 & 1.07 & 1.27 & 1.13 & 1.27 & 1.20 & 1.06 & 1.11 & 1.74 \\
+5 & 50 & 1.07 & 1.63 & 1.25 & 1.63 & 1.44 & 1.06 & 1.11 & 1.92 \\
+10 & 5 & 1.09 & 1.09 & 1.06 & 1.09 & 1.07 & 1.07 & 1.19 & 1.61 \\
+10 & 10 & 1.10 & 1.16 & 1.06 & 1.16 & 1.09 & 1.07 & 1.19 & 1.67 \\
+10 & 20 & 1.10 & 1.28 & 1.06 & 1.28 & 1.13 & 1.07 & 1.24 & 1.74 \\
+10 & 50 & 1.10 & 1.64 & 1.06 & 1.64 & 1.25 & 1.07 & 1.37 & 1.92 \\
+15 & 5 & 1.10 & 1.07 & 1.09 & 1.07 & 1.08 & 1.08 & 1.17 & 1.61 \\
+15 & 10 & 1.13 & 1.09 & 1.11 & 1.09 & 1.10 & 1.08 & 1.15 & 1.67 \\
+15 & 20 & 1.20 & 1.13 & 1.15 & 1.13 & 1.14 & 1.08 & 1.15 & 1.74 \\
+15 & 50 & 1.33 & 1.25 & 1.27 & 1.25 & 1.26 & 1.08 & 1.15 & 1.92 \\
+\end{longtable}}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}@{}}
+\caption{Cost rate relative to perfect foresight, FD003.}\\
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Age \\
+\midrule\endfirsthead
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Age \\
+\midrule\endhead
+\bottomrule\endfoot
+0 & 5 & 1.08 & 1.09 & 1.09 & 1.09 & 1.08 & 1.08 & 1.14 & 1.77 \\
+0 & 10 & 1.08 & 1.14 & 1.09 & 1.14 & 1.13 & 1.08 & 1.20 & 1.86 \\
+0 & 20 & 1.08 & 1.24 & 1.09 & 1.25 & 1.24 & 1.08 & 1.31 & 2.03 \\
+0 & 50 & 1.08 & 1.56 & 1.09 & 1.56 & 1.55 & 1.08 & 1.63 & 2.54 \\
+5 & 5 & 1.06 & 1.04 & 1.08 & 1.04 & 1.12 & 1.08 & 1.15 & 1.77 \\
+5 & 10 & 1.06 & 1.04 & 1.08 & 1.04 & 1.22 & 1.08 & 1.21 & 1.86 \\
+5 & 20 & 1.06 & 1.04 & 1.08 & 1.04 & 1.43 & 1.08 & 1.32 & 2.03 \\
+5 & 50 & 1.06 & 1.04 & 1.08 & 1.04 & 2.05 & 1.08 & 1.65 & 2.54 \\
+10 & 5 & 1.06 & 1.04 & 1.08 & 1.04 & 1.04 & 1.08 & 1.15 & 1.77 \\
+10 & 10 & 1.06 & 1.04 & 1.08 & 1.04 & 1.04 & 1.08 & 1.21 & 1.86 \\
+10 & 20 & 1.06 & 1.04 & 1.08 & 1.04 & 1.04 & 1.08 & 1.32 & 2.03 \\
+10 & 50 & 1.06 & 1.04 & 1.08 & 1.04 & 1.04 & 1.08 & 1.65 & 2.54 \\
+15 & 5 & 1.06 & 1.13 & 1.08 & 1.13 & 1.14 & 1.10 & 1.17 & 1.77 \\
+15 & 10 & 1.06 & 1.23 & 1.08 & 1.23 & 1.24 & 1.10 & 1.23 & 1.86 \\
+15 & 20 & 1.06 & 1.44 & 1.08 & 1.44 & 1.45 & 1.10 & 1.34 & 2.03 \\
+15 & 50 & 1.06 & 2.06 & 1.08 & 2.06 & 2.08 & 1.10 & 1.68 & 2.54 \\
+\end{longtable}}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}@{}}
+\caption{Cost rate relative to perfect foresight, FD004.}\\
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Age \\
+\midrule\endfirsthead
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Age \\
+\midrule\endhead
+\bottomrule\endfoot
+0 & 5 & 1.09 & 1.08 & 1.08 & 1.09 & 1.08 & 1.07 & 1.10 & 1.93 \\
+0 & 10 & 1.11 & 1.13 & 1.08 & 1.13 & 1.12 & 1.07 & 1.10 & 2.13 \\
+0 & 20 & 1.15 & 1.22 & 1.08 & 1.22 & 1.21 & 1.07 & 1.10 & 2.07 \\
+0 & 50 & 1.28 & 1.47 & 1.08 & 1.47 & 1.46 & 1.07 & 1.10 & 2.30 \\
+5 & 5 & 1.08 & 1.08 & 1.10 & 1.08 & 1.09 & 1.07 & 1.12 & 1.93 \\
+5 & 10 & 1.11 & 1.10 & 1.12 & 1.10 & 1.13 & 1.07 & 1.14 & 2.13 \\
+5 & 20 & 1.11 & 1.14 & 1.16 & 1.14 & 1.21 & 1.07 & 1.19 & 2.07 \\
+5 & 50 & 1.11 & 1.27 & 1.29 & 1.27 & 1.47 & 1.07 & 1.32 & 2.30 \\
+10 & 5 & 1.11 & 1.13 & 1.11 & 1.14 & 1.07 & 1.10 & 1.16 & 1.93 \\
+10 & 10 & 1.16 & 1.22 & 1.13 & 1.22 & 1.10 & 1.12 & 1.20 & 2.13 \\
+10 & 20 & 1.22 & 1.40 & 1.17 & 1.40 & 1.14 & 1.16 & 1.29 & 2.07 \\
+10 & 50 & 1.36 & 1.91 & 1.31 & 1.91 & 1.27 & 1.29 & 1.56 & 2.30 \\
+15 & 5 & 1.12 & 1.14 & 1.14 & 1.13 & 1.09 & 1.10 & 1.16 & 1.93 \\
+15 & 10 & 1.19 & 1.20 & 1.19 & 1.20 & 1.12 & 1.10 & 1.19 & 2.13 \\
+15 & 20 & 1.28 & 1.33 & 1.27 & 1.33 & 1.16 & 1.10 & 1.23 & 2.07 \\
+15 & 50 & 1.54 & 1.72 & 1.54 & 1.72 & 1.29 & 1.10 & 1.37 & 2.30 \\
+\end{longtable}}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1111\linewidth-2\tabcolsep\relax}@{}}
+\caption{Cost rate relative to perfect foresight, N-CMAPSS.}\\
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Age \\
+\midrule\endfirsthead
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Age \\
+\midrule\endhead
+\bottomrule\endfoot
+0 & 5 & 1.50 & 1.52 & 1.46 & 1.46 & 1.40 & 1.47 & 1.73 & 1.68 \\
+0 & 10 & 1.79 & 1.51 & 1.53 & 1.51 & 1.53 & 1.55 & 2.33 & 1.72 \\
+0 & 20 & 1.83 & 1.65 & 1.67 & 1.65 & 1.67 & 1.69 & 4.14 & 1.87 \\
+0 & 50 & 1.63 & 2.07 & 2.10 & 2.07 & 2.10 & 2.12 & 3.64 & 2.35 \\
+5 & 5 & 1.60 & 1.53 & 1.45 & 1.48 & 1.42 & 1.44 & 1.77 & 1.68 \\
+5 & 10 & 1.67 & 1.41 & 1.42 & 1.41 & 1.39 & 1.41 & 2.47 & 1.72 \\
+5 & 20 & 1.95 & 1.41 & 1.42 & 1.41 & 1.39 & 1.41 & 4.16 & 1.87 \\
+5 & 50 & 2.45 & 1.41 & 1.42 & 1.41 & 1.39 & 1.41 & 2.92 & 2.35 \\
+10 & 5 & 1.66 & 1.50 & 1.48 & 1.47 & 1.43 & 1.46 & 1.79 & 1.68 \\
+10 & 10 & 1.70 & 1.51 & 1.54 & 1.51 & 1.52 & 1.53 & 3.01 & 1.72 \\
+10 & 20 & 1.86 & 1.65 & 1.69 & 1.65 & 1.67 & 1.68 & 2.73 & 1.87 \\
+10 & 50 & 2.50 & 2.08 & 2.11 & 2.08 & 2.09 & 2.10 & 2.44 & 2.35 \\
+15 & 5 & 1.66 & 1.39 & 1.41 & 1.42 & 1.46 & 1.57 & 1.99 & 1.68 \\
+15 & 10 & 1.64 & 1.41 & 1.48 & 1.42 & 1.65 & 1.74 & 2.36 & 1.72 \\
+15 & 20 & 1.79 & 1.42 & 1.46 & 1.42 & 1.99 & 2.02 & 2.15 & 1.87 \\
+15 & 50 & 2.25 & 1.42 & 1.46 & 1.42 & 2.86 & 2.91 & 2.15 & 2.35 \\
+\end{longtable}}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0556\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0889\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0889\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0889\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0889\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0889\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0889\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0889\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0889\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0889\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0889\linewidth-2\tabcolsep\relax}@{}}
+\caption{Cost rate relative to perfect foresight, Battery (training-only $\kappa$; $\ell$ in cycles).}\\
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Capacity cost & Capacity 1-SE & Age \\
+\midrule\endfirsthead
+\toprule
+$\ell$ & $\rho$ & STW window & STW cost & STW cost 1-SE & STW cost q80 & Q10 cost & Q10 cost 1-SE & HI cost & Capacity cost & Capacity 1-SE & Age \\
+\midrule\endhead
+\bottomrule\endfoot
+0 & 5 & 1.08 & 1.09 & 1.14 & 1.09 & 1.06 & 1.14 & 1.10 & 1.01 & 1.05 & 2.16 \\
+0 & 10 & 1.16 & 1.14 & 1.19 & 1.14 & 1.13 & 1.21 & 1.14 & 1.01 & 1.05 & 2.23 \\
+0 & 20 & 1.24 & 1.22 & 1.28 & 1.22 & 1.24 & 1.30 & 1.23 & 1.01 & 1.05 & 2.67 \\
+0 & 50 & 1.57 & 1.48 & 1.55 & 1.48 & 1.51 & 1.58 & 1.49 & 1.01 & 1.05 & 4.59 \\
+15 & 5 & 1.08 & 1.06 & 1.14 & 1.06 & 1.10 & 1.14 & 1.11 & 1.07 & 1.11 & 2.16 \\
+15 & 10 & 1.12 & 1.14 & 1.19 & 1.14 & 1.14 & 1.23 & 1.15 & 1.11 & 1.16 & 2.23 \\
+15 & 20 & 1.25 & 1.23 & 1.28 & 1.23 & 1.26 & 1.32 & 1.24 & 1.19 & 1.24 & 2.67 \\
+15 & 50 & 1.57 & 1.49 & 1.55 & 1.49 & 1.53 & 1.59 & 1.50 & 1.44 & 1.51 & 4.59 \\
+30 & 5 & 1.09 & 1.06 & 1.14 & 1.09 & 1.11 & 1.16 & 1.20 & 1.14 & 1.19 & 2.16 \\
+30 & 10 & 1.13 & 1.13 & 1.18 & 1.13 & 1.17 & 1.22 & 1.19 & 1.22 & 1.28 & 2.23 \\
+30 & 20 & 1.25 & 1.22 & 1.27 & 1.22 & 1.25 & 1.31 & 1.28 & 1.40 & 1.46 & 2.67 \\
+30 & 50 & 1.51 & 1.47 & 1.54 & 1.47 & 1.52 & 1.58 & 1.54 & 1.92 & 2.00 & 4.59 \\
+45 & 5 & 1.11 & 1.08 & 1.12 & 1.08 & 1.12 & 1.16 & 1.18 & 1.18 & 1.16 & 2.16 \\
+45 & 10 & 1.15 & 1.12 & 1.17 & 1.12 & 1.15 & 1.20 & 1.22 & 1.27 & 1.16 & 2.23 \\
+45 & 20 & 1.26 & 1.20 & 1.25 & 1.20 & 1.24 & 1.29 & 1.34 & 1.45 & 1.16 & 2.67 \\
+45 & 50 & 1.53 & 1.46 & 1.52 & 1.46 & 1.50 & 1.56 & 1.62 & 1.99 & 1.16 & 4.59 \\
+\end{longtable}}
+
+\section*{S12. Theory-guided shift rule (STW-T)}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.1773\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.0665\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1219\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1219\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1440\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.1551\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.2134\linewidth-2\tabcolsep\relax}@{}}
+\caption{Count-selected shift (STW) against the theory-guided shift (STW-T, median out-of-fold error set to \textminus{}5.5) on the datasets seen before STW-T was written (descriptive; five-fold cross-validation; battery as in the protocol, $\kappa$ = 3).}\\
+\toprule
+Dataset & \textit{H} & STW (\%) & STW-T (\%) & Mean shift STW & Mean shift STW-T & Only STW-T / only STW; \textit{p} \\
+\midrule\endfirsthead
+\toprule
+Dataset & \textit{H} & STW (\%) & STW-T (\%) & Mean shift STW & Mean shift STW-T & Only STW-T / only STW; \textit{p} \\
+\midrule\endhead
+\bottomrule\endfoot
+PHM08 & 10 & 96.3 & 95.0 & \textminus{}4.9 & \textminus{}5.8 & 3 / 6; 0.508 \\
+ & 15 & 94.0 & 93.6 & \textminus{}4.0 & \textminus{}5.3 & 4 / 5; 1.000 \\
+ & 20 & 91.7 & 90.8 & \textminus{}5.0 & \textminus{}6.5 & 7 / 9; 0.804 \\
+FD001 & 10 & 98.0 & 97.0 & \textminus{}4.7 & \textminus{}5.3 & 0 / 1; 1.000 \\
+ & 15 & 95.0 & 97.0 & \textminus{}3.5 & \textminus{}5.5 & 2 / 0; 0.500 \\
+ & 20 & 88.0 & 86.0 & \textminus{}4.0 & \textminus{}5.7 & 1 / 3; 0.625 \\
+FD002 & 10 & 96.2 & 97.7 & \textminus{}4.8 & \textminus{}6.1 & 5 / 1; 0.219 \\
+ & 15 & 96.9 & 95.4 & \textminus{}4.5 & \textminus{}5.6 & 2 / 6; 0.289 \\
+ & 20 & 94.6 & 94.2 & \textminus{}5.0 & \textminus{}5.7 & 3 / 4; 1.000 \\
+FD003 & 10 & 94.0 & 95.0 & \textminus{}4.0 & \textminus{}5.2 & 2 / 1; 1.000 \\
+ & 15 & 94.0 & 94.0 & \textminus{}5.1 & \textminus{}5.7 & 1 / 1; 1.000 \\
+ & 20 & 96.0 & 94.0 & \textminus{}3.9 & \textminus{}4.8 & 0 / 2; 0.500 \\
+FD004 & 10 & 90.4 & 90.0 & \textminus{}5.9 & \textminus{}6.0 & 0 / 1; 1.000 \\
+ & 15 & 85.9 & 85.9 & \textminus{}4.9 & \textminus{}6.0 & 7 / 7; 1.000 \\
+ & 20 & 82.7 & 83.5 & \textminus{}4.8 & \textminus{}5.4 & 6 / 4; 0.754 \\
+N-CMAPSS & 10 & 74.7 & 72.7 & \textminus{}3.5 & \textminus{}5.2 & 3 / 5; 0.727 \\
+ & 15 & 70.7 & 71.7 & \textminus{}4.4 & \textminus{}5.5 & 4 / 3; 1.000 \\
+ & 20 & 68.7 & 68.7 & \textminus{}2.5 & \textminus{}5.3 & 9 / 9; 1.000 \\
+Battery & 10 & 98.4 & 98.4 & \textminus{}2.7 & \textminus{}5.5 & 1 / 1; 1.000 \\
+ & 15 & 99.2 & 99.2 & \textminus{}3.4 & \textminus{}5.8 & 0 / 0; 1.000 \\
+ & 20 & 97.6 & 96.7 & \textminus{}3.4 & \textminus{}5.7 & 2 / 3; 1.000 \\
+\end{longtable}}
+
+\noindent Setting the shift so that the median out-of-fold error equals the window centre changed the rate at \textit{H} = 20 by between \textminus{}2.0 and 0.8 percentage points on these datasets, and no change was significant. On N-CMAPSS, STW-T moved the mean shift from \textminus{}2.5 to \textminus{}5.3 without changing the rate. Because a different shift also moves the alarm (Section 6.5 of the main text), this is not a test of Proposition 1.
+
+\section*{S13. Settings}
+
+{\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{\dimexpr0.2437\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr0.7563\linewidth-2\tabcolsep\relax}@{}}
+\caption{Settings of the recipe and of the evaluation (identical for all datasets unless stated otherwise).}\\
+\toprule
+Component & Setting \\
+\midrule\endfirsthead
+\toprule
+Component & Setting \\
+\midrule\endhead
+\bottomrule\endfoot
+Outer split & Five folds by unit (seed 2026); repeated 50/168 splits on PHM08 with seeds 1001--1030; N-CMAPSS official split (60/39); bearing official split (6/11); battery leave-one-batch-out \\
+Inner split & Five folds of the training units (seed 100 + outer fold; 2000 + iteration for the random 50-engine tests; 106 for official splits; 100 + batch for leave-one-batch-out) \\
+Normalisation & z-score per operating regime with training statistics (PHM08, FD002, FD004: 6 regimes; FD001, FD003: 1; N-CMAPSS: flight class 1--3); sensors constant within any regime removed \\
+Features & Early-life baseline (first $\le$ 20 cycles); EWM spans 10 and 30 of baseline-removed signals; slopes over 15 and 40 cycles (smoothed, span 5); age \\
+Regressor & Histogram gradient boosting, absolute-error loss, 500 iterations, learning rate 0.05, 31 leaves, $\ge$ 40 samples per leaf, seed 0; target min(\textit{r}, \textit{c}) \\
+Decision grid & \textit{c} $\in$ \{40, 60, 90\} with \textit{c} $\ge$ \textit{H} + 20; \textit{m} $\in$ \{1, 3, 6\}; \textit{k} $\in$ \{1, 2, 3, 5\}; \textit{s} $\in$ \{\textminus{}12, \textminus{}11.5, \ldots{}, +8\}; criterion: correct out-of-fold first warnings, ties to smaller |\textit{s}| \\
+Window and levels & Correct if \textminus{}13 $\le$ \textit{e} $\le$ +2; \textit{H} $\in$ \{10, 15, 20\} on all datasets; 30 and 40 on PHM08 in the main results and on all datasets in the timing controls and cost analyses; primary \textit{H} = 20 \\
+Battery & Blocks of $\kappa$ cycles, $\kappa$ = max(1, round(median training life / 209.5)) per outer split (protocol: median of all cells, $\kappa$ = 3); block means of seven quantities, forward-filled; one regime \\
+Bearings & Blocks of $\kappa$ snapshots (same rule; protocol: $\kappa$ = 7); eight features per snapshot; z-score per load/speed condition \\
+Cost & $\ell$ $\in$ \{0, 5, 10, 15\} cycles (battery 0, 15, 30, 45 cycles); $\rho$ $\in$ \{5, 10, 20, 50\}; 200 bootstrap resamples of training units for the regularised rules; 2,000 paired bootstrap resamples of test units for intervals \\
+Statistics & Clopper--Pearson 95\% intervals; exact McNemar tests; Holm correction as stated in each table \\
+\end{longtable}}
+
+\section*{S14. Reproducibility}
+
+\noindent Every number in the article is produced by scripts in the accompanying repository and collected into one results file from which the manuscript is built; the build checks the statements of the text against that file and fails if they disagree. Main results: eol\_window2.py; fixed-time models: safe\_run.py, safe\_methods.py, collect\_base.py and related scripts; identical-protocol comparison: h2h.py and dl\_warning.py; ablation and oracle-timed control: warn\_ablation.py and oracle\_check.py; leakage checks: eol\_leakage.py; timing controls and earlier cost analysis: rev\_experiments.py; protocol analyses: ncm\_warning.py, battery\_warning.py, bearing\_warning.py with the hashed protocols; repeated splits: rep30.py. Analyses added in this revision: audit\_confirmations.py (training-only $\kappa$, $\kappa$ sensitivity, battery capacity baselines), audit\_battery\_controls.py, audit\_cost.py (cost policies and shift study), audit\_fixed\_time.py (decomposition of Fig. 2), audit\_summarize.py and fig\_audit.py. The scikit-learn version is pinned, because other versions change the fitted trees.
+
+\end{document}

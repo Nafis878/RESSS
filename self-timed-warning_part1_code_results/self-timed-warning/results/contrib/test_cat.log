@@ -1,0 +1,9 @@
+PASS  T1 Lemma 1: alarm index non-increasing in tau and identical to rev_experiments.first_idx (300 random units)
+PASS  T2 Lemma 2: planned(tau) <=> tau >= tau*, grid score = closed form rounded up to the grid (leads 0-15, grids 5 and 10)
+PASS  T3 planned matrix and costs identical to rev_experiments.cost_of and the grid_cost logic of kam_fd001
+PASS  T4 tau_hat and order index on hand examples (k = ceil((n+1)(1-alpha)); +inf scores; non-certifiable levels)
+PASS  T5 Theorem 1 Monte Carlo: n=19 alpha=0.05 continuous: P(fail)=0.0500 (MCSE 0.0005), bound [0.0000, 0.05]; n=50 alpha=0.1 continuous: P(fail)=0.0982 (MCSE 0.0007), bound [0.0804, 0.1]; n=40 alpha=0.05 ties: P(fail)=0.0044 (MCSE 0.0001), bound [0.0256, 0.05]; n=100 alpha=0.02 ties: P(fail)=0.0000 (MCSE 0.0000), bound [0.0101, 0.02]
+PASS  T6 earliest-of-K alarm is planned iff at least one member alarm is planned (200 random cases)
+PASS  T7 influence interval of M: perfect policy M = 0.0e+00, width 0.0e+00; other policy M = 91.78% [61.71, 121.86]
+PASS  T8 combined grid and nonzero lead: eight hand-worked strict-deadline cases, including infeasible actions
+ALL TESTS PASSED

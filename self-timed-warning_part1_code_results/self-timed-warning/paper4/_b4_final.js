@@ -1,0 +1,49 @@
+
+// ================================================================ cost narrative, discussion of cost, conclusion and front matter
+const ALLC = d => cellKeys(d).map(k => CO3[d][k]);
+const rngTxt = v => { const a = Math.min(...v), b = Math.max(...v); return a.toFixed(2) === b.toFixed(2) ? a.toFixed(2) : `${a.toFixed(2)}–${b.toFixed(2)}`; };
+const dsList = arr => arr.map(d => RNAME[d]).join(', ');
+const ageWinDS = RDS.filter(d => CBD[d].age.window_sig_cheaper >= 12);
+const ageNoneDS = RDS.filter(d => CBD[d].age.window_sig_cheaper === 0);
+const sig = (o, k) => RDS.map(d => [d, CBD[d][o] ? CBD[d][o][k] : 0]);
+const fmtSig = (o, k) => sig(o, k).filter(([, v]) => v > 0).map(([d, v]) => `${RNAME[d]} ${v}`).join(', ');
+const tot = (o, k) => sig(o, k).reduce((a, [, v]) => a + v, 0);
+const RG3 = R3.regret;
+const andList = a => a.length > 1 ? a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1] : a[0];
+const cellsList = (o, k) => { const pos = RDS.filter(d => CBD[d][o] && CBD[d][o][k] > 0), zero = RDS.filter(d => CBD[d][o] && CBD[d][o][k] === 0);
+  const nm = d => d === 'Battery' ? 'the batteries' : RNAME[d];
+  if (!pos.length) return 'no cell on any dataset';
+  if (pos.length === 1) return `${CBD[pos[0]][o][k]} of the 16 cells on ${nm(pos[0])} (none elsewhere)`;
+  return `${andList(pos.map(d => CBD[d][o][k]))} of the 16 cells on ${andList(pos.map(nm))}${zero.length ? ` (none on ${andList(zero.map(nm))})` : ''}`; };
+const POLL = { STW_window: 'window-tuned STW', STW_cost: 'cost-tuned STW', STW_cost_1se: 'cost-tuned STW with the 1-SE rule', STW_cost_q80: 'cost-tuned STW (80th percentile)', Q10_cost: 'cost-tuned quantile alarm', Q10_cost_1se: 'quantile alarm with the 1-SE rule', HI_cost: 'health-indicator alarm', capacity_cost: 'cost-tuned capacity threshold', capacity_cost_1se: 'capacity threshold with the 1-SE rule' };
+const bestByDS = RDS.map(d => { const ps = ['STW_window', 'STW_cost', 'STW_cost_1se', 'STW_cost_q80', 'Q10_cost', 'Q10_cost_1se', 'HI_cost'].concat(d === 'Battery' ? ['capacity_cost', 'capacity_cost_1se'] : []);
+  const m = ps.map(p => [p, RG3[p].by_ds[d]]).sort((a, b) => a[1] - b[1]); return [d, m[0][0], m[0][1]]; });
+
+function COST_NCM_PHRASE() { return ', and its alarms were not significantly cheaper than age replacement in any cost setting'; }
+
+function COST_TEXT3() {
+  must(RG3.STW_cost_1se.max < RG3.STW_window.max && RG3.STW_window.max < RG3.STW_cost.max && RG3.Q10_cost.max > RG3.STW_window.max, 'largest excess cost: 1-SE < window < plain cost tuning; quantile alarm above window'); must(ageNoneDS.length === 1 && ageNoneDS[0] === 'NCMAPSS6', 'window-tuned alarms never significantly cheaper than age replacement on N-CMAPSS, and significantly cheaper in at least 12 of 16 cells on every other dataset');
+  must(RDS.every(d => CBD[d].age.window_sig_dearer === 0), 'window-tuned alarms never significantly more expensive than age replacement');
+  const ex = CO3.PHM08['10|50'];
+  const p = [
+    `Table 7 and Fig. 7 compare the policies under identical splits, information, lead times and cost ratios. Against optimal age replacement, the window-tuned alarms were cheaper with a paired interval excluding equality in ${ageWinDS.map(d => `${CBD[d].age.window_sig_cheaper}`).join(', ')} of 16 cells on ${dsList(ageWinDS)}, respectively. Their cost rate was ${rngTxt(ALLC('PHM08').map(c => c.STW_window.ratio))} times that of perfect foresight on PHM08, against ${rngTxt(ALLC('PHM08').map(c => c.age.ratio))} for age replacement. N-CMAPSS was the exception: in no cell did the interval exclude equality, and the point estimate favoured age replacement in ${16 - CBD.NCMAPSS6.age.window_point_cheaper} of 16 cells.`,
+    `Against policies tuned directly to cost the results depend on the dataset (Table 7). Plain cost tuning of the same regressor was significantly cheaper than window tuning in ${cellsList('STW_cost', 'window_sig_dearer')}, and significantly more expensive in ${cellsList('STW_cost', 'window_sig_cheaper')}. Its occasional large losses remain. On PHM08 with ℓ = 10 and ρ = 50 it cost ${ex.STW_cost.ratio.toFixed(2)} times perfect foresight, against ${ex.STW_window.ratio.toFixed(2)} for window tuning, with ${ex.STW_cost.failures} test failures against ${ex.STW_window.failures}. The one-standard-error rule reduced that loss to ${ex.STW_cost_1se.ratio.toFixed(2)}, still above window tuning there. Across cells it was significantly cheaper than window tuning in ${cellsList('STW_cost_1se', 'window_sig_dearer')}, and significantly more expensive in ${cellsList('STW_cost_1se', 'window_sig_cheaper')}. The cost-tuned 10% quantile alarm was significantly cheaper than window tuning in ${cellsList('Q10_cost', 'window_sig_dearer')}, and more expensive in ${cellsList('Q10_cost', 'window_sig_cheaper')}. The health-indicator alarm was usually the more expensive: window tuning was significantly cheaper in ${cellsList('HI_cost', 'window_sig_cheaper')}, and more expensive in ${cellsList('HI_cost', 'window_sig_dearer')}. On the batteries, the cost-tuned capacity-threshold policy was significantly cheaper than window tuning in ${CBD.Battery.capacity_cost.window_sig_dearer} cells and never significantly more expensive.`,
+    `Relative to the cheapest condition-based policy in each cell, the mean excess cost over the 112 cells was ${f1(RG3.STW_window.mean)}% for window tuning, ${f1(RG3.STW_cost.mean)}% for plain cost tuning, ${f1(RG3.STW_cost_1se.mean)}% with the one-standard-error rule, ${f1(RG3.Q10_cost.mean)}% for the quantile alarm (${f1(RG3.Q10_cost_1se.mean)}% with the one-standard-error rule), ${f1(RG3.HI_cost.mean)}% for the health-indicator alarm and ${f1(RG3.age.mean)}% for age replacement. These means are descriptive, because the cells are correlated. The policy with the lowest mean excess cost differed between datasets: ${bestByDS.map(([d, pp]) => `${POLL[pp]} on ${RNAME[d]}`).join(', ')}. The largest single excess cost was ${f1(RG3.STW_cost.max)}% for plain cost tuning (${RNAME[RG3.STW_cost.max_ds]}), ${f1(RG3.STW_window.max)}% for window tuning (${RNAME[RG3.STW_window.max_ds]}, ℓ = ${RG3.STW_window.max_cell.split('|')[0]}, ρ = ${RG3.STW_window.max_cell.split('|')[1]}), ${f1(RG3.STW_cost_1se.max)}% with the one-standard-error rule (${RNAME[RG3.STW_cost_1se.max_ds]}) and ${f1(RG3.Q10_cost.max)}% for the quantile alarm (${RNAME[RG3.Q10_cost.max_ds]}). Window tuning thus avoided the largest losses of plain cost tuning on several datasets, plausibly through the margin that the narrow late side of the window builds in, but that mechanism was not tested and it did not hold on N-CMAPSS. No tuning rule was cheapest on every dataset, and window tuning is not a reliable surrogate for cost optimisation.`];
+  return p;
+}
+
+function COST_DISC() {
+  must(CBD.FD003.STW_cost_1se.window_sig_cheaper >= 12 && CBD.Battery.STW_cost_1se.window_sig_cheaper >= 12, 'window tuning significantly cheaper than the 1-SE rule in most cells on FD003 and the batteries');
+  return [`Kamariotis et al. (2024) argue that prognostic algorithms and the policies built on them should be judged and tuned by the long-run cost of the decisions they induce. Our results support evaluating alarms by cost, with a qualification about how the cost is minimised. Minimising the empirical cost rate over about two thousand settings sometimes selected alarms with too little margin and produced large losses when failures were expensive. A one-standard-error rule reduced the largest losses, a lower quantile was often cheaper but did not avoid them, and no tuning rule was cheapest on every dataset. Window tuning was cheaper than the one-standard-error rule on FD003 and the batteries and more expensive on several other datasets. Its settings other than the warning level do not depend on cost ratios, which are often uncertain in practice. The window is best regarded as an operational specification, not a proxy for cost. Where cost ratios and lead times can be estimated, tuning to the cost with a safeguard against selection noise should be compared with it on the fleet's own history.`];
+}
+
+function COST_SUPP_TEXT() {
+  return `The tables of this section give, for every dataset, lead time ℓ (cycles) and cost ratio ρ, the long-run cost rate of each policy relative to perfect foresight (1.00 = replacement one cycle before every failure). All policies were tuned on the same out-of-fold predictions of the training units of each outer fold and applied once to its test units. The window-tuned, plain cost-tuned, health-indicator, age-replacement and perfect-foresight results reproduce those of an earlier, separate run unit by unit on the six engine datasets; the battery results use the training-only κ and lead times in cycles. Run-to-failure cost ${rngTxt(RDS.flatMap(d => ALLC(d).filter((c, i) => i % 4 === 0).map(c => c.run_to_failure.ratio)))} times perfect foresight at ρ = 5 and up to ${Math.max(...RDS.flatMap(d => ALLC(d).map(c => c.run_to_failure.ratio))).toFixed(1)} at ρ = 50.`;
+}
+function COST_SUPP_TABLES() {
+  return RDS.map(d => { const ps = ['STW_window', 'STW_cost', 'STW_cost_1se', 'STW_cost_q80', 'Q10_cost', 'Q10_cost_1se', 'HI_cost'].concat(d === 'Battery' ? ['capacity_cost', 'capacity_cost_1se'] : []).concat(['age']);
+    const short = { STW_window: 'STW window', STW_cost: 'STW cost', STW_cost_1se: 'STW cost 1-SE', STW_cost_q80: 'STW cost q80', Q10_cost: 'Q10 cost', Q10_cost_1se: 'Q10 cost 1-SE', HI_cost: 'HI cost', capacity_cost: 'Capacity cost', capacity_cost_1se: 'Capacity 1-SE', age: 'Age' };
+    return tableS(`Cost rate relative to perfect foresight, ${RNAME[d]}${d === 'Battery' ? ' (training-only κ; ℓ in cycles)' : ''}.`, ['ℓ', 'ρ', ...ps.map(p => short[p])],
+      cellKeys(d).map(k => { const [l, r] = k.split('|'); return [l, r, ...ps.map(p => CO3[d][k][p].ratio.toFixed(2))]; }),
+      [500, 500, ...ps.map(() => Math.round(8000 / ps.length))]); });
+}

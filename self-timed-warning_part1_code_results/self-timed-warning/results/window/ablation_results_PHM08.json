@@ -1,0 +1,284 @@
+{
+ "A_single_raw": {
+  "age": {
+   "in_window": 26,
+   "pct": 11.9,
+   "late": 107,
+   "early": 85,
+   "mae": 34.9
+  },
+  "gbm": {
+   "in_window": 45,
+   "pct": 20.6,
+   "late": 111,
+   "early": 62,
+   "mae": 24.9
+  },
+  "lstm": {
+   "in_window": 66,
+   "pct": 30.3,
+   "late": 95,
+   "early": 57,
+   "mae": 18.4
+  },
+  "cnn": {
+   "in_window": 54,
+   "pct": 24.8,
+   "late": 116,
+   "early": 48,
+   "mae": 20.0
+  },
+  "iohmm": {
+   "in_window": 14,
+   "pct": 6.4,
+   "late": 190,
+   "early": 14,
+   "mae": 62.6
+  },
+  "bayes_q50": {
+   "in_window": 58,
+   "pct": 26.6,
+   "late": 101,
+   "early": 59,
+   "mae": 15.8
+  },
+  "tf_q50": {
+   "in_window": 46,
+   "pct": 21.1,
+   "late": 129,
+   "early": 43,
+   "mae": 22.7
+  },
+  "sim": {
+   "in_window": 54,
+   "pct": 24.8,
+   "late": 86,
+   "early": 78,
+   "mae": 22.3
+  }
+ },
+ "B_information": {
+  "g_age": {
+   "in_window": 23,
+   "pct": 10.6,
+   "late": 105,
+   "early": 90,
+   "mae": 34.7
+  },
+  "g_base": {
+   "in_window": 10,
+   "pct": 4.6,
+   "late": 204,
+   "early": 4,
+   "mae": 56.8
+  },
+  "g_level": {
+   "in_window": 39,
+   "pct": 17.9,
+   "late": 119,
+   "early": 60,
+   "mae": 24.5
+  },
+  "g_trend": {
+   "in_window": 43,
+   "pct": 19.7,
+   "late": 134,
+   "early": 41,
+   "mae": 23.2
+  },
+  "g_noage": {
+   "in_window": 47,
+   "pct": 21.6,
+   "late": 113,
+   "early": 58,
+   "mae": 24.3
+  },
+  "g_all": {
+   "in_window": 42,
+   "pct": 19.3,
+   "late": 109,
+   "early": 67,
+   "mae": 23.9
+  }
+ },
+ "C_stacker_type": {
+  "gbm_point": {
+   "cal_cv_hit": 45.9,
+   "in_window": 68,
+   "pct": 31.2,
+   "late": 76,
+   "early": 74,
+   "mae": 16.2
+  },
+  "linear_quantile": {
+   "cal_cv_hit": 46.5,
+   "in_window": 68,
+   "pct": 31.2,
+   "late": 48,
+   "early": 102,
+   "mae": 16.9
+  },
+  "gbm_quantile": {
+   "cal_cv_hit": 47.0,
+   "in_window": 73,
+   "pct": 33.5,
+   "late": 70,
+   "early": 75,
+   "mae": 16.8
+  }
+ },
+ "chosen_stacker": "gbm_quantile",
+ "final_hybrid": {
+  "cal_cv_hit": 47.0,
+  "in_window": 73,
+  "pct": 33.5,
+  "late": 70,
+  "early": 75,
+  "mae": 16.8,
+  "self_assessed_expected_hit_pct": 55.2
+ },
+ "D_leave_one_out": {
+  "age": {
+   "in_window": 69,
+   "pct": 31.7,
+   "late": 70,
+   "early": 79,
+   "mae": 16.9
+  },
+  "gbm": {
+   "in_window": 74,
+   "pct": 33.9,
+   "late": 71,
+   "early": 73,
+   "mae": 16.6
+  },
+  "lstm": {
+   "in_window": 70,
+   "pct": 32.1,
+   "late": 69,
+   "early": 79,
+   "mae": 17.2
+  },
+  "cnn": {
+   "in_window": 70,
+   "pct": 32.1,
+   "late": 76,
+   "early": 72,
+   "mae": 16.9
+  },
+  "iohmm": {
+   "in_window": 73,
+   "pct": 33.5,
+   "late": 69,
+   "early": 76,
+   "mae": 16.9
+  },
+  "bayes": {
+   "in_window": 49,
+   "pct": 22.5,
+   "late": 87,
+   "early": 82,
+   "mae": 21.0
+  },
+  "transformer": {
+   "in_window": 66,
+   "pct": 30.3,
+   "late": 72,
+   "early": 80,
+   "mae": 17.1
+  },
+  "similarity": {
+   "in_window": 65,
+   "pct": 29.8,
+   "late": 78,
+   "early": 75,
+   "mae": 16.9
+  },
+  "sensor_baseline": {
+   "in_window": 69,
+   "pct": 31.7,
+   "late": 77,
+   "early": 72,
+   "mae": 16.2
+  },
+  "sensor_trend": {
+   "in_window": 72,
+   "pct": 33.0,
+   "late": 73,
+   "early": 73,
+   "mae": 17.3
+  }
+ },
+ "D_only": {
+  "age": {
+   "in_window": 24,
+   "pct": 11.0,
+   "late": 62,
+   "early": 132,
+   "mae": 50.9
+  },
+  "gbm": {
+   "in_window": 38,
+   "pct": 17.4,
+   "late": 87,
+   "early": 93,
+   "mae": 28.2
+  },
+  "lstm": {
+   "in_window": 33,
+   "pct": 15.1,
+   "late": 85,
+   "early": 100,
+   "mae": 32.0
+  },
+  "cnn": {
+   "in_window": 38,
+   "pct": 17.4,
+   "late": 68,
+   "early": 112,
+   "mae": 32.8
+  },
+  "iohmm": {
+   "in_window": 22,
+   "pct": 10.1,
+   "late": 61,
+   "early": 135,
+   "mae": 44.2
+  },
+  "bayes": {
+   "in_window": 68,
+   "pct": 31.2,
+   "late": 70,
+   "early": 80,
+   "mae": 18.8
+  },
+  "transformer": {
+   "in_window": 55,
+   "pct": 25.2,
+   "late": 81,
+   "early": 82,
+   "mae": 21.8
+  },
+  "similarity": {
+   "in_window": 30,
+   "pct": 13.8,
+   "late": 76,
+   "early": 112,
+   "mae": 34.7
+  },
+  "sensor_baseline": {
+   "in_window": 19,
+   "pct": 8.7,
+   "late": 101,
+   "early": 98,
+   "mae": 46.3
+  },
+  "sensor_trend": {
+   "in_window": 51,
+   "pct": 23.4,
+   "late": 62,
+   "early": 105,
+   "mae": 26.5
+  }
+ }
+}

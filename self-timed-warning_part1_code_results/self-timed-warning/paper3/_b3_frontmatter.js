@@ -1,0 +1,10 @@
+// ---------------------------------------------------------------- front matter
+const TITLE = 'Self-timed end-of-life alarms: timing, maintenance cost and limits';
+const ABSTRACT = `Remaining-useful-life models are usually scored at evaluator-chosen times, whereas a replacement is triggered once. We evaluate first-warning policies that raise one alarm per unit, accepted if the true remaining life lies between 2 cycles below and 13 cycles above the reported estimate, and we separate prediction accuracy, alarm timing and maintenance cost. A gradient-boosted regressor with a tuned trigger placed ${f1(P08.pct)}% of PHM08 alarms and ${f1(pool['20'].pct)}% of ${pool['20'].n} simulated engine alarms in this window at a 20-cycle warning level. Fixed-time models reached at most ${f1(halfMax)}% at half of life, but a calibrated fixed-time model reached ${f1(G90.cal_pct)}% at 90% of life: the contrast mainly reflects horizon and calibration. A constant estimate at the same alarm times scored ${f1(R2.pooled['20'].STW_const.pct)}%, so the window rewards alarm timing. In a renewal–reward model, window-tuned alarms were cheaper than age replacement except on N-CMAPSS, but alarms tuned directly to cost were cheaper on some datasets and dearer on others. Retrained under protocols hashed in advance, and after correcting a time-scale leak, the recipe reached ${f1(NW.pct)}% on N-CMAPSS, 0 of 17 on bearings, and ${f1(BWc.pct)}% on battery cells within batches but ${f1(BLc.pct)}% with a batch held out, where capacity-trend extrapolation reached ${f1(BTrL.pct)}%.`;
+const HIGHLIGHTS = [
+  'First-warning policies raise one alarm per unit, scored when it is raised',
+  'An asymmetric window score rewards alarm timing, not the reported estimate',
+  'Half-life versus self-timed contrasts mostly reflect horizon and calibration',
+  'Window tuning is not a reliable surrogate for cost-based alarm tuning',
+  `Batteries: ${f1(BWc.pct)}% within batches, ${f1(BLc.pct)}% with a batch held out; bearings 0/17`];
+const KEYWORDS = 'Remaining useful life; Predictive maintenance; Alarm timing; Renewal–reward model; Model evaluation; Turbofan engine; Lithium-ion battery';

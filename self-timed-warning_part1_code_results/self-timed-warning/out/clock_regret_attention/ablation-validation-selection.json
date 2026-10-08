@@ -1,0 +1,81 @@
+{
+  "selected": "sequential_greedy",
+  "ranking": [
+    {
+      "split": "validation",
+      "method": "sequential_greedy",
+      "cohorts": 200,
+      "mean_log_gap": 0.0030257080040387674,
+      "mean_certificate_factor": 3.204057416964286,
+      "optimum_coverage": 0.835
+    },
+    {
+      "split": "validation",
+      "method": "attention",
+      "cohorts": 200,
+      "mean_log_gap": 0.0030646062524646933,
+      "mean_certificate_factor": 3.2396196693355166,
+      "optimum_coverage": 0.83
+    },
+    {
+      "split": "validation",
+      "method": "no_broadcast_attention",
+      "cohorts": 200,
+      "mean_log_gap": 0.003155974815057115,
+      "mean_certificate_factor": 3.2505499224005066,
+      "optimum_coverage": 0.83
+    },
+    {
+      "split": "validation",
+      "method": "pooled",
+      "cohorts": 200,
+      "mean_log_gap": 0.003219152627110462,
+      "mean_certificate_factor": 3.2447436617551,
+      "optimum_coverage": 0.83
+    },
+    {
+      "split": "validation",
+      "method": "mlp",
+      "cohorts": 200,
+      "mean_log_gap": 0.0032686459677348013,
+      "mean_certificate_factor": 3.246408331663805,
+      "optimum_coverage": 0.825
+    },
+    {
+      "split": "validation",
+      "method": "singleton",
+      "cohorts": 200,
+      "mean_log_gap": 0.003683633448047631,
+      "mean_certificate_factor": 3.1849522073711443,
+      "optimum_coverage": 0.775
+    },
+    {
+      "split": "validation",
+      "method": "premium",
+      "cohorts": 200,
+      "mean_log_gap": 0.0038479338833161338,
+      "mean_certificate_factor": 3.1845687282780712,
+      "optimum_coverage": 0.775
+    },
+    {
+      "split": "validation",
+      "method": "premium_per_use",
+      "cohorts": 200,
+      "mean_log_gap": 0.007330598183059104,
+      "mean_certificate_factor": 3.5329329524152002,
+      "optimum_coverage": 0.72
+    },
+    {
+      "split": "validation",
+      "method": "horizon",
+      "cohorts": 200,
+      "mean_log_gap": 0.29815431021737004,
+      "mean_certificate_factor": 7.750030923583893,
+      "optimum_coverage": 0.06
+    }
+  ],
+  "tie_break": "lexical method name",
+  "ensemble": "mean of three checkpoint logits, then top four",
+  "plan_sha256": "961de38afb680607f875ac3a76f345957f6285a78f0dd6ff3c6e362e7f5ce34f",
+  "confirmation_data_not_yet_generated": true
+}

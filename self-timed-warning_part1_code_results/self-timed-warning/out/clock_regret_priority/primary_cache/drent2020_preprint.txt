@@ -1,0 +1,1055 @@
+=== PDF PAGE 1 ===
+EURANDOM PREPRINT SERIES
+2020-005
+April 23, 2020
+Censored lifetime learning:
+Optimal Bayesian age-replacement policies
+C. Drent, S. Kapodistria, O. Boxma
+ISSN 1389-2355
+
+
+=== PDF PAGE 2 ===
+Censored lifetime learning: Optimal Bayesian age-replacement policies
+Collin Drenta,∗, Stella Kapodistriaa, Onno Boxmaa
+aEindhoven University of Technology, Department of Mathematics and Computer Science, P.O. Box 513, 5600 MB Eindhoven, the Netherlands
+Abstract
+We consider a sequence of age-replacement problems with a general lifetime distribution parametrized by an a-priori unknown
+parameter. There is a trade-oﬀ: Preventive replacements are censored but cheap, whereas corrective replacements are uncensored
+but costly observations of the lifetime distribution. We ﬁrst analyze the optimal policy for a ﬁnite sequence and establish some
+properties. We then propose a myopic Bayesian policy that almost surely learns the unknown parameter and converges to the
+optimal policy with full knowledge of the parameter.
+Keywords: age-replacement, maintenance, Bayesian learning, censoring, asymptotic optimality
+1. Introduction
+In the classical age-replacement problem, introduced in Bar-
+low and Hunter (1960), a decision maker determines the opti-
+mal age threshold to preventively replace a single-component
+system subject to random failures to avoid high costs and/or
+low reliability associated with corrective replacements. The key
+assumption in this canonical age-replacement problem, and in
+many of its variations (we refer the interested reader to Wang
+(2002), and De Jonge and Scarf (2019), as they provide com-
+prehensive overviews of the area), is that the lifetime distri-
+bution is a-priori fully determined and known to the decision
+maker.
+However, in many real-life applications, especially
+when a component has not yet generated (suﬃcient) data to esti-
+mate the lifetime distribution, this assumption is unfounded and
+necessitates an age-replacement policy that integrates learning
+and decision making.
+The concept of integrating learning in optimal decision
+making has recently gained momentum in the literature of
+condition-based maintenance (CBM). Elwany et al. (2011),
+Kim and Makis (2013), Chen et al. (2015), Van Oosterom et al.
+(2017), and Drent et al. (2020) all study optimal CBM poli-
+cies in which the parameters of the degradation process of a
+component are only partially known to the decision maker. The
+parameters are then inferred based on the component’s degrada-
+tion observations (e.g., vibrations, temperature) using Bayesian
+learning, which leads to policies that outperform conventional
+approaches which do not integrate learning. Two crucial as-
+sumptions in this literature, when incorporating Bayesian learn-
+ing, are that (i) the prior and the posterior degradation distribu-
+tion belong to the same family, i.e. they are conjugate distri-
+butions; and (ii) the degradation observations are fully observ-
+able. These two assumptions combined imply that the posterior
+∗Corresponding author
+Email addresses: c.drent@tue.nl (Collin Drent),
+s.kapodistria@tue.nl (Stella Kapodistria), o.j.boxma@tue.nl (Onno
+Boxma)
+distributions remain tractable throughout the information accu-
+mulation process.
+By contrast, in the study of age-replacement policies, the in-
+formation accumulation process consists of both censored (i.e.
+preventive replacements) and uncensored (i.e. corrective re-
+placements) observations of the underlying lifetime distribu-
+tion. Consequently, for most distribution families, Bayesian
+updates lose their conjugate property and the problem becomes
+intractable. Hence, only few age-replacement papers have stud-
+ied the integration of Bayesian learning in optimal decision
+making. The most relevant analyses (to the work of this pa-
+per) are Fox (1967) and Dayanik and G¨urler (2002), who both
+consider a sequence of age-replacement problems, where the
+lifetime is a Weibull random variable. Fox (1967) assumes that
+only the scale parameter is unknown, and formulates a Bayesian
+dynamic program to analyze the optimal policy of an inﬁnite
+sequence of age-replacement problems. The author shows that
+this Bayesian dynamic program converges to the corresponding
+dynamic program of the setting in which the scale parameter
+is known. The Bayesian dynamic program is, however, com-
+putationally intractable and therefore diﬃcult to implement in
+practice. Dayanik and G¨urler (2002) therefore propose a my-
+opic Bayesian policy that, at least numerically, performs close
+to the setting in which there is full knowledge of the unknown
+parameters. The authors do not, however, establish whether the
+learning and/or decision making of this myopic policy converge
+to the setting with full knowledge.
+Fortunately, Braden and Freimer (1991) introduced a class
+of distributions that preserve the conjugate property even under
+censoring: newsboy distributions. This class of distributions
+has received much attention from the inventory research com-
+munity focused on inventory systems where demand in excess
+of the inventory level is lost and thus unobserved. Lariviere and
+Porteus (1999), Ding et al. (2002), Chen and Plambeck (2008),
+Lu et al. (2008), Bensoussan et al. (2009), Chen (2010), Bisi
+et al. (2011) and Mersereau (2015) all assume a newsboy distri-
+bution with unknown parameter, which permits an exact anal-
+Preprint submitted to Operations Research Letters
+April 23, 2020
+
+
+=== PDF PAGE 3 ===
+ysis of the optimal policy under diﬀerent variations of this lost
+sales inventory control problem with censored demand learn-
+ing. Surprisingly, the parametric Bayesian framework for cen-
+sored learning assumed in these papers has not found its way
+to the age-replacement community, although such inventory
+control problems share similarities with adaptive maintenance:
+e.g., the inventory level and the age-replacement threshold in-
+ﬂuence the information accumulation process of the unknown
+demand and lifetime distribution, respectively, in the same way.
+The main contributions of this paper are as follows. This
+paper is the ﬁrst to investigate the eﬀect of lifetime censor-
+ing on the optimal policy in a sequence of age-replacement
+problems where the lifetime distribution can be expressed as
+a newsboy distribution.
+We ﬁrst analyze the optimal policy
+for a ﬁnite sequence of components, where there is an inher-
+ent exploration-exploitation trade-oﬀ. As this optimal policy is
+analytically intractable, we then propose a computationally ap-
+pealing Bayesian policy. We show that this policy is asymptoti-
+cally optimal; that is, (i) it almost surely learns the unknown pa-
+rameter, and (ii) it converges to the optimal decision one would
+have taken with full knowledge of the unknown parameter.
+The remainder of this paper is organized as follows: We in-
+troduce our notation and the problem formulation in §2. In
+§3, we provide some background on censored learning in the
+parametric Bayesian framework for newsboy distributions, and
+establish a new stochastic order result for this class of distri-
+butions.
+We analyze the optimal policy when the sequence
+of components is ﬁnite in §4. In §5, we propose a myopic
+Bayesian policy and establish its asymptotic properties. Finally,
+§6 contains some concluding remarks.
+2. Problem formulation
+We consider a sequence of N components, where the compo-
+nents are indexed by n = 1, 2, . . . , N deﬁned over a probability
+space (Ω, F , P). Each component is controlled by the classical
+age-replacement policy. That is, component n is either replaced
+preventively when it has been in operation for a ﬁxed amount of
+time τn (at cost cp > 0), or it is replaced correctively if it fails
+before this time (at cost cc > cp).
+We assume that the lifetimes of the components are indepen-
+dent and identically distributed, belonging to a family of dis-
+tributions parametrized by an unknown parameter θ > 0 with
+true value θ0. Given parameter θ, the lifetime distribution has a
+probability density function denoted by fX(x | θ) and a cumula-
+tive distribution function denoted by FX(x | θ). To preserve the
+conjugate property under censored learning, we assume that the
+underlying lifetime distribution is from the class of newsboy
+distributions, so that FX(x | θ) can be expressed in the form
+FX(x | θ) = 1 −e−θℓ(x),
+(1)
+where ℓ(x) : [0, ∞) →[0, ∞) is a diﬀerentiable, nondecreas-
+ing and unbounded function with ℓ(0) = 0 that is known to
+the decision maker (Braden and Freimer 1991). Note e.g., that
+the Weibull distribution with known shape parameter β > 0
+and unknown scale parameter θ can be expressed as a news-
+boy distribution by setting ℓ(x) B xβ. The Weibull distribution
+has been extensively used in modeling lifetimes due to its abil-
+ity to model various aging classes of lifetime distributions (cf.
+Ahmad and Kamaruddin 2012). For a further detailed discus-
+sion on this broad class of distributions, we refer the interested
+reader to Braden and Freimer (1991).
+The decision maker can only observe censored observations,
+rather than lifetime realizations. For component n, the censored
+observation is given by Xn ∧τn B min{Xn, τn}, where Xn is the
+realized lifetime and τn the imposed age-replacement thresh-
+old. Let Fn be the ﬁltration generated by this censored lifetime
+process. Hence, for n ≥1, we have the σ-algebra
+Fn B σ(X1 ∧τ1, τ1, X2 ∧τ2, τ2, . . . , Xn ∧τn, τn),
+and let F0 be the trivial σ-algebra. It is thus evident that the
+accumulated information about the lifetime up to the n−th com-
+ponent is impacted by all past replacements decisions.
+The decision maker wishes to minimize the total expected
+discounted cost due to both corrective and preventive replace-
+ments, where costs are discounted with rate α ∈(0, 1), over an
+N component horizon. This optimality criterion is often em-
+ployed in ﬁnite-horizon problems in the age-replacement litera-
+ture (cf. De Jonge and Scarf 2019). We are interested in ﬁnding
+the optimal non-anticipatory policy (i.e. the decision τn is Fn−1-
+measurable for all n ≥1) that attains this minimum.
+Observe that when deciding on the age-replacement thresh-
+old for the n−th component, there is an inherent trade-oﬀbe-
+tween the direct expected cost of the n−th component and the
+impact the decision has on future costs through the information
+accumulation process. Speciﬁcally, exploration (i.e. a higher
+value of the age-replacement threshold) increases the probabil-
+ity of a corrective replacement, but at the same time leads to
+accumulating more, valuable, information. This phenomenon
+is often referred to as the exploration-exploitation trade-oﬀ.
+3. Censored lifetime learning
+In this section, we describe how the lifetime distribution of
+components can be inferred with increasing accuracy as infor-
+mation is accumulated. The approach is based on Braden and
+Freimer (1991), who show that the gamma distribution is the
+conjugate prior for all newsboy distributions.
+Following a Bayesian approach, we treat the unknown pa-
+rameter as a random variable, denoted with Θ, and assume that
+the decision maker has a prior density for the unknown param-
+eter θ, denoted by pΘ(θ). This density captures the information
+about the unknown parameter of the lifetime distribution.
+Let m and k denote the shape and scale parameter, respec-
+tively, of the gamma distribution.
+The prior density is then
+given by
+pΘ(θ | m, k) B kmθm−1e−kθ
+Γ(m)
+,
+for all θ > 0,
+(2)
+where Γ(·) denotes the gamma function.
+Using fX(x | θ) =
+d
+dxFX(x | θ) = θℓ′(x)e−θℓ(x) (cf. Equation (1)) and uncondition-
+ing on θ using Equation (2), we obtain the posterior predictive
+2
+
+
+=== PDF PAGE 4 ===
+lifetime density and distribution function, respectively;
+fX(x|m, k) =
+mkmℓ′(x)
+[k + ℓ(x)]m+1 and FX(x|m, k) = 1 −
+"
+k
+k + ℓ(x)
+#m
+.
+We use the shorthand notation mn and kn to denote the updated
+shape and scale parameter conditional on Fn. Here, we omit
+the dependence on Fn as there is a mapping between Fn and
+(mn, kn), which we explain henceforth. Let (m0, k0) denote the
+parameters before the installment of the ﬁrst component. Then
+for n ≥1, conditional on Fn, the prior hyper parameters are
+computed as:
+mn = m0 +
+n
+X
+i=1
+1{Xi<τi} = mn−1 + 1{Xn<τn}, and,
+kn = k0 +
+n
+X
+i=1
+ℓ(Xi ∧τi) = kn−1 + ℓ(Xn ∧τn),
+(3)
+where 1{a} denotes the indicator function taking value 1 if
+event a occurs and value 0 otherwise. Here, we assume that
+m0 · k0 > 1, and thus mn · kn > 1 for all n ≥1 through the
+update rules, so that the posterior predictive lifetime distribu-
+tion of each component has a ﬁnite expectation. Observe that
+the scale parameter kn is an aggregate of all observations. The
+shape parameter mn counts the number of uncensored obser-
+vations (corresponding to corrective replacements), and, as the
+coeﬃcient of variation for the gamma prior is equal to
+p
+1/mn,
+it is also a measure for the precision of the accrued information
+on the unknown parameter θ.
+Equation (3) induces a simple, Markovian scheme for se-
+quentially inferring the lifetime distribution conditional on Fn.
+In what follows, for notational simplicity and in order to en-
+hance the readability of the paper, we write, depending on our
+objective, either Fn or (mn, kn).
+In order to derive structural properties of the conditional pos-
+terior predictive lifetime random variable given (mn, kn), de-
+noted with X(mn, kn) B {X | mn, kn}, and in order to make com-
+parisons between diﬀerent conditional posterior predictive life-
+time random variables, we use the hazard rate ordering:
+Deﬁnition 1 (Shaked and Shanthikumar 2007). Let Y and Z be
+two nonnegative random variables with absolutely continuous
+distribution functions and with hazard rate functions r(x) and
+q(x), respectively, such that r(x) ≥q(x) for all x > 0. Then Y is
+said to be smaller than Z in the hazard rate order.
+We now present an important proposition that indicates how
+the accrued information, encoded in (m, k), aﬀects the stochas-
+tic ordering of the conditional posterior predictive lifetime dis-
+tribution.
+Proposition 1. The conditional posterior predictive lifetime
+random variable X(m, k) is:
+(i) stochastically increasing in the hazard rate order in the
+scale parameter k, and
+(ii) stochastically decreasing in the hazard rate order in the
+shape parameter m.
+Proof. Let h(x | m, k) denote the hazard rate function of the con-
+ditional posterior predictive lifetime when the shape and scale
+parameters are m and k, respectively. We then have
+h(x | m, k) B
+fX(x | m, k)
+1 −FX(x | m, k) =
+mkmℓ′(x)
+[k+ℓ(x)]m+1
+h
+k
+k+ℓ(x)
+im = mℓ′(x)
+k + ℓ(x).
+Observe that since ℓ(x) is positive and increasing (by assump-
+tion), we have the following. If M > m > 0 then h(x | M, k) >
+h(x | m, k) for all x > 0, which establishes the hazard rate order
+in m. Finally, if K > k > 0 then h(x | m, K) < h(x | m, k) for all
+x > 0, which establishes the hazard rate order in k.
+Assertion (i) establishes the monotonic increase in the ex-
+pected conditional posterior predictive lifetime when the aggre-
+gate of observations increases for a ﬁxed number of uncensored
+observations. This implies that if the aggregate of all observa-
+tions is high, then past components have had a relatively long
+lifetime on average. Hence, the decision maker predicts that
+the next component will have a longer lifetime than in the case
+where the accrued information has a lower aggregate of obser-
+vations.
+Assertion (ii) establishes the stochastic-ordering property of
+lifetime distributions that are updated using censored observa-
+tions and uncensored observations, respectively. It states that
+a censored lifetime observation results in a lifetime distribu-
+tion that is stochastically greater than that from an uncensored
+observation. An intuitive explanation is as follows. With a cen-
+sored observation, the true lifetime is at least as large as the cen-
+sored observation, as opposed to the uncensored observation,
+where the true lifetime is equal to the uncensored observation.
+As the usual stochastic order is implied by the hazard rate or-
+der (see e.g., Shaked and Shanthikumar 2007, Theorem 1.B.1.),
+Proposition 6.2 and 6.3 of Braden and Freimer (1991), which
+state the usual stochastic order of the conditional posterior pre-
+dictive lifetime, directly follow from Proposition 1.
+4. Optimal policy for a ﬁnite sequence
+In this section, we investigate the structure of the optimal
+policy when N is ﬁnite. In a ﬁnite sequence of components,
+the exploration-exploitation trade-oﬀurges the decision maker
+to explicitly recognize the impact that current decisions have
+on both the direct expected costs and the future expected costs
+through the information accumulation process.
+This inter-
+dependence is made explicit by formulating the optimization
+problem as a dynamic program.
+To this end, let Vn(m, k) denote the minimum total expected
+discounted cost over components n, n + 1, . . . , N, starting with
+component n, when the updated hyper parameters are (m, k),
+respectively. We assume the terminal cost to be zero, hence
+VN+1(m, k) B 0 for all (m, k). The optimality equations, for
+n = 1, 2, . . . , N, are:
+Vn(m, k) =
+(4)
+min
+τn≥0
+n
+Cn(τn | m, k) +
+Z ∞
+0
+Gn(τn, x | m, k) fX(x | m, k)dx
+o
+,
+3
+
+
+=== PDF PAGE 5 ===
+where
+Cn(τn | m, k) =
+(5)
+cc
+Z τn
+0
+e−αx fX(x | m, k)dx + cpe−ατn(1 −FX(τn | m, k)),
+denotes the direct expected discounted cost function of compo-
+nent n when the age-replacement threshold is τn (the ﬁrst part
+is due to corrective replacement and the second part is due to
+preventive replacement) and
+Gn(τn, x | m, k) B
+
+e−αxVn+1(m + 1, k + ℓ(x)),
+if x < τn,
+e−ατnVn+1(m, k + ℓ(τn)),
+if x ≥τn, (6)
+denotes the discounted cost function over the remaining com-
+ponents n+1, . . . , N when the age-replacement threshold of the
+n−th component is τn and the lifetime realization equals x.
+The existence of an optimal policy in this setting is guaran-
+teed, see e.g., Proposition 3.4 of Bertsekas and Shreve (1978).
+Observe that over an N component horizon, the minimum total
+expected discounted cost is given by V1(m0, k0) which can be
+found by solving Equation (4) via backward induction. Unfor-
+tunately, analytic solutions do not appear to be readily available
+and solving Equation (4) numerically, even for small instances,
+is a diﬃcult task. Instead, we establish some structural results
+of the optimal policy in the remainder of this section and then
+focus on an asymptotically optimal policy that is simple to com-
+pute making it easy to implement in practice.
+We ﬁrst state two properties regarding the direct expected
+discounted cost function that are instrumental in characterizing
+the behavior of Vn(m, k) with respect to its parameters.
+Lemma 1. Cn(τn | m, k) is
+(i) nonincreasing in k, and
+(ii) nondecreasing in m,
+for all τn ≥0 and n ∈{1, 2, . . . , N}.
+Proof. Note that Equation (5) can be rewritten as
+Cn(τn | m, k) =
+−cc
+Z τn
+0
+e−αxd (1 −FX(x | m, k) + cpe−ατn 1 −FX(τn | m, k)
+= (cp −cc)e−ατn 1 −FX(τn | m, k) + cc
+−ccα
+Z τn
+0
+e−αx 1 −FX(τn | m, k)dx.
+(7)
+Since cp < cc, α ∈(0, 1), and because of Assertion (i) (Asser-
+tion (ii)) of Proposition 1, both terms involving FX(τ | m, k) in
+the last two lines of (7) are nonincreasing (nondecreasing) in k
+(m), which establishes the result.
+We now proceed with two properties regarding the minimum
+total expected discounted cost over components n, n + 1, . . . , N,
+starting with the n−th component.
+Theorem 1. Vn(m, k) is
+(i) nonincreasing in k, and
+(ii) nondecreasing in m,
+for all n ∈{1, 2, . . . , N + 1}.
+Proof. We ﬁrst prove Assertion (i) by backward induction. The
+base case, i.e.
+VN+1(m, k), holds trivially as terminal costs
+VN+1(m, k) = 0 for all (m, k). Let K > k and assume inductively
+that Vn+1(m, K) ≤Vn+1(m, k), and let τn
+m, j denote the optimal
+age-replacement threshold for the n−th component, when the
+shape and scale parameters are m and j, respectively. We have
+Vn(m, K) −Vn(m, k)
+= Cn(τn
+m,K | m, K) +
+Z ∞
+0
+Gn(τn
+m,K, x | m, K) fX(x | m, K)dx
+−Cn(τn
+m,k | m, k) −
+Z ∞
+0
+Gn(τn
+m,k, x | m, k) fX(x | m, k)dx
+≤Cn(τn
+m,K | m, K) +
+Z ∞
+0
+Gn(τn
+m,K, x | m, K) fX(x | m, K)dx
+−Cn(τn
+m,K | m, k) −
+Z ∞
+0
+Gn(τn
+m,K, x | m, k) fX(x | m, k)dx
+≤
+Z ∞
+0
+Gn(τn
+m,K, x | m, K) fX(x | m, K)dx
+−
+Z ∞
+0
+Gn(τn
+m,K, x | m, k) fX(x | m, k)dx
+≤
+Z ∞
+0
+Gn(τn
+m,K, x | m, k) fX(x | m, K)dx
+−
+Z ∞
+0
+Gn(τn
+m,K, x | m, k) fX(x | m, k)dx
+= E[Gn(τn
+m,K, X | m, k) | m, K] −E[Gn(τn
+m,K, X | m, k) | m, k] ≤0.
+The ﬁrst inequality holds because τn
+m,K is a feasible policy for
+m and k but not necessarily optimal. The second inequality
+holds by Assertion (i) of Lemma 1. The third inequality follows
+from the induction hypothesis. That is, Vn+1(m, K) ≤Vn+1(m, k)
+implies that
+Gn(τn
+m,K, x | m, K) −Gn(τn
+m,K, x | m, k)
+=
+
+e−αx Vn+1(m + 1, K + ℓ(x)) −Vn+1(m + 1, k + ℓ(x)) ≤0,
+e−ατn
+m,K Vn+1(m, K + ℓ(τn
+m,K)) −Vn+1(m, k + ℓ(τn
+m,K)) ≤0,
+where the ﬁrst branch corresponds to x
+<
+τn
+m,K and the
+second branch to x ≥τn
+m,K.
+Hence, Gn(τn
+m,K, x | m, K) ≤
+Gn(τn
+m,K, x | m, k) for all x ≥0, which implies the third inequal-
+ity. Then, following a similar reasoning, Gn(τn
+m,K, x | m, k) is
+nonincreasing in x by the induction hypothesis and since e−αx
+is decreasing in x for α > 0. We then have the expectation of a
+decreasing function Gn(τn
+m,K, x | m, k), so that the last inequality
+is implied by the stochastic order of Assertion (i) of Proposi-
+tion 1 between fX(x | m, K) and fX(x | m, k) (see e.g., Ross 1996,
+Proposition 9.1.2).
+The proof of Assertion (ii) follows verbatim the proof of
+Assertion (i), starting with M > m, looking at the diﬀerence
+Vn(m, k)−Vn(M, k), and assuming inductively that Vn+1(m, k) ≤
+Vn+1(M, k) with M > m.
+Theorem 1 establishes the monotonicity of the minimum to-
+tal expected discounted cost in both the aggregate of all obser-
+vations k and the number of exact observations m. The intuition
+4
+
+
+=== PDF PAGE 6 ===
+behind both parts (and their individual counterparts in Lemma
+1) is as follows: If the aggregate of all observations increases
+and everything else is held ﬁxed, it means that on average, each
+component has had a longer lifetime and is thus discounted at a
+higher rate. This leads to a lower total expected discounted cost.
+A similar reasoning holds if the number of exact observations
+increases and the aggregate of all observations is held ﬁxed.
+Both preventive and corrective replacement costs are then, on
+average, discounted at an equal rate, but there are more exact
+observations so that cc is incurred more often. This leads to a
+higher total expected discounted cost.
+5. An asymptotically optimal policy
+In the previous section we have established some structural
+results pertaining to the optimal policy in the case of a ﬁnite
+sequence of components (i.e.
+N < ∞). However, comput-
+ing this optimal policy via the proposed dynamic program is
+analytically intractable and even numerically a diﬃcult task.
+Therefore, in this section, we investigate asymptotic properties
+(as N →∞) of the information accumulation process and of a
+computationally tractable myopic policy.
+We proceed in two steps. First we show that under any rea-
+sonable policy, the learning converges in the Bayesian sense.
+We then propose a myopic policy and prove its asymptotical
+optimality.
+5.1. Convergence of learning
+Recall that {Θ | Fn}n=1,2,...,N denotes our posterior belief re-
+garding the unknown parameter θ and that the hyper parame-
+ters are updated according to Equation (3). In the next result,
+we show that this posterior expectation, denoted with E[Θ | FN]
+converges (a.s.) to the true value θ0, as N →∞, and that the
+variance, denoted with Var[Θ | FN], converges (a.s.) to 0, as
+N →∞. This convergence is guaranteed under any policy in
+which the threshold can be lower bounded by some constant
+ϵ > 0. We believe that this assumption is justiﬁed as it is not
+natural to replace a component immediately after installment.
+Theorem 2. Under any policy for which τn ≥ϵ > 0 for all
+n ∈{1, 2, . . . , N}, we have
+E[Θ | FN]
+a.s.
+−−−−−→θ0 and Var[Θ | FN]
+a.s.
+−−−−−→0 as N →∞.
+Proof. By the updating scheme of the posterior density, the ex-
+pectation of Θ given FN and ﬁxed policy τn ≥ϵ > 0 for all
+n ∈{1, 2, . . . , N} can be written as (recall that the random vari-
+able {Θ | FN} is gamma distributed, cf. Equation (2)):
+E[Θ | FN] = mN
+kN
+= m0 + PN
+n=1 1{Xn<ϵ}
+k0 + PN
+n=1 ℓ(Xn ∧ϵ)
+=
+m0
+N +
+PN
+n=1 1{Xn<ϵ}
+N
+k0
+N +
+PN
+n=1 ℓ(Xn∧ϵ)
+N
+.
+Then, when N →∞, we have by the strong law of large num-
+bers, almost surely,
+lim
+N→∞E[Θ | FN] = lim
+N→∞
+m0
+N +
+PN
+n=1 1{Xn<ϵ}
+N
+k0
+N +
+PN
+n=1 ℓ(Xn∧ϵ)
+N
+=
+FX(ϵ | θ0)
+E[ℓ(X ∧ϵ)].
+Using straightforward calculus yields
+FX(ϵ | θ0)
+E[ℓ(X ∧ϵ)] =
+FX(ϵ | θ0)
+R ∞
+0 P ℓ(X ∧ϵ) > ydy
+=
+FX(ϵ | θ0)
+R ℓ(ϵ)
+0
+P X > ℓ−1(y)dy
+=
+FX(ϵ | θ0)
+R ℓ(ϵ)
+0
+e−θ0ydy
+=
+FX(ϵ | θ0)
+1
+θ0 FX(ϵ | θ0)
+= θ0.
+The second equality follows from the nondecreasing property
+of the function ℓ(·). The third and fourth equality follow using
+the cumulative distribution function of a newsboy distribution,
+see Equation (1).
+For the second part, note that
+Var[Θ | FN] =
+m0 + PN
+n=1 1{Xn<ϵ}
+ k0 + PN
+n=1 ℓ(Xn ∧ϵ)2
+= E[Θ | FN] ·
+1
+k0 + PN
+n=1 ℓ(Xn ∧ϵ)
+.
+Using
+E[Θ | FN]
+a.s.
+−−−−−→θ0 and
+1
+k0 + PN
+n=1 ℓ(Xn ∧ϵ)
+a.s.
+−−−−−→0,
+when N →∞leads to the desired result.
+Observe that the crucial part of the proof, i.e. the equality
+FX(ϵ | θ0)
+E[ℓ(X∧ϵ)] = θ0 regardless of the value of ϵ, relies explicitly on
+the form of the cumulative distribution function of a newsboy
+distribution. As such, this is a distinctive feature of this class of
+distributions.
+Theorem 2 establishes the Bayesian consistency of the pos-
+terior distribution {Θ | FN} at the true value θ0 (DeGroot 2005).
+This implies that the true value will be learned with certainty as
+information is accumulated.
+5.2. Convergence of myopic policy
+Given full knowledge of the true value θ0, the optimal age-
+replacement threshold for each component can be computed by
+minimizing the direct expected discounted cost function, that
+is,
+τ∗(θ0) B arg min
+τ≥0
+C(τ | θ0)
+(8)
+= arg min
+τ≥0
+n
+cc
+Z τ
+0
+e−αx fX(x | θ0)dx + cpe−ατ(1 −FX(τ | θ0))
+o
+,
+where we use the notation C(τ | θ0) to denote the direct expected
+discounted cost function when θ0 is known. We refer to τ∗(θ0)
+as the Oracle as this decision requires full knowledge about the
+unknown parameter and is hence not attainable in practice. The
+following remark relates the uniqueness and ﬁniteness of τ∗(θ0)
+to properties of ℓ(x).
+5
+
+
+=== PDF PAGE 7 ===
+Remark 1. It has been shown in Fox (1966) that τ∗(θ0) is unique
+and ﬁnite if and only if X has a strictly increasing hazard rate.
+An increasing hazard rate implies that the component degrades
+over time so that there is an incentive to perform preventive
+maintenance. Given full knowledge about θ0, the hazard rate,
+denoted with h(x | θ0), is equal to
+h(x | θ0) =
+d
+dxFX(x | θ0)
+1 −FX(x | θ0) = θ0ℓ′(x)e−θ0ℓ(x)
+e−θ0ℓ(x)
+= θ0ℓ′(x).
+It is then obvious (recall that θ0 > 0) that h(x | θ0) is strictly in-
+creasing if and only if ℓ′(x) is strictly increasing. Hence, τ∗(θ0)
+is unique and ﬁnite if and only if ℓ′′(x) > 0. This statement
+can thus be veriﬁed a-priori without any knowledge about the
+unknown parameter θ0.
+A policy that is attainable in the absence of knowledge on the
+true value θ0 is to, upon installment of the n−th component, im-
+plement the age-replacement threshold that only minimizes the
+direct expected discounted costs given the accumulated infor-
+mation. Recall that we used this function also in the dynamic
+program formulation, where (m, k) captured the accumulated
+information, see Equation (5). In other words, this myopic pol-
+icy does not integrate learning with decision making, and solely
+focuses on exploitation. For n = 1, 2, . . . , N, we denote the op-
+timal age-replacement threshold of this myopic Bayesian policy
+with τmb(Fn), so that
+τmb(Fn) B arg min
+τ≥0
+Cn(τ | Fn).
+The following result establishes the asymptotic optimality of
+this myopic Bayesian policy in the sense that the induced de-
+cision converges to the Oracle. It relies on the condition that
+the Oracle is unique and ﬁnite, which, as stated before, can be
+easily veriﬁed before any information is accrued, see Remark
+1.
+Theorem 3. Suppose τ∗(θ0) is unique and ﬁnite. Then the my-
+opic Bayesian policy is asymptotically optimal; that is,
+lim
+N→∞τmb(FN) = τ∗(θ0).
+Proof. We ﬁrst prove that CN(τ | FN) converges uniformly to
+C(τ | θ0) when N →∞. We then show that this uniform conver-
+gence together with properties of CN(τ | FN) implies a stronger
+notion of convergence, namely epi-convergence, which leads
+directly to the desired result. We have
+sup
+τ≥0
+CN(τ | FN) −C(τ | θ0)
+
+= sup
+τ≥0
+cc
+Z τ
+0
+e−αx fX(x | FN)dx + cpe−ατ(1 −FX(τ | FN))
+−cc
+Z τ
+0
+e−αx fX(x | θ0)dx −cpe−ατ(1 −FX(τ | θ0))
+
+= sup
+τ≥0
+cc
+Z τ
+0
+e−αx( fX(x | FN) −fX(x | θ0))dx
++ cpe−ατ
+Z ∞
+τ
+( fX(x | FN) −fX(x | θ0))dx
+
+≤sup
+τ≥0
+
+cc
+Z τ
+0
+e−αx fX(x | FN) −fX(x | θ0)
+dx
+(9)
++ cpe−ατ
+Z ∞
+τ
+ fX(x | FN) −fX(x | θ0)
+dx
+
+≤sup
+τ≥0
+
+cc
+Z τ
+0
+e−αx fX(x | FN) −fX(x | θ0)
+dx
+
+(10)
++ sup
+τ≥0
+
+cpe−ατ
+Z ∞
+τ
+ fX(x | FN) −fX(x | θ0)
+dx
+
+= cc
+Z ∞
+0
+e−αx fX(x | FN) −fX(x | θ0)
+dx
++ cp
+Z ∞
+0
+ fX(x | FN) −fX(x | θ0)
+dx
+
+.
+(11)
+Inequality (9) follows from the triangle inequality and H¨older’s
+inequality, and ﬁnally, Inequality (10) is a triangle-like inequal-
+ity for the supremum operator.
+Note that
+fX(x | FN) =
+Z ∞
+0
+fX(x | θ)pΘ(θ | FN)dθ.
+Since fX(x | θ) is a bounded, continuous function, we have by
+Theorem 2 and the weak convergence of measures that
+fX(x | FN) →fX(x | θ0),
+when N →∞.
+(12)
+Using this weak convergence of measures, we have by Scheﬀ´e’s
+Theorem (see e.g., Billingsley 1995, Theorem 16.11) that
+lim
+N→∞
+Z ∞
+0
+ fX(x | FN) −fX(x | θ0)
+dx = 0,
+(13)
+lim
+N→∞
+Z ∞
+0
+e−αx fX(x | FN) −fX(x | θ0)
+dx = 0.
+(14)
+Using the established bound in (11) in combination with (13)
+and (14), we have
+lim
+N→∞sup
+τ≥0
+CN(τ | FN) −C(τ | θ0)
+ = 0,
+which establishes the uniform convergence of the direct ex-
+pected cost functions.
+Since CN(τ | FN) converges uniformly to C(τ | θ0), and
+CN(τ | FN) is ﬁnite (i.e. 0 < CN(τ | FN) ≤cc) and continu-
+ous for all τ ≥0 and N ≥0, we have by Proposition 7.15 of
+Rockafellar and Wets (2009) that CN(τ | FN) epi-converges to
+C(τ | θ0) when N →∞.
+Note that the sequence CN(τ | FN) is eventually level-
+bounded since we assume that τ∗(θ0) is unique and ﬁnite (hence
+the arg min set will eventually be bounded and nonempty).
+Then, as C(τ | θ0) is a proper and left semi-continuous function,
+we have by Theorem 7.33 of Rockafellar and Wets (2009) that
+lim
+N→∞arg min
+τ≥0
+CN(τ | FN) = arg min
+τ≥0
+C(τ | θ0),
+which establishes the result.
+As noted before, computing the optimal policy via the pro-
+posed dynamic program is analytically intractable and even nu-
+merically a diﬃcult task. As such, decision makers can resort
+6
+
+
+=== PDF PAGE 8 ===
+to the myopic Bayesian policy. This policy is not only compu-
+tationally appealing, but also, as is established in Theorem 3,
+asymptotically optimal.
+5.3. Illustrative example
+Figure 1 provides an illustrative example of the established
+asymptotic properties for the case when the lifetimes are
+Weibull distributed random variables with known shape β = 3
+and unknown scale. Since β > 1, the lifetime distribution has
+an increasing hazard rate so that the assumption of a unique and
+ﬁnite τ∗(θ0) is justiﬁed. The value of τ∗(θ0) is computed using
+Equation (8) with α = 0.9.
+Sub-ﬁgure (a) shows that the posterior mean converges to the
+true value θ0, while the posterior variance converges to 0 at the
+same time. Sub-ﬁgure (b) shows the corresponding sequence
+of decisions induced by the myopic Bayesian policy, and its
+convergence to τ∗(θ0). The posterior mean in Figure (a) and
+the myopic Bayesian policy in Figure (b) appear to be closely
+linked. The coupling between the evolution of the posterior
+mean and the myopic Bayesian policy can be explained intu-
+itively. For instance, the jump in the myopic Bayesian policy
+starting at n ≈80 can be explained as follows. If the posterior
+mean of Θ decreases based on the accumulated information,
+the decision maker expects that the posterior predictive lifetime
+is becoming larger in expectation (see Proposition 1), hence,
+a higher age-replacement threshold is imposed. The reverse
+holds true as well, as is nicely illustrated when the posterior
+mean starts to increase again after n ≈200.
+6. Conclusions
+We considered a sequence of age-replacement problems with
+a general lifetime distribution parametrized by a parameter that
+is unknown a-priori. By adopting a parametric Bayesian frame-
+work often used in the inventory research community, we were
+able to investigate the exploration-exploitation trade-oﬀthat
+naturally arises when age-replacement decisions are integrated
+with learning from both censored and uncensored observations.
+A new stochastic order for this parametric Bayesian frame-
+work was established that is particularly useful in maintenance
+and reliability related problems. For the case of a ﬁnite se-
+quence of components, we then analyzed the optimal policy
+for a ﬁnite sequence of components and established structural
+properties. For the inﬁnite case, we proposed a computation-
+ally appealing myopic policy and proved that it almost surely
+learns the unknown parameter, and that it converges to the opti-
+mal decision one would have taken with full knowledge of the
+unknown parameter.
+Two immediate directions for future research are (i) to inves-
+tigate the rate of convergence of the asymptotic properties due
+to its practical importance, and (ii) to study how the myopic
+decision relates to the optimal decision in the ﬁnite sequence
+when the information state in both is the same. With respect
+to the latter, we expect that the myopic threshold will be lower
+as it only focuses on exploitation and neglects the exploratory
+beneﬁts that a higher threshold has.
+(a) Sequence of posterior mean (left scale) versus the true value θ0, and se-
+quence of posterior variance (right scale).
+0.6 
+0.55 
+0.5 
+0.45 
+0.4 
+0.35 
+0.3 
+0.25 
+0.2 
+200 
+400 
+- - - -Oracle, T*(0o)
+--Myopic Bayesian, Tmb(Fn)
+600 
+800 
+1000 
+1200 
+Component n
+(b) Sequence of decisions induced by myopic Bayesian policy versus the deci-
+sion induced by the Oracle τ∗(θ0).
+Figure 1: Illustration of asymptotic properties for the consistency (a) and the
+decision making (b) when cp = 1, cc = 4, ℓ(x) B x3, θ0 = 1.3 and τ∗(θ0) ≈
+0.34. The data points in both sub-ﬁgures are obtained from the same sample
+path.
+Acknowledgements
+The research of Collin Drent is supported by the Data Sci-
+ence Flagship framework, a cooperation between the Eind-
+hoven University of Technology and Philips.
+The research
+of Stella Kapodistria and Onno Boxma is supported by the
+NWO Gravitation Programme NETWORKS (Grant number
+024.002.003).
+References
+Ahmad,
+R., Kamaruddin,
+S..
+An overview of time-based and
+condition-based maintenance in industrial application.
+Com-
+puters & Industrial Engineering 2012;63(1):135–149.
+Barlow, R., Hunter, L.. Optimum preventive maintenance policies.
+Operations Research 1960;8(1):90–100.
+Bensoussan, A., C¸ akanyıldırım, M., Royal, A., Sethi, S.P.. Bayesian
+and adaptive controls for a newsvendor facing exponential de-
+mand. Risk and Decision Analysis 2009;1(4):197–210.
+7
+
+
+=== PDF PAGE 9 ===
+Bertsekas, D.P., Shreve, S.E.. Stochastic Optimal Control: The Dis-
+crete Time Case. Academic Press, 1978.
+Billingsley, P.. Probability and Measure. 3rd ed. John Wiley & Sons,
+1995.
+Bisi, A., Dada, M., Tokdar, S.. A censored-data multiperiod inven-
+tory problem with newsvendor demand distributions. Manufac-
+turing & Service Operations Management 2011;13(4):525–533.
+Braden, D.J., Freimer, M.. Informational dynamics of censored ob-
+servations. Management Science 1991;37(11):1390–1404.
+Chen,
+L..
+Bounds and heuristics for optimal Bayesian inven-
+tory control with unobserved lost sales. Operations Research
+2010;58(2):396–413.
+Chen,
+L., Plambeck,
+E.L.. Dynamic inventory management with
+learning about the demand distribution and substitution prob-
+ability.
+Manufacturing & Service Operations Management
+2008;10(2):236–256.
+Chen, N., Ye, Z.S., Xiang, Y., Zhang, L.. Condition-based mainte-
+nance using the inverse Gaussian degradation model. European
+Journal of Operational Research 2015;243(1):190–199.
+Dayanik, S., G¨urler,
+¨U.. An adaptive Bayesian replacement policy
+with minimal repair. Operations Research 2002;50(3):552–558.
+De Jonge, B., Scarf, P.A.. A review on maintenance optimization.
+European Journal of Operational Research 2019;Forthcoming.
+DeGroot, M.H.. Optimal Statistical Decisions. John Wiley & Sons,
+2005.
+Ding, X., Puterman, M.L., Bisi, A.. The censored newsvendor and
+the optimal acquisition of information.
+Operations Research
+2002;50(3):517–527.
+Drent, C., Drent, M., Arts, J., Kapodistria, S.. Real-time integrated
+learning and decision making for deteriorating systems; 2020.
+Working paper.
+Elwany,
+A.H., Gebraeel,
+N.Z., Maillart,
+L.M..
+Structured re-
+placement policies for components with complex degrada-
+tion processes and dedicated sensors.
+Operations Research
+2011;59(3):684–695.
+Fox, B.. Age replacement with discounting. Operations Research
+1966;14(3):533–537.
+Fox, B.. Adaptive age replacement. Journal of Mathematical Analysis
+and Applications 1967;18(2):365–376.
+Kim, M.J., Makis, V.. Joint optimization of sampling and control
+of partially observable failing systems.
+Operations Research
+2013;61(3):777–790.
+Lariviere, M.A., Porteus, E.L.. Stalking information: Bayesian in-
+ventory management with unobserved lost sales. Management
+Science 1999;45(3):346–363.
+Lu,
+X., Song,
+J.S., Zhu,
+K..
+Analysis of perishable-inventory
+systems with censored demand data.
+Operations Research
+2008;56(4):1034–1038.
+Mersereau, A.J.. Demand estimation from censored observations with
+inventory record inaccuracy. Manufacturing & Service Opera-
+tions Management 2015;17(3):335–349.
+Rockafellar,
+R.T., Wets,
+R.J.B..
+Variational Analysis.
+2nd ed.
+Springer Science & Business Media, 2009.
+Ross, S.M.. Stochastic Processes. 2nd ed. John Wiley & Sons, 1996.
+Shaked, M., Shanthikumar, J.G.. Stochastic Orders. Springer Science
+& Business Media, 2007.
+Van Oosterom, C., Peng, H., van Houtum, G.J.. Maintenance opti-
+mization for a Markovian deteriorating system with population
+heterogeneity. IISE Transactions 2017;49(1):96–109.
+Wang, H.. A survey of maintenance policies of deteriorating systems.
+European Journal of Operational Research 2002;139(3):469–
+489.
+8

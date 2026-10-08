@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\UseR\Downloads\RESSSSSS\self-timed-warning_part1_code_results\self-timed-warning\contrib\cat_bearing.py", line 119, in <module>
+    guarded_main()
+  File "C:\Users\UseR\Downloads\RESSSSSS\self-timed-warning_part1_code_results\self-timed-warning\contrib\cat_bearing.py", line 108, in guarded_main
+    try: main()
+         ^^^^^^
+  File "C:\Users\UseR\Downloads\RESSSSSS\self-timed-warning_part1_code_results\self-timed-warning\contrib\cat_bearing.py", line 43, in main
+    t0 = time.time(); S, L = AC.bearing_snapshots(); units = np.sort(L.index.values); rows, sets, w20, platform = [], [], [], [], []
+                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 4)

@@ -1,0 +1,32 @@
+{
+  "horizon": [
+    1,
+    1,
+    1
+  ],
+  "logger_failed": [
+    true,
+    false,
+    false
+  ],
+  "premiums": [
+    98,
+    1,
+    100
+  ],
+  "age_a": 3,
+  "age_b": 2,
+  "denominators": [
+    "707",
+    "612",
+    "1010"
+  ],
+  "optimal_shared_count": 1,
+  "witness": [
+    1,
+    2,
+    3
+  ],
+  "exact_ratio": "505/306",
+  "two_endpoint_ratio": "10/7"
+}

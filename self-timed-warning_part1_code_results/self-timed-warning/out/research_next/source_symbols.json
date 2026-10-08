@@ -1,0 +1,3601 @@
+{
+ "ablate_hybrid.py": {
+  "doc": "Ablation study and stacked hybrid for the [-13, +2] window at half of life (PHM08).\n\nInput: out/window/base_preds_PHM08.csv (collect_base.py). The stacker is trained on CALIBRATION rows only\n(calibration engines at 16 life stages); its type and decoder are chosen by engine-grouped 4-fold CV inside the\ncalibration rows, pooled over all stages (never on test engines, never tuned to the half-life point).\nTest engines (one row each at half of life) are scored once per configuration.",
+  "functions": [
+   {
+    "name": "hit",
+    "line": 19,
+    "end": 19,
+    "doc": null
+   },
+   {
+    "name": "summ",
+    "line": 20,
+    "end": 22,
+    "doc": null
+   },
+   {
+    "name": "decode_q",
+    "line": 23,
+    "end": 30,
+    "doc": "window-optimal choice from predicted quantiles (piecewise-linear CDF)"
+   },
+   {
+    "name": "fit_predict",
+    "line": 32,
+    "end": 44,
+    "doc": null
+   },
+   {
+    "name": "with_shift",
+    "line": 46,
+    "end": 52,
+    "doc": "shift for the window, chosen by engine-grouped CV inside the calibration rows"
+   },
+   {
+    "name": "run",
+    "line": 54,
+    "end": 59,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, json, numpy as np, pandas as pd, warnings",
+   "from sklearn.linear_model import QuantileRegressor",
+   "from sklearn.ensemble import HistGradientBoostingRegressor",
+   "from sklearn.model_selection import GroupKFold"
+  ]
+ },
+ "audit_battery_controls.py": {
+  "doc": "Battery row of the timing-control table (constant-estimate control, health-indicator threshold alarm) rerun with the\ntraining-only block length of audit_confirmations.py. Identical to rev_experiments.run (R0, R1, R2) except that the block\nlength kappa is computed from the training cells of each outer fold and the per-cycle data are forward-filled only.\nOutput: out/audit/battery_controls.csv (per test cell, method, H; same columns as out/rev/<ds>_window.csv plus kappa)",
+  "functions": [
+   {
+    "name": "feats",
+    "line": 20,
+    "end": 22,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, pickle, numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "import rev_experiments as R",
+   "import audit_confirmations as AC",
+   "import battery_warning as BW",
+   "from safe_common import outer_folds"
+  ]
+ },
+ "audit_battery_cost2.py": {
+  "doc": "Battery maintenance cost under cross-validation by cell AND with one batch held out, including the capacity-trend\nbaseline (post hoc; exploratory).\n\nSame renewal-reward model, lead times (0, 15, 30, 45 cycles), cost ratios, training-only block length kappa, inner folds and\nbootstrap rule as audit_cost.py. All policies of audit_cost.py for the battery are recomputed (the cross-validation rows must\nreproduce out/audit/cost_Battery.csv exactly) and three capacity-trend policies are added:\n  trend_window      capacity-trend remaining-life extrapolation (to 0.88 Ah) with the self-timed trigger; window length w,\n                    span, debounce and shift chosen by the window count on the training cells for each H in {10,...,40}\n                    blocks, then H chosen by the training cost rate (as the window-tuned recipe)\n  trend_cost        alarm when the smoothed extrapolated remaining life stays <= tau for k blocks; w, span, k, tau chosen\n                    to minimise the training cost rate\n  trend_cost_1se    the same with the one-standard-error rule\nThe trend has no fitted parameters, so its settings are chosen on the series of the training cells themselves.\nOutput: out/audit/cost_battery2.csv",
+  "functions": [
+   {
+    "name": "feats",
+    "line": 32,
+    "end": 35,
+    "doc": null
+   },
+   {
+    "name": "ttab",
+    "line": 70,
+    "end": 72,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, pickle, time",
+   "import numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "import rev_experiments as R",
+   "import audit_confirmations as AC",
+   "import audit_cost as CO",
+   "import battery_warning as BW"
+  ]
+ },
+ "audit_battery_cost_nested.py": {
+  "doc": "Battery maintenance cost with FULLY NESTED preprocessing and the task in cycles (convention C; post hoc, exploratory).\nPlan fixed and hashed before the run: kam/PHASE3_4_PLAN.md, section 4a.\n\nSame renewal-reward model, lead times (0, 15, 30, 45 cycles), cost ratios (5, 10, 20, 50), splits (cv1-cv5 by cell,\nseed 2026; lobo1-lobo3), inner folds and bootstrap rule as audit_battery_cost2.py (convention B), with two differences:\n  1. every inner training subset builds its own blocks, z-score statistics and models with kappa by the protocol rule\n     computed from that subset (inner validation cells are predicted in their own blocks); the final models use kappa by\n     the rule from the outer training set (as audit_battery_physical.py, 'rule_nested');\n  2. the task is in cycles (the engine task scaled by three): H in {30, 45, 60, 90, 120} cycles, window [-39, +6] cycles,\n     caps {120, 180, 270} cycles (cap >= H + 60), shifts -36 ... +24 cycles (step 1.5), cost thresholds 3, 6, ..., 180 cycles;\n     span and debounce in blocks. A model in blocks of kappa uses every cycle quantity divided by kappa.\nAlarm tables are converted to cycles (remaining life at the alarm, alarm cycle and life times the kappa of the model that\nproduced them) and concatenated over the inner folds, so training cost rates of folds with different kappa are summed in\ncycles. Capacity policies fit nothing; their settings are chosen on the training cells in blocks of the outer kappa.\nCheck R4a: the window-tuned recipe at H = 60 cycles reproduces the per-cell first warnings of audit_battery_physical.py\n('rule_nested'); written to out/audit/cost_battery_nested_check.txt.\nOutput: out/audit/cost_battery_nested.csv (one row per split, lead time, cost ratio, policy and test cell)\nUsage: python audit_battery_cost_nested.py",
+  "functions": [
+   {
+    "name": "fit_models",
+    "line": 35,
+    "end": 51,
+    "doc": "blocks, statistics and models from the training cells tr only (as audit_battery_physical.fit_predict, plus the\nhealth indicator and the 10 % quantile model of audit_cost.models_ext); series in blocks of kap for the target cells"
+   },
+   {
+    "name": "to_cycles",
+    "line": 54,
+    "end": 55,
+    "doc": null
+   },
+   {
+    "name": "cat",
+    "line": 58,
+    "end": 59,
+    "doc": null
+   },
+   {
+    "name": "counts",
+    "line": 62,
+    "end": 64,
+    "doc": null
+   },
+   {
+    "name": "run_split",
+    "line": 67,
+    "end": 167,
+    "doc": null
+   },
+   {
+    "name": "oof_tab",
+    "line": 79,
+    "end": 81,
+    "doc": null
+   },
+   {
+    "name": "te_tab",
+    "line": 83,
+    "end": 85,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, pickle, time",
+   "import numpy as np, pandas as pd",
+   "from sklearn.ensemble import HistGradientBoostingRegressor",
+   "import eol_window2 as W",
+   "import rev_experiments as R",
+   "import audit_confirmations as AC",
+   "import audit_cost as CO",
+   "import battery_warning as BW"
+  ]
+ },
+ "audit_battery_physical.py": {
+  "doc": "Battery analyses with a common PHYSICAL task and fully nested preprocessing (post hoc; exploratory).\n\nTask, in charge-discharge cycles (the protocol task at kappa = 3): warning level H = 60 cycles, acceptance window\n[-39, +6] cycles on the error (estimate - true remaining life), caps {120, 180, 270} cycles, shift grid -36 ... +24 cycles\n(step 1.5). Smoothing span m and debounce k are counted in blocks. A model working in blocks of kappa cycles uses\nH / kappa, [-39 / kappa, +6 / kappa], caps / kappa and shifts / kappa, so every setting has the same meaning in cycles and\nevery score is the same physical acceptance rule (alarms can only be raised at block ends).\n\nFully nested: inside each outer training set, every inner training subset builds its own blocks (missing first blocks\nfilled from that subset), its own z-score statistics and its own regressor; the inner validation units are scored in their\nown blocks. Out-of-fold in-window counts of the inner folds are summed per setting (same physical grid). After selection,\nblocks, statistics and regressor are rebuilt from the complete outer training set and the outer test units are scored once.\n\nFor every outer split (cv1..cv5 by cell, seed 2026; lobo1..lobo3, one batch held out) and every kappa in KS the script\nstores the inner out-of-fold predictions and the outer test predictions, then derives:\n  fixed_kappa      kappa fixed in advance (2, ..., 6), inner and outer\n  rule_nested      kappa = max(1, round(median life / 209.5)) computed from each inner training subset (inner folds) and\n                   from the outer training set (final model): no failure life outside a training subset enters its time scale\n  cv_selected      kappa chosen among KS by the summed inner out-of-fold count (ties: rule kappa of the outer training set,\n                   then smaller kappa)\nand, on the same task and blocks, the capacity-trend baseline (extrapolation of block-mean discharge capacity to 0.88 Ah,\nsame trigger; window length, span, debounce and shift chosen on the training cells).\nOutput: out/audit/battery_physical.csv (one row per outer split, variant, kappa and test cell)\nUsage: python audit_battery_physical.py [cv|lobo|all]",
+  "functions": [
+   {
+    "name": "fit_predict",
+    "line": 40,
+    "end": 47,
+    "doc": "blocks and statistics from the training cells tr only; predictions (in blocks) for target cells tg, every cap"
+   },
+   {
+    "name": "split_store",
+    "line": 50,
+    "end": 64,
+    "doc": null
+   },
+   {
+    "name": "counts",
+    "line": 67,
+    "end": 69,
+    "doc": null
+   },
+   {
+    "name": "select",
+    "line": 72,
+    "end": 81,
+    "doc": "fold_sets: list of (kappa, {cap: {u: (pred, y)}}); returns (score, cap, span, k, shift_cycles)"
+   },
+   {
+    "name": "score",
+    "line": 84,
+    "end": 86,
+    "doc": null
+   },
+   {
+    "name": "trend_select",
+    "line": 89,
+    "end": 97,
+    "doc": null
+   },
+   {
+    "name": "analyse",
+    "line": 100,
+    "end": 120,
+    "doc": null
+   },
+   {
+    "name": "run",
+    "line": 51,
+    "end": 63,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, pickle, time",
+   "import numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "import battery_warning as BW",
+   "import audit_confirmations as AC"
+  ]
+ },
+ "audit_confirmations.py": {
+  "doc": "Audit reruns of the battery and bearing confirmations (post hoc corrections; not part of the hashed protocols).\n\nCorrection 1 (time scale): the protocols set the block length kappa = max(1, round(median life / 209.5)) from the lives of ALL\nincluded units, so held-out lives entered the time scale (and, through it, the warning level H = 20 blocks and the window\n[-13, +2] blocks). Here kappa is computed from the lives of the TRAINING units of each outer split only; inner folds use the\nkappa of their outer split (inner validation units belong to the outer training set). The test units never influence it.\nCorrection 2 (battery filling): invalid per-cycle values are forward-filled only; a block mean uses the valid cycles of the\nblock (leading invalid values at cycle 1 are no longer back-filled from cycle 2). With kappa = 1 a block can be empty; it is\nthen filled with the median of the training units' first-block values.\nEverything else (model, grids, rules, seeds, splits) is unchanged from battery_warning.py / bearing_warning.py.\n\nModes (outputs in out/audit/, one checkpoint per split):\n  battery_corrected      all three pre-specified methods, analyses cv123, lobo, cv119, training-only kappa\n  battery_sens K [K..]   self-timed model only, cv123, PHYSICAL task fixed: H = 60 cycles, window [-39, +6] cycles,\n                         caps {120, 180, 270} cycles, shift grid [-36, +24] cycles; only the aggregation kappa varies\n  battery_baselines      capacity-threshold alarm and capacity-trend extrapolation (to 0.88 Ah = 80 % of nominal),\n                         window evaluation, cv123 and lobo, training-only kappa\n  bearing_corrected      all methods incl. STW-T, cv and official split, training-only kappa\n  bearing_sens K [K..]   self-timed model only, cv, physical task fixed: H = 140 snapshots, window [-91, +14] snapshots",
+  "functions": [
+   {
+    "name": "ckpt",
+    "line": 34,
+    "end": 38,
+    "doc": null
+   },
+   {
+    "name": "battery_cycles",
+    "line": 42,
+    "end": 50,
+    "doc": null
+   },
+   {
+    "name": "battery_blocks",
+    "line": 53,
+    "end": 60,
+    "doc": null
+   },
+   {
+    "name": "battery_splits",
+    "line": 63,
+    "end": 70,
+    "doc": null
+   },
+   {
+    "name": "bearing_snapshots",
+    "line": 74,
+    "end": 79,
+    "doc": null
+   },
+   {
+    "name": "bearing_blocks",
+    "line": 82,
+    "end": 86,
+    "doc": null
+   },
+   {
+    "name": "in_counts_g",
+    "line": 90,
+    "end": 96,
+    "doc": null
+   },
+   {
+    "name": "evaluate_g",
+    "line": 99,
+    "end": 101,
+    "doc": null
+   },
+   {
+    "name": "stw_split",
+    "line": 104,
+    "end": 122,
+    "doc": null
+   },
+   {
+    "name": "capacity_series",
+    "line": 126,
+    "end": 127,
+    "doc": null
+   },
+   {
+    "name": "trend_rul",
+    "line": 130,
+    "end": 138,
+    "doc": "causal least-squares slope of capacity over the last w blocks; extrapolated blocks until 0.88 Ah (80 % of 1.1 Ah)"
+   },
+   {
+    "name": "baselines_split",
+    "line": 141,
+    "end": 172,
+    "doc": null
+   },
+   {
+    "name": "battery_corrected",
+    "line": 176,
+    "end": 184,
+    "doc": null
+   },
+   {
+    "name": "battery_sens",
+    "line": 187,
+    "end": 196,
+    "doc": null
+   },
+   {
+    "name": "battery_baselines",
+    "line": 199,
+    "end": 205,
+    "doc": null
+   },
+   {
+    "name": "bearing_corrected",
+    "line": 208,
+    "end": 217,
+    "doc": null
+   },
+   {
+    "name": "bearing_sens",
+    "line": 220,
+    "end": 228,
+    "doc": null
+   },
+   {
+    "name": "fit",
+    "line": 105,
+    "end": 107,
+    "doc": null
+   },
+   {
+    "name": "run",
+    "line": 180,
+    "end": 181,
+    "doc": null
+   },
+   {
+    "name": "run",
+    "line": 191,
+    "end": 194,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, json, pickle, time",
+   "import numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "import battery_warning as BW",
+   "import bearing_warning as GW",
+   "from safe_common import outer_folds",
+   "from feats import causal_feats"
+  ]
+ },
+ "audit_cost.py": {
+  "doc": "Audit of the maintenance-cost comparison and of assumption A1 of Proposition 1 (post hoc; exploratory).\n\nSame outer folds, inner folds, seeds, model, features and renewal-reward cost model as rev_experiments.py. For every\n(dataset, lead time l, cost ratio rho) the following policies are tuned on the training units' out-of-fold (OOF)\npredictions and applied once to the test units:\n  age            optimal age replacement, age chosen on training lives\n  STW_window     settings (cap, span, debounce, shift) tuned to the window for each warning level H in {10,...,40};\n                 H chosen by training cost (the policy therefore also uses cost, but only to choose among 5 levels)\n  STW_cost       cap, span, debounce and alarm threshold tau in {1,...,60} chosen to minimise the training cost rate\n  STW_cost_1se   same grid; one-standard-error rule: among settings whose training cost rate is within one bootstrap\n                 standard error of the minimum, the one with the largest mean true remaining life at the alarm\n  STW_cost_q80   same grid; minimise the 80th percentile of the bootstrap distribution of the training cost rate\n  Q10_cost       probabilistic alarm: gradient-boosted 10 % quantile of remaining life (pinball loss, same\n                 hyperparameters, target capped at the largest cap); alarm when the smoothed quantile stays <= tau for k\n                 cycles; span, k, tau chosen to minimise the training cost rate\n  Q10_cost_1se   same with the one-standard-error rule\n  HI_cost        health-indicator threshold alarm (as rev_experiments.py), cost-tuned\n  capacity_cost, capacity_cost_1se   (battery only) threshold on the measured discharge capacity, cost-tuned\n  perfect_foresight, run_to_failure  reference bounds\nBootstrap: 200 resamples of the training units (seed 2026 + fold). Battery: training-only block length kappa per fold\n(audit_confirmations.py) and lead times in cycles {0, 15, 30, 45}, converted to blocks; engines: lead times {0, 5, 10, 15}.\nAssumption A1: for the test units of each fold, with the window-tuned settings at H = 20, the shift is varied over the grid\nand the alarm time, the unshifted error eps at the alarm and the realised in-window indicator are recorded.\nUsage: python audit_cost.py DATASET [DATASET ...]      Output: out/audit/cost_<ds>.csv, out/audit/shift_<ds>.pkl",
+  "functions": [
+   {
+    "name": "models_ext",
+    "line": 40,
+    "end": 57,
+    "doc": "identical to rev_experiments.models, plus a 10 % quantile model"
+   },
+   {
+    "name": "boot_weights",
+    "line": 60,
+    "end": 63,
+    "doc": null
+   },
+   {
+    "name": "select",
+    "line": 66,
+    "end": 81,
+    "doc": "tabs: {key: (train table, test table)}; returns (key, column) of the selected setting"
+   },
+   {
+    "name": "apply",
+    "line": 84,
+    "end": 85,
+    "doc": null
+   },
+   {
+    "name": "run",
+    "line": 88,
+    "end": 177,
+    "doc": null
+   },
+   {
+    "name": "ttab",
+    "line": 134,
+    "end": 136,
+    "doc": null
+   },
+   {
+    "name": "feats",
+    "line": 103,
+    "end": 106,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, pickle, time",
+   "import numpy as np, pandas as pd",
+   "from sklearn.ensemble import HistGradientBoostingRegressor",
+   "import eol_window2 as W",
+   "import rev_experiments as R",
+   "import audit_confirmations as AC",
+   "import battery_warning as BW",
+   "from safe_common import outer_folds"
+  ]
+ },
+ "audit_fixed_matched.py": {
+  "doc": "Fixed-time versus self-timed comparison on PHM08 with MATCHED training data and calibration (post hoc; exploratory).\n\nEvery variant below uses the same outer folds (seed 2026) and the same cross-fitting: inner five-fold out-of-fold (OOF)\npredictions of the outer training engines (seed 100 + fold; normalisation statistics from each inner training subset) are\nused for every calibration or selection step, and the final model is then refitted on ALL outer training engines.\nOuter test engines never enter fitting, calibration or selection.\n  fixed_f{50,90}   fixed-time gradient-boosted trees (safe_methods.GBM: no target cap, features of the seven temperature\n                   and speed sensors) scored at 50 % / 90 % of each test engine's life, t = floor(f L); a shift chosen on\n                   the OOF errors of the training engines at the same fraction (grid -30 ... +30, step 0.5)\n  fixed_r20        the same model scored at the cycle with exactly 20 true cycles left (oracle observation time),\n                   shift chosen on OOF errors at r = 20\n  fixed_trigger    the same model with the self-timed trigger (H = 20; span, debounce and shift chosen on OOF alarms;\n                   shift grid -20 ... +10): alarm timing added, target and features unchanged\n  recipe_f90       the recipe's regressor (capped target, recipe features) at 90 % of life; cap and shift chosen on OOF\n  recipe_r20       the recipe's regressor at r = 20 (oracle observation time); cap and shift chosen on OOF at r = 20\n  recipe_self      the recipe (self-timed, H = 20), selection exactly as eol_window2.py: must reproduce the main result\nThe fit-on-75 % / calibrate-on-25 % comparison of the earlier analysis is added from frozen outputs:\n  fixed_f90_7525   fixed-time GBM at 90 % of life, shift on the calibration engines (audit_fixed_time.py)\n  recipe_self_7525 the recipe fitted on the same 75 % and tuned on the same 25 % (identical-protocol comparison, h2h.py)\nOutput: out/audit/fixed_matched.json, out/audit/fixed_matched_units.csv",
+  "functions": [
+   {
+    "name": "cp",
+    "line": 38,
+    "end": 39,
+    "doc": null
+   },
+   {
+    "name": "best_shift",
+    "line": 42,
+    "end": 43,
+    "doc": null
+   },
+   {
+    "name": "at_time",
+    "line": 46,
+    "end": 53,
+    "doc": "P: {u: (pred per cycle, rul per cycle)} -> {u: (pred, rul)} at the chosen cycle (index t-1)"
+   },
+   {
+    "name": "fixed_fit",
+    "line": 61,
+    "end": 63,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, json, numpy as np, pandas as pd",
+   "from scipy.stats import binomtest, beta",
+   "import eol_window2 as W",
+   "import rev_experiments as R",
+   "import audit_confirmations as AC",
+   "from safe_common import load_dataset, outer_folds, regime_norm, engines",
+   "from fixed_gbm import GBM"
+  ]
+ },
+ "audit_fixed_time.py": {
+  "doc": "Decomposition of the fixed-time versus self-timed contrast on PHM08 (post hoc, exploratory; no model is refitted).\n\nThe half-life comparison of the manuscript mixes four things: the horizon of the prediction (how much wear is visible),\nthe calibration of the estimate to the asymmetric window (a shift), the training target, and the choice of the alarm time.\nUsing only frozen predictions, this script separates them:\n  fixed-time models (age, gbm, lstm, cnn, iohmm; trained on the fit engines of each outer fold, results/safe) scored\n    (a) raw at 30, 50, 70 and 90 % of life (as in the manuscript),\n    (b) with a shift chosen on the calibration engines of the same fold at the same fraction of life (no test information),\n  the self-timed model's own calibrated estimate at the cycle where exactly H true cycles remain (oracle-timed control,\n    results/window/oracle_timed_PHM08.csv), and the self-timed first warning (results/window/first_warning_v2_PHM08.csv).\nOutput: out/audit/fixed_time.json",
+  "functions": [
+   {
+    "name": "cp",
+    "line": 19,
+    "end": 20,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import json, numpy as np, pandas as pd",
+   "from scipy.stats import beta, binomtest"
+  ]
+ },
+ "audit_hi_calibrated.py": {
+  "doc": "Calibrated health-indicator alarm (post hoc, exploratory; plan fixed and hashed before the run: kam/PHASE3_4_PLAN.md, 4b).\n\nThe linear health indicator of the health-indicator threshold alarm (rev_experiments.models: ridge fit separating the first 30\nfrom the last 5 cycles of each training unit, on the first feature block) is mapped to cycles by an isotonic, decreasing\nregression of min(r, c) on the indicator value, fitted on the pooled inner out-of-fold values of the training units, for\neach cap c in {40, 60, 90}. The mapped series goes through the recipe's trigger with the recipe's grids and selection rule\n(caps c >= H + 20, spans, debounces, shifts; most correct out-of-fold first warnings, ties to the smaller |s|), for every\nH in {10, 15, 20, 30, 40}. The indicator is refitted on all outer training units for the test units; test units are scored\nonce. Outer folds seed 2026, inner seed 100 + fold, as rev_experiments.py.\n\nCheck R4b: the uncalibrated indicator, put through the selection of the existing health-indicator threshold alarm, must\nreproduce the per-unit outcomes of results/rev/<ds>_window.csv (method HI_threshold).\nOutput: out/audit/hi_calibrated_<ds>.csv (fold, H, method, unit, pred, y, cycle, cls), out/audit/hi_calibrated_check.txt\nUsage: python audit_hi_calibrated.py PHM08 FD001 FD002 FD003 FD004 NCMAPSS6",
+  "functions": [
+   {
+    "name": "hi_models",
+    "line": 27,
+    "end": 35,
+    "doc": "the health indicator of rev_experiments.models, without the regressors"
+   },
+   {
+    "name": "run",
+    "line": 38,
+    "end": 85,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, time",
+   "import numpy as np, pandas as pd",
+   "from sklearn.isotonic import IsotonicRegression",
+   "import eol_window2 as W",
+   "import rev_experiments as R",
+   "from safe_common import outer_folds"
+  ]
+ },
+ "audit_summarize.py": {
+  "doc": "Summarise the audit reruns (audit_confirmations.py, audit_battery_controls.py, audit_cost.py, audit_fixed_time.py) into\npaper3/numbers.json: the numbers of the submitted version (paper2/numbers.json) plus the key 'rev3'.\nUsage: python audit_summarize.py            (reads the fresh outputs in out/audit)\n       python audit_summarize.py --frozen   (reads the frozen outputs in results/audit)\nAlso writes plain tables to out/audit/tables/ and checks the reproduction of earlier results where the rerun should\nreproduce them exactly (engine datasets: window-tuned, cost-tuned, health-indicator and age policies).",
+  "functions": [
+   {
+    "name": "F_",
+    "line": 15,
+    "end": 19,
+    "doc": "path of an audit output, plain or gzip-compressed; None if absent"
+   },
+   {
+    "name": "cp",
+    "line": 24,
+    "end": 25,
+    "doc": null
+   },
+   {
+    "name": "summ",
+    "line": 28,
+    "end": 33,
+    "doc": null
+   },
+   {
+    "name": "mcn",
+    "line": 36,
+    "end": 38,
+    "doc": null
+   },
+   {
+    "name": "holm",
+    "line": 41,
+    "end": 45,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, json, pickle, glob, gzip",
+   "import numpy as np, pandas as pd",
+   "from scipy.stats import binomtest, beta",
+   "import sys"
+  ]
+ },
+ "audit_summarize2.py": {
+  "doc": "Second revision: summarise the matched fixed-time comparison (audit_fixed_matched.py), the battery analyses with a common\nphysical task and fully nested preprocessing (audit_battery_physical.py) and the battery cost analysis with the capacity-trend\nbaseline (audit_battery_cost2.py) into paper4/numbers.json = paper3/numbers.json + key 'rev4'.\nUsage: python audit_summarize2.py [--frozen]   (fresh outputs in out/audit, or frozen copies in results/audit)",
+  "functions": [
+   {
+    "name": "F_",
+    "line": 13,
+    "end": 16,
+    "doc": null
+   },
+   {
+    "name": "cp",
+    "line": 19,
+    "end": 20,
+    "doc": null
+   },
+   {
+    "name": "mcn",
+    "line": 23,
+    "end": 25,
+    "doc": null
+   },
+   {
+    "name": "bsumm",
+    "line": 34,
+    "end": 43,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, json, gzip",
+   "import numpy as np, pandas as pd",
+   "from scipy.stats import binomtest, beta"
+  ]
+ },
+ "battery_cost.py": {
+  "doc": "Secondary cost analysis on the battery confirmation (listed as secondary in battery/BATTERY_PROTOCOL.md).\nSame renewal-reward model as multi_eval.py, but with the warning level fixed at the pre-specified primary H = 20 blocks (no\nselection). A warning at block t* triggers a planned replacement l blocks later (l in {0, 5, 10, 15} blocks = 0-45 cycles);\nfailure if no warning or true remaining life at the warning <= l. Cost 1 per planned replacement, rho per failure; cost rate =\ntotal cost / total cycles used. Age replacement: age T (cycles) chosen per fold on the training cells' lives.\nOutput: out/battery/cost.csv",
+  "functions": [],
+  "imports": [
+   "import numpy as np, pandas as pd",
+   "from safe_common import outer_folds"
+  ]
+ },
+ "battery_warning.py": {
+  "doc": "Battery confirmation of the self-timed warning model, exactly as fixed in battery/BATTERY_PROTOCOL.md (incl. Deviations D1-D3).\n\nData: Severson et al. (2019) per-cycle summaries (battery/severson_cycle_summary.csv.gz, battery/severson_cells.csv).\nReuses the model and warning-rule code of eol_window2.py / ncm_warning.py unchanged (gbm, smooth, evaluate, in_counts,\nCAPS, KS, SPANS, SHIFTS, kalman). All model quantities are in blocks of kappa cycles.\nSplits: primary 5-fold CV by cell (outer_folds, seed 2026; inner seed 100 + fold); secondary leave-one-batch-out (inner seed\n100 + batch) and 5-fold CV on the 119-cell set without the providers' four 'noisy' channels.\nOutput: out/battery/warning_results.csv, out/battery/warning_summary.json",
+  "functions": [
+   {
+    "name": "load",
+    "line": 26,
+    "end": 45,
+    "doc": null
+   },
+   {
+    "name": "features",
+    "line": 47,
+    "end": 52,
+    "doc": null
+   },
+   {
+    "name": "predict",
+    "line": 54,
+    "end": 64,
+    "doc": null
+   },
+   {
+    "name": "run_split",
+    "line": 66,
+    "end": 87,
+    "doc": null
+   },
+   {
+    "name": "summarise",
+    "line": 89,
+    "end": 98,
+    "doc": null
+   },
+   {
+    "name": "mcnemar",
+    "line": 100,
+    "end": 103,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 105,
+    "end": 128,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, json, numpy as np, pandas as pd",
+   "from sklearn.neural_network import MLPRegressor",
+   "from scipy.stats import binomtest, beta",
+   "import eol_window2 as W",
+   "from ncm_warning import kalman",
+   "from safe_common import outer_folds",
+   "from feats import causal_feats"
+  ]
+ },
+ "bayes_phys.py": {
+  "doc": "Physics-informed Bayesian degradation model (exponential degradation path, Gebraeel-style) for the [-13, +2] window.\n\nHealth indicator (HI): linear combination of regime-normalised sensors, learned on FIT engines so that HI ~ 0 early in life\nand ~ 1 at failure. Physics: HI(s) = a + exp(theta + beta * s) + noise; the engine fails when the path reaches its\nfailure level D. Population prior over (a, theta, beta, log D) = multivariate normal fitted to per-engine least-squares fits\nof the FIT engines. For a test engine observed up to cycle t, posterior by importance sampling (likelihood of the observed HI\npath, and the constraint that it has not yet failed); RUL distribution = crossing time - t. Window decoder chooses c maximising\nP(c - 2 <= RUL <= c + 13). Calibration engines choose the noise scale (tempering) and a decoder shift, pooled over 30/50/70/90 %.\nSame engine-level folds as the main study; test engines are scored once at t = floor(L/2).",
+  "functions": [
+   {
+    "name": "hit",
+    "line": 19,
+    "end": 20,
+    "doc": null
+   },
+   {
+    "name": "path",
+    "line": 22,
+    "end": 23,
+    "doc": null
+   },
+   {
+    "name": "decode",
+    "line": 25,
+    "end": 28,
+    "doc": null
+   },
+   {
+    "name": "BayesDeg",
+    "line": 30,
+    "end": 55,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 57,
+    "end": 96,
+    "doc": null
+   },
+   {
+    "name": "fit",
+    "line": 31,
+    "end": 46,
+    "doc": null
+   },
+   {
+    "name": "rul_dist",
+    "line": 48,
+    "end": 55,
+    "doc": null
+   },
+   {
+    "name": "at",
+    "line": 72,
+    "end": 81,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, numpy as np, pandas as pd",
+   "from scipy.optimize import curve_fit",
+   "from safe_common import load_dataset, outer_folds, fit_cal_split",
+   "from feats import regime_stats, zmat"
+  ]
+ },
+ "bearing_extract.py": {
+  "doc": "Per-snapshot features of the FEMTO/PRONOSTIA bearings, as fixed in bearing/BEARING_PROTOCOL.md.\nFor each acc_*.csv snapshot (2560 samples, horizontal and vertical acceleration): per channel (mean removed) RMS, peak, kurtosis\n(Fisher), crest factor. Output: bearing/femto_snapshot_features.csv.gz (one row per bearing and snapshot).",
+  "functions": [
+   {
+    "name": "read",
+    "line": 10,
+    "end": 13,
+    "doc": null
+   },
+   {
+    "name": "feats",
+    "line": 15,
+    "end": 17,
+    "doc": null
+   },
+   {
+    "name": "bearing",
+    "line": 19,
+    "end": 25,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, glob, numpy as np, pandas as pd",
+   "from scipy.stats import kurtosis",
+   "from concurrent.futures import ProcessPoolExecutor"
+  ]
+ },
+ "bearing_warning.py": {
+  "doc": "Bearing confirmation of the self-timed warning model (FEMTO / PRONOSTIA), exactly as fixed in bearing/BEARING_PROTOCOL.md.\nPart A: standard model + age-only + MLP/Kalman; Part B: theory-guided shift rule STW-T (method 'warning_T').\nInputs: bearing/femto_snapshot_features.csv.gz (bearing_extract.py). All model quantities in blocks of kappa snapshots.\nOutput: out/bearing/warning_results.csv, out/bearing/warning_summary.json",
+  "functions": [
+   {
+    "name": "load",
+    "line": 18,
+    "end": 27,
+    "doc": null
+   },
+   {
+    "name": "features",
+    "line": 29,
+    "end": 35,
+    "doc": null
+   },
+   {
+    "name": "predict",
+    "line": 37,
+    "end": 47,
+    "doc": null
+   },
+   {
+    "name": "run_split",
+    "line": 49,
+    "end": 74,
+    "doc": null
+   },
+   {
+    "name": "summarise",
+    "line": 76,
+    "end": 85,
+    "doc": null
+   },
+   {
+    "name": "mcnemar",
+    "line": 87,
+    "end": 90,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 92,
+    "end": 110,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, json, numpy as np, pandas as pd",
+   "from sklearn.neural_network import MLPRegressor",
+   "from scipy.stats import binomtest, beta",
+   "import eol_window2 as W",
+   "from ncm_warning import kalman",
+   "from safe_common import outer_folds",
+   "from feats import causal_feats",
+   "from stwt import shift_T"
+  ]
+ },
+ "collect_base.py": {
+  "doc": "Collect base-model predictions for the ablation study and the stacked hybrid (window [-13, +2]).\n\nSame engine-level folds / fit-calibration split as the main study. For every outer fold:\n  CAL rows : calibration engines at 16 life stages (20, 25, ..., 95 % of life)  -> used to learn the stacker\n  TEST rows: outer-test engines at t = floor(L/2)                                -> scored once\nBase models (all trained on FIT engines only):\n  age, gbm, lstm, cnn, iohmm       stored predictions of the main pipeline (same folds)\n  bayes_q05/q50/q95                physics-informed Bayesian degradation model (bayes_phys.BayesDeg)\n  tf_q05/q50/q95                   hybrid Transformer (hybrid_tf.build), quantile outputs\n  sim                              trajectory-similarity median\n  g_* (information-source ablation) gradient-boosted trees on feature subsets of causal_feats:\n       g_age (cycle count only), g_base (early-life sensor baseline), g_level (recent level vs baseline),\n       g_trend (slopes), g_noage (all sensor features, no cycle count), g_all (everything)\nOutput: out/window/base_preds_PHM08.csv",
+  "functions": [
+   {
+    "name": "main",
+    "line": 28,
+    "end": 87,
+    "doc": null
+   },
+   {
+    "name": "mk",
+    "line": 75,
+    "end": 77,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, numpy as np, pandas as pd",
+   "from sklearn.ensemble import HistGradientBoostingRegressor",
+   "from safe_common import load_dataset, outer_folds, fit_cal_split",
+   "from feats import regime_stats, zmat, causal_feats",
+   "from bayes_phys import BayesDeg",
+   "import hybrid_tf as HT",
+   "from similarity import SimilarityRUL",
+   "from countdown_hmm import GRID",
+   "import keras"
+  ]
+ },
+ "contrib/build_report.py": {
+  "doc": "Build the final contribution report, tables and figure from a verified full suite.",
+  "functions": [
+   {
+    "name": "table",
+    "line": 15,
+    "end": 17,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 20,
+    "end": 192,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import json",
+   "from datetime import datetime, timedelta, timezone",
+   "from pathlib import Path",
+   "import numpy as np",
+   "import pandas as pd",
+   "import matplotlib",
+   "import matplotlib.pyplot as plt"
+  ]
+ },
+ "contrib/cat.py": {
+  "doc": "Certified alarm thresholds (CAT): unit-level conformal calibration of threshold-crossing end-of-life alarms.\n\nPlan fixed and hashed before any run: contrib/PLAN.md, contrib/PLAN.sha256. Exploratory, plan hashed before the run.\n\nA threshold-crossing alarm with smoothed estimate x_1, x_2, ... and debounce k fires at the first t at which x has stayed\n<= tau for k consecutive cycles (rev_experiments.first_idx). With m_t = min_{s <= t} max(x_{s-k+1}, ..., x_s) (the\ndebounced running minimum), the alarm for tau fires at the first t with m_t <= tau, so the alarm time is non-increasing in\ntau (Lemma 1). A replacement is planned iff the alarm leaves more than the lead time l (and, on a decision grid of step dT,\niff the next decision point is before failure); the set of admissible alarm times is {t <= t_max}. Hence\n\n    unplanned failure at threshold tau  <=>  tau < tau*,   tau* = m_{t_max}   (critical threshold; Lemma 2)\n\nand the order statistic tau_hat = S_(ceil((n+1)(1-alpha))) of the critical thresholds of n exchangeable calibration units\ngives P(failure of a new unit) <= alpha (Theorem 1). Everything here works on the alarm tables of rev_experiments\n(U, ok, ya, ta, L) so that every decision and every cost is identical to the existing cost code.",
+  "functions": [
+   {
+    "name": "runmin",
+    "line": 26,
+    "end": 30,
+    "doc": "Debounced running minimum m_t = min_{s<=t} max(x_{s-k+1..s}); +inf before k values exist."
+   },
+   {
+    "name": "alarm_index",
+    "line": 33,
+    "end": 35,
+    "doc": "Index of the first alarm for every threshold in thr (len(x) if never); identical to rev_experiments.first_idx."
+   },
+   {
+    "name": "last_admissible",
+    "line": 38,
+    "end": 51,
+    "doc": "Largest index i at which an alarm still gives a planned replacement, -1 if none.\ny: true remaining life at cycles 1..L-1 (model units; strictly decreasing); scale converts model units to cycles\n(battery blocks); lead in cycles. dT None: planned iff y_i * scale > lead (rev_experiments.cost_of).\ndT given: planned iff g(t_i) + lead < L with t_i = (i + 1) * scale,\ng(t) = max(dT, ceil(t/dT) dT). At lead 0 this is kam_fd001.grid_cost."
+   },
+   {
+    "name": "critical_threshold",
+    "line": 54,
+    "end": 57,
+    "doc": "Closed form of Lemma 2: tau* = m_{t_max} (continuous), +inf if no admissible alarm time."
+   },
+   {
+    "name": "planned_matrix",
+    "line": 60,
+    "end": 66,
+    "doc": "(U, T) boolean: planned replacement for every unit and every threshold column of an alarm table (cycles)."
+   },
+   {
+    "name": "scores_from_table",
+    "line": 69,
+    "end": 74,
+    "doc": "Critical threshold on the grid: smallest tau in taus with a planned replacement (+inf if none). Checks Lemma 1."
+   },
+   {
+    "name": "order_index",
+    "line": 78,
+    "end": 80,
+    "doc": "k = ceil((n+1)(1-alpha)) (1-based), guarded against floating-point error."
+   },
+   {
+    "name": "tau_hat",
+    "line": 83,
+    "end": 88,
+    "doc": "Conformal threshold: k-th smallest score. Returns (tau_hat, certifiable). Not certifiable when k > n or the\nk-th score is +inf (no finite threshold in the grid certifies the level)."
+   },
+   {
+    "name": "certified_column",
+    "line": 91,
+    "end": 95,
+    "doc": "Column index of the certified threshold in the grid (fallback: largest threshold when not certifiable)."
+   },
+   {
+    "name": "cost_aware_column",
+    "line": 98,
+    "end": 102,
+    "doc": "CAT-c: column minimising the training cost rate among thresholds >= the certified one (ties: smallest tau)."
+   },
+   {
+    "name": "cost_1cycle",
+    "line": 105,
+    "end": 109,
+    "doc": "Renewal-reward cost of every threshold column (rev_experiments.cost_of, 1-cycle decisions)."
+   },
+   {
+    "name": "cost_grid",
+    "line": 112,
+    "end": 116,
+    "doc": "Grid-mapped cost of every column (kam_fd001.grid_cost, lead 0): cost 1 or cc, life-cycle length g or L."
+   },
+   {
+    "name": "conformal_quantile",
+    "line": 119,
+    "end": 122,
+    "doc": "Upper conformal quantile: the ceil((N+1)(1-alpha))-th smallest value (+inf if beyond N)."
+   },
+   {
+    "name": "m_influence_ci",
+    "line": 126,
+    "end": 136,
+    "doc": "M = R / R_p - 1 with R = sum C / sum T and R_p the grid-perfect rate on the same units. First-order (influence\nfunction) variance that keeps the covariance between the policy and the perfect reference:\npsi_i = [ (C_i - R T_i) / mean(T) - (R / R_p) (Cp_i - R_p Tp_i) / mean(Tp) ] / R_p,  Var(M_hat) ~ sum psi_i^2 / n^2."
+   }
+  ],
+  "imports": [
+   "import math",
+   "import numpy as np",
+   "import pandas as pd",
+   "import kam_metric as K"
+  ]
+ },
+ "contrib/cat_battery.py": {
+  "doc": "Phase 3: certified alarm thresholds (CAT) on the battery cells, convention C (fully nested preprocessing, task in cycles),\ncross-validation by cell (cv1-cv5) and with each batch held out (lobo1-lobo3). Exploratory, plan hashed before the run\n(contrib/PLAN.md).\n\nSame splits, inner folds, block lengths (kappa by the protocol rule per training subset), regressor, thresholds in cycles\n(3, 6, ..., 180), lead times (0, 15, 30, 45 cycles) and cost ratios as audit_battery_cost_nested.py, whose functions are\nreused. The CAT setting (cap, span, debounce) is the window-tuned setting at H = 60 cycles (the primary physical task).\nReproduction check: STW_window, STW_cost and STW_cost_1se recomputed here equal the original nested script rerun on this\nplatform, cell by cell (Amendment 1). CAT-KMIN: each inner model, in its own blocks, calibrated on its own held-out cells; CAT-SPLIT: half of the\ntraining cells (seed 500 + split index), kappa by the rule from that half.\nUsage: python contrib/cat_battery.py      Outputs: out/contrib/Battery_cost.csv, Battery_settings.csv, Battery_check.txt",
+  "functions": [
+   {
+    "name": "fit_caps",
+    "line": 29,
+    "end": 35,
+    "doc": "As audit_battery_cost_nested.fit_models, regressors only (identical X, y and model)."
+   },
+   {
+    "name": "tab_c",
+    "line": 38,
+    "end": 39,
+    "doc": null
+   },
+   {
+    "name": "col",
+    "line": 42,
+    "end": 43,
+    "doc": null
+   },
+   {
+    "name": "run_split",
+    "line": 46,
+    "end": 124,
+    "doc": null
+   },
+   {
+    "name": "_earliest",
+    "line": 127,
+    "end": 131,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 134,
+    "end": 157,
+    "doc": null
+   },
+   {
+    "name": "emit",
+    "line": 84,
+    "end": 88,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, time, pickle",
+   "import numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "import rev_experiments as R",
+   "import audit_confirmations as AC",
+   "import audit_cost as CO",
+   "import battery_warning as BW",
+   "import audit_battery_cost_nested as BN",
+   "import cat as C"
+  ]
+ },
+ "contrib/cat_bearing.py": {
+  "doc": "Phase 3: certified alarm thresholds (CAT) on the 17 PRONOSTIA bearings (validity of the guarantee only; exploratory,\nplan hashed before the run, contrib/PLAN.md). Five-fold cross-validation by bearing (seed 2026), kappa from the outer\ntraining bearings (audit_confirmations.bearing_corrected), task in blocks (H = 20 blocks as in the protocol), the recipe's\nregressor and features (bearing_warning.features), inner folds seed 100 + fold. Lead time 0: a failure is a bearing that\nfails without an alarm. With 13-14 calibration bearings, alpha >= 1/(n+1) ~ 0.07 is needed for a certificate.\nReproduction check: the window-tuned first warnings at H = 20 equal the original warning script rerun on this platform (cv).\nUsage: python contrib/cat_bearing.py       Outputs: out/contrib/Bearing_units.csv, Bearing_settings.csv, Bearing_check.txt",
+  "functions": [
+   {
+    "name": "fit_predict",
+    "line": 24,
+    "end": 28,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 31,
+    "end": 83,
+    "doc": null
+   },
+   {
+    "name": "signature",
+    "line": 86,
+    "end": 96,
+    "doc": "Guard complete-run reuse against changes of code, inputs or numerical environment."
+   },
+   {
+    "name": "guarded_main",
+    "line": 99,
+    "end": 115,
+    "doc": "Allow another queue to reuse a verified run without concurrent output writes."
+   }
+  ],
+  "imports": [
+   "import os, sys, time, json, hashlib, platform",
+   "from pathlib import Path",
+   "import numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "import rev_experiments as R",
+   "import audit_confirmations as AC",
+   "import bearing_warning as GW",
+   "from safe_common import outer_folds",
+   "import cat as C",
+   "import sklearn, scipy",
+   "import msvcrt",
+   "import fcntl"
+  ]
+ },
+ "contrib/cat_equiv.py": {
+  "doc": "Checks of Amendment 1 (contrib/PLAN.md): the baselines that cat_run.py recomputes from the same predictions as CAT are\nfaithful copies of the original scripts, run on this machine, and the difference from the frozen results is a platform\neffect, not a code effect.\nP1 platform check: the window-tuned first warnings at H = 20 of the CAT code path (out/contrib/FD001_window20.csv) are\n   identical, unit by unit, to those of the unmodified eol_window2.py run on this machine (PLATFORM_FILE, written by\n   'python eol_window2.py FD001 20'); the deviation from the frozen results/rev/FD001_window.csv is reported.\nP2 audit_cost.run (unmodified) restricted to fold 1 of FD001 gives the same decisions as the copies in cat_run.py for every\n   cost policy, lead time and cost ratio.\nP3 kam_fd001.run_split (unmodified) on fold 1 of FD001 gives the same decisions as the copies in cat_run.py for every\n   policy under the metric M (mapped policies) and every cost ratio.\nUsage: python contrib/cat_equiv.py [PLATFORM_FILE]      Output: out/contrib/cat_equiv.txt",
+  "functions": [
+   {
+    "name": "main",
+    "line": 24,
+    "end": 58,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys",
+   "import numpy as np, pandas as pd",
+   "import audit_cost as CO",
+   "import kam_fd001 as KF",
+   "from safe_common import outer_folds"
+  ]
+ },
+ "contrib/cat_kmin_sim.py": {
+  "doc": "Supplement the saved Phase 1 with explicit earliest-of-five rank calibration.\n\nFixed synthetic rules from the original plan; five disjoint calibration samples,\none common test trajectory. KMIN has an upper bound, not the single-rule lower\nbound incorrectly proposed in the plan. No refitted/calibration-selected model.",
+  "functions": [
+   {
+    "name": "main",
+    "line": 15,
+    "end": 52,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys",
+   "import numpy as np",
+   "import pandas as pd",
+   "import cat as C",
+   "import cat_sim as S"
+  ]
+ },
+ "contrib/cat_leak.py": {
+  "doc": "Leakage checks E1-E4 on the CAT code path (contrib/PLAN.md, 'Leakage checks'), FD001 fold 1 (as kam/kam_fd001.py leak).\nE1 disjoint unit sets: asserted inside every split of cat_run.py, cat_battery.py and cat_bearing.py; repeated here for the\n   five FD001 folds, including the CAT-SPLIT halves.\nE2 causality: (a) regressor prediction at cycle t from the prefix 1..t equals the full-series prediction (90 checks);\n   (b) the CAT alarm on the full series fires at the same cycle when every cycle after the alarm is deleted, and does not\n   fire on the series truncated just before it (all test units, certified threshold, lead 10).\nE3 negative control: inner and final regressors trained on lives permuted across the training units (calibration on the\n   true training lives, as allowed); CAT-c (alpha 0.05, lead 10, rho 10) must cost more than with the real labels.\nE4 rerun of fold 1 from scratch reproduces every stored CAT decision (cost and M rows) of out/contrib/ckpt/FD001_fold1.pkl.\nUsage: python contrib/cat_leak.py      Output: out/contrib/cat_leakage.txt",
+  "functions": [
+   {
+    "name": "main",
+    "line": 26,
+    "end": 86,
+    "doc": null
+   },
+   {
+    "name": "feats_perm",
+    "line": 57,
+    "end": 59,
+    "doc": null
+   },
+   {
+    "name": "cat_c_cost",
+    "line": 60,
+    "end": 70,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, pickle",
+   "import numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "import rev_experiments as R",
+   "from safe_common import load_dataset, outer_folds",
+   "from feats import regime_stats, zmat, causal_feats",
+   "import cat as C",
+   "import cat_run as CR"
+  ]
+ },
+ "contrib/cat_run.py": {
+  "doc": "Phases 2-3: certified alarm thresholds (CAT) on the engine datasets (contrib/PLAN.md with Amendment 1; exploratory, plan\nhashed before the run). Same outer folds (seed 2026), inner folds (seed 100 + fold), regressor, features and cost model as\nrev_experiments.py / audit_cost.py / kam/kam_fd001.py.\n\nAmendment 1: the gradient-boosted fits of this machine differ in floating point from the frozen (Linux) fits, so CAT is\ncompared with baselines recomputed here from the SAME predictions, with code copied from audit_cost.py (cost policies) and\nkam/kam_fd001.py (policies under the metric M). contrib/cat_equiv.py checks that the copies give the same decisions as\nthe original scripts run on this machine (FD001, fold 1).\n\nPer outer fold:\n  * inner models (fitted on four inner folds) predict their held-out inner fold (out-of-fold, OOF) and, for CAT-KMIN, the\n    outer test units; final models are refitted on all outer training units; CAT-SPLIT fits the selected cap on a random\n    half of the training units (seed 500 + fold) and calibrates on the other half;\n  * models: capped GBM 40/60/90, 10 % quantile GBM and linear health indicator (audit_cost.models_ext); FD001-FD004 also\n    cap 125 and the classifier of RUL <= 10 (kam_fd001.fit_models);\n  * window-tuned settings for every H; the CAT setting (cap, span, debounce) is the window-tuned setting at H = 20;\n  * cost policies of audit_cost.py for every lead time and cost ratio; CAT variants for every lead time and alpha: bare\n    certified threshold (CAT-CF primary, CAT-SPLIT, CAT-KMIN), cost-aware CAT-c (CF), per-time-step conformal lower bound\n    (PT), ablations 'setting chosen by plain training cost' and 'Bonferroni over the 27 settings (alpha / 27)';\n  * FD001-FD004: the policies of kam_fd001.py and the CAT variants under the conventions of M (grid 10, lead 0).\nUsage: python contrib/cat_run.py DATASET     (PHM08 FD001 FD002 FD003 FD004 NCMAPSS6)\nOutputs (out/contrib/): <ds>_cost.csv, <ds>_M.csv (FD001-FD004), <ds>_settings.csv, <ds>_scores.csv.gz, <ds>_selected.csv,\n<ds>_window20.csv; checkpoints out/contrib/ckpt/<ds>_fold<f>.pkl.",
+  "functions": [
+   {
+    "name": "fit_all",
+    "line": 43,
+    "end": 63,
+    "doc": "audit_cost.models_ext (caps 40/60/90, HI, Q10) and, with_m, kam_fd001.fit_models extras (cap 125, classifier);\ncaps given: only those capped regressors. Statistics and models from train_u; series over cycles with RUL >= 1."
+   },
+   {
+    "name": "window_select",
+    "line": 66,
+    "end": 75,
+    "doc": null
+   },
+   {
+    "name": "tab_of",
+    "line": 78,
+    "end": 79,
+    "doc": null
+   },
+   {
+    "name": "col",
+    "line": 82,
+    "end": 83,
+    "doc": null
+   },
+   {
+    "name": "combine_earliest",
+    "line": 86,
+    "end": 91,
+    "doc": "Earliest of several single-threshold alarms (same unit order): (U, ok, ya, ta, L)."
+   },
+   {
+    "name": "run_fold",
+    "line": 94,
+    "end": 249,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 252,
+    "end": 269,
+    "doc": null
+   },
+   {
+    "name": "check_grid",
+    "line": 272,
+    "end": 279,
+    "doc": "Enforce the plan's negative-M stop rule before accepting a fold/checkpoint."
+   },
+   {
+    "name": "emit",
+    "line": 130,
+    "end": 134,
+    "doc": null
+   },
+   {
+    "name": "emit_TR",
+    "line": 136,
+    "end": 139,
+    "doc": null
+   },
+   {
+    "name": "emit_m",
+    "line": 141,
+    "end": 144,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, time, pickle",
+   "import numpy as np, pandas as pd",
+   "from sklearn.ensemble import HistGradientBoostingRegressor",
+   "import eol_window2 as W",
+   "import rev_experiments as R",
+   "import audit_cost as CO",
+   "import kam_metric as K",
+   "import kam_fd001 as KF",
+   "from safe_common import outer_folds",
+   "import cat as C"
+  ]
+ },
+ "contrib/cat_sim.py": {
+  "doc": "Phase 1: ground-truth checks of the certified alarm threshold (CAT) on simulated data (contrib/PLAN.md, Phase 1).\n\nPart A  Theorem 1 (validity). Calibration units and new units are drawn i.i.d. from a large simulated pool, so the\n        failure probability of a calibrated threshold is known exactly under the pool distribution: P(S > tau_hat).\n        A1  virtual RUL simulator of Kamariotis et al. (their Sec. 3; T_F ~ N(225, 40), correlated lognormal errors,\n            decisions at t_k = 10k), point estimate = median of the predictive distribution, lead l in {0, 10}.\n        A2  monotone-degradation model (below), 1-cycle decisions, lead l in {0, 5, 10, 15}, one setting.\n        n in {20, 50, 100, 200}, alpha in {0.01, 0.02, 0.05, 0.10}, 20,000 replicates per cell; scores on the threshold\n        grid (ties; Theorem 1 gives P <= alpha) and continuous (also P > alpha - 1/(n+1)). Criterion (plan): realised\n        P in [alpha - 1/(n+1) - 3 MCSE, alpha + 3 MCSE] (lower end for continuous scores only). Descriptive: the\n        per-time-step conformal lower bound (threshold l + q_{1-alpha} of the residuals x_t - r_t over all cycles).\nPart B  Theorem 2 (fragility as selection), degradation model: plain minimisation of the training cost rate over G\n        settings (G in {1, 4, 12, 36}, nested subsets of 36 correlated settings, or G independent noise realisations of\n        one setting) and the threshold grid, rho in {50, 1000}, l in {0, 10}; realised P(fail) of the selected policy\n        against min(1, G/(n+1)) and 1/(n+1); true cost rates of plain tuning and of CAT-c (alpha = 0.05, one setting).\nPart C  Secondary: coverage of 95% intervals for M (simulator A1, sigma = 0.4): their Eq. 7, the paired influence\n        interval and the paired bootstrap (2,000 resamples), n in {20, 100}, 5,000 replicates, truth from n = 200,000.\n\nMonotone-degradation model (fixed before the run): life L ~ round(N(200, 40)) clipped to [100, 400]; shape\nbeta ~ U(1.5, 3); degradation D_t = (t / L)^beta reaches 1 at failure; observation z_t = D_t + 0.04 e_t, e_t ~ N(0, 1).\nEstimate of the remaining life at t: least-squares line through the last w observations (fewer than 3 points or slope\n<= 1e-4: 300), RUL_hat = clip((1 - fitted level at t) / slope, 0, 300); causal EWM span m; debounce k. Settings\nw in {10, 20, 40}, m in {1, 3, 6}, k in {1, 2, 3, 5} (36, like the recipe's 3 x 3 x 4 grid); primary setting (20, 3, 2).\nSeeds: A1 2026 (sigma = 0.4) and 2027 (sigma = 0.15); degradation pools 9000 (correlated settings) and 9001 (independent\nrealisations); replicate draws 9100 + cell index; Part C 9200. Outputs in out/contrib/: sim_validity.csv,\nsim_selection.csv, sim_m_coverage.csv, sim_checks.txt.\nUsage: python contrib/cat_sim.py [A|B|C ...]   (default: all)",
+  "functions": [
+   {
+    "name": "chk",
+    "line": 48,
+    "end": 49,
+    "doc": null
+   },
+   {
+    "name": "sim_pool",
+    "line": 53,
+    "end": 60,
+    "doc": "Kamariotis simulator: T_F, median point estimates x_k = (T_F - t_k) eps_k at valid decision points."
+   },
+   {
+    "name": "sim_scores",
+    "line": 63,
+    "end": 68,
+    "doc": "k = 1: runmin over decision points; admissible t_k + lead < T_F; score = runmin at the last admissible point."
+   },
+   {
+    "name": "deg_units",
+    "line": 71,
+    "end": 75,
+    "doc": null
+   },
+   {
+    "name": "deg_estimate",
+    "line": 78,
+    "end": 92,
+    "doc": "RUL_hat over cycles 1..L-1 (padded with +inf beyond), local linear trend of the last w noisy observations."
+   },
+   {
+    "name": "ewm_rows",
+    "line": 95,
+    "end": 99,
+    "doc": null
+   },
+   {
+    "name": "runmin_rows",
+    "line": 102,
+    "end": 107,
+    "doc": null
+   },
+   {
+    "name": "deg_pool",
+    "line": 110,
+    "end": 131,
+    "doc": "Scores (continuous and on TAU_DEG) per setting and lead, and alarm index per threshold of TAU_DEG (lead-free).\nindependent=True: every 'setting' is a separate noise realisation of the primary setting."
+   },
+   {
+    "name": "grid_up",
+    "line": 134,
+    "end": 136,
+    "doc": null
+   },
+   {
+    "name": "validity_cells",
+    "line": 140,
+    "end": 158,
+    "doc": "pool_scores: {(lead, kind): scores}; exact failure probability under the pool for each replicate."
+   },
+   {
+    "name": "per_time_cells",
+    "line": 161,
+    "end": 173,
+    "doc": "Per-time-step conformal lower bound: threshold lead + q_{1-alpha}(x_t - r_t over all cycles of n units)."
+   },
+   {
+    "name": "part_a",
+    "line": 176,
+    "end": 207,
+    "doc": null
+   },
+   {
+    "name": "part_b",
+    "line": 211,
+    "end": 266,
+    "doc": null
+   },
+   {
+    "name": "part_c",
+    "line": 270,
+    "end": 306,
+    "doc": null
+   },
+   {
+    "name": "csum",
+    "line": 81,
+    "end": 81,
+    "doc": null
+   },
+   {
+    "name": "policy_tr",
+    "line": 272,
+    "end": 277,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, time, itertools",
+   "import numpy as np, pandas as pd",
+   "from scipy.special import ndtr",
+   "import kam_metric as K",
+   "import cat as C"
+  ]
+ },
+ "contrib/cat_summarize.py": {
+  "doc": "Summary of the CAT analyses (contrib/PLAN.md): every number of the contribution, with the verdicts of the pre-specified\nrules, written to out/contrib/contrib_numbers.json (key 'contrib' of paper7/numbers.json) and readable tables.\nInputs: out/contrib/<ds>_cost.csv, <ds>_M.csv, <ds>_settings.csv, <ds>_scores.csv.gz, Battery_*, Bearing_*, sim_*.csv.\nBaseline rows are included in the same-platform cost/M files, as required by Amendment 1.\n--frozen: read the CAT outputs from results/contrib/ instead of out/contrib/.\nBootstrap: 2,000 paired resamples of test units (fold, unit), seed 2027 per cell; M: kam_metric.paired_boot_mdiff, seed 2027.",
+  "functions": [
+   {
+    "name": "rd",
+    "line": 24,
+    "end": 28,
+    "doc": null
+   },
+   {
+    "name": "binom_p",
+    "line": 31,
+    "end": 33,
+    "doc": "One-sided exact p-value of H0: failure probability <= a, given x failures in n units."
+   },
+   {
+    "name": "cp_ci",
+    "line": 36,
+    "end": 38,
+    "doc": null
+   },
+   {
+    "name": "merged_cost",
+    "line": 41,
+    "end": 53,
+    "doc": "CAT and same-platform baselines required by Amendment 1; never mix frozen fits."
+   },
+   {
+    "name": "validity",
+    "line": 56,
+    "end": 65,
+    "doc": "Pooled test failure rate of a bare policy per lead time (rows of one cost ratio)."
+   },
+   {
+    "name": "cost_compare",
+    "line": 68,
+    "end": 94,
+    "doc": "Per (lead, rho) cell: cost rate / perfect foresight for a and others; paired bootstrap ratio a / other; failures;\nfold-cells with >= 1 test failure."
+   },
+   {
+    "name": "m_compare",
+    "line": 97,
+    "end": 123,
+    "doc": null
+   },
+   {
+    "name": "plain_edge",
+    "line": 126,
+    "end": 139,
+    "doc": "Real-data check of the mechanism of Theorem 2: share of plain cost-tuned thresholds (rho = 50) that sit at the\nzero-training-failure edge (= the largest OOF critical threshold of the selected setting), and the test failure rate."
+   },
+   {
+    "name": "main",
+    "line": 142,
+    "end": 218,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, json, math",
+   "import numpy as np, pandas as pd",
+   "from scipy.stats import binom, binomtest",
+   "import kam_metric as K",
+   "import cat as C",
+   "from scipy.stats import beta"
+  ]
+ },
+ "contrib/run_remaining.py": {
+  "doc": "Two single-threaded queues, each stopping on the first failed stage.",
+  "functions": [
+   {
+    "name": "main",
+    "line": 15,
+    "end": 31,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import json",
+   "import os",
+   "from pathlib import Path",
+   "import subprocess",
+   "import sys",
+   "from datetime import datetime, timezone"
+  ]
+ },
+ "contrib/test_cat.py": {
+  "doc": "Unit tests of contrib/cat.py (run from the repository root: python contrib/test_cat.py). Writes out/contrib/test_cat.log.\nT1 Lemma 1: alarm index non-increasing in the threshold; identical to rev_experiments.first_idx.\nT2 Lemma 2: planned(tau) <=> tau >= tau* for every grid threshold; grid score = smallest grid value >= closed form.\nT3 lead time and decision grid: planned matrix and costs identical to rev_experiments.cost_of and kam_fd001.grid_cost.\nT4 tau_hat on hand examples (including +inf scores and non-certifiable levels).\nT5 Theorem 1, Monte Carlo: P(fail) <= alpha for exchangeable scores (continuous: also > alpha - 1/(n+1); ties: <= alpha).\nT6 earliest-of-K combination: planned whenever any member is planned.\nT7 secondary: influence interval of M equals kam_metric.m_hat at the point, has zero width for the perfect policy.\nT8 combined lead/grid: explicit 21-cycle examples, including replacement exactly at failure and infeasible action times.",
+  "functions": [
+   {
+    "name": "check",
+    "line": 22,
+    "end": 24,
+    "doc": null
+   },
+   {
+    "name": "random_unit",
+    "line": 27,
+    "end": 32,
+    "doc": "A noisy decreasing estimate of the remaining life with occasional bumps, and the true remaining life."
+   },
+   {
+    "name": "grid_cost_ref",
+    "line": 35,
+    "end": 40,
+    "doc": "Verbatim logic of kam_fd001.grid_cost with DT as an argument (kam_fd001 fixes DT = 10 and loads data on import)."
+   },
+   {
+    "name": "main",
+    "line": 43,
+    "end": 132,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys",
+   "import numpy as np",
+   "import rev_experiments as R",
+   "import kam_metric as K",
+   "import cat as C",
+   "import kam_fd001 as KF"
+  ]
+ },
+ "contrib/verify_completion.py": {
+  "doc": "Audit completeness, pairing and provenance without inventing a verdict for missing data.",
+  "functions": [
+   {
+    "name": "main",
+    "line": 13,
+    "end": 95,
+    "doc": null
+   },
+   {
+    "name": "check",
+    "line": 15,
+    "end": 17,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import hashlib",
+   "import os",
+   "import json",
+   "from pathlib import Path",
+   "import pandas as pd",
+   "import platform, numpy, scipy, sklearn"
+  ]
+ },
+ "contrib/verify_plan.py": {
+  "doc": "Verify the hashes of contrib/PLAN.md: the original plan (text before the first amendment, with '(none)' under\n'## Amendments', exactly as hashed on 2026-10-06) and the full amended file. Usage: python contrib/verify_plan.py",
+  "functions": [],
+  "imports": [
+   "import hashlib"
+  ]
+ },
+ "countdown_hmm.py": {
+  "doc": "Countdown HMM for remaining-useful-life (RUL) on PHM08 \u2014 still a discrete HMM.\n\nStates\n  r = 0 .. Rc-1 : \"r cycles left\"   (deterministic countdown r -> r-1)\n  H             : \"healthy, >= Rc cycles left\"  (leaves H with an age-dependent\n                  hazard learned from the training engines' lifetimes)\nObservations\n  one discrete symbol per cycle (1..M): a learned health index (ridge regression\n  of all regime-normalised, engine-baseline-corrected sensors onto\n  min(RUL, Rc)/Rc), cut into M quantile bins.\nInference\n  forward filtering -> posterior over the current state -> full RUL distribution\n  (H mass spread using the training life distribution given the engine's age)\nDecision\n  predicted RUL = value that minimises the EXPECTED PHM08 score under that\n  distribution (so it is automatically cautious);  90% interval = 5th..95th pct.",
+  "functions": [
+   {
+    "name": "load",
+    "line": 29,
+    "end": 34,
+    "doc": null
+   },
+   {
+    "name": "phm_score",
+    "line": 37,
+    "end": 39,
+    "doc": null
+   },
+   {
+    "name": "CountdownHMM",
+    "line": 42,
+    "end": 220,
+    "doc": null
+   },
+   {
+    "name": "make_cuts",
+    "line": 224,
+    "end": 230,
+    "doc": null
+   },
+   {
+    "name": "evaluate",
+    "line": 233,
+    "end": 251,
+    "doc": null
+   },
+   {
+    "name": "criteria",
+    "line": 254,
+    "end": 267,
+    "doc": null
+   },
+   {
+    "name": "MixtureCountdownHMM",
+    "line": 279,
+    "end": 395,
+    "doc": null
+   },
+   {
+    "name": "__init__",
+    "line": 43,
+    "end": 54,
+    "doc": null
+   },
+   {
+    "name": "_z",
+    "line": 57,
+    "end": 62,
+    "doc": null
+   },
+   {
+    "name": "_feat",
+    "line": 64,
+    "end": 69,
+    "doc": "features for the prefix 1..t of one engine (baseline from first min(base,t) cycles)"
+   },
+   {
+    "name": "_score_raw",
+    "line": 71,
+    "end": 73,
+    "doc": "per-engine regime-normalised sensor matrix (cycle order)"
+   },
+   {
+    "name": "_hi_prefix",
+    "line": 75,
+    "end": 76,
+    "doc": null
+   },
+   {
+    "name": "_slope",
+    "line": 78,
+    "end": 89,
+    "doc": "causal least-squares slope of hi over the last W cycles (per cycle)"
+   },
+   {
+    "name": "_symbols",
+    "line": 91,
+    "end": 94,
+    "doc": null
+   },
+   {
+    "name": "fit",
+    "line": 97,
+    "end": 147,
+    "doc": null
+   },
+   {
+    "name": "_life_pmf",
+    "line": 149,
+    "end": 150,
+    "doc": null
+   },
+   {
+    "name": "_hazard",
+    "line": 152,
+    "end": 157,
+    "doc": "P(leave H at t -> t+1 | in H at t) = P(life = t+Rc | life >= t+Rc)"
+   },
+   {
+    "name": "filter",
+    "line": 160,
+    "end": 184,
+    "doc": "forward filtering; returns posterior (T x Rc+1) over states at each t"
+   },
+   {
+    "name": "rul_distribution",
+    "line": 186,
+    "end": 197,
+    "doc": "full RUL pmf on GRID given state posterior after observing t cycles"
+   },
+   {
+    "name": "predict_from_dist",
+    "line": 199,
+    "end": 204,
+    "doc": null
+   },
+   {
+    "name": "engine_scores_raw",
+    "line": 206,
+    "end": 207,
+    "doc": null
+   },
+   {
+    "name": "predict_prefix",
+    "line": 209,
+    "end": 216,
+    "doc": "RUL prediction after observing cycles 1..t of an engine"
+   },
+   {
+    "name": "full_posterior",
+    "line": 218,
+    "end": 220,
+    "doc": null
+   },
+   {
+    "name": "__init__",
+    "line": 280,
+    "end": 282,
+    "doc": null
+   },
+   {
+    "name": "_modes_from_signature",
+    "line": 284,
+    "end": 290,
+    "doc": null
+   },
+   {
+    "name": "_ridge",
+    "line": 292,
+    "end": 295,
+    "doc": null
+   },
+   {
+    "name": "_his",
+    "line": 297,
+    "end": 299,
+    "doc": null
+   },
+   {
+    "name": "_joint_symbols",
+    "line": 301,
+    "end": 306,
+    "doc": null
+   },
+   {
+    "name": "fit",
+    "line": 308,
+    "end": 344,
+    "doc": null
+   },
+   {
+    "name": "_hazard_k",
+    "line": 347,
+    "end": 351,
+    "doc": null
+   },
+   {
+    "name": "filter",
+    "line": 353,
+    "end": 375,
+    "doc": null
+   },
+   {
+    "name": "rul_distribution",
+    "line": 377,
+    "end": 385,
+    "doc": null
+   },
+   {
+    "name": "predict_prefix",
+    "line": 387,
+    "end": 392,
+    "doc": null
+   },
+   {
+    "name": "full_posterior",
+    "line": 394,
+    "end": 395,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import numpy as np, pandas as pd",
+   "from sklearn.cluster import KMeans"
+  ]
+ },
+ "dl_warning.py": {
+  "doc": "Fair deep-learning competitors under the first-warning protocol (PHM08), same inputs and target options as our model.\n\nIdentical to the protocol of h2h.py (outer folds seed 2026; fit 75% / calibration 25% engines, seed 7; warning settings\nm, k, s and the cap chosen on calibration engines; shift grid -15..+10; H = 10 and 20; window [-13, +2]), but every\nnetwork sees the SAME 15 regime-normalised sensors as our model plus the age, and chooses its target cap from {40, 60, 90},\nexactly like our model:\n  lstm15   two-layer LSTM (64, 64) on 30-cycle windows (Zheng et al. 2017 architecture), MSE on min(RUL, c)/c\n  cnn15    Li et al. (2018) CNN on 30-cycle windows\n  tf15     hybrid Transformer (hybrid_tf.build): 40-cycle sequence of the 15 sensors + regime indicators and the causal\n           features of Section 4.2; median of the quantile output; pinball loss on min(RUL, c)/100\nOutput: out/window/dl_warning_PHM08.csv (one row per method, H, test engine) and the chosen settings.",
+  "functions": [
+   {
+    "name": "main",
+    "line": 22,
+    "end": 70,
+    "doc": null
+   },
+   {
+    "name": "mk",
+    "line": 40,
+    "end": 42,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, json, time, numpy as np, pandas as pd",
+   "from safe_common import load_dataset, outer_folds, fit_cal_split",
+   "from safe_methods import DeepNet",
+   "from feats import regime_stats, zmat, causal_feats",
+   "import hybrid_tf as HT",
+   "import h2h",
+   "import keras"
+  ]
+ },
+ "eol_leakage.py": {
+  "doc": "Leakage checks for the end-of-life first-warning model (eol_window2.py), PHM08.\nE1 engine sets: outer-test engines never used for training, normalisation or tuning (all 5 folds).\nE2 causality: the prediction at cycle t is identical when the engine's data after t is deleted.\nE3 negative control: train on labels that belong to other engines (lives permuted across engines);\n   the first-warning hit rate must collapse towards the age-only level.\nE4 fold-1 rerun reproduces the stored first-warning result for H=10.",
+  "functions": [],
+  "imports": [
+   "import numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "from safe_common import load_dataset, outer_folds",
+   "from feats import regime_stats, zmat, causal_feats"
+  ]
+ },
+ "eol_window2.py": {
+  "doc": "End-of-life first-warning model, version 2 (window [-13, +2], error = prediction - true RUL).\n\nChanges from version 1: all outer-training engines are used. Settings (target cap, prediction smoothing, debounce k,\nshift s) are chosen on OUT-OF-FOLD predictions from an inner 5-fold split of the outer-training engines (~174 engines),\nthen models are refit on all outer-training engines and applied once to the outer-test engines.\nWarning rule: first cycle at which the smoothed, shifted prediction has been <= H for k consecutive cycles.\nNo step uses the total life of a test engine. Engines never warned before failure count as MISSED (late).",
+  "functions": [
+   {
+    "name": "gbm",
+    "line": 21,
+    "end": 23,
+    "doc": null
+   },
+   {
+    "name": "smooth",
+    "line": 25,
+    "end": 26,
+    "doc": null
+   },
+   {
+    "name": "warn",
+    "line": 28,
+    "end": 31,
+    "doc": null
+   },
+   {
+    "name": "evaluate",
+    "line": 33,
+    "end": 37,
+    "doc": null
+   },
+   {
+    "name": "in_counts",
+    "line": 39,
+    "end": 47,
+    "doc": "vectorised over SHIFTS: number of engines whose first warning lands in the window (same rule as evaluate)"
+   },
+   {
+    "name": "predict_all",
+    "line": 49,
+    "end": 57,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 59,
+    "end": 88,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, numpy as np, pandas as pd",
+   "from sklearn.ensemble import HistGradientBoostingRegressor",
+   "from safe_common import load_dataset, outer_folds",
+   "from feats import regime_stats, zmat, causal_feats"
+  ]
+ },
+ "ext_data.py": {
+  "doc": "External-knowledge experiments at half of life, window [-13, +2], PHM08 test engines (same folds as the main study).\n\nE-A  Extra training engines: NASA C-MAPSS FD002 (260 engines) and FD004 (249 engines) were simulated under the same six\n     operating conditions as PHM08. They are added to the FIT engines of every fold (PHM08 test engines stay unseen).\n     Models: gradient-boosted trees (causal features, uncapped RUL) and the physics-informed Bayesian degradation model.\nE-B  Selective prediction: the stacked hybrid answers only for engines whose predicted probability of landing in the\n     window is highest; accuracy vs coverage.\nE-C  Relative window (alpha-lambda idea, Saxena et al. 2010): correct if error in [-13 %, +2 %] ... [-30 %, +10 %] of the true RUL.",
+  "functions": [
+   {
+    "name": "hit",
+    "line": 16,
+    "end": 16,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import numpy as np, pandas as pd, json",
+   "from sklearn.ensemble import HistGradientBoostingRegressor",
+   "from safe_common import load_dataset, outer_folds, fit_cal_split",
+   "from feats import regime_stats, zmat, causal_feats",
+   "from bayes_phys import BayesDeg"
+  ]
+ },
+ "ext_stack.py": {
+  "doc": "Stacked hybrid with external training engines (C-MAPSS FD002 added to the FIT engines of every fold).\nAdds two base models -- GBM(+FD002) and physics-informed Bayesian(+FD002) -- computed on the same calibration rows\n(16 life stages) and test rows (half of life) as base_preds_PHM08.csv, then reruns the stacker of ablate_hybrid.py.",
+  "functions": [],
+  "imports": [
+   "import json, numpy as np, pandas as pd",
+   "from sklearn.ensemble import HistGradientBoostingRegressor",
+   "from safe_common import load_dataset, outer_folds, fit_cal_split",
+   "from feats import regime_stats, zmat, causal_feats",
+   "from bayes_phys import BayesDeg"
+  ]
+ },
+ "feats.py": {
+  "doc": null,
+  "functions": [
+   {
+    "name": "regime_stats",
+    "line": 4,
+    "end": 9,
+    "doc": null
+   },
+   {
+    "name": "zmat",
+    "line": 11,
+    "end": 12,
+    "doc": null
+   },
+   {
+    "name": "causal_feats",
+    "line": 14,
+    "end": 30,
+    "doc": "per-cycle causal features for one engine prefix (uses only cycles <= i)"
+   }
+  ],
+  "imports": [
+   "import numpy as np, pandas as pd",
+   "from countdown_hmm import load, SENS"
+  ]
+ },
+ "fig_audit.py": {
+  "doc": "Figures of the revised manuscript that use the audit reruns (vector PDF + 300-dpi PNG in out/paper3_figs/).\nFig2_decomposition   fixed-time versus self-timed contrast, separated into horizon, calibration and alarm choice (PHM08)\nFig7_battery_v3      battery: first warnings with training-only block length; within-batch versus held-out-batch rates\nFigR3_cost_audit     cost of window-tuned, cost-tuned (plain and regularised) and age policies by dataset\nFig8_shift_A1        assumption A1: realised in-window rate and alarm time as the shift moves away from the selected one",
+  "functions": [
+   {
+    "name": "F_",
+    "line": 14,
+    "end": 17,
+    "doc": null
+   },
+   {
+    "name": "save",
+    "line": 22,
+    "end": 23,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import json, os, numpy as np, pandas as pd, matplotlib",
+   "import matplotlib.pyplot as plt",
+   "import sys"
+  ]
+ },
+ "fig_audit2.py": {
+  "doc": "Figures of the second revision (vector PDF + 300-dpi PNG in out/paper4_figs/), from paper4/numbers.json and the audit outputs.\nFig2_matched          fixed-time versus self-timed on PHM08 under matched training data and cross-fitted calibration\nFig8_battery_physical battery, common physical task, fully nested: rates by evaluation, kappa sensitivity, notice\nFig9_battery_cost     battery cost under cross-validation and with a batch held out, including the capacity trend\nUsage: python fig_audit2.py [--frozen]",
+  "functions": [
+   {
+    "name": "F_",
+    "line": 16,
+    "end": 19,
+    "doc": null
+   },
+   {
+    "name": "save",
+    "line": 22,
+    "end": 23,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, json, numpy as np, pandas as pd, matplotlib",
+   "import matplotlib.pyplot as plt"
+  ]
+ },
+ "fig_future_work.py": {
+  "doc": "Fig. 9 of the manuscript: planned uses of the warning model (future work schematic). Writes paper2/img/Fig9_future_work.png.",
+  "functions": [
+   {
+    "name": "box",
+    "line": 8,
+    "end": 10,
+    "doc": null
+   },
+   {
+    "name": "arrow",
+    "line": 11,
+    "end": 12,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import matplotlib",
+   "import matplotlib.pyplot as plt",
+   "from matplotlib.patches import FancyBboxPatch"
+  ]
+ },
+ "fig_rep30.py": {
+  "doc": "Figure: 30 random 50-engine iterations on PHM08 (rep30.py), x-axis = iteration 0-30. Same style as Fig. 5.",
+  "functions": [],
+  "imports": [
+   "import numpy as np, pandas as pd, matplotlib",
+   "import matplotlib.pyplot as plt"
+  ]
+ },
+ "fig_rev.py": {
+  "doc": "Figures for the revision: Fig. R1 timing vs estimate; Fig. R2 cost-primary comparison (lead 0 and 10).",
+  "functions": [],
+  "imports": [
+   "import json, numpy as np, matplotlib",
+   "import matplotlib.pyplot as plt"
+  ]
+ },
+ "fig_rev5.py": {
+  "doc": "Figures of the third revision (vector PDF + 300-dpi PNG in out/paper5_figs/), from paper5/numbers.json and the kam outputs.\nFigR3_cost_audit5   cost of window-tuned, cost-tuned and age policies by dataset (battery: fully nested, convention C)\nFig9_battery_cost5  battery cost under cross-validation and with a batch held out, fully nested (convention C)\nFig10_metric_M      comparison with the metric M of Kamariotis et al.: (a) M on FD001 (five-fold) by cost ratio,\n                    (b) their Fig. 9a on our data (FD001 fold 1, c_p/c_c = 0.01), (c) test sets with a failure, FD001-FD004\nUsage: python fig_rev5.py [--frozen]",
+  "functions": [
+   {
+    "name": "save",
+    "line": 19,
+    "end": 20,
+    "doc": null
+   },
+   {
+    "name": "F_",
+    "line": 23,
+    "end": 26,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, json, numpy as np, pandas as pd, matplotlib",
+   "import matplotlib.pyplot as plt"
+  ]
+ },
+ "fig_stw_architecture.py": {
+  "doc": "Fig. 1 of the warning-model paper: architecture of the self-timed end-of-life warning model (STW).\nVector PDF + 1000-dpi PNG, double-column width (7.2 in).",
+  "functions": [
+   {
+    "name": "box",
+    "line": 14,
+    "end": 19,
+    "doc": null
+   },
+   {
+    "name": "arr",
+    "line": 21,
+    "end": 24,
+    "doc": null
+   },
+   {
+    "name": "sx",
+    "line": 69,
+    "end": 69,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import matplotlib",
+   "import matplotlib.pyplot as plt",
+   "from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Rectangle"
+  ]
+ },
+ "fixed_gbm.py": {
+  "doc": "Fixed-time gradient-boosted trees of safe_methods.py (functions _roll_slope_expanding, gbm_features and class GBM copied\nverbatim, lines 18-46), so that they can be used without numba, which safe_methods.py imports only for the\nhidden Markov model. audit_fixed_matched.py checks that this copy reproduces the frozen predictions of results/safe/.",
+  "functions": [
+   {
+    "name": "_roll_slope_expanding",
+    "line": 7,
+    "end": 15,
+    "doc": null
+   },
+   {
+    "name": "gbm_features",
+    "line": 17,
+    "end": 22,
+    "doc": null
+   },
+   {
+    "name": "GBM",
+    "line": 24,
+    "end": 33,
+    "doc": null
+   },
+   {
+    "name": "fit",
+    "line": 26,
+    "end": 31,
+    "doc": null
+   },
+   {
+    "name": "predict",
+    "line": 32,
+    "end": 33,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import numpy as np, pandas as pd",
+   "from sklearn.ensemble import HistGradientBoostingRegressor"
+  ]
+ },
+ "h2h.py": {
+  "doc": "Head-to-head: our end-of-life warning model vs re-implementations of the three published PHM08 challenge approaches,\nall under ONE identical first-warning protocol (window [-13, +2], error = prediction - true RUL).\n\nProtocol (same for every method), per outer fold of the main study (seeds 2026 / 7):\n  FIT engines  -> train the RUL model\n  CAL engines  -> choose the warning settings: smoothing span, debounce k, shift s (+ the method's own option below)\n  TEST engines -> first warning = first cycle where the smoothed, shifted prediction stays <= H for k cycles; scored once.\nMethods\n  ours       capped gradient-boosted trees on causal features of 15 sensors; cap in {40, 60, 90} chosen on CAL\n  similarity trajectory-similarity RUL, in the spirit of Wang et al. (2008)   [median of the RUL distribution]\n  rnn        LSTM network (stored predictions of the main pipeline), in the spirit of Heimes (2008)\n  mlp_kf     multilayer perceptron + Kalman filter over time, in the spirit of Peel (2008); filter noise ratio chosen on CAL\n  cnn        1-D CNN (stored predictions; later deep-learning baseline, Li et al. 2018 style)\nThese are re-implementations in the spirit of the published methods, not the original code.",
+  "functions": [
+   {
+    "name": "smooth",
+    "line": 27,
+    "end": 27,
+    "doc": null
+   },
+   {
+    "name": "kalman",
+    "line": 28,
+    "end": 33,
+    "doc": null
+   },
+   {
+    "name": "in_counts",
+    "line": 34,
+    "end": 40,
+    "doc": null
+   },
+   {
+    "name": "first_warning",
+    "line": 41,
+    "end": 43,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 45,
+    "end": 93,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, json, numpy as np, pandas as pd",
+   "from sklearn.ensemble import HistGradientBoostingRegressor",
+   "from sklearn.neural_network import MLPRegressor",
+   "from safe_common import load_dataset, outer_folds, fit_cal_split",
+   "from feats import regime_stats, zmat, causal_feats",
+   "from similarity import SimilarityRUL",
+   "from countdown_hmm import GRID"
+  ]
+ },
+ "hybrid_tf.py": {
+  "doc": "Hybrid Transformer + engineered-feature model, and distributional GBM, for the [-13, +2] window at half of life.\n\nError = prediction - true RUL; correct iff -13 <= error <= +2  <=>  true RUL in [pred - 2, pred + 13].\nProtocol: same engine-level 5-fold CV and fit/calibration split as the main study (seeds 2026 / 7).\n  FIT engines  : train models (all cycles, uncapped RUL target)\n  CAL engines  : early stopping of the network; choice of decoder shift\n  TEST engines : scored once at t = floor(L/2).\nBoth models predict 9 quantiles of the RUL; the window decoder picks the prediction c that maximises the predicted\nprobability P(c - 2 <= RUL <= c + 13) (Bayes-optimal for the window). No step sees a test engine's total life.",
+  "functions": [
+   {
+    "name": "hit",
+    "line": 20,
+    "end": 21,
+    "doc": null
+   },
+   {
+    "name": "window_decode",
+    "line": 23,
+    "end": 31,
+    "doc": "Q: (n, 9) sorted quantiles. Piecewise-linear CDF (tails extended linearly); maximise F(c+13) - F(c-2)."
+   },
+   {
+    "name": "seq_windows",
+    "line": 33,
+    "end": 35,
+    "doc": null
+   },
+   {
+    "name": "build",
+    "line": 37,
+    "end": 54,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 56,
+    "end": 107,
+    "doc": null
+   },
+   {
+    "name": "pinball",
+    "line": 52,
+    "end": 53,
+    "doc": null
+   },
+   {
+    "name": "mk",
+    "line": 69,
+    "end": 71,
+    "doc": null
+   },
+   {
+    "name": "at",
+    "line": 81,
+    "end": 86,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, numpy as np, pandas as pd",
+   "from sklearn.ensemble import HistGradientBoostingRegressor",
+   "from safe_common import load_dataset, outer_folds, fit_cal_split",
+   "from feats import regime_stats, zmat, causal_feats",
+   "import keras",
+   "from keras import layers, ops",
+   "import keras"
+  ]
+ },
+ "kam/check_r0.py": {
+  "doc": "Check R0 of kam/PHASE3_4_PLAN.md: the re-run of Phase 2 (after the workspace reset) must reproduce the frozen Phase 2\nsummary tables in results/kam/ (written before the reset). Compares the freshly summarised tables in out/kam/ with the\nfrozen ones, column by column (numerical tolerance 1e-9, relative), and writes out/kam/r0_check.txt.\nUsage: python kam/kam_fd001_summarize.py && python kam/check_r0.py",
+  "functions": [],
+  "imports": [
+   "import os, sys",
+   "import numpy as np, pandas as pd"
+  ]
+ },
+ "kam/kam_fd001.py": {
+  "doc": "Phase 2: alarm policies of this repository and policies 1 and 3 of Kamariotis et al. (2024) on FD001, evaluated with\ntheir metric M (re-implementation, kam_metric.py) on a decision grid dT = 10, replacement-only setting, lead time 0.\nPlan fixed and hashed before the run: kam/PHASE2_PLAN.md (with amendment 1), kam/PHASE2_PLAN.sha256. Exploratory.\n\nUsage (from the repository root; add --ds FD002|FD003|FD004 for Phase 3, default FD001):\n  python kam/kam_fd001.py cv                 protocol (B): five-fold CV, existing FD001 folds (seed 2026, inner 100 + fold)\n  python kam/kam_fd001.py splits [s0 s1]     protocol (A): random 80/20 splits s0..s1 (default 1..30), seed 31000 + s\n  python kam/kam_fd001.py leak               leakage checks E2-E4 on fold 1 of protocol (B) (E1 runs inside every split)\nOutputs (out/kam/): fd001_<protocol>_units.csv (one row per protocol, split, cost ratio, policy, test unit),\nfd001_<protocol>_settings.csv, fd001_<protocol>_bins.csv, fd001_leakage.txt; checkpoints in out/kam/ckpt/.",
+  "functions": [
+   {
+    "name": "classifier",
+    "line": 35,
+    "end": 37,
+    "doc": null
+   },
+   {
+    "name": "fit_models",
+    "line": 40,
+    "end": 55,
+    "doc": "Regressors for caps 40/60/90 (recipe) and 125 (sensitivity), the linear HI of rev_experiments, and the\nclassifier of 1{RUL <= dT}; each returns, per target unit, (series over cycles 1..L-1, true RUL over cycles 1..L-1)."
+   },
+   {
+    "name": "grid_cost",
+    "line": 59,
+    "end": 64,
+    "doc": "Alarm at cycle ta acts at the first grid point >= ta; preventive only if that point is before failure L."
+   },
+   {
+    "name": "boot_weights",
+    "line": 67,
+    "end": 70,
+    "doc": null
+   },
+   {
+    "name": "select_grid",
+    "line": 73,
+    "end": 85,
+    "doc": "As audit_cost.select, with the grid-mapped cost; 1-SE: largest mean remaining life at the replacement point."
+   },
+   {
+    "name": "select_1cycle",
+    "line": 88,
+    "end": 100,
+    "doc": "Unmapped 1-cycle selection (lead 0), identical to audit_cost.select for 'plain' and '1se'."
+   },
+   {
+    "name": "grid_series",
+    "line": 104,
+    "end": 110,
+    "doc": "{u: (series over cycles 1..L-1, rul)} -> {u: values at grid points t_k = 10k <= L-1}, L"
+   },
+   {
+    "name": "make_bins",
+    "line": 113,
+    "end": 122,
+    "doc": "Equal-count bins of the OOF estimates (20 quantile edges), merging bins with fewer than MINBIN rows."
+   },
+   {
+    "name": "res_model",
+    "line": 125,
+    "end": 136,
+    "doc": "P-res: per-bin empirical distribution of the true RUL of OOF cycles (RUL above the cap set to the cap)."
+   },
+   {
+    "name": "res_prob",
+    "line": 139,
+    "end": 140,
+    "doc": null
+   },
+   {
+    "name": "cls_calibrator",
+    "line": 143,
+    "end": 145,
+    "doc": null
+   },
+   {
+    "name": "p1_first",
+    "line": 149,
+    "end": 151,
+    "doc": "First grid point (time) at which the probability series reaches thr; inf if never."
+   },
+   {
+    "name": "p1_optimise",
+    "line": 154,
+    "end": 162,
+    "doc": "Training cost rate for every threshold in PGRID; minimising set; 'mid' and 'max' tie rules."
+   },
+   {
+    "name": "lam_bar",
+    "line": 165,
+    "end": 168,
+    "doc": "Option 1 of their Sec. 2.3.4: optimal age-replacement cost rate on the empirical training lives."
+   },
+   {
+    "name": "p3_flags",
+    "line": 171,
+    "end": 178,
+    "doc": "Per bin: replace now if the minimiser x* of Eq. (14) over x = 0..cap is <= dT."
+   },
+   {
+    "name": "p3_first",
+    "line": 181,
+    "end": 183,
+    "doc": null
+   },
+   {
+    "name": "run_split",
+    "line": 187,
+    "end": 284,
+    "doc": null
+   },
+   {
+    "name": "check_split",
+    "line": 287,
+    "end": 292,
+    "doc": "Stop rule: no grid-mapped policy may have M < 0 on the test units of a split."
+   },
+   {
+    "name": "run_protocol",
+    "line": 295,
+    "end": 305,
+    "doc": null
+   },
+   {
+    "name": "cv_splits",
+    "line": 308,
+    "end": 312,
+    "doc": null
+   },
+   {
+    "name": "random_splits",
+    "line": 315,
+    "end": 319,
+    "doc": null
+   },
+   {
+    "name": "write",
+    "line": 322,
+    "end": 323,
+    "doc": null
+   },
+   {
+    "name": "leak",
+    "line": 327,
+    "end": 359,
+    "doc": null
+   },
+   {
+    "name": "ttab",
+    "line": 219,
+    "end": 221,
+    "doc": null
+   },
+   {
+    "name": "emit",
+    "line": 238,
+    "end": 241,
+    "doc": null
+   },
+   {
+    "name": "emit_tab",
+    "line": 243,
+    "end": 250,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, time, pickle",
+   "import numpy as np, pandas as pd",
+   "from sklearn.ensemble import HistGradientBoostingClassifier",
+   "from sklearn.isotonic import IsotonicRegression",
+   "import eol_window2 as W",
+   "import rev_experiments as R",
+   "from safe_common import load_dataset, outer_folds",
+   "from feats import regime_stats, zmat, causal_feats",
+   "import kam_metric as K"
+  ]
+ },
+ "kam/kam_fd001_summarize.py": {
+  "doc": "Phase 2 summary tables from the per-unit outputs of kam_fd001.py (plan: kam/PHASE2_PLAN.md with amendment 1); with\n--ds FD002|FD003|FD004 the same tables for the Phase 3 five-fold runs (plan: kam/PHASE3_4_PLAN.md), files <ds>_* instead of fd001_*.\nUsage: python kam/kam_fd001_summarize.py [--ds FDxxx] [--frozen]   (reads out/kam or, with --frozen, results/kam)\nOutputs (out/kam/): fd001_cv_table.csv (M per policy and cost ratio, Eq. 7 and bootstrap intervals, failures),\nfd001_cv_pairs.csv (paired differences, 'beats' flags), fd001_rs_policies.csv, fd001_rs_pairs.csv (distribution across\nthe 30 random splits), fd001_bins_summary.csv, fd001_thresholds.csv, fd001_summary.md",
+  "functions": [
+   {
+    "name": "read",
+    "line": 19,
+    "end": 20,
+    "doc": null
+   },
+   {
+    "name": "m_boot",
+    "line": 23,
+    "end": 26,
+    "doc": null
+   },
+   {
+    "name": "piv",
+    "line": 29,
+    "end": 32,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, glob",
+   "import numpy as np, pandas as pd",
+   "import kam_metric as K"
+  ]
+ },
+ "kam/kam_fragility.py": {
+  "doc": "Phase 3: robustness of direct threshold optimisation (their Fig. 9a on my data). Plan: kam/PHASE3_4_PLAN.md, P3.2.\nComputed from the per-split series saved by kam_fd001.py (out/kam/ckpt/<ds>_<protocol>_<split>_series.pkl) and the\nper-unit outputs (out/kam/<ds>_<protocol>_units.csv); nothing is refitted.\n\nUsage: python kam/kam_fragility.py\nOutputs (out/kam/): fragility_p1.csv (policy 1: per test set, ratio and probability model, the optimised thresholds, the\nsmallest threshold with a training / test failure, test failures and M at p_mid and p_max), fragility_stw.csv (plain and\n1-SE cost-tuned STW: selected threshold tau and the largest tau with a test failure), fragility_tally.csv (cells with >= 1\ntest failure and with M > 50 % per policy, dataset and protocol), fragility_tie.csv (decisions differing between the\n'mid' and 'max' tie rules), fragility_verdict.csv (decision rule of the plan), fragility_curve.csv (FD001 fold 1,\nc_p/c_c = 0.01: training and test M over the threshold grid), fragility_summary.md",
+  "functions": [
+   {
+    "name": "p1_curve",
+    "line": 24,
+    "end": 31,
+    "doc": "replacement time of every unit for every threshold in PGRID (first grid point where the running max reaches p)"
+   },
+   {
+    "name": "curve_stats",
+    "line": 34,
+    "end": 36,
+    "doc": null
+   },
+   {
+    "name": "tie",
+    "line": 39,
+    "end": 40,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 43,
+    "end": 138,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, glob, pickle",
+   "import numpy as np, pandas as pd",
+   "import kam_metric as K"
+  ]
+ },
+ "kam/kam_grid_effect.py": {
+  "doc": "Phase 1a: reference-grid effect. For every existing policy of the cost analysis (audit_cost.py, frozen outputs\nresults/audit/cost_<ds>.csv.gz), at lead time 0 only, compute its long-run cost rate relative to\n  (a) the 1-cycle perfect policy (replacement at L - 1), as reported in the manuscript, and\n  (b) the grid-perfect policy of Kamariotis et al. (last decision point k*dT strictly before failure), dT = 10 cycles,\nand the difference. The policies are NOT re-mapped to the grid here: they act at any cycle (\"unmapped 1-cycle results\"),\nso (b) - 1 is M_hat of an off-grid policy and can be negative; every negative value is listed, not clipped.\nBattery: convention B of key_numbers.md (task in blocks, kappa from the outer training cells), lives in cycles from the\nfully nested run, dT = 10 and 30 cycles.\nOutput: out/kam/grid_effect_policies.csv, out/kam/grid_effect_summary.csv",
+  "functions": [],
+  "imports": [
+   "import os, sys",
+   "import numpy as np, pandas as pd",
+   "import kam_metric as K"
+  ]
+ },
+ "kam/kam_metric.py": {
+  "doc": "Re-implementation of the decision-oriented metric M of Kamariotis, Tatsis, Chatzi, Goebel & Straub (2024),\nReliability Engineering & System Safety 242, 109723 (arXiv:2306.03759v2), replacement-only decision setting (their\nSection 2.3). Equation numbers refer to arXiv v2. This is a re-implementation from the paper; the authors' code is not\navailable, and nothing here reproduces their numbers.\n\nConventions (theirs):\n  * decisions only at t_k = k * dT, k = 1, 2, ...; a preventive replacement decided at t_k happens at t_k;\n  * cost c_p for a preventive replacement at T_R < T_F, c_c for a corrective replacement at the failure time T_F;\n  * life-cycle length T_lc = min(T_R, T_F)                                                        (Eq. 8)\n  * R_hat = mean(C_m) / mean(T_lc)                                                                 (Eq. 2)\n  * perfect policy: preventive replacement at the last grid point strictly before T_F               (Sec. 2.3.1, Eq. 4)\n  * M_hat = (R_hat - R_perfect) / R_perfect                                                        (Eq. 6, 9)\n  * Var[R_hat] by the first-order (delta-method) formula                                           (Eq. 3)\n  * Var[M_hat] = Var[R_hat] / R_perfect^2, the variance of R_perfect being neglected               (Eq. 7)\nSample moments use ddof = 1 (the paper does not state the estimator).\n\nM >= 0 is NOT enforced: m_hat() records every negative value in VIOLATIONS (with a label) and returns it unchanged.\nA negative M arises (i) for a policy that acts between grid points, and (ii) in the case of their footnote 1, when c_c is\nso close to c_p that letting a unit fail beats replacing it at the last grid point; perfect_with_failure_option() checks\n(ii) explicitly.",
+  "functions": [
+   {
+    "name": "grid_point_at_or_after",
+    "line": 29,
+    "end": 32,
+    "doc": "Map an alarm raised at cycle t (any real t > 0; NaN/inf = no alarm) to the first decision point k*dT >= t, k >= 1."
+   },
+   {
+    "name": "perfect_tr",
+    "line": 35,
+    "end": 38,
+    "doc": "Perfect policy: last grid point strictly before failure, T_R = k*dT with k = ceil(T_F/dT) - 1; inf if k < 1."
+   },
+   {
+    "name": "lifecycle",
+    "line": 41,
+    "end": 46,
+    "doc": "Cost and length of one life-cycle (Eq. 8): preventive if T_R < T_F, otherwise corrective at T_F.\nA decision point at or beyond the failure time therefore counts as a failure at cost c_c."
+   },
+   {
+    "name": "r_hat",
+    "line": 49,
+    "end": 51,
+    "doc": "Eq. (2)."
+   },
+   {
+    "name": "var_r_hat",
+    "line": 54,
+    "end": 58,
+    "doc": "Eq. (3): first-order approximation of Var[R_hat] with sample moments (ddof = 1)."
+   },
+   {
+    "name": "r_perfect",
+    "line": 61,
+    "end": 64,
+    "doc": "Eq. (4) for the perfect policy of Sec. 2.3.1; returns (R_perfect, number of units with no grid point before T_F)."
+   },
+   {
+    "name": "m_hat",
+    "line": 67,
+    "end": 71,
+    "doc": "Eq. (6)/(9). Negative values are recorded in VIOLATIONS and returned unchanged (never clipped)."
+   },
+   {
+    "name": "var_m_hat",
+    "line": 74,
+    "end": 77,
+    "doc": "Eq. (7)."
+   },
+   {
+    "name": "m_with_ci",
+    "line": 80,
+    "end": 83,
+    "doc": "M_hat with the normal 95% interval of Eq. (7)."
+   },
+   {
+    "name": "paired_boot_mdiff",
+    "line": 86,
+    "end": 93,
+    "doc": "Paired bootstrap over units of M_a - M_b (R_perfect recomputed in every resample). Returns (diff, lo, hi)."
+   },
+   {
+    "name": "perfect_with_failure_option",
+    "line": 96,
+    "end": 108,
+    "doc": "Their footnote 1: allow each unit either the preventive replacement at the last grid point or a corrective\nreplacement at T_F, and minimise the long-run cost rate over these choices (Dinkelbach iteration on the ratio).\nReturns (R_opt, number of units for which failing is optimal). If R_opt < R_perfect, M can be negative."
+   }
+  ],
+  "imports": [
+   "import math",
+   "import numpy as np"
+  ]
+ },
+ "kam/kam_simulator.py": {
+  "doc": "Phase 1b: check of the metric re-implementation on the virtual RUL simulator of Kamariotis et al. (2024), Section 3\n(arXiv:2306.03759v2), replacement-only setting. Qualitative comparison with their Figs. 4 and 5 only.\n\nSimulator (their Eqs. 21-25): T_F ~ N(225, 40); decision points t_k = 10k; ln RUL_pred,k ~ N(mu_k, sigma) with\nmu_k = ln(T_F - t_k) + ln eps_k, (ln eps_1, ...) ~ MVN(0, Sigma), Sigma_ij = sigma^2 exp(-|t_i - t_j| / 50);\nsigma = 0.4 (their Fig. 4) and 0.15 (Fig. 5); n = 2000 components; c_p = 1, c_c = c_p / ratio.\nPolicies (their Sec. 2.3.2-2.3.4):\n  1  replace at t_k if Pr(RUL_pred,k <= dT) >= p_thres, with p_thres = c_p/c_c and with p_thres minimising M on the same\n     2000 components (in-sample, as in their Sec. 3.2);\n  2  replace at t_k if the minimiser T_R* of Eq. (12) satisfies T_R* <= t_k + dT;\n  3  as 2 with the objective of Eq. (14), E[C]/E[T] of the population set by their option 1 (optimal age replacement for\n     N(225, 40)).\nT_R is optimised on a log-spaced grid of x = T_R - t_k (400 points from 0.05 to 5000 cycles plus every 0.05 cycle in\n[9, 11]); the decision only depends on whether the minimiser lies at or below dT.\nOutput: out/kam/sim_results.csv (one row per sigma, ratio, policy), out/kam/sim_pthres.csv, out/kam/sim_checks.txt",
+  "functions": [
+   {
+    "name": "age_replacement_rate",
+    "line": 30,
+    "end": 35,
+    "doc": "Option 1 of their Sec. 2.3.4: optimal long-run cost rate of age replacement for T_F ~ N(225, 40),\nmin_T [c_p S(T) + c_c F(T)] / int_0^T S(t) dt, on a 0.25-cycle grid (trapezoidal integral)."
+   },
+   {
+    "name": "simulate",
+    "line": 38,
+    "end": 44,
+    "doc": null
+   },
+   {
+    "name": "first_tr",
+    "line": 47,
+    "end": 50,
+    "doc": "Replacement time = first valid decision point at which flag is True; inf if never."
+   },
+   {
+    "name": "policy_23",
+    "line": 53,
+    "end": 68,
+    "doc": "Flag (unit, step) where the minimiser of Eq. (12) (kind 2) or Eq. (14) (kind 3) lies at x <= dT."
+   },
+   {
+    "name": "main",
+    "line": 71,
+    "end": 113,
+    "doc": null
+   },
+   {
+    "name": "add",
+    "line": 82,
+    "end": 85,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, math, time",
+   "import numpy as np, pandas as pd",
+   "from scipy.stats import norm",
+   "from scipy.special import ndtr",
+   "import kam_metric as K"
+  ]
+ },
+ "kam/make_key_numbers.py": {
+  "doc": "Writes key_numbers.md for the third revision from paper5/numbers.json: every number used in the abstract, the key-numbers\ntable and the conclusion of the rewritten manuscript, with the script and result file that produce it.\nUsage: python kam/make_key_numbers.py > key_numbers.md",
+  "functions": [],
+  "imports": [
+   "import json"
+  ]
+ },
+ "kam/make_rev5_numbers.py": {
+  "doc": "Third revision (comparison with the metric M of Kamariotis et al., 2024, and Phases 3-4): collect every number used by the\nrewritten manuscript into paper5/numbers.json = paper4/numbers.json + key 'rev5'.\nSources (fresh outputs in out/, or with --frozen the frozen copies in results/):\n  results/kam/   kam_grid_effect.py, kam_simulator.py (Phase 1); kam_fd001.py + kam_fd001_summarize.py (Phases 2-3);\n                 kam_fragility.py (Phase 3); check_r0.py (re-run check)\n  results/audit/ audit_hi_calibrated.py (4b), audit_battery_cost_nested.py (4a), audit_fixed_matched.py --ds FD004 (4d)\nUsage: python kam/make_rev5_numbers.py [--frozen]",
+  "functions": [
+   {
+    "name": "F_",
+    "line": 19,
+    "end": 22,
+    "doc": null
+   },
+   {
+    "name": "rd",
+    "line": 25,
+    "end": 26,
+    "doc": null
+   },
+   {
+    "name": "cp",
+    "line": 29,
+    "end": 30,
+    "doc": null
+   },
+   {
+    "name": "mcn",
+    "line": 33,
+    "end": 35,
+    "doc": null
+   },
+   {
+    "name": "holm",
+    "line": 38,
+    "end": 41,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, json, glob, re",
+   "import numpy as np, pandas as pd",
+   "from scipy.stats import binomtest, beta"
+  ]
+ },
+ "kam/test_kam_metric.py": {
+  "doc": "Unit tests of kam_metric.py. Run: python kam/test_kam_metric.py (plain asserts; exits non-zero on failure).",
+  "functions": [
+   {
+    "name": "check",
+    "line": 11,
+    "end": 12,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os",
+   "from fractions import Fraction as Fr",
+   "import numpy as np",
+   "import kam_metric as K"
+  ]
+ },
+ "make_paper2_numbers.py": {
+  "doc": "Collect every number used in the warning-model manuscript into paper2/numbers.json (nothing is typed by hand).",
+  "functions": [
+   {
+    "name": "cp",
+    "line": 6,
+    "end": 6,
+    "doc": null
+   },
+   {
+    "name": "phm",
+    "line": 7,
+    "end": 7,
+    "doc": null
+   },
+   {
+    "name": "summarise",
+    "line": 20,
+    "end": 27,
+    "doc": null
+   },
+   {
+    "name": "_clean",
+    "line": 221,
+    "end": 227,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import json, os, re, numpy as np, pandas as pd",
+   "from scipy.stats import beta, binomtest",
+   "from safe_common import load_dataset",
+   "from safe_common import SENS7",
+   "from feats import regime_stats as _rs",
+   "import bearing_warning as _BWg"
+  ]
+ },
+ "make_rev_numbers.py": {
+  "doc": "Collect the revision experiments (out/rev) into paper2/numbers.json under key 'rev2' (the other keys are untouched).",
+  "functions": [
+   {
+    "name": "cp",
+    "line": 6,
+    "end": 7,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import json, numpy as np, pandas as pd",
+   "from scipy.stats import binomtest, beta",
+   "import rev_analyze as RA"
+  ]
+ },
+ "multi_eval.py": {
+  "doc": "Tolerance-window sensitivity and maintenance-cost analysis of the self-timed warning model.\n\nFor each dataset: outer 5-fold engine CV (seed 2026) and inner 5-fold OOF predictions (seed 100 + fold) exactly as\neol_window2.py; the regressors are fitted once per fold and reused for all windows and warning levels.\n(1) Windows [-10,+2], [-13,+2], [-20,+5], [-30,+10]: settings (cap, span, k, shift) re-selected for each window and level.\n(2) Cost analysis (window [-13,+2]): a warning at t* triggers a planned replacement l cycles later (logistics lead time\n    l in {0, 5, 10, 15}); if the engine fails first (true remaining life at the warning <= l) or is never warned, it fails.\n    Cost per engine: 1 for a planned replacement, rho in {5, 10, 20, 50} for a failure; cost rate = total cost / total\n    cycles operated (renewal-reward). The warning level H in {10, 15, 20, 30, 40} is chosen per (l, rho) on the training\n    engines' out-of-fold warnings, then applied to the test engines. Baselines: age-based replacement with the age T chosen\n    on the training engines' lives (classical optimal age replacement), run-to-failure, and perfect foresight\n    (replacement one cycle before failure).\nDatasets: PHM08, FD001-FD004, N-CMAPSS (six sensors as pre-specified) and, exploratory, N-CMAPSS with all 14 sensors.\nOutput: out/multi/<ds>_windows.csv, <ds>_cost.csv, <ds>_warnings.csv",
+  "functions": [
+   {
+    "name": "prep",
+    "line": 26,
+    "end": 32,
+    "doc": "per unit: (p, y, running minimum of the k-cycle rolling maximum); computed once per (cap, span, k)"
+   },
+   {
+    "name": "in_counts",
+    "line": 34,
+    "end": 40,
+    "doc": "identical rule to eol_window2.in_counts, on prepared units"
+   },
+   {
+    "name": "warnings",
+    "line": 42,
+    "end": 47,
+    "doc": null
+   },
+   {
+    "name": "ncm_frame",
+    "line": 49,
+    "end": 53,
+    "doc": null
+   },
+   {
+    "name": "predict_generic",
+    "line": 55,
+    "end": 63,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 65,
+    "end": 120,
+    "doc": null
+   },
+   {
+    "name": "policy_cost",
+    "line": 100,
+    "end": 102,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "from safe_common import load_dataset, outer_folds",
+   "from feats import causal_feats"
+  ]
+ },
+ "ncm_warning.py": {
+  "doc": "N-CMAPSS confirmation of the end-of-life warning model, exactly as fixed in ncm/WARNING_PROTOCOL.md.\nReuses the warning-rule code of eol_window2.py unchanged (gbm, smooth, evaluate, in_counts, CAPS, KS, SPANS, SHIFTS).",
+  "functions": [
+   {
+    "name": "load",
+    "line": 11,
+    "end": 16,
+    "doc": null
+   },
+   {
+    "name": "kalman",
+    "line": 18,
+    "end": 23,
+    "doc": null
+   },
+   {
+    "name": "features",
+    "line": 25,
+    "end": 31,
+    "doc": null
+   },
+   {
+    "name": "predict",
+    "line": 33,
+    "end": 44,
+    "doc": "returns {method: {option: {unit: (raw prediction over cycles with RUL >= 1, true RUL)}}}"
+   },
+   {
+    "name": "run_split",
+    "line": 46,
+    "end": 67,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 69,
+    "end": 93,
+    "doc": null
+   },
+   {
+    "name": "mcn",
+    "line": 84,
+    "end": 85,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import json, numpy as np, pandas as pd",
+   "from sklearn.neural_network import MLPRegressor",
+   "from scipy.stats import binomtest, beta",
+   "import eol_window2 as W",
+   "from safe_common import outer_folds",
+   "from feats import causal_feats"
+  ]
+ },
+ "oracle_check.py": {
+  "doc": "Per-engine oracle-timed control (PHM08): the full model's calibrated estimate at the cycle where the true remaining life\nequals H, with the settings the nested selection chose in warn_ablation.py. Writes out/window/oracle_timed_PHM08.csv and\nchecks that the totals equal those stored in ablation_warning_PHM08.json.",
+  "functions": [],
+  "imports": [
+   "import json, numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "from safe_common import load_dataset, outer_folds",
+   "from feats import regime_stats, zmat, causal_feats"
+  ]
+ },
+ "paper2_figures.py": {
+  "doc": "Figures 2-6 of the warning-model manuscript (Fig. 1 = fig_stw_architecture.py). Vector PDF + 1000-dpi PNG.",
+  "functions": [
+   {
+    "name": "save",
+    "line": 11,
+    "end": 12,
+    "doc": null
+   },
+   {
+    "name": "grid",
+    "line": 13,
+    "end": 13,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import json, numpy as np, pandas as pd, matplotlib",
+   "import matplotlib.pyplot as plt",
+   "import eol_window2 as W",
+   "from safe_common import load_dataset, outer_folds",
+   "from feats import regime_stats, zmat, causal_feats"
+  ]
+ },
+ "paper2_figures_rev.py": {
+  "doc": "Revision figures of the warning-model manuscript: Fig. 7 (battery), Fig. 8 (theory check), Fig. 9 (windows and cost).\nVector PDF + 1000-dpi PNG, same style as paper2_figures.py. All numbers from paper2/numbers.json or the stored result files.",
+  "functions": [
+   {
+    "name": "save",
+    "line": 11,
+    "end": 12,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import json, numpy as np, pandas as pd, matplotlib",
+   "import matplotlib.pyplot as plt"
+  ]
+ },
+ "rep30.py": {
+  "doc": "Supervisor's protocol, repeated: 30 random splits (identical code and seeds to rep50.py; repetitions 1-20 reproduce it) of the 218 PHM08 engines into 50 test / 168 training engines.\n\nPer repetition r (seed 1000 + r):\n  A  50 test engines drawn at random;  B  the other 168 train the model\n  warning model (eol_window2.py): settings (target cap, smoothing, debounce k, shift) chosen on out-of-fold predictions of an inner\n  5-fold split of the 168 training engines; models refit on all 168; applied once to the 50 test engines, warning level H = 20\n  C  actual life of each test engine\n  D  predicted life = cycle at which the warning is issued + predicted cycles left at that moment\n  E  error = D - C (= predicted - true cycles left); correct if -13 <= E <= +2; no warning before failure = missed (late)\nOutput: out/rep30/rep30_results_<first>_<last>.csv (one row per engine per repetition), rep30_log_<first>_<last>.txt; run as two halves: rep30.py 1 15 and rep30.py 16 30",
+  "functions": [
+   {
+    "name": "run",
+    "line": 18,
+    "end": 45,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "from safe_common import load_dataset"
+  ]
+ },
+ "rep30_excel.py": {
+  "doc": "Excel report for 30 repeated random 50/168 tests (supervisor's A-B-C-D-E layout) -> out/rep30/Warning_model_30_iterations.xlsx",
+  "functions": [
+   {
+    "name": "head",
+    "line": 12,
+    "end": 16,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import glob",
+   "import numpy as np, pandas as pd",
+   "from openpyxl import Workbook",
+   "from openpyxl.styles import Font, PatternFill, Alignment, Border, Side",
+   "from openpyxl.formatting.rule import CellIsRule",
+   "from openpyxl.utils import get_column_letter",
+   "from openpyxl.chart import BarChart, Reference"
+  ]
+ },
+ "rep50.py": {
+  "doc": "Supervisor's protocol, repeated: 20 random splits of the 218 PHM08 engines into 50 test / 168 training engines.\n\nPer repetition r (seed 1000 + r):\n  A  50 test engines drawn at random;  B  the other 168 train the model\n  warning model (eol_window2.py): settings (target cap, smoothing, debounce k, shift) chosen on out-of-fold predictions of an inner\n  5-fold split of the 168 training engines; models refit on all 168; applied once to the 50 test engines, warning level H = 20\n  C  actual life of each test engine\n  D  predicted life = cycle at which the warning is issued + predicted cycles left at that moment\n  E  error = D - C (= predicted - true cycles left); correct if -13 <= E <= +2; no warning before failure = missed (late)\nOutput: out/rep50/rep50_results.csv (one row per engine per repetition), rep50_log.txt",
+  "functions": [
+   {
+    "name": "run",
+    "line": 17,
+    "end": 44,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "from safe_common import load_dataset"
+  ]
+ },
+ "rep50_excel.py": {
+  "doc": "Excel report for the repeated 50/168 test (supervisor's A-B-C-D-E layout) -> out/rep50/Warning_model_50_engine_tests.xlsx",
+  "functions": [
+   {
+    "name": "head",
+    "line": 11,
+    "end": 15,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import numpy as np, pandas as pd",
+   "from openpyxl import Workbook",
+   "from openpyxl.styles import Font, PatternFill, Alignment, Border, Side",
+   "from openpyxl.formatting.rule import CellIsRule",
+   "from openpyxl.utils import get_column_letter"
+  ]
+ },
+ "rev_analyze.py": {
+  "doc": "Aggregate the revision experiments (rev_experiments.py) into tables.\nT_R1R2: in-window rates per dataset and H for STW, STW_const, HI_threshold; exact McNemar vs STW; share of warnings with\n        >= 13 true cycles left (early limit can bind); reproduction check of STW against the original result files.\nT_R3:   pooled long-run cost rate relative to perfect foresight per policy, (lead, rho); paired cluster bootstrap\n        (units resampled within dataset, fitted policies fixed) of cost-rate ratios STW_cost / HI_cost and STW_cost / age.",
+  "functions": [
+   {
+    "name": "mcn",
+    "line": 15,
+    "end": 17,
+    "doc": null
+   },
+   {
+    "name": "window_tables",
+    "line": 20,
+    "end": 46,
+    "doc": null
+   },
+   {
+    "name": "cost_tables",
+    "line": 49,
+    "end": 70,
+    "doc": null
+   },
+   {
+    "name": "ratio",
+    "line": 62,
+    "end": 65,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, json, numpy as np, pandas as pd",
+   "from scipy.stats import binomtest"
+  ]
+ },
+ "rev_experiments.py": {
+  "doc": "Revision experiments for the STW manuscript (exploratory; added after the original results were known).\n\nR1  Constant-estimate control: keep the STW warning time, replace its reported estimate by one constant c chosen on\n    the training engines' out-of-fold (OOF) warnings. If R1 ~= STW, the in-window rate measures alarm timing.\nR2  Health-indicator (HI) threshold alarm baseline (no RUL regressor): a linear HI in the style of Wang et al. (2008),\n    least squares of the EWM(10) baseline-removed regime-normalised sensors onto 1 (last 5 cycles) / 0 (first 30\n    cycles); causal EWM smoothing m, alarm when HI >= theta for k consecutive cycles, reported estimate = constant c\n    with H-6 <= c <= H (the range of estimates STW reports at level H). theta, m, k, c chosen on training OOF only.\nR3  Cost-primary evaluation (renewal-reward, as manuscript Sec. 5.6): each alarm policy is tuned on training OOF to\n    minimise the long-run cost rate for each (lead l, cost ratio rho); STW-cost (threshold tau on the smoothed\n    estimate, no window), STW-window (window-tuned STW, H chosen per (l, rho): the manuscript's analysis),\n    HI-cost, optimal age replacement, perfect foresight, run-to-failure.\nSplits, seeds, model, grids: identical to eol_window2.py (outer 5-fold seed 2026, inner 5-fold seed 100+fold).\nUsage: python rev_experiments.py DATASET [DATASET ...]   (PHM08 FD001 FD002 FD003 FD004 NCMAPSS6 Battery)\nOutput: out/rev/<ds>_window.csv (per test unit, per method and H), out/rev/<ds>_cost.csv (per test unit, per policy, l, rho)",
+  "functions": [
+   {
+    "name": "adapter",
+    "line": 30,
+    "end": 52,
+    "doc": "returns units, feats(stat_units, units) -> (F, Y); F[u] causal features (last column = age), Y[u] true RUL"
+   },
+   {
+    "name": "models",
+    "line": 55,
+    "end": 68,
+    "doc": "GBM predictions for the three caps (as eol_window2) and the linear HI; series over cycles with RUL >= 1"
+   },
+   {
+    "name": "first_idx",
+    "line": 72,
+    "end": 76,
+    "doc": "first index i at which s has been <= thr for k consecutive cycles, for every thr (len(s) if never)"
+   },
+   {
+    "name": "alarm_table",
+    "line": 79,
+    "end": 85,
+    "doc": "P: {u: (s, y)} -> arrays (U, T): ok, y at alarm, cycle at alarm; L (U,) life in model units"
+   },
+   {
+    "name": "cost_of",
+    "line": 88,
+    "end": 91,
+    "doc": null
+   },
+   {
+    "name": "cls_of",
+    "line": 94,
+    "end": 96,
+    "doc": null
+   },
+   {
+    "name": "run",
+    "line": 100,
+    "end": 205,
+    "doc": null
+   },
+   {
+    "name": "feats",
+    "line": 34,
+    "end": 36,
+    "doc": null
+   },
+   {
+    "name": "feats",
+    "line": 41,
+    "end": 43,
+    "doc": null
+   },
+   {
+    "name": "feats",
+    "line": 48,
+    "end": 50,
+    "doc": null
+   },
+   {
+    "name": "pick",
+    "line": 180,
+    "end": 185,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, time, numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "from safe_common import load_dataset, outer_folds",
+   "from feats import regime_stats, zmat, causal_feats",
+   "import pickle",
+   "import ncm_warning as N",
+   "import battery_warning as B"
+  ]
+ },
+ "safe_analyze.py": {
+  "doc": "Cautious layer + metrics for every (dataset, method). Reads out/safe/preds_*.csv, writes out/safe/results_*.csv",
+  "functions": [
+   {
+    "name": "process",
+    "line": 11,
+    "end": 27,
+    "doc": null
+   },
+   {
+    "name": "summarise",
+    "line": 29,
+    "end": 35,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import glob, sys, numpy as np, pandas as pd",
+   "from scipy.stats import wilcoxon",
+   "from safe_common import CautiousLayer, QGRID, FRACTIONS, classify, clopper_pearson, EARLY_LIM, LATE_LIM"
+  ]
+ },
+ "safe_common.py": {
+  "doc": "Shared protocol for the safety-constrained early-prediction study.\n\nDatasets : PHM08 training set (218 run-to-failure engines) and C-MAPSS FD001-FD004 training sets.\nProtocol : 5-fold cross-validation by engine (seed 2026). Inside each outer-training part the engines are\n           split 75 / 25 into FIT engines (train the point model) and CALIBRATION engines (build the\n           cautious layer) -- split-conformal style, identical for every method.\n           Official C-MAPSS test sets: fit/calibrate on the full training set (same 75/25 split).\nInputs   : temperatures T24, T30, T50 and shaft speeds Nf, Nc, NRf, NRc (s2, s3, s4, s8, s9, s13, s14),\n           z-scored per operating regime with statistics of the FIT engines only.",
+  "functions": [
+   {
+    "name": "_read",
+    "line": 21,
+    "end": 24,
+    "doc": null
+   },
+   {
+    "name": "load_dataset",
+    "line": 27,
+    "end": 35,
+    "doc": "returns train df (with life, rul), official test df or None, official true RUL dict or None"
+   },
+   {
+    "name": "outer_folds",
+    "line": 38,
+    "end": 39,
+    "doc": null
+   },
+   {
+    "name": "fit_cal_split",
+    "line": 42,
+    "end": 44,
+    "doc": null
+   },
+   {
+    "name": "regime_norm",
+    "line": 47,
+    "end": 52,
+    "doc": null
+   },
+   {
+    "name": "engines",
+    "line": 55,
+    "end": 61,
+    "doc": "dict unit -> (Z (T x 7), regime codes (T,), rul (T,) or None)"
+   },
+   {
+    "name": "CautiousLayer",
+    "line": 65,
+    "end": 103,
+    "doc": "Empirical distribution of the TRUE remaining life among the K calibration cases most similar in\n(point prediction, age); the cautious prediction is its q-quantile."
+   },
+   {
+    "name": "classify",
+    "line": 106,
+    "end": 107,
+    "doc": null
+   },
+   {
+    "name": "clopper_pearson",
+    "line": 110,
+    "end": 114,
+    "doc": null
+   },
+   {
+    "name": "Z",
+    "line": 49,
+    "end": 51,
+    "doc": null
+   },
+   {
+    "name": "__init__",
+    "line": 68,
+    "end": 69,
+    "doc": null
+   },
+   {
+    "name": "fit",
+    "line": 71,
+    "end": 76,
+    "doc": null
+   },
+   {
+    "name": "quantiles",
+    "line": 78,
+    "end": 86,
+    "doc": null
+   },
+   {
+    "name": "calibrate",
+    "line": 88,
+    "end": 103,
+    "doc": "largest q whose late rate (error > +5) on the calibration engines (leave-own-engine-out) <= target.\nmode='all'  : late rate pooled over all cycles (version 1, pre-specified)\nmode='stage': late rate <= target in EVERY life-stage band 25-35, 45-55, 65-75, 85-95 % (version 2, amended)"
+   }
+  ],
+  "imports": [
+   "import numpy as np, pandas as pd",
+   "from scipy.stats import beta",
+   "from sklearn.neighbors import NearestNeighbors"
+  ]
+ },
+ "safe_methods.py": {
+  "doc": "Point models. Each: fit(E_fit) with E = {unit: (Z, regimes, rul)}; predict(Z, regimes) -> point RUL after every cycle\n(causal: the value at cycle t uses cycles 1..t only).",
+  "functions": [
+   {
+    "name": "AgeOnly",
+    "line": 8,
+    "end": 14,
+    "doc": null
+   },
+   {
+    "name": "_roll_slope_expanding",
+    "line": 18,
+    "end": 26,
+    "doc": null
+   },
+   {
+    "name": "gbm_features",
+    "line": 28,
+    "end": 33,
+    "doc": null
+   },
+   {
+    "name": "GBM",
+    "line": 35,
+    "end": 44,
+    "doc": null
+   },
+   {
+    "name": "_fb",
+    "line": 49,
+    "end": 73,
+    "doc": "scaled forward-backward for one sequence of an input-output left-right HMM with absorbing failure.\nA[r] is N x (N+1): column N = probability of failing after the current cycle under input r.\nA single set of scale factors (from the forward pass) is used in both passes."
+   },
+   {
+    "name": "_accumulate",
+    "line": 76,
+    "end": 88,
+    "doc": null
+   },
+   {
+    "name": "_filter",
+    "line": 91,
+    "end": 104,
+    "doc": null
+   },
+   {
+    "name": "IOHMM",
+    "line": 106,
+    "end": 149,
+    "doc": "3 left-right health states (good / degrading / bad), one transition matrix per operating regime (input),\n4 discrete symbols of the first principal component of the normalised sensors (the thesis's health indicator),\nRUL = expected number of cycles until absorption in the failure state, with future regimes drawn from their\ntraining frequencies (the thesis's mean-time-to-failure prognosis, Eq. 31-33)."
+   },
+   {
+    "name": "DeepNet",
+    "line": 153,
+    "end": 183,
+    "doc": null
+   },
+   {
+    "name": "make",
+    "line": 186,
+    "end": 188,
+    "doc": null
+   },
+   {
+    "name": "fit",
+    "line": 10,
+    "end": 11,
+    "doc": null
+   },
+   {
+    "name": "predict",
+    "line": 12,
+    "end": 14,
+    "doc": null
+   },
+   {
+    "name": "fit",
+    "line": 37,
+    "end": 42,
+    "doc": null
+   },
+   {
+    "name": "predict",
+    "line": 43,
+    "end": 44,
+    "doc": null
+   },
+   {
+    "name": "__init__",
+    "line": 112,
+    "end": 112,
+    "doc": null
+   },
+   {
+    "name": "_sym",
+    "line": 113,
+    "end": 113,
+    "doc": null
+   },
+   {
+    "name": "fit",
+    "line": 114,
+    "end": 145,
+    "doc": null
+   },
+   {
+    "name": "predict",
+    "line": 146,
+    "end": 149,
+    "doc": null
+   },
+   {
+    "name": "__init__",
+    "line": 154,
+    "end": 156,
+    "doc": null
+   },
+   {
+    "name": "_win",
+    "line": 157,
+    "end": 159,
+    "doc": null
+   },
+   {
+    "name": "fit",
+    "line": 160,
+    "end": 181,
+    "doc": null
+   },
+   {
+    "name": "predict",
+    "line": 182,
+    "end": 183,
+    "doc": null
+   },
+   {
+    "name": "mk",
+    "line": 164,
+    "end": 166,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, numpy as np, pandas as pd",
+   "import numba as nb",
+   "from sklearn.ensemble import HistGradientBoostingRegressor",
+   "import keras",
+   "from keras import layers"
+  ]
+ },
+ "safe_run.py": {
+  "doc": "python safe_run.py <method> <dataset>  ->  out/safe/preds_<dataset>_<method>.csv (point predictions only)",
+  "functions": [
+   {
+    "name": "run",
+    "line": 6,
+    "end": 30,
+    "doc": null
+   },
+   {
+    "name": "add",
+    "line": 14,
+    "end": 17,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, time, numpy as np, pandas as pd",
+   "from safe_common import load_dataset, outer_folds, fit_cal_split, regime_norm, engines",
+   "from safe_methods import make"
+  ]
+ },
+ "similarity.py": {
+  "doc": "Trajectory-similarity RUL (in the spirit of Wang et al., PHM08 2nd place).\n\nEach engine -> causal multivariate health trajectory: regime-normalised sensors,\nexponentially smoothed (causal), projected on the top principal components of\nthe training trajectories.  A test prefix of length t is compared with every\ntraining engine at every end position e using its last W cycles; the best match\nper training engine gives a candidate RUL = L_j - e with weight exp(-d/tau).\nOutput: a RUL probability distribution on GRID (candidates kernel-smoothed).",
+  "functions": [
+   {
+    "name": "SimilarityRUL",
+    "line": 16,
+    "end": 55,
+    "doc": null
+   },
+   {
+    "name": "__init__",
+    "line": 17,
+    "end": 19,
+    "doc": null
+   },
+   {
+    "name": "_traj",
+    "line": 21,
+    "end": 24,
+    "doc": null
+   },
+   {
+    "name": "fit",
+    "line": 26,
+    "end": 33,
+    "doc": null
+   },
+   {
+    "name": "trajectory",
+    "line": 35,
+    "end": 36,
+    "doc": null
+   },
+   {
+    "name": "distribution",
+    "line": 38,
+    "end": 55,
+    "doc": "RUL pmf after observing cycles 1..t of a trajectory Q_full (t x n_pc)"
+   }
+  ],
+  "imports": [
+   "import numpy as np, pandas as pd",
+   "from numpy.lib.stride_tricks import sliding_window_view",
+   "from feats import regime_stats, zmat",
+   "from countdown_hmm import GRID"
+  ]
+ },
+ "stw_timing.py": {
+  "doc": "Wall time of the STW regressor (three caps) for one PHM08 fit/calibration split, same 2-core machine as dl_warning.py.",
+  "functions": [],
+  "imports": [
+   "import sys, time, json, numpy as np",
+   "import eol_window2 as W",
+   "from safe_common import load_dataset, outer_folds, fit_cal_split"
+  ]
+ },
+ "stwt.py": {
+  "doc": "Theory-guided shift rule STW-T (bearing/BEARING_PROTOCOL.md, Part B).\nGiven the out-of-fold predictions (already smoothed with the selected span) and the selected debounce k, choose the shift s on the\ngrid that minimises |median OOF first-warning error - (-5.5)|; missed units ignored; ties -> larger OOF in-window count, then\nsmaller |s|. Same first-warning rule as eol_window2 (first cycle where the shifted prediction has been <= H for k cycles).",
+  "functions": [
+   {
+    "name": "shift_T",
+    "line": 8,
+    "end": 20,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import numpy as np, pandas as pd"
+  ]
+ },
+ "stwt_all.py": {
+  "doc": "STW-T (theory-guided shift, bearing/BEARING_PROTOCOL.md Part B) on the datasets seen before the rule was written.\nDescriptive only. Same folds, seeds, regressors and count-based selection of cap/span/k as the main analyses; the standard\nmodel's results are recomputed alongside and must reproduce the stored main results.\nOutput: out/stwt/<ds>.csv (one row per unit, H and method in {'warning', 'warning_T'}).",
+  "functions": [
+   {
+    "name": "battery_pred",
+    "line": 14,
+    "end": 20,
+    "doc": null
+   },
+   {
+    "name": "setup",
+    "line": 22,
+    "end": 26,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 28,
+    "end": 52,
+    "doc": null
+   },
+   {
+    "name": "pred",
+    "line": 17,
+    "end": 19,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "from safe_common import load_dataset, outer_folds",
+   "from feats import causal_feats",
+   "from stwt import shift_T",
+   "import multi_eval as ME",
+   "import battery_warning as BWm"
+  ]
+ },
+ "tcn_eval.py": {
+  "doc": "Evaluate TCN, TCN+GAN and the stacked hybrid with TCN/TCN+GAN added (window [-13, +2], half of life, PHM08).\nReuses the stacker definitions of ablate_hybrid.py (trained on calibration rows only, shift by engine-grouped CV).",
+  "functions": [
+   {
+    "name": "decode3",
+    "line": 10,
+    "end": 15,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import json, numpy as np, pandas as pd"
+  ]
+ },
+ "tcn_gan.py": {
+  "doc": "TCN and TCN + conditional GAN augmentation (pure JAX / optax) for the [-13, +2] window at half of life.\n\nSame engine-level folds / fit-calibration split as the main study.\n  TCN      : causal dilated 1-D convolutions (dilations 1,2,4,8, kernel 3, 32 channels, residual), input = last 40 cycles of\n             15 regime-normalised sensors + age channel; outputs 5 monotone quantiles of RUL (pinball loss).\n  cGAN     : generator G(noise, RUL, age) -> 40-cycle sensor window; discriminator D(window, RUL, age). Trained on FIT engines only.\n  TCN+GAN  : TCN trained on real FIT windows + synthetic windows (50 % extra), labels = conditioning RUL.\n  TSTR     : TCN trained on synthetic windows only (checks whether the GAN learned anything real).\nValidation (model selection by epoch) uses CALIBRATION engines. Predictions are written for the calibration rows (16 life stages)\nand the test rows (half of life) of out/window/base_preds_PHM08.csv so they can enter the stacked hybrid.",
+  "functions": [
+   {
+    "name": "conv",
+    "line": 19,
+    "end": 23,
+    "doc": "x: (B, T, C_in), w: (K, C_in, C_out)"
+   },
+   {
+    "name": "glorot",
+    "line": 25,
+    "end": 26,
+    "doc": null
+   },
+   {
+    "name": "init_tcn",
+    "line": 28,
+    "end": 33,
+    "doc": null
+   },
+   {
+    "name": "tcn",
+    "line": 35,
+    "end": 40,
+    "doc": null
+   },
+   {
+    "name": "pinball",
+    "line": 42,
+    "end": 43,
+    "doc": null
+   },
+   {
+    "name": "init_G",
+    "line": 45,
+    "end": 48,
+    "doc": null
+   },
+   {
+    "name": "G",
+    "line": 50,
+    "end": 53,
+    "doc": null
+   },
+   {
+    "name": "init_D",
+    "line": 55,
+    "end": 58,
+    "doc": null
+   },
+   {
+    "name": "Dn",
+    "line": 60,
+    "end": 63,
+    "doc": null
+   },
+   {
+    "name": "train_gan",
+    "line": 66,
+    "end": 83,
+    "doc": null
+   },
+   {
+    "name": "train_tcn",
+    "line": 85,
+    "end": 96,
+    "doc": null
+   },
+   {
+    "name": "windows",
+    "line": 98,
+    "end": 99,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 101,
+    "end": 132,
+    "doc": null
+   },
+   {
+    "name": "step",
+    "line": 71,
+    "end": 78,
+    "doc": null
+   },
+   {
+    "name": "step",
+    "line": 88,
+    "end": 89,
+    "doc": null
+   },
+   {
+    "name": "ld",
+    "line": 72,
+    "end": 73,
+    "doc": null
+   },
+   {
+    "name": "lg",
+    "line": 75,
+    "end": 76,
+    "doc": null
+   },
+   {
+    "name": "add_age",
+    "line": 110,
+    "end": 110,
+    "doc": null
+   },
+   {
+    "name": "mk",
+    "line": 111,
+    "end": 113,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, time, numpy as np, pandas as pd, jax, jax.numpy as jnp, optax",
+   "from safe_common import load_dataset, outer_folds, fit_cal_split",
+   "from feats import regime_stats, zmat"
+  ]
+ },
+ "theory_check.py": {
+  "doc": "Empirical check of the window-centring proposition.\n\nModel: a warning is raised when the shifted prediction p + s first falls to H; at that moment the unshifted prediction error is\neps = p - r (r = true remaining life), and the reported error is e = eps + s. With eps ~ F (continuous, unimodal, symmetric about\nits median m) the probability of a correct first warning is P(s) = F(b - s) - F(a - s); it is maximised at s* = (a + b)/2 - m\n(= -5.5 - m for the window [-13, +2]), and the maximum equals P(|eps - m| <= (b - a)/2).\nFor every dataset and warning level we compute, on the TEST warnings (one per engine), eps = pred - shift - y, its median m, the\nimplied s*, the shifts actually chosen on training data, the centred bound P(|eps - m| <= 7.5), the best fixed-shift rate\nmax_s P(a <= eps + s <= b) and the realised in-window rate. Missed engines count as failures in all rates.\nOutput: out/theory/theory_check.csv",
+  "functions": [
+   {
+    "name": "rows_for",
+    "line": 16,
+    "end": 27,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 29,
+    "end": 41,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, numpy as np, pandas as pd"
+  ]
+ },
+ "tools/check_data.py": {
+  "doc": "Check that the input data are exactly those used for the paper.\n\nEvery data file is checked against tools/DATA_SHA256.json. For the NASA text files (PHM08 and C-MAPSS) a mismatch of the\nfile hash is not fatal when the parsed numerical content is identical (a hash of the values read as float64), so a fresh\ndownload from the NASA repository with different whitespace is accepted. Run from the repository root:\n    python tools/check_data.py            # check\n    python tools/check_data.py --write    # (maintainers) record the hashes of the current files",
+  "functions": [
+   {
+    "name": "file_hash",
+    "line": 19,
+    "end": 20,
+    "doc": null
+   },
+   {
+    "name": "value_hash",
+    "line": 23,
+    "end": 25,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 28,
+    "end": 43,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, json, hashlib, os, glob",
+   "import numpy as np"
+  ]
+ },
+ "tools/ncmapss_colab_extract.py": {
+  "doc": "N-CMAPSS -> small per-flight-cycle summary (run in Google Colab or Kaggle, NOT on your laptop).\n\nHow to use (Google Colab, free):\n  1. Go to https://colab.research.google.com  ->  New notebook.\n  2. Upload this file (folder icon on the left -> upload), then run in a cell:\n         !python ncmapss_colab_extract.py\n     It downloads the official NASA archive (~14 GB) to Colab's temporary disk, reads one subset at a time,\n     keeps only the average of every signal per engine per flight cycle, and deletes the big files.\n     Runtime: roughly 20-60 minutes depending on Colab's speed.\n  3. Download the output file  ncmapss_cycle_summary.csv.gz  (a few MB) from the file panel\n     and attach it in the chat.\n\nNothing is stored on your computer except the small output file.",
+  "functions": [
+   {
+    "name": "h5_members",
+    "line": 34,
+    "end": 36,
+    "doc": null
+   },
+   {
+    "name": "dec",
+    "line": 52,
+    "end": 53,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, glob, zipfile, subprocess, shutil",
+   "import numpy as np, pandas as pd",
+   "import h5py",
+   "import h5py"
+  ]
+ },
+ "tools/severson_colab_extract.py": {
+  "doc": null,
+  "functions": [],
+  "imports": [
+   "import os, glob, subprocess, h5py, numpy as np, pandas as pd"
+  ]
+ },
+ "verify_audit.py": {
+  "doc": "Compare the fresh audit outputs in out/audit/ with the frozen copies in results/audit/ (gzip-aware).\nCSV and JSON files must be byte-identical after decompression; pickles must contain identical arrays.",
+  "functions": [
+   {
+    "name": "eq",
+    "line": 7,
+    "end": 9,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, gzip, glob, pickle",
+   "import numpy as np"
+  ]
+ },
+ "verify_reproduction.py": {
+  "doc": "Compare freshly produced outputs (out/) with the frozen outputs of the paper (results/), and the rebuilt paper numbers and\nmanuscript (paper2/) with the reference copies (paper2/reference/).\n\nEvery comparison is exact: CSV/CSV.GZ tables must be identical value by value (pandas, check_exact), JSON files identical\nafter parsing, Markdown/LaTeX files identical byte by byte.\n\nFiles fall into three groups:\n  EXACT    gradient-boosted and scikit-learn experiments; bit-for-bit reproducible with the pinned versions (requirements.txt)\n  NETWORK  outputs of neural networks (Keras/JAX, TCN-GAN) and analyses built on them; fixed seeds, but floating-point\n           reductions may differ slightly across CPUs, so small differences are reported but do not fail the check\n  SKIPPED  run logs, timings, Excel workbooks (embedded time stamps) and PDFs\nUsage: python verify_reproduction.py            # all groups that were rerun\n       python verify_reproduction.py --paper-only\nExit code 1 if an EXACT file or the paper numbers/manuscript differ.",
+  "functions": [
+   {
+    "name": "group",
+    "line": 25,
+    "end": 32,
+    "doc": null
+   },
+   {
+    "name": "same",
+    "line": 35,
+    "end": 45,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 48,
+    "end": 79,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import sys, os, json, glob",
+   "import pandas as pd"
+  ]
+ },
+ "verify_revision5.py": {
+  "doc": "Third revision: compare the outputs of a fresh rerun (out/kam, out/audit) with the frozen copies (results/kam, results/audit).\nCSV files are compared column by column (numbers to a relative tolerance of 1e-9, text exactly), JSON files exactly after\nparsing, text files line by line. Writes out/verify_revision5.txt and exits with status 1 if anything differs.\nUsage: python verify_revision5.py",
+  "functions": [
+   {
+    "name": "find",
+    "line": 17,
+    "end": 20,
+    "doc": null
+   },
+   {
+    "name": "same_csv",
+    "line": 23,
+    "end": 31,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import os, sys, json",
+   "import numpy as np, pandas as pd"
+  ]
+ },
+ "warn_ablation.py": {
+  "doc": "Component ablation of the end-of-life warning model (PHM08, same outer folds and inner-CV tuning as eol_window2.py).\n\nEach variant removes or fixes one component; everything not fixed is tuned exactly as in the full model.\n  full              cap in {40,60,90}, span, k, shift tuned, 15 sensors + age                 (= eol_window2.py)\n  cap125            conventional piecewise-linear target (cap 125) instead of the end-focused caps\n  uncapped          no target cap\n  no_shift          shift fixed at 0 (no window centring)\n  no_debounce       k fixed at 1\n  no_smoothing      span fixed at 1\n  untuned_rule      cap 60, span 1, k 1, shift 0 (no tuning of the decision rule at all)\n  age_only          cycle count as the only input\n  sensors_no_age    all sensor features, cycle count removed\n  sensors7          temperature and shaft-speed sensors only (s2, s3, s4, s8, s9, s13, s14) + age\nAlso: oracle-timed control -- the full model's (smoothed, shifted) prediction evaluated at the cycle where the TRUE remaining\nlife equals H (not deployable; shows the regressor's accuracy at that horizon without self-timing).\nOutput: out/window/ablation_warning_PHM08.csv / .json",
+  "functions": [
+   {
+    "name": "feats_sets",
+    "line": 24,
+    "end": 29,
+    "doc": null
+   },
+   {
+    "name": "predict",
+    "line": 33,
+    "end": 39,
+    "doc": null
+   },
+   {
+    "name": "tune",
+    "line": 47,
+    "end": 57,
+    "doc": null
+   },
+   {
+    "name": "main",
+    "line": 59,
+    "end": 88,
+    "doc": null
+   }
+  ],
+  "imports": [
+   "import json, numpy as np, pandas as pd",
+   "import eol_window2 as W",
+   "from safe_common import load_dataset, outer_folds",
+   "from feats import regime_stats, zmat, causal_feats"
+  ]
+ }
+}

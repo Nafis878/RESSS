@@ -1,0 +1,330 @@
+{
+ "variants": {
+  "fixed_f50": {
+   "IN": 47,
+   "n": 249,
+   "pct": 18.9,
+   "ci": [
+    14.2,
+    24.3
+   ]
+  },
+  "fixed_f90": {
+   "IN": 166,
+   "n": 249,
+   "pct": 66.7,
+   "ci": [
+    60.4,
+    72.5
+   ]
+  },
+  "fixed_r20": {
+   "IN": 168,
+   "n": 249,
+   "pct": 67.5,
+   "ci": [
+    61.3,
+    73.3
+   ]
+  },
+  "fixed_trigger": {
+   "IN": 180,
+   "n": 249,
+   "pct": 72.3,
+   "ci": [
+    66.3,
+    77.8
+   ],
+   "median_left": 20.0,
+   "left_p05": 7.0,
+   "left_p95": 32.69999999999999,
+   "missed": 2
+  },
+  "recipe_f90": {
+   "IN": 205,
+   "n": 249,
+   "pct": 82.3,
+   "ci": [
+    77.0,
+    86.9
+   ]
+  },
+  "recipe_r20": {
+   "IN": 222,
+   "n": 249,
+   "pct": 89.2,
+   "ci": [
+    84.6,
+    92.7
+   ]
+  },
+  "recipe_self": {
+   "IN": 206,
+   "n": 249,
+   "pct": 82.7,
+   "ci": [
+    77.5,
+    87.2
+   ],
+   "median_left": 20.0,
+   "left_p05": 12.0,
+   "left_p95": 34.0,
+   "missed": 0
+  }
+ },
+ "paired": {
+  "fixed_trigger|fixed_f90": {
+   "only_a": 31,
+   "only_b": 17,
+   "p": 0.05946337525377034
+  },
+  "recipe_f90|fixed_f90": {
+   "only_a": 61,
+   "only_b": 22,
+   "p": 2.1806574627155318e-05
+  },
+  "recipe_self|fixed_trigger": {
+   "only_a": 42,
+   "only_b": 16,
+   "p": 0.0008617822405421265
+  },
+  "recipe_self|recipe_f90": {
+   "only_a": 18,
+   "only_b": 17,
+   "p": 1.0
+  },
+  "recipe_self|fixed_f90": {
+   "only_a": 55,
+   "only_b": 15,
+   "p": 1.652519847797991e-06
+  },
+  "recipe_r20|fixed_r20": {
+   "only_a": 66,
+   "only_b": 12,
+   "p": 3.485851300097458e-10
+  },
+  "recipe_self|recipe_r20": {
+   "only_a": 16,
+   "only_b": 32,
+   "p": 0.029304946720529308
+  },
+  "fixed_trigger|fixed_r20": {
+   "only_a": 33,
+   "only_b": 21,
+   "p": 0.13367423536410522
+  }
+ },
+ "selection": [
+  {
+   "fold": 1,
+   "variant": "fixed_f50",
+   "shift": -2.0
+  },
+  {
+   "fold": 1,
+   "variant": "fixed_f90",
+   "shift": -6.5
+  },
+  {
+   "fold": 1,
+   "variant": "fixed_r20",
+   "shift": -3.5
+  },
+  {
+   "fold": 1,
+   "variant": "recipe_f90",
+   "cap": 60,
+   "shift": -7.0
+  },
+  {
+   "fold": 1,
+   "variant": "recipe_r20",
+   "cap": 40,
+   "shift": -6.0
+  },
+  {
+   "fold": 1,
+   "variant": "fixed_trigger",
+   "span": 1,
+   "k": 5,
+   "shift": -6.0
+  },
+  {
+   "fold": 1,
+   "variant": "recipe_self",
+   "cap": 40,
+   "span": 3,
+   "k": 5,
+   "shift": -5.5
+  },
+  {
+   "fold": 2,
+   "variant": "fixed_f50",
+   "shift": -16.5
+  },
+  {
+   "fold": 2,
+   "variant": "fixed_f90",
+   "shift": -5.0
+  },
+  {
+   "fold": 2,
+   "variant": "fixed_r20",
+   "shift": -5.0
+  },
+  {
+   "fold": 2,
+   "variant": "recipe_f90",
+   "cap": 40,
+   "shift": -7.0
+  },
+  {
+   "fold": 2,
+   "variant": "recipe_r20",
+   "cap": 40,
+   "shift": -6.5
+  },
+  {
+   "fold": 2,
+   "variant": "fixed_trigger",
+   "span": 1,
+   "k": 5,
+   "shift": -2.5
+  },
+  {
+   "fold": 2,
+   "variant": "recipe_self",
+   "cap": 40,
+   "span": 3,
+   "k": 5,
+   "shift": -6.0
+  },
+  {
+   "fold": 3,
+   "variant": "fixed_f50",
+   "shift": -2.0
+  },
+  {
+   "fold": 3,
+   "variant": "fixed_f90",
+   "shift": -7.0
+  },
+  {
+   "fold": 3,
+   "variant": "fixed_r20",
+   "shift": -7.5
+  },
+  {
+   "fold": 3,
+   "variant": "recipe_f90",
+   "cap": 40,
+   "shift": -6.5
+  },
+  {
+   "fold": 3,
+   "variant": "recipe_r20",
+   "cap": 40,
+   "shift": -6.0
+  },
+  {
+   "fold": 3,
+   "variant": "fixed_trigger",
+   "span": 3,
+   "k": 5,
+   "shift": -6.0
+  },
+  {
+   "fold": 3,
+   "variant": "recipe_self",
+   "cap": 90,
+   "span": 1,
+   "k": 2,
+   "shift": -4.0
+  },
+  {
+   "fold": 4,
+   "variant": "fixed_f50",
+   "shift": -9.5
+  },
+  {
+   "fold": 4,
+   "variant": "fixed_f90",
+   "shift": -6.0
+  },
+  {
+   "fold": 4,
+   "variant": "fixed_r20",
+   "shift": -6.0
+  },
+  {
+   "fold": 4,
+   "variant": "recipe_f90",
+   "cap": 60,
+   "shift": -5.5
+  },
+  {
+   "fold": 4,
+   "variant": "recipe_r20",
+   "cap": 40,
+   "shift": -6.5
+  },
+  {
+   "fold": 4,
+   "variant": "fixed_trigger",
+   "span": 1,
+   "k": 5,
+   "shift": -5.5
+  },
+  {
+   "fold": 4,
+   "variant": "recipe_self",
+   "cap": 90,
+   "span": 1,
+   "k": 5,
+   "shift": -3.5
+  },
+  {
+   "fold": 5,
+   "variant": "fixed_f50",
+   "shift": -6.0
+  },
+  {
+   "fold": 5,
+   "variant": "fixed_f90",
+   "shift": -7.5
+  },
+  {
+   "fold": 5,
+   "variant": "fixed_r20",
+   "shift": -6.0
+  },
+  {
+   "fold": 5,
+   "variant": "recipe_f90",
+   "cap": 40,
+   "shift": -6.5
+  },
+  {
+   "fold": 5,
+   "variant": "recipe_r20",
+   "cap": 40,
+   "shift": -6.5
+  },
+  {
+   "fold": 5,
+   "variant": "fixed_trigger",
+   "span": 1,
+   "k": 5,
+   "shift": -5.0
+  },
+  {
+   "fold": 5,
+   "variant": "recipe_self",
+   "cap": 60,
+   "span": 1,
+   "k": 5,
+   "shift": -5.0
+  }
+ ],
+ "recipe_self_reproduces_main": true
+}
